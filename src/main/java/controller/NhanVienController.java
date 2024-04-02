@@ -58,7 +58,10 @@ public class NhanVienController extends HttpServlet {
 				changerinformation(request, response);
 			}else if(action.equals("showarrdkn")){
 				showDsDonDkNghi(request, response);
+			}else if(action.equals("changerpass")){
+				changePass(request, response);
 			}
+			System.out.println(action);
 		}
 		
 	}
@@ -223,6 +226,30 @@ public class NhanVienController extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher(url);
 		rd.forward(request, response);
 	}
+	public void changePass(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
+		String url = "InfomationEmpl.jsp";
+		String matkhaucu = request.getParameter("matkhaucu");
+		String matkhaumoi = request.getParameter("matkhaumoi");
+		String matkhaumoi2 = request.getParameter("matkhaumoi2");
+		NhanVienBo nvbo = new NhanVienBo();
+		HttpSession session = request.getSession();
+		NhanVienBean nhanvien = (NhanVienBean)session.getAttribute("nhanvien");
+		if(matkhaucu != null && matkhaumoi != null && matkhaumoi2 != null) {
+			if(matkhaumoi.equals(matkhaumoi2)) {				
+				nhanvien.setMatKhau(matkhaumoi);
+				try {
+					nvbo.updateNV(nhanvien);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				request.setAttribute("msgSuccess","Chỉnh sửa thông tin thành công!");
+			}else {
+				request.setAttribute("msgSuccess","Mật khẩu không khớp");
+			}
+		}
+		RequestDispatcher rd = request.getRequestDispatcher(url);
+		rd.forward(request, response);
+	}
 	public void showDsDonDkNghi(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
 		String url = "NHANVIENDSDangKyNghi.jsp";
 		String thang = request.getParameter("thang");
@@ -231,23 +258,23 @@ public class NhanVienController extends HttpServlet {
 		NhanVienBean nhanvien = (NhanVienBean)session.getAttribute("nhanvien");
 		DangKyNghibo dknbo = new DangKyNghibo();
 		ArrayList<DangKyNghiBean> dsdknghi = new ArrayList<DangKyNghiBean>();
-		if(thang != null && nam != null) {			
-			try {
-				dsdknghi = dknbo.GetDKNbyMaNV_Month_Year(nhanvien.getMaNV(), Integer.parseInt(thang),  Integer.parseInt(nam));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			if(dsdknghi.size()!=0) {
-				request.setAttribute("dsdknghi", dsdknghi);
-			//	System.out.println(dsdknghi);
-			}else {				
-				request.setAttribute("msg", "Thông tin tìm kiếm không tồn tại!");
-//				System.out.println("Thông tin tìm kiếm không tồn tại!");
-			}
-		}else {
-			request.setAttribute("msg", "Vui lòng nhập thông tin tìm kiếm!");
-//			System.out.println("Vui lòng nhập thông tin tìm kiếm!");
+		LocalDate date = LocalDate.now();
+		if(thang == null && nam == null) {						
+			thang = Integer.toString(date.getMonthValue());
+			nam = Integer.toString(date.getYear());
 		}
+		try {
+			dsdknghi = dknbo.GetDKNbyMaNV_Month_Year(nhanvien.getMaNV(), Integer.parseInt(thang),  Integer.parseInt(nam));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(dsdknghi.size()!=0) {
+			request.setAttribute("dsdknghi", dsdknghi);
+		}else {				
+			request.setAttribute("msg", "Danh sách trống!");
+		}
+		
+		
 		request.setAttribute("thang", thang);
 		request.setAttribute("nam", nam);
 		RequestDispatcher rd = request.getRequestDispatcher(url);

@@ -28,6 +28,7 @@
 	String msgSuccess = (request.getAttribute("msgSuccess")!=null)?request.getAttribute("msgSuccess").toString():"";%>
 	<jsp:include page="header.jsp"></jsp:include>
 	<div class="row">
+	
 		<div class="col-2  mt-5">
 			<jsp:include page="Slidebar.jsp"></jsp:include>
 		</div>

@@ -57,7 +57,15 @@
 	%>
 	<div class="row">
 		<div class="col-2  mt-5">
-			<jsp:include page="Slidebar.jsp"></jsp:include>
+			<%
+			if(nhanvien.getMaCV().equals("CV001")){
+				%><jsp:include page="adminSlidebar.jsp"></jsp:include><%
+			}else if(nhanvien.getMaCV().equals("CV002")){
+				%><jsp:include page="QUANLYslidebar.jsp"></jsp:include><%
+			}else if(nhanvien.getMaCV().equals("CV003")){
+				%><jsp:include page="Slidebar.jsp"></jsp:include><%
+			}
+			%>
 		</div>
 		<div class="col-8 mt-4">
 				<div class="mb-3 row">
@@ -135,6 +143,51 @@
 					    <label for="trangthaicongviec" class="col-sm-2 col-form-label">Trạng thái công việc:</label>
 					    <div class="col-sm-10">
 					      <input type="text" readonly class="form-control-plaintext" value="<%=trangThaiCongViec==true?"Đang hoạt động":"Ngưng hoạt động"%>" readonly>
+					    </div>
+			    </div>
+			    <div class="mb-3 row">
+					    <label for="trangthaicongviec" class="col-sm-2 col-form-label">Mật khẩu:</label>
+					    <div class="col-sm-10">
+					      	<button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalDoiMk">
+							  Đổi mật khẩu
+							</button>
+							<!-- Modal -->
+							<div class="modal fade" id="exampleModalDoiMk" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							  <div class="modal-dialog">
+							    <div class="modal-content">
+							    	<form action="nhanvien?action=changerpass" method="post">
+							      <div class="modal-header">
+							        <h1 class="modal-title fs-5" id="exampleModalLabel">Đổi mật khẩu</h1>
+							        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							      </div>
+							      <div class="modal-body">
+							        <div class="mb-3 row">
+										    <label for="password" class="col-sm-4 col-form-label">Mật khẩu cũ:</label>
+										    <div class="col-sm-8 ">
+										      <input type="password" class="form-control" id="password" name="matkhaucu" required="required">
+										    </div>
+								    </div>   
+								    <div class="mb-3 row">
+										    <label for="newpassword" class="col-sm-4 col-form-label">Mật khẩu mới:</label>
+										    <div class="col-sm-8">
+										      <input type="password" class="form-control" id="newpassword" name="matkhaumoi" required="required">
+										    </div>
+								    </div>   
+								    <div class="mb-3 row">
+										    <label for="renewpassword" class="col-sm-4 col-form-label">Nhập lại mật khẩu:</label>
+										    <div class="col-sm-8">
+										      <input type="password" class="form-control" id="renewpassword" name="matkhaumoi2" required="required">
+										    </div>
+								    </div>   
+							      </div>
+							      <div class="modal-footer">
+							        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+							        <button type="submit" class="btn btn-primary">Đổi mật khẩu</button>
+							      </div>
+							      </form>
+							    </div>
+							  </div>
+							</div>					      	
 					    </div>
 			    </div>
 				<div class=" mt-4">

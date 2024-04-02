@@ -18,7 +18,7 @@
 	    <a class="nav-link" href="nhanvien?action=workregistration">Đăng ký làm việc</a>
 	  </li>
 	  <li class="nav-item">
-	    <a class="nav-link" href="nhanvien?action=showarrdkn">Đơn đăng kí nghỉ</a>
+	    <a class="nav-link" href="nhanvien?action=showarrdkn">Danh sách nghỉ</a>
 	  </li>
 	</ul>
 </body>

@@ -40,25 +40,29 @@
 					<div class="row container">
 						<form action="nhanvien?action=showarrdkn" method="post">
 						 	<div class="row">
-								    <div class="col-sm-4">
-								      <select class="form-control" id="month" name="thang">
-								      	<option >Tháng</option>
-								        <option value="1" <%= (thang.equals("1") ? "selected=\"selected\"" : "") %>>Tháng 1</option>
-								        <option value="2" <%= (thang.equals("2") ? "selected=\"selected\"" : "") %>>Tháng 2</option>
-								        <option value="3" <%= (thang.equals("3") ? "selected=\"selected\"" : "") %>>Tháng 3</option>
-								        <option value="4" <%= (thang.equals("4") ? "selected=\"selected\"" : "") %>>Tháng 4</option>
-								        <option value="5" <%= (thang.equals("5") ? "selected=\"selected\"" : "") %>>Tháng 5</option>
-								        <option value="6" <%= (thang.equals("6") ? "selected=\"selected\"" : "") %>>Tháng 6</option>
-								        <option value="7" <%= (thang.equals("7") ? "selected=\"selected\"" : "") %>>Tháng 7</option>
-								        <option value="8" <%= (thang.equals("8") ? "selected=\"selected\"" : "") %>>Tháng 8</option>
-								        <option value="9" <%= (thang.equals("9") ? "selected=\"selected\"" : "") %>>Tháng 9</option>
-								        <option value="10" <%= (thang.equals("10") ? "selected=\"selected\"" : "") %>>Tháng 10</option>
-								        <option value="11" <%= (thang.equals("11") ? "selected=\"selected\"" : "") %>>Tháng 11</option>
-								        <option value="12" <%= (thang.equals("12") ? "selected=\"selected\"" : "") %>>Tháng 12</option>
-								      </select>
-								    </div>
-								    <div class="col-sm-4">
-								       <select class="form-control" id="year" name="nam">
+						 		<div class="col mb-3 mx-2">
+							 		<div class="row">
+										    <label for="month" class="col col-form-label text-center">Tháng:</label>
+										      <select class="form-control col" id="month" name="thang">
+										        <option value="1" <%= (thang.equals("1") ? "selected=\"selected\"" : "") %>>1</option>
+										        <option value="2" <%= (thang.equals("2") ? "selected=\"selected\"" : "") %>>2</option>
+										        <option value="3" <%= (thang.equals("3") ? "selected=\"selected\"" : "") %>>3</option>
+										        <option value="4" <%= (thang.equals("4") ? "selected=\"selected\"" : "") %>>4</option>
+										        <option value="5" <%= (thang.equals("5") ? "selected=\"selected\"" : "") %>>5</option>
+										        <option value="6" <%= (thang.equals("6") ? "selected=\"selected\"" : "") %>>6</option>
+										        <option value="7" <%= (thang.equals("7") ? "selected=\"selected\"" : "") %>>7</option>
+										        <option value="8" <%= (thang.equals("8") ? "selected=\"selected\"" : "") %>>8</option>
+										        <option value="9" <%= (thang.equals("9") ? "selected=\"selected\"" : "") %>>9</option>
+										        <option value="10" <%= (thang.equals("10") ? "selected=\"selected\"" : "") %>>10</option>
+										        <option value="11" <%= (thang.equals("11") ? "selected=\"selected\"" : "") %>>11</option>
+										        <option value="12" <%= (thang.equals("12") ? "selected=\"selected\"" : "") %>>12</option>
+										      </select>
+							 		</div>
+						 		</div>
+					 			<div class="mb-3 col">
+					 				<div class="row">					 				
+								       <label for="year" class="col col-form-label text-center">Năm:</label>
+								       <select class="form-control col" id="year" name="nam">
 											  <% 
 											    int startYear = nhanvien.getNgayVaoLam().getYear()+1900; // Chuyển đổi biến nam sang kiểu int
 											    int currentYear = java.time.LocalDate.now().getYear(); // Lấy năm hiện tại
@@ -66,10 +70,12 @@
 											      <option value="<%= year %>" <%= ((nam).equals(year+"") ? "selected=\"selected\"" : "") %>><%= year %></option>
 											  <% } %>
 										</select>
-								    </div>
-								  	<div class="col-sm-4">
-								      <button type="submit" class="btn btn-primary" >Tìm kiếm</button>
-								    </div>
+					 				</div>
+								 </div>
+							  	<div class="col-sm-4">
+							  		<label for=""> </label>
+							      <button type="submit" class="btn btn-primary" >Tìm kiếm</button>
+							    </div>
 							 </div>
 						</form>
 					</div>
