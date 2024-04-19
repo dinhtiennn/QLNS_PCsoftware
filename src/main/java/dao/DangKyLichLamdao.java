@@ -1,4 +1,4 @@
-package admindao;
+package dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -6,9 +6,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import admindao.ketnoiDB;
 import bean.DangKyLamBean;
 
-public class adminDangKyLamdao {
+public class DangKyLichLamdao {
 	public ArrayList<DangKyLamBean> GetAllDKL() throws Exception{
 		ArrayList<DangKyLamBean> ds = new ArrayList<DangKyLamBean>();
 		ketnoiDB kn = new ketnoiDB();
