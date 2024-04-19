@@ -7,20 +7,20 @@ public class NhanVienBean {
 	private String tenNV;
 	private String maCV;
 	private Date ngaySinh;
-	private String gioiTinh;
+	private Boolean gioiTinh;
 	private String email;
 	private String sDT;
 	private String dVCT;
 	private String chucDanh;
 	private String tenDangNhap;
 	private String matKhau;
-	private String trangThaiCongViec;
+	private Boolean trangThaiCongViec;
 	public NhanVienBean() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public NhanVienBean(String maNV, String tenNV, String maCV, Date ngaySinh, String gioiTinh, String email,
-			String sDT, String dVCT, String chucDanh, String tenDangNhap, String matKhau, String trangThaiCongViec) {
+	public NhanVienBean(String maNV, String tenNV, String maCV, Date ngaySinh, Boolean gioiTinh, String email,
+			String sDT, String dVCT, String chucDanh, String tenDangNhap, String matKhau, Boolean trangThaiCongViec) {
 		super();
 		this.maNV = maNV;
 		this.tenNV = tenNV;
@@ -59,10 +59,10 @@ public class NhanVienBean {
 	public void setNgaySinh(Date ngaySinh) {
 		this.ngaySinh = ngaySinh;
 	}
-	public String getGioiTinh() {
+	public Boolean getGioiTinh() {
 		return gioiTinh;
 	}
-	public void setGioiTinh(String gioiTinh) {
+	public void setGioiTinh(Boolean gioiTinh) {
 		this.gioiTinh = gioiTinh;
 	}
 	public String getEmail() {
@@ -101,10 +101,10 @@ public class NhanVienBean {
 	public void setMatKhau(String matKhau) {
 		this.matKhau = matKhau;
 	}
-	public String getTrangThaiCongViec() {
+	public Boolean getTrangThaiCongViec() {
 		return trangThaiCongViec;
 	}
-	public void setTrangThaiCongViec(String trangThaiCongViec) {
+	public void setTrangThaiCongViec(Boolean trangThaiCongViec) {
 		this.trangThaiCongViec = trangThaiCongViec;
 	}
 	@Override
@@ -114,6 +114,7 @@ public class NhanVienBean {
 				+ chucDanh + ", tenDangNhap=" + tenDangNhap + ", matKhau=" + matKhau + ", trangThaiCongViec="
 				+ trangThaiCongViec + "]";
 	}
+	
 	
 	
 }
