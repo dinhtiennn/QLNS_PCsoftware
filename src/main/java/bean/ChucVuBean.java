@@ -1,8 +1,6 @@
 package bean;
 
 public class ChucVuBean {
-<<<<<<< Updated upstream
-=======
 	private String maVc;
 	private String tenCV;
 	public ChucVuBean() {
@@ -29,6 +27,5 @@ public class ChucVuBean {
 	public String toString() {
 		return "ChucVuBean [maVc=" + maVc + ", tenCV=" + tenCV + "]";
 	}
->>>>>>> Stashed changes
 	
 }
