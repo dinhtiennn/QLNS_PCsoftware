@@ -16,4 +16,8 @@ public class HuongDanGITbash {
 // vi dụ:  git reset -- src/main/java/dao/ketnoiDB.java  //đây là DB tùy từng máy nên k commit 
 //	7.git commit -m 'messenger'
 //	8.git push  origin master
+	
+//Fix lỗi overwritten
+// 1. git stash
+// 2. git pull
 }
