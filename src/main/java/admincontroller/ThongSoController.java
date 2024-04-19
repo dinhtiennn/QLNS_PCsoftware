@@ -1,5 +1,7 @@
 package admincontroller;
 
+import java.io.IOException;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,18 +12,18 @@ import javax.servlet.http.HttpSession;
 
 import adminbo.adminThongSoKyThuatbo;
 
-import java.io.IOException;
-
 /**
  * Servlet implementation class ThongSoController
  */
+@WebServlet("/ThongSoController")
 public class ThongSoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
     /**
-     * Default constructor. 
+     * @see HttpServlet#HttpServlet()
      */
     public ThongSoController() {
+        super();
         // TODO Auto-generated constructor stub
     }
 
@@ -39,7 +41,6 @@ public class ThongSoController extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		
 	}
 

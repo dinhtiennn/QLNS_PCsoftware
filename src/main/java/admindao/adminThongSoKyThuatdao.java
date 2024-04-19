@@ -8,8 +8,8 @@ import bean.ThongSoKiThuatBean;
 
 
 public class adminThongSoKyThuatdao {
-	public ArrayList<ThongSoKiThuatBean> GetThongSo() throws Exception{
-		ArrayList<ThongSoKiThuatBean> ds = new ArrayList<ThongSoKiThuatBean>();
+	public ThongSoKiThuatBean GetThongSo() throws Exception{
+		ThongSoKiThuatBean ds = null;
 		ketnoiDB kn = new ketnoiDB();
 		kn.ketnoi();
 		String sql = "select * from ThongSoKiThuat";
@@ -22,7 +22,7 @@ public class adminThongSoKyThuatdao {
 			float HSL = rs.getFloat("HSL");
 			float HSLOT = rs.getFloat("HSLOT");;
 			float HSLPhat = rs.getFloat("HSLPhat");;
-			ds.add(new ThongSoKiThuatBean(SoCaLamMin, SoNVMotCaMin, SoNVMotCaMax, HSL, HSLOT, HSLPhat));
+			ds = new ThongSoKiThuatBean(SoCaLamMin, SoNVMotCaMin, SoNVMotCaMax, HSL, HSLOT, HSLPhat);
 		}
 		rs.close();
 		kn.cn.close();
