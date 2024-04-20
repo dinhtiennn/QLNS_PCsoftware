@@ -35,7 +35,7 @@ public class adminIndex extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
-		RequestDispatcher rd = request.getRequestDispatcher("adminNhanVienController");
+		RequestDispatcher rd = request.getRequestDispatcher("ThongSoController");
 		rd.forward(request, response);
 	}
 

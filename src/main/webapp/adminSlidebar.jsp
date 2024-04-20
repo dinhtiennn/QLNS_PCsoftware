@@ -9,19 +9,19 @@
 <body>
 	<ul class="nav flex-column">
 		<li class="nav-item">
-	    	<a class="nav-link" href="lichtrinhthang">Thông số kĩ thuật</a>
+	    	<a class="nav-link" href="ThongSoController">Thông số kĩ thuật</a>
 	  	</li>
 	  	<li class="nav-item">
-	   		<a class="nav-link" href="dangkilamviec">Đăng ký làm việc</a>
+	   		<a class="nav-link" href="adminNhanVienController">Thông tin nhân viên</a>
 	  	</li>
 	  	<li class="nav-item">
-	    	<a class="nav-link" href="dangkinghi">Đăng kí nghỉ</a>
+	    	<a class="nav-link" href="#">Thêm Chức Năng</a>
 	  	</li>
 	  	<li class="nav-item">
-	    	<a class="nav-link" href="#">Hồ sơ cần nộp</a>
+	    	<a class="nav-link" href="#">Thêm Chức Năng</a>
 	  	</li>
 	    <li class="nav-item">
-	    	<a class="nav-link" href="#">Thông tin lương</a>
+	    	<a class="nav-link" href="#">Thêm Chức Năng</a>
 	  	</li>
 	</ul>
 </body>
