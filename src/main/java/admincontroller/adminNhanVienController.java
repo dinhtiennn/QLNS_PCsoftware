@@ -1,8 +1,6 @@
-package controller;
+package admincontroller;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,22 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.NhanVienBean;
-
-import bo.NhanVienBo;
-
+import adminbo.adminNhanVienBo;
 
 /**
- * Servlet implementation class index
+ * Servlet implementation class adminNhanVienController
  */
-@WebServlet("/index")
-public class index extends HttpServlet {
+@WebServlet("/adminNhanVienController")
+public class adminNhanVienController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public index() {
+    public adminNhanVienController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,27 +31,18 @@ public class index extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		String select_Nam = request.getParameter("select-nam");
-		String select_Thang = request.getParameter("selectthang");
-		NhanVienBo nvbo = new NhanVienBo();
-	
-		NhanVienBean nv = (NhanVienBean)session.getAttribute("nhanvien");
-		String url = "";
-		if(nv != null) {
-			String maCV = nv.getMaCV();
-			if(maCV.equals("CV001")) {
-				url = "adminIndex";
-			}
-			else {
-				url = "NewFile.jsp";
-			}		
-		}else {
-			url = "login.jsp";
+		try {
+			request.setCharacterEncoding("utf-8");
+			response.setCharacterEncoding("utf-8");
+			HttpSession session= request.getSession();
+			adminNhanVienBo adnvbo = new adminNhanVienBo();
+			request.setAttribute("DanhSachNhanVien", adnvbo.getnhanvien());
+			RequestDispatcher rd = request.getRequestDispatcher("ADMINnhanvien.jsp");
+			rd.forward(request, response);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
-		RequestDispatcher rd = request.getRequestDispatcher(url);
-		rd.forward(request, response);
-		
 	}
 
 	/**

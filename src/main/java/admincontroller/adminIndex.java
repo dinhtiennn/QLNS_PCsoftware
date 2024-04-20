@@ -35,16 +35,7 @@ public class adminIndex extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
-	
-		NhanVienBean nv = (NhanVienBean)session.getAttribute("nhanvien");
-		String url = "";
-		if(nv != null) {
-			url = "ADMINview.jsp";
-			
-		}else {
-			url = "login.jsp";
-		}
-		RequestDispatcher rd = request.getRequestDispatcher(url);
+		RequestDispatcher rd = request.getRequestDispatcher("adminNhanVienController");
 		rd.forward(request, response);
 	}
 
