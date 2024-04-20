@@ -8,6 +8,7 @@ import java.util.Date;
 
 import admindao.ketnoiDB;
 import bean.DangKyLamBean;
+import bean.NhanVienBean;
 
 public class DangKyLichLamdao {
 	public ArrayList<DangKyLamBean> GetAllDKL() throws Exception{
@@ -16,6 +17,65 @@ public class DangKyLichLamdao {
 		kn.ketnoi();
 		String sql = "select * from DangKyLichLam";
 		PreparedStatement cmd = kn.cn.prepareStatement(sql);
+		ResultSet rs = cmd.executeQuery();
+		while(rs.next()) {
+			Long MaDKLam = rs.getLong("MaDKLam");
+			String MaNV = rs.getString("MaNV");
+			String MaLoaiCa = rs.getString("MaLoaiCa");
+			Date Duyet = rs.getDate("NgayDK");
+			ds.add(new DangKyLamBean(MaDKLam, MaNV, MaLoaiCa, Duyet));
+		}
+		kn.cn.close();
+		rs.close();
+		return ds;
+	}
+	public ArrayList<DangKyLamBean> GetAllNVLamCungCa(java.sql.Date ngayDK, String maLC) throws Exception{
+		ArrayList<DangKyLamBean> ds = new ArrayList<DangKyLamBean>();
+		ketnoiDB kn = new ketnoiDB();
+		kn.ketnoi();
+		String sql = "SELECT * FROM DangKyLichLam WHERE NgayDK=? and MaLoaiCa = ?;";
+		PreparedStatement cmd = kn.cn.prepareStatement(sql);
+		cmd.setDate(1, ngayDK);
+		cmd.setString(2, maLC);
+		ResultSet rs = cmd.executeQuery();
+		while(rs.next()) {
+			Long MaDKLam = rs.getLong("MaDKLam");
+			String MaNV = rs.getString("MaNV");
+			String MaLoaiCa = rs.getString("MaLoaiCa");
+			Date Duyet = rs.getDate("NgayDK");
+			ds.add(new DangKyLamBean(MaDKLam, MaNV, MaLoaiCa, Duyet));
+		}
+		kn.cn.close();
+		rs.close();
+		return ds;
+	}
+	public ArrayList<DangKyLamBean> GetDKLamByNhanVien(String idnv) throws Exception{
+		ArrayList<DangKyLamBean> ds = new ArrayList<DangKyLamBean>();
+		ketnoiDB kn = new ketnoiDB();
+		kn.ketnoi();
+		String sql = "select * from DangKyLichLam where MaNV = ?";
+		PreparedStatement cmd = kn.cn.prepareStatement(sql);
+		cmd.setString(1, idnv);
+		ResultSet rs = cmd.executeQuery();
+		while(rs.next()) {
+			Long MaDKLam = rs.getLong("MaDKLam");
+			String MaNV = rs.getString("MaNV");
+			String MaLoaiCa = rs.getString("MaLoaiCa");
+			Date Duyet = rs.getDate("NgayDK");
+			ds.add(new DangKyLamBean(MaDKLam, MaNV, MaLoaiCa, Duyet));
+		}
+		kn.cn.close();
+		rs.close();
+		return ds;
+	}
+	public ArrayList<DangKyLamBean> GetDKLamByNhanVienAndMonth(String idnv, int month) throws Exception{
+		ArrayList<DangKyLamBean> ds = new ArrayList<DangKyLamBean>();
+		ketnoiDB kn = new ketnoiDB();
+		kn.ketnoi();
+		String sql = "SELECT * FROM DangKyLichLam WHERE MaNV = ? and MONTH(NgayDK) = ?";
+		PreparedStatement cmd = kn.cn.prepareStatement(sql);
+		cmd.setString(1, idnv);
+		cmd.setInt(2, month);
 		ResultSet rs = cmd.executeQuery();
 		while(rs.next()) {
 			Long MaDKLam = rs.getLong("MaDKLam");

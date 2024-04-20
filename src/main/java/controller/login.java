@@ -41,7 +41,7 @@ public class login extends HttpServlet {
 			NhanVienBean nhanvien = null;
 			if(tendangnhap != null && matkhau != null){					
 				nhanvien = nvbo.getNhanVienTheoTKvaMK(tendangnhap, matkhau);
-					if(nhanvien != null ){
+					if(nhanvien != null && nhanvien.getTrangThaiCongViec()==true){
 						url = "index";
 						session.setAttribute("nhanvien", nhanvien);
 					}else {

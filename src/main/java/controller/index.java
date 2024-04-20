@@ -37,10 +37,7 @@ public class index extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		String select_Nam = request.getParameter("select-nam");
-		String select_Thang = request.getParameter("selectthang");
-		NhanVienBo nvbo = new NhanVienBo();
-	
+		
 		NhanVienBean nv = (NhanVienBean)session.getAttribute("nhanvien");
 		String url = "";
 		if(nv != null) {
@@ -48,9 +45,12 @@ public class index extends HttpServlet {
 			if(maCV.equals("CV001")) {
 				url = "adminIndex";
 			}
-			else {
-				url = "NewFile.jsp";
-			}		
+			else if(maCV.equals("CV002")){
+				url = "quanli";
+			}
+			else if(maCV.equals("CV003")){
+				url = "nhanvien?action=index";
+			}
 		}else {
 			url = "login.jsp";
 		}

@@ -9,10 +9,10 @@
 <body>
 	<ul class="nav flex-column">
 			<li class="nav-item">
-		    <a class="nav-link" href="lichtrinhthang">Lịch trình tháng</a>
+		    <a class="nav-link" href="nhanvien?action=showmonthlyschedule">Lịch trình tháng</a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" href="dangkilamviec">Đăng ký làm việc</a>
+		    <a class="nav-link" href="nhanvien?action=workregistration">Đăng ký làm việc</a>
 		  </li>
 		  <li class="nav-item">
 		    <a class="nav-link" href="dangkinghi">Đăng kí nghỉ</a>
