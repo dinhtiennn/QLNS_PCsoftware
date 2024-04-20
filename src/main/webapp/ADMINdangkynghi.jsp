@@ -35,8 +35,12 @@
 			           <td><%=dkb.getMaNV() %></td>      
 			           <td><%=dkb.getMaLoaiCa() %></td>      
 			           <td><%=dkb.getNgayDK() %></td>      
-			           <td><%=dkb.getDuyet() %></td>      
-			           <td><%=dkb.getNguoiDuyet() %></td>      
+			           <td><%=dkb.getDuyet() %></td>
+			           <%if(dkb.getNguoiDuyet()==null) { %>  
+			           		<td>Đang chờ duyệt</td>
+			           <%} else {%>    
+			           		<td><%=dkb.getNguoiDuyet() %></td>      
+			           <%} %>
         	   </tr>
    			 <%}%>
    			 </tbody>

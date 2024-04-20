@@ -12,6 +12,7 @@
 <style type="text/css">
 input {
 	border : none;
+	text-align: center;
 }
 input:focus-visible {
 	outline : none;
@@ -25,13 +26,13 @@ input:focus-visible {
 			<jsp:include page="adminSlidebar.jsp"></jsp:include>
 		</div>
 		
-		<div>
+		<div style="margin-left: 260px;">
 			<h1>Bảng Thông Số Kỹ Thuật</h1>
 		 	<% ThongSoKiThuatBean tsbean = (ThongSoKiThuatBean)request.getAttribute("BangThongSo"); %>
 		
 		 	
 		 	<form action="ThongSoController" method="post">
-			 	<table>
+			 	<table class="table">
 			 		<tr>
 			 			<th> Hệ Số Lương </th>
 			 			<td> 
@@ -73,11 +74,11 @@ input:focus-visible {
 			 				<input type="text" name="sclMinCa" value="<%=tsbean.getSoNVMotCaMin()%>">
 			 			</td>
 			 		</tr>
-			 		
-			 		<tr>
-			 			<button class="" id="submit" type="submit">Xác Nhận</button>
-			 		</tr>
+		 			
 			 	</table>
+			 	<div>
+			 		<button class="btn btn-primary" id="submit" type="submit">Xác Nhận</button>
+			 	</div>
 		 	</form>
 		</div>
 	</div>

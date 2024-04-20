@@ -15,53 +15,53 @@
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
-	<div class="col-2  mt-5">
-		<jsp:include page="adminSlidebar.jsp"></jsp:include>
-	</div>
-	<table>
-	<thead>
-        <tr>
-            <th>Mã Nhân Viên</th>
-            <th>Tên Nhân Viên</th>
-            <th>Mã Chức Vụ</th>
-            <th>Ngày Sinh</th>
-            <th>Giới Tính</th>
-            <th>Email</th>
-            <th>Số Điện Thoại</th>
-            <th>Đơn Vị Công Tác</th>
-            <th>Chức Danh</th>
-            <th>Tài Khoản</th>
-            <th>Mật Khẩu</th>
-            <th>Trạng Thái Công Việc</th> 
-        </tr>
-    </thead>
-     <tbody>
-	<%
-	ArrayList<NhanVienBean> ds = (ArrayList<NhanVienBean>)request.getAttribute("DanhSachNhanVien"); 
-	int n = ds.size();
-	for(int i=0; i<n; i++) {
-		NhanVienBean nvb = ds.get(i);%>
-	
-        <tr>
-            <td><%=nvb.getMaNV()%></td>
-            <td><%=nvb.getTenNV() %></td>
-            <td><%=nvb.getMaCV() %></td>
-            <td><%=nvb.getNgaySinh() %></td>
-            <td><%=nvb.getGioiTinh() %></td>
-            <td><%=nvb.getEmail() %></td>
-            <td><%=nvb.getsDT() %></td>
-            <td><%=nvb.getdVCT() %></td>
-            <td><%=nvb.getChucDanh() %></td>
-            <td><%=nvb.getTenDangNhap() %></td>
-            <td><%=nvb.getMatKhau() %></td>
-            <td><%=nvb.getTrangThaiCongViec() %></td>        
-        </tr>
-    
-	<%}%>
-	</tbody>
+	<div class="d-flex">
+		<div class="col-2  mt-5">
+			<jsp:include page="adminSlidebar.jsp"></jsp:include>
+		</div>
+		<table class="table" style="font-size: 11px;">
+			<thead>
+		        <tr>
+		            <th>Mã Nhân Viên</th>
+		            <th style="width: 180px;">Tên Nhân Viên</th>
+		            <th>Mã Chức Vụ</th>
+		            <th>Ngày Sinh</th>
+		            <th>Giới Tính</th>
+		            <th>Email</th>
+		            <th>Số Điện Thoại</th>
+		            <th>Đơn Vị Công Tác</th>
+		            <th>Chức Danh</th>
+		            <th>Tài Khoản</th>
+		            <th>Mật Khẩu</th>
+		            <th>Trạng Thái Công Việc</th> 
+		        </tr>
+		    </thead>
+		    <tbody>
+			<%
+			ArrayList<NhanVienBean> ds = (ArrayList<NhanVienBean>)request.getAttribute("DanhSachNhanVien"); 
+			int n = ds.size();
+			for(int i=0; i<n; i++) {
+				NhanVienBean nvb = ds.get(i);%>
 			
-	
-	</table>
+		        <tr>
+		            <td><%=nvb.getMaNV()%></td>
+		            <td><%=nvb.getTenNV() %></td>
+		            <td><%=nvb.getMaCV() %></td>
+		            <td><%=nvb.getNgaySinh() %></td>
+		            <td><%=nvb.getGioiTinh() %></td>
+		            <td><%=nvb.getEmail() %></td>
+		            <td><%=nvb.getsDT() %></td>
+		            <td><%=nvb.getdVCT() %></td>
+		            <td><%=nvb.getChucDanh() %></td>
+		            <td><%=nvb.getTenDangNhap() %></td>
+		            <td><%=nvb.getMatKhau() %></td>
+		            <td><%=nvb.getTrangThaiCongViec() %></td>        
+		        </tr>
+		    
+			<%}%>
+			</tbody>
+		</table>
+	</div>
  	
 </body>
 </html>
