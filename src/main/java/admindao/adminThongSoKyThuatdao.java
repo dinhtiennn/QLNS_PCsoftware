@@ -28,4 +28,18 @@ public class adminThongSoKyThuatdao {
 		kn.cn.close();
 		return ds;
 	}
+	public void SuaThongSo(int SoCaLamMin, int SoNVMotCaMin ,int SoNVMotCaMax ,float HSL, float HSLOT, float HSLPhat) throws Exception{
+		ketnoiDB kn = new ketnoiDB();
+		kn.ketnoi();
+		String sql = "Update ThongSoKiThuat Set SoCaLamMin = ? ,SoNVMotCaMin = ?,SoNVMotCaMax = ?, HSL= ?, HSLOT=?, HSLPhat= ? ";
+		PreparedStatement cmd = kn.cn.prepareStatement(sql);
+		cmd.setInt(1, SoCaLamMin);
+		cmd.setInt(2, SoNVMotCaMin);
+		cmd.setInt(3, SoNVMotCaMax);
+		cmd.setFloat(4, HSL);
+		cmd.setFloat(5, HSLOT);
+		cmd.setFloat(6, HSLPhat);
+		cmd.executeUpdate();
+		kn.cn.close();
+	}
 }
