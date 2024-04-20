@@ -13,9 +13,8 @@
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
-<div class="row">
 	<div class="col-2  mt-5">
-		<jsp:include page="Slidebar.jsp"></jsp:include>
+		<jsp:include page="adminSlidebar.jsp"></jsp:include>
 	</div>
 	<h1>Bảng Thông số kỹ thuật</h1>
  	<% ThongSoKiThuatBean tsbean = (ThongSoKiThuatBean)request.getAttribute("BangThongSo"); %>
@@ -25,5 +24,39 @@
  	Số ca làm tối thiểu 1 tháng : <%=tsbean.getSoCaLamMin()%><br>
  	Số nhân viên tối đa 1 ca : <%=tsbean.getSoNVMotCaMax()%><br>
  	Số nhân viên tối thiểu 1 ca : <%=tsbean.getSoNVMotCaMin()%><br>
+ 	
+ 	<form action="" method="post">
+	 	<table>
+	 		<tr>
+	 			<th> Hệ Số Lương </th>
+	 			<td> <%=tsbean.getHSL()%> </td>
+	 		</tr>
+	 		
+	 		<tr>
+	 			<th> Hệ Số Lương Tăng Ca </th>
+	 			<td> <%=tsbean.getHSLOT()%> </td>
+	 		</tr>
+	 		
+	 		<tr>
+	 			<th> Hệ Số Lương Phạt </th>
+	 			<td> <%=tsbean.getHSLPhat()%> </td>
+	 		</tr>
+	 		
+	 		<tr>
+	 			<th> Số Ca Làm Tối Thiểu 1 Tháng </th>
+	 			<td> <%=tsbean.getSoCaLamMin()%> </td>
+	 		</tr>
+	 		
+	 		<tr>
+	 			<th> Số Nhân Viên Tối Đa 1 Ca </th>
+	 			<td> <%=tsbean.getSoNVMotCaMax()%> </td>
+	 		</tr>
+	 		
+	 		<tr>
+	 			<th> Số Nhân Viên Tối Thiểu 1 Ca </th>
+	 			<td> <%=tsbean.getSoNVMotCaMin()%> </td>
+	 		</tr>
+	 	</table>
+ 	</form>
 </body>
 </html>
