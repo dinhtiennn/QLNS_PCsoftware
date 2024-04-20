@@ -4,8 +4,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-
 import bean.ThongKeLuongBean;
+
 
 public class adminThongKeLuongdao {
 	public ArrayList<ThongKeLuongBean> getAllThongKeLuong() throws Exception{
@@ -69,12 +69,5 @@ public class adminThongKeLuongdao {
 		cmd.close();
 		kn.cn.close();
 	}
-	public static void main(String[] args) {
-		adminThongKeLuongdao ad= new adminThongKeLuongdao();
-		try {
-			ad.DeleteThongKeLuong("NV004");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	
 }
