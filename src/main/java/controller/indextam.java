@@ -1,4 +1,4 @@
-package admincontroller;
+package controller;
 
 import java.io.IOException;
 
@@ -8,20 +8,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import adminbo.adminThongTinNhanVienbo;
+import bean.NhanVienBean;
+import bo.NhanVienBo;
 
 /**
- * Servlet implementation class admindangnhapController
+ * Servlet implementation class indextam
  */
-@WebServlet("/admindangnhapController")
-public class admindangnhapController extends HttpServlet {
+@WebServlet("/indextam")
+public class indextam extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public admindangnhapController() {
+    public indextam() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,19 +32,18 @@ public class admindangnhapController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
-			request.setCharacterEncoding("utf-8");
-			response.setCharacterEncoding("utf-8");
-			adminThongTinNhanVienbo adnvbo = new adminThongTinNhanVienbo();
-			String txtun = request.getParameter("txtun");
-			String txtpass = request.getParameter("txtpass");
-			adnvbo.ktdn(txtun, txtpass);
+		HttpSession session = request.getSession();
+	
+		NhanVienBean nv = (NhanVienBean)session.getAttribute("nhanvien");
+		String url = "";
+		if(nv != null) {
+			url = "ThongSoController";
 			
-			RequestDispatcher rd = request.getRequestDispatcher("dangnhapadmin.jsp");
-			rd.forward(request, response);
-		} catch (Exception e) {
-			e.printStackTrace();
+		}else {
+			url = "login.jsp";
 		}
+		RequestDispatcher rd = request.getRequestDispatcher(url);
+		rd.forward(request, response);
 	}
 
 	/**
