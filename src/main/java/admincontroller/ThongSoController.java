@@ -37,7 +37,7 @@ public class ThongSoController extends HttpServlet {
 			HttpSession session= request.getSession();
 			adminThongSoKyThuatbo tskhbo = new adminThongSoKyThuatbo();
 			request.setAttribute("BangThongSo", tskhbo.GetThongSo());
-			RequestDispatcher rd = request.getRequestDispatcher("ThongSo.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("ADMINview.jsp");
 			rd.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();

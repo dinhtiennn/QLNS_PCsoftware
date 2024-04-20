@@ -44,7 +44,7 @@ public class index extends HttpServlet {
 		NhanVienBean nv = (NhanVienBean)session.getAttribute("nhanvien");
 		String url = "";
 		if(nv != null) {
-			url = "ADMINview.jsp";
+			url = "ThongSoController";
 			
 		}else {
 			url = "login.jsp";
