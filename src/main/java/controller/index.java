@@ -44,8 +44,13 @@ public class index extends HttpServlet {
 		NhanVienBean nv = (NhanVienBean)session.getAttribute("nhanvien");
 		String url = "";
 		if(nv != null) {
-			url = "ThongSoController";
-			
+			String maCV = nv.getMaCV();
+			if(maCV.equals("CV001")) {
+				url = "ThongSoController";
+			}
+			else {
+				url = "NewFile.jsp";
+			}		
 		}else {
 			url = "login.jsp";
 		}
