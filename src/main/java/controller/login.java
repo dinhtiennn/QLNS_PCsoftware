@@ -42,8 +42,15 @@ public class login extends HttpServlet {
 			if(tendangnhap != null && matkhau != null){					
 				nhanvien = nvbo.getNhanVienTheoTKvaMK(tendangnhap, matkhau);
 					if(nhanvien != null ){
-						url = "index";
-						session.setAttribute("nhanvien", nhanvien);// setNguoiDUng
+						String maCV = nhanvien.getMaCV();
+						if(maCV.equals("CV001")) {
+							url = "index";
+							session.setAttribute("nhanvien", nhanvien);							
+						}
+						else {
+							url = "NewFile.jsp";
+							session.setAttribute("nhanvien", nhanvien);
+						}
 					}else {
 						url = "login.jsp";
 						request.setAttribute("baoloilogin", "Sai tên đăng nhập hoặc mật khẩu!");
