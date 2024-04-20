@@ -32,8 +32,9 @@ public class ThongSoController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			HttpSession session = request.getSession();
-			response.setCharacterEncoding("UTF-8");
+			request.setCharacterEncoding("utf-8");
+			response.setCharacterEncoding("utf-8");
+			HttpSession session= request.getSession();
 			adminThongSoKyThuatbo tskhbo = new adminThongSoKyThuatbo();
 			request.setAttribute("BangThongSo", tskhbo.GetThongSo());
 			RequestDispatcher rd = request.getRequestDispatcher("ThongSo.jsp");
@@ -41,7 +42,6 @@ public class ThongSoController extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
 
 	/**
