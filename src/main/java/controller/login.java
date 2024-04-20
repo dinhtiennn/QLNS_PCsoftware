@@ -1,8 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,21 +11,19 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.NhanVienBean;
-
 import bo.NhanVienBo;
 
-
 /**
- * Servlet implementation class index
+ * Servlet implementation class login
  */
-@WebServlet("/index")
-public class index extends HttpServlet {
+@WebServlet("/login")
+public class login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public index() {
+    public login() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,29 +32,32 @@ public class index extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		String select_Nam = request.getParameter("select-nam");
-		String select_Thang = request.getParameter("selectthang");
+		String tendangnhap = request.getParameter("tendangnhap");
+		String matkhau = request.getParameter("matkhau");
 		NhanVienBo nvbo = new NhanVienBo();
-	
-		NhanVienBean nv = (NhanVienBean)session.getAttribute("nhanvien");
 		String url = "";
-		if(nv != null) {
-			String maCV = nv.getMaCV();
-			if(maCV.equals("CV001")) {
-				url = "adminIndex";
+		HttpSession session = request.getSession();
+		try {
+			NhanVienBean nhanvien = null;
+			if(tendangnhap != null && matkhau != null){					
+				nhanvien = nvbo.getNhanVienTheoTKvaMK(tendangnhap, matkhau);
+					if(nhanvien != null ){
+						url = "index";
+						session.setAttribute("nhanvien", nhanvien);
+					}else {
+						url = "login.jsp";
+						request.setAttribute("baoloilogin", "Sai tên đăng nhập hoặc mật khẩu!");
+						request.setAttribute("tendangnhap", tendangnhap);
+					}
+			}else {
+				url = "login.jsp";
 			}
-			else {
-				url = "NewFile.jsp";
-			}		
-		}else {
-			url = "login.jsp";
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		RequestDispatcher rd = request.getRequestDispatcher(url);
 		rd.forward(request, response);
-		
-	}
-
+}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
