@@ -4,3 +4,6 @@ src/main/java/admindao/ketnoiDB.java
 .settings
 build/classes/.gitignore
 /admincontroller/
+/controller/
+/dao/
+/bo/
