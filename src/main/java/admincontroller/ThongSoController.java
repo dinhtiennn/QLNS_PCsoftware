@@ -34,9 +34,21 @@ public class ThongSoController extends HttpServlet {
 		try {
 			request.setCharacterEncoding("utf-8");
 			response.setCharacterEncoding("utf-8");
+			String hsl = request.getParameter("hsl");
+			String hslOT = request.getParameter("hslOT");
+			String hslPhat = request.getParameter("hslPhat");
+			String sclMinThang = request.getParameter("sclMinThang");
+			String sclMaxCa = request.getParameter("sclMaxCa");
+			String sclMinCa = request.getParameter("sclMinCa");
 			HttpSession session= request.getSession();
 			adminThongSoKyThuatbo tskhbo = new adminThongSoKyThuatbo();
+			
 			request.setAttribute("BangThongSo", tskhbo.GetThongSo());
+			if(hsl != null && hslOT != null && hslPhat != null && sclMinThang != null && sclMaxCa != null && sclMinCa != null) {
+				tskhbo.SuaThongSo(Integer.parseInt(sclMinThang), Integer.parseInt(sclMinCa), Integer.parseInt(sclMaxCa), Float.parseFloat(hsl), Float.parseFloat(hslOT), Float.parseFloat(hslPhat));
+				request.setAttribute("BangThongSo", tskhbo.GetThongSo());
+			}
+			
 			RequestDispatcher rd = request.getRequestDispatcher("ADMINview.jsp");
 			rd.forward(request, response);
 		} catch (Exception e) {
