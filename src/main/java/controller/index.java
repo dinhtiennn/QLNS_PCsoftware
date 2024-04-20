@@ -37,22 +37,35 @@ public class index extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		String select_Nam = request.getParameter("select-nam");
-		String select_Thang = request.getParameter("selectthang");
+		String tendangnhap = request.getParameter("tendangnhap");
+		String matkhau = request.getParameter("matkhau");
 		NhanVienBo nvbo = new NhanVienBo();
-	
-		NhanVienBean nv = (NhanVienBean)session.getAttribute("nhanvien");
 		String url = "";
-		if(nv != null) {
-			String maCV = nv.getMaCV();
-			if(maCV.equals("CV001")) {
-				url = "adminIndex";
+		
+		try {
+			NhanVienBean nv = null;
+			if(tendangnhap!=null && matkhau != null) {
+				nv = nvbo.getNhanVienTheoTKvaMK(tendangnhap, matkhau);
+				if(nv != null ){
+					System.out.println(nv.toString());
+					String maCV = nv.getMaCV();
+					if(maCV.equals("CV001")) {
+						url = "adminIndex";
+					}
+					else {
+						url = "NewFile.jsp";
+					}		
+					session.setAttribute("nhanvien", nv);
+				}
+			}else {
+					url = "login.jsp";
+					request.setAttribute("baoloilogin", "Sai tên đăng nhập hoặc mật khẩu!");
+					request.setAttribute("tendangnhap", tendangnhap);
 			}
-			else {
-				url = "NewFile.jsp";
-			}		
-		}else {
-			url = "login.jsp";
+		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		RequestDispatcher rd = request.getRequestDispatcher(url);
 		rd.forward(request, response);
