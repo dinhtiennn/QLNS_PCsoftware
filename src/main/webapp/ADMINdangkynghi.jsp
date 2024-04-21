@@ -13,13 +13,15 @@
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
+	<div class="d-flex">
 		<div class="col-2  mt-5">
 			<jsp:include page="adminSlidebar.jsp"></jsp:include>
 		</div>
-		<table>
+		<table class="table">
 			<thead>
 		        <tr>
 		            <th>Mã Nhân Viên</th>
+		            <th>Tên Nhân Viên</th>
 		            <th>Loại Ca Làm</th>
 		            <th>Ngày Đăng Ký</th>
 		            <th>Duyệt</th>
@@ -32,12 +34,13 @@
 		   			for(int i=0; i<n; i++) {
 		   			DangKyNghiBean dkb = ds.get(i);%>
    			 	<tr>
-			           <td><%=dkb.getMaNV() %></td>      
+			           <td><%=dkb.getMaNV() %></td>  
+			           <td><%=dkb.getTenNV() %></td>     
 			           <td><%=dkb.getMaLoaiCa() %></td>      
 			           <td><%=dkb.getNgayDK() %></td>      
 			           <td><%=dkb.getDuyet() %></td>
 			           <%if(dkb.getNguoiDuyet()==null) { %>  
-			           		<td>Đang chờ duyệt</td>
+			           		<td style="color: #c6cd1e;">Đang chờ duyệt</td>
 			           <%} else {%>    
 			           		<td><%=dkb.getNguoiDuyet() %></td>      
 			           <%} %>
@@ -46,5 +49,6 @@
    			 </tbody>
 
 		</table>
+	</div>
 </body>
 </html>
