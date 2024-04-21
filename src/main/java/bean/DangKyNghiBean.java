@@ -5,25 +5,34 @@ import java.util.Date;
 public class DangKyNghiBean {
 	private Long maDkNghi;
 	private String maNV;
-	private String tenNV;
 	private String maLoaiCa;
 	private Date ngayDK;
 	private int duyet;
 	private String nguoiDuyet;
-	public DangKyNghiBean() {
+	private String lyDo;
+ 	public DangKyNghiBean() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public DangKyNghiBean(Long maDkNghi, String maNV, String tenNV, String maLoaiCa, Date ngayDK, int duyet,
-			String nguoiDuyet) {
+	public DangKyNghiBean(Long maDkNghi, String maNV, String maLoaiCa, Date ngayDK, int duyet, String nguoiDuyet,
+			String lyDo) {
 		super();
 		this.maDkNghi = maDkNghi;
 		this.maNV = maNV;
-		this.tenNV = tenNV;
 		this.maLoaiCa = maLoaiCa;
 		this.ngayDK = ngayDK;
 		this.duyet = duyet;
 		this.nguoiDuyet = nguoiDuyet;
+		this.lyDo = lyDo;
+	}
+	public DangKyNghiBean(String maNV, String maLoaiCa, Date ngayDK, int duyet, String nguoiDuyet, String lyDo) {
+		super();
+		this.maNV = maNV;
+		this.maLoaiCa = maLoaiCa;
+		this.ngayDK = ngayDK;
+		this.duyet = duyet;
+		this.nguoiDuyet = nguoiDuyet;
+		this.lyDo = lyDo;
 	}
 	public Long getMaDkNghi() {
 		return maDkNghi;
@@ -36,12 +45,6 @@ public class DangKyNghiBean {
 	}
 	public void setMaNV(String maNV) {
 		this.maNV = maNV;
-	}
-	public String getTenNV() {
-		return tenNV;
-	}
-	public void setTenNV(String tenNV) {
-		this.tenNV = tenNV;
 	}
 	public String getMaLoaiCa() {
 		return maLoaiCa;
@@ -67,11 +70,16 @@ public class DangKyNghiBean {
 	public void setNguoiDuyet(String nguoiDuyet) {
 		this.nguoiDuyet = nguoiDuyet;
 	}
+	public String getLyDo() {
+		return lyDo;
+	}
+	public void setLyDo(String lyDo) {
+		this.lyDo = lyDo;
+	}
 	@Override
 	public String toString() {
-		return "DangKyNghiBean [maDkNghi=" + maDkNghi + ", maNV=" + maNV + ", tenNV=" + tenNV + ", maLoaiCa=" + maLoaiCa
-				+ ", ngayDK=" + ngayDK + ", duyet=" + duyet + ", nguoiDuyet=" + nguoiDuyet + "]";
+		return "DangKyNghiBean [maDkNghi=" + maDkNghi + ", maNV=" + maNV + ", maLoaiCa=" + maLoaiCa + ", ngayDK="
+				+ ngayDK + ", duyet=" + duyet + ", nguoiDuyet=" + nguoiDuyet + ", lyDo=" + lyDo + "]";
 	}
-	
 	
 }

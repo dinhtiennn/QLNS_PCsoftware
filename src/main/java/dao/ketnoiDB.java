@@ -3,12 +3,20 @@ package dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class ketnoiDB_NV {
+public class ketnoiDB {
 	public static Connection cn;
 	public void ketnoi() throws Exception {
 		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-		String url ="jdbc:sqlserver://DESKTOP-VSQGE62\\\\TANNGO:1433;databaseName=QLNS; user=sa; password=123";
+		String url ="jdbc:sqlserver://RIN\\SQLEXPRESS:1433;databaseName=QLNS; user=sa; password=123";
 		cn = DriverManager.getConnection(url);
 		System.out.println("Da Ket Noi");
+	}
+	public static void main(String[] args) {
+		ketnoiDB kn = new ketnoiDB();
+		try {
+			kn.ketnoi();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 }

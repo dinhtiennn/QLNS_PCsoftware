@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import admindao.ketnoiDB;
 import bean.NhanVienBean;
 
 

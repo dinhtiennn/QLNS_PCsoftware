@@ -16,7 +16,7 @@
       <div class="col">
          <div class="d-flex justify-content-start">
           <a href="index">
-		  		<img style="width: 100px" alt="" src="https://banner2.cleanpng.com/20190524/ala/kisspng-management-human-resource-analytics-data-business-human-resources-oil-and-gas-solutions-5ce8ba52ecbef6.7833354115587559229697.jpg">
+		  		<img style="width: 100px" alt="" src="https://img.freepik.com/vetores-premium/design-de-logotipo-de-conectividade-de-pessoas-de-amizade-de-trabalho-em-equipe_18099-4788.jpg?w=740">
 		  </a>
         </div>
       </div>

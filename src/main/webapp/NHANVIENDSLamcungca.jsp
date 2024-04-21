@@ -48,7 +48,6 @@
 				<jsp:include page="Slidebar.jsp"></jsp:include>
 			</div>
 			<div class="col-6  mt-5">
-				Danh sách làm của:
 				<br>
 				<br>
 					Ngày: <%=formattedDate%> 

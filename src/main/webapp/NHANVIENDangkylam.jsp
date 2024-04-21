@@ -1,3 +1,4 @@
+<%@page import="bean.DangKyLamBean"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Locale"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
@@ -16,7 +17,10 @@
 
 </head>
 <body>
-	<%String msgSuccess = (request.getAttribute("msgSuccess")!=null)?request.getAttribute("msgSuccess").toString():"";%>
+	<%
+	ArrayList<DangKyLamBean> dsdk = ((ArrayList<DangKyLamBean>)request.getAttribute("dsdk")!=null)?(ArrayList<DangKyLamBean>)request.getAttribute("dsdk"):(new ArrayList<DangKyLamBean>());
+	String msgSuccess = (request.getAttribute("msgSuccess")!=null)?request.getAttribute("msgSuccess").toString():"";%>
+
 	<jsp:include page="header.jsp"></jsp:include>
 	<div class="row">
 		<div class="col-2  mt-5">
@@ -133,7 +137,8 @@
 			        </table>
 					</div>
 				</div>
-				<button type="submit" class="btn btn-success">Đăng ký</button>
+				<button name="submitBtn" value="regis" id="btnDangKy" type="submit" class="btn btn-success" style="display: none;">Đăng ký</button>
+				<button name="submitBtn" value="changeregis" id="btnChinhSua" type="submit" class="btn btn-primary" style="display: none;">Chỉnh sửa</button>
 			</form>
 			<%}else{%>
 				<span class="text-center">Chưa tới thời gian đăng ký!</span>
@@ -167,11 +172,67 @@
 	    </div>
 	  </div>
 	</div>
-	
+	<%
+	    // Khởi tạo các mảng để chứa ngày đăng ký cho từng buổi
+	    ArrayList<String> casang = new ArrayList<>();
+	    ArrayList<String> cachieu = new ArrayList<>();
+	    ArrayList<String> catoi = new ArrayList<>();
+
+	    // Duyệt qua từng phần tử trong danh sách dsdk
+	    for (int i = 0; i < dsdk.size(); i++) {
+	        // Lấy ra ngày đăng ký và ca từ phần tử hiện tại
+	        String ngayDK = dsdk.get(i).getNgayDK().toString();
+	        String ca = dsdk.get(i).getMaLoaica(); // Trường maLoaica sẽ chứa các giá trị LC001, LC002, LC003
+
+	        // Thêm ngày đăng ký vào mảng tương ứng với ca
+	        if (ca.equals("LC001")) {
+	            casang.add(ngayDK);
+	        } else if (ca.equals("LC002")) {
+	            cachieu.add(ngayDK);
+	        } else if (ca.equals("LC003")) {
+	            catoi.add(ngayDK);
+	        }
+	    }
+		
+	    // Khởi tạo chuỗi JSON cho casang
+	    StringBuilder casangJson = new StringBuilder("[");
+	    for (int i = 0; i < casang.size(); i++) {
+	        casangJson.append("\"").append(casang.get(i)).append("\"");
+	        if (i < casang.size() - 1) {
+	            casangJson.append(",");
+	        }
+	    }
+	    casangJson.append("]");
+
+	    // Khởi tạo chuỗi JSON cho cachieu
+	    StringBuilder cachieuJson = new StringBuilder("[");
+	    for (int i = 0; i < cachieu.size(); i++) {
+	        cachieuJson.append("\"").append(cachieu.get(i)).append("\"");
+	        if (i < cachieu.size() - 1) {
+	            cachieuJson.append(",");
+	        }
+	    }
+	    cachieuJson.append("]");
+
+	    // Khởi tạo chuỗi JSON cho catoi
+	    StringBuilder catoiJson = new StringBuilder("[");
+	    for (int i = 0; i < catoi.size(); i++) {
+	        catoiJson.append("\"").append(catoi.get(i)).append("\"");
+	        if (i < catoi.size() - 1) {
+	            catoiJson.append(",");
+	        }
+	    }
+	    catoiJson.append("]");	
+	    // Tạo chuỗi JSON tổng cùng với các trường
+	    String jsonString = "{";
+	    jsonString += "\"casang\": " + casangJson.toString() + ", ";
+	    jsonString += "\"cachieu\": " + cachieuJson.toString() + ", ";
+	    jsonString += "\"catoi\": " + catoiJson.toString();
+	    jsonString += "}";
+	%>
 </body>
 </html>
 <script >
-	
 	document.addEventListener("DOMContentLoaded", function() {
 		  // Lấy giá trị của các thuộc tính từ request.getAttribute
 		  var msgSuccess = "<%=msgSuccess%>";
@@ -191,4 +252,36 @@
 			    document.getElementById("msgsuccess").innerHTML = msgSuccess;
 		  }
 		});
+	// Hàm để đặt dấu tick cho các ô checkbox đã được đăng ký
+	function setCheckedState(dsdk) {
+	    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+	    checkboxes.forEach(function(checkbox) {
+	        var date = checkbox.value;
+	        var session = checkbox.name;
+	        if (dsdk[session] && dsdk[session].includes(date)) {
+	            checkbox.checked = true;
+	        }
+	    });
+	}
+	setCheckedState(<%= jsonString %>);	
+	
+    // Giả sử dsdk là một mảng JavaScript
+    var dsdk = <%=dsdk.size()%>;
+
+    // Log giá trị của dsdk ra console
+    console.log("Giá trị của dsdk là:", dsdk);
+
+    // Kiểm tra giá trị của dsdk
+    if (dsdk > 0) {
+        // Ẩn nút Đăng ký
+        document.getElementById("btnDangKy").style.display = "none";
+        // Hiển thị nút Chỉnh sửa
+        document.getElementById("btnChinhSua").style.display = "block";
+    } else if(dsdk == 0){
+        // Hiển thị nút Đăng ký
+        document.getElementById("btnDangKy").style.display = "block";
+        // Ẩn nút Chỉnh sửa
+        document.getElementById("btnChinhSua").style.display = "none";
+    }
+
 </script>

@@ -17,6 +17,11 @@ public class DangKyLamBean {
 		this.maLoaica = maLoaica;
 		this.ngayDK = ngayDK;
 	}
+	public DangKyLamBean(String maLoaica, Date ngayDK) {
+		super();
+		this.maLoaica = maLoaica;
+		this.ngayDK = ngayDK;
+	}
 	public Long getMaDkLam() {
 		return maDkLam;
 	}

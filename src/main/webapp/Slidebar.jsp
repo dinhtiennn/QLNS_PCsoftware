@@ -8,21 +8,18 @@
 </head>
 <body>
 	<ul class="nav flex-column">
-			<li class="nav-item">
-		    <a class="nav-link" href="nhanvien?action=showmonthlyschedule">Lịch trình tháng</a>
-		  </li>
-		  <li class="nav-item">
-		    <a class="nav-link" href="nhanvien?action=workregistration">Đăng ký làm việc</a>
-		  </li>
-		  <li class="nav-item">
-		    <a class="nav-link" href="dangkinghi">Đăng kí nghỉ</a>
-		  </li>
-		  <li class="nav-item">
-		    <a class="nav-link" href="#">Hồ sơ cần nộp</a>
-		  </li>
-	      <li class="nav-item">
-		    <a class="nav-link" href="#">Thông tin lương</a>
-		  </li>
-		</ul>
+	  <li class="nav-item">
+	    <a class="nav-link" href="index">Trang chủ</a>
+	  </li>
+	  <li class="nav-item">
+	    <a class="nav-link" href="nhanvien?action=showmonthlyschedule">Lịch trình tháng</a>
+	  </li>
+	  <li class="nav-item">
+	    <a class="nav-link" href="nhanvien?action=workregistration">Đăng ký làm việc</a>
+	  </li>
+	  <li class="nav-item">
+	    <a class="nav-link" href="dangkinghi">Đăng kí nghỉ</a>
+	  </li>
+	</ul>
 </body>
 </html>

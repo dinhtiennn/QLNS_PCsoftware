@@ -6,7 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import admindao.ketnoiDB;
 import bean.DangKyLamBean;
 import bean.NhanVienBean;
 
@@ -88,6 +87,27 @@ public class DangKyLichLamdao {
 		rs.close();
 		return ds;
 	}
+	public ArrayList<DangKyLamBean> GetDKLamByNhanVienNextWeek(java.sql.Date beginDate, java.sql.Date endDate,String idnv) throws Exception{
+		ArrayList<DangKyLamBean> ds = new ArrayList<DangKyLamBean>();
+		ketnoiDB kn = new ketnoiDB();
+		kn.ketnoi();
+		String sql = "SELECT * \r\n"
+				+ "FROM DangKyLichLam \r\n"
+				+ "WHERE NgayDK BETWEEN ? AND ? and MaNV = ?";
+		PreparedStatement cmd = kn.cn.prepareStatement(sql);
+		cmd.setDate(1, beginDate);
+		cmd.setDate(2, endDate);
+		cmd.setString(3, idnv);
+		ResultSet rs = cmd.executeQuery();
+		while(rs.next()) {
+			String MaLoaiCa = rs.getString("MaLoaiCa");
+			Date Duyet = rs.getDate("NgayDK");
+			ds.add(new DangKyLamBean(MaLoaiCa, Duyet));
+		}
+		kn.cn.close();
+		rs.close();
+		return ds;
+	}
 	public void ThemDKL(String maNV,String maLoaica, Date ngayDK) throws Exception{
 		ketnoiDB kn = new ketnoiDB();
 		kn.ketnoi();
@@ -103,4 +123,17 @@ public class DangKyLichLamdao {
 		cmd.close();
 		kn.cn.close();
 	}
+	public void XoaDKL(java.sql.Date beginDate, java.sql.Date endDate, String idnv) throws Exception {
+	    ketnoiDB kn = new ketnoiDB();
+	    kn.ketnoi();
+	    String sql = "DELETE FROM DangKyLichLam WHERE NgayDK BETWEEN ? AND ? AND MaNV = ?";
+	    PreparedStatement cmd = kn.cn.prepareStatement(sql);
+	    cmd.setDate(1, beginDate);
+	    cmd.setDate(2, endDate);
+	    cmd.setString(3, idnv);
+	    cmd.executeUpdate();
+	    cmd.close();
+	    kn.cn.close();
+	}
+
 }

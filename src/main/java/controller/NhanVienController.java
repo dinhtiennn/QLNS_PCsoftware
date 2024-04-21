@@ -108,6 +108,7 @@ public class NhanVienController extends HttpServlet {
 	}
 	public void workRegistration(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
 		String url = "login";
+		String btnAction = request.getParameter("submitBtn");
 		String[] caSang = request.getParameterValues("casang");
 		String[] caChieu = request.getParameterValues("cachieu");
 		String[] caToi = request.getParameterValues("catoi");
@@ -118,7 +119,8 @@ public class NhanVienController extends HttpServlet {
 			try {
 				url = "NHANVIENDangkylam.jsp";
 				if(caSang != null || caChieu != null || caToi != null) {		
-				    	if (caSang != null) {
+					if(btnAction.equals("regis")) {
+						if (caSang != null) {
 				    		for (String ngay : caSang) {
 				    			dklbo.insertDK(nv.getMaNV(),"LC001", Date.valueOf(ngay));
 				    		}
@@ -134,7 +136,27 @@ public class NhanVienController extends HttpServlet {
 				    		}
 				    	}
 				    	request.setAttribute("msgSuccess", "Đăng kí thành công!");
+					}else if(btnAction.equals("changeregis")) {
+						dklbo.deleteDK(nv.getMaNV());
+						if (caSang != null) {
+				    		for (String ngay : caSang) {
+				    			dklbo.insertDK(nv.getMaNV(),"LC001", Date.valueOf(ngay));
+				    		}
+				    	}
+				    	if (caToi != null) {
+				    		for (String ngay : caChieu) {
+				    			dklbo.insertDK(nv.getMaNV(),"LC002", Date.valueOf(ngay));
+				    		}
+				    	}
+				    	if (caToi != null) {
+				    		for (String ngay : caToi) {
+				    			dklbo.insertDK(nv.getMaNV(),"LC003", Date.valueOf(ngay));
+				    		}
+				    	}
+				    	request.setAttribute("msgSuccess", "Chỉnh sửa thành công!");
+					}
 				}
+				request.setAttribute("dsdk", dklbo.GetDKLamByNhanVienNextWeek(nv.getMaNV()));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
