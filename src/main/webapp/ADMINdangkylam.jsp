@@ -1,4 +1,4 @@
-<%@page import="bean.LoaiCaBean"%>
+<%@page import="bean.DangKyLamBean"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -18,33 +18,29 @@
 		<div class="col-2  mt-5">
 			<jsp:include page="adminSlidebar.jsp"></jsp:include>
 		</div>
-		<table class="table" >
+	<table class="table" >
 			<thead>
 				<tr>
+					<th>Mã Đăng Ký </th>
+					<th>Mã Nhân viên</th>
 					<th>Mã Loại Ca</th>
-					<th>Tên Loại Ca</th>
+					<th>Ngày Đăng Ký</th>
 				</tr>
 			</thead>
 			<tbody>
-				<%
-					ArrayList<LoaiCaBean> ds = (ArrayList<LoaiCaBean>)request.getAttribute("BangLoaiCa");
-				int n = ds.size();
-				for(int i =0; i<n;i++){
-					LoaiCaBean lcb = ds.get(i);%>
-					<tr>
-						<td><%=lcb.getMaLoaiCa() %></td>
-						<td><%=lcb.getTenLoaiCa() %></td>
-					</tr>	
-				<%}%>
+			<% ArrayList<DangKyLamBean> ds = (ArrayList<DangKyLamBean>)request.getAttribute("BangDangKyLam");
+			int n = ds.size();
+			for(int i =0; i<n;i++){
+				DangKyLamBean dkb = ds.get(i);%>
+				<tr>
+					<td><%=dkb.getMaDkLam()%></td>
+					<td><%=dkb.getMaNV()%></td>
+					<td><%=dkb.getMaLoaica()%></td>
+					<td><%=dkb.getNgayDK()%></td>
+				</tr>	
+			<%}%>
 			</tbody>
-			
-			
-		
-		
-		
-		</table>
-		
-		
+	</table>
 	</div>
 </body>
 </html>
