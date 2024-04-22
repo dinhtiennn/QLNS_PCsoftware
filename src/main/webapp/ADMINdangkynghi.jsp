@@ -1,3 +1,4 @@
+<%@page import="adminbo.adminNhanVienBo"%>
 <%@page import="bean.DangKyNghiBean"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -26,16 +27,18 @@
 		            <th>Ngày Đăng Ký</th>
 		            <th>Duyệt</th>
 		            <th>Người Duyệt</th>
+		            <th>Lý Do</th> 
 		        </tr>
    			 </thead>
    			 <tbody>
    			 	<%ArrayList<DangKyNghiBean> ds = (ArrayList<DangKyNghiBean>)request.getAttribute("BangDangKyNghi");
+   			 	adminNhanVienBo adnvbo = new adminNhanVienBo();
 		   			int n = ds.size();
 		   			for(int i=0; i<n; i++) {
 		   			DangKyNghiBean dkb = ds.get(i);%>
    			 	<tr>
 			           <td><%=dkb.getMaNV() %></td>  
-			           <td><%=dkb.getTenNV() %></td>     
+			           <td><%=adnvbo.getnhanvientheoma(dkb.getMaNV()).getTenNV() %></td>     
 			           <td><%=dkb.getMaLoaiCa() %></td>      
 			           <td><%=dkb.getNgayDK() %></td>      
 			           <td><%=dkb.getDuyet() %></td>
@@ -44,6 +47,7 @@
 			           <%} else {%>    
 			           		<td><%=dkb.getNguoiDuyet() %></td>      
 			           <%} %>
+			           <td><%=dkb.getLyDo() %></td>
         	   </tr>
    			 <%}%>
    			 </tbody>

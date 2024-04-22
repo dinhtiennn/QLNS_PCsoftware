@@ -11,4 +11,7 @@ public class adminNhanVienBo {
 	public ArrayList<NhanVienBean> getnhanvien() throws Exception{
 		return adnvdao.getnhanvien();
 	}
+	public NhanVienBean getnhanvientheoma(String manv) throws Exception{
+		return adnvdao.getnhanvientheoma(manv);
+	}
 }

@@ -17,12 +17,12 @@ public class adminDangKyNghiDao {
 		while(rs.next()) {
 			Long maDkNghi = rs.getLong("MaDKNghi");
 			String maNV = rs.getString("MaNV");
-			String tenNV = rs.getString("TenNV");
 			String maLoaiCa = rs.getString("MaLoaiCa");
 			Date ngayDK = rs.getDate("NgayDK");
 			int duyet = rs.getInt("Duyet");
 			String nguoiDuyet = rs.getString("NguoiDuyet");
-			ds.add(new DangKyNghiBean(maDkNghi, maNV,tenNV, maLoaiCa, ngayDK, duyet, nguoiDuyet));
+			String lyDo = rs.getString("LyDo");
+			ds.add(new DangKyNghiBean(maDkNghi, maNV, maLoaiCa, ngayDK, duyet, nguoiDuyet, lyDo));
 		}
 		rs.close();
 		kn.cn.close();
