@@ -37,7 +37,6 @@ public class index extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		
 		NhanVienBean nv = (NhanVienBean)session.getAttribute("nhanvien");
 		String url = "";
 		if(nv != null) {

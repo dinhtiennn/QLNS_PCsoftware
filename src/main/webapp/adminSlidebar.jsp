@@ -23,6 +23,18 @@
 	    <li class="nav-item">
 	    	<a class="nav-link" href="#">Thêm Chức Năng</a>
 	  	</li>
+	    <li class="nav-item">
+	    	<a class="nav-link" href="#">Thêm Chức Năng</a>
+	  	</li>
+	    <li class="nav-item">
+	    	<a class="nav-link" href="#">Thêm Chức Năng</a>
+	  	</li>
+	    <li class="nav-item">
+	    	<a class="nav-link" href="#">Thêm Chức Năng</a>
+	  	</li>
+	    <li class="nav-item">
+	    	<a class="nav-link" href="#">Thêm Chức Năng</a>
+	  	</li>
 	</ul>
 </body>
 </html>
