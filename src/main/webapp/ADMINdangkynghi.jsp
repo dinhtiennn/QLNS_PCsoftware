@@ -40,14 +40,20 @@
 			           <td><%=dkb.getMaNV() %></td>  
 			           <td><%=adnvbo.getnhanvientheoma(dkb.getMaNV()).getTenNV() %></td>     
 			           <td><%=dkb.getMaLoaiCa() %></td>      
-			           <td><%=dkb.getNgayDK() %></td>      
-			           <td><%=dkb.getDuyet() %></td>
-			           <%if(dkb.getNguoiDuyet()==null) { %>  
-			           		<td style="color: #c6cd1e;">Đang chờ duyệt</td>
-			           <%} else {%>    
-			           		<td><%=dkb.getNguoiDuyet() %></td>      
-			           <%} %>
-			           <td><%=dkb.getLyDo() %></td>
+			           <td><%=dkb.getNgayDK() %></td>  
+			           
+		           <%if(dkb.getDuyet() == 0) {%>
+			           <td>Chờ duyệt</td>
+		           <%} else {%>
+			           <td>Đã duyệt</td>
+		           <%} %>
+		           
+		           <%if(dkb.getNguoiDuyet()==null) { %>  
+		           		<td style="color: #c6cd1e;"> </td>
+		           <%} else {%>    
+		           		<td><%=dkb.getNguoiDuyet() %></td>      
+		           <%} %>
+			           	<td><%=dkb.getLyDo() %></td>
         	   </tr>
    			 <%}%>
    			 </tbody>
