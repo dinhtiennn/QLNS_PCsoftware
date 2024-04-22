@@ -18,7 +18,7 @@
 	    	<a class="nav-link" href="adminDangKyNghiController">Bảng Đăng Ký Nghỉ</a>
 	  	</li>
 	  	<li class="nav-item">
-	    	<a class="nav-link" href="#">Thêm Chức Năng</a>
+	    	<a class="nav-link" href="adminLoaiCaController">Phân Loại Ca Làm</a>
 	  	</li>
 	    <li class="nav-item">
 	    	<a class="nav-link" href="#">Thêm Chức Năng</a>

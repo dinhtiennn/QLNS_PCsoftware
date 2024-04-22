@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import bean.LoaiCaBean;
 
 public class adminLoaiCadao {
-	public ArrayList<LoaiCaBean> getAllCV() throws Exception{
+	public ArrayList<LoaiCaBean> GetAllLC() throws Exception{
 		ArrayList<LoaiCaBean> ds = new ArrayList<LoaiCaBean>();
 		ketnoiDB kn = new ketnoiDB();
 		kn.ketnoi();
