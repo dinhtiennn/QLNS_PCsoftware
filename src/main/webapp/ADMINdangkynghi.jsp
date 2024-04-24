@@ -1,3 +1,4 @@
+<%@page import="bean.VDangKyNghiBean"%>
 <%@page import="adminbo.adminNhanVienBo"%>
 <%@page import="bean.DangKyNghiBean"%>
 <%@page import="java.util.ArrayList"%>
@@ -31,14 +32,13 @@
 		        </tr>
    			 </thead>
    			 <tbody>
-   			 	<%ArrayList<DangKyNghiBean> ds = (ArrayList<DangKyNghiBean>)request.getAttribute("BangDangKyNghi");
-   			 	adminNhanVienBo adnvbo = new adminNhanVienBo();
+   			 	<%ArrayList<VDangKyNghiBean> ds = (ArrayList<VDangKyNghiBean>)request.getAttribute("BangDangKyNghi");
 		   			int n = ds.size();
 		   			for(int i=0; i<n; i++) {
-		   			DangKyNghiBean dkb = ds.get(i);%>
+		   			VDangKyNghiBean dkb = ds.get(i);%>
    			 	<tr>
 			           <td><%=dkb.getMaNV() %></td>  
-			           <td><%=adnvbo.getnhanvientheoma(dkb.getMaNV()).getTenNV() %></td>     
+			           <td><%=dkb.getTenNV() %></td>     
 			           <td><%=dkb.getMaLoaiCa() %></td>      
 			           <td><%=dkb.getNgayDK() %></td>  
 			           
