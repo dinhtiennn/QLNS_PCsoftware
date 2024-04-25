@@ -41,13 +41,16 @@ public class DangKyLamBo {
         LocalDate endOfWeek = currentDate.with(DayOfWeek.SATURDAY);
 		dklam.XoaDKL(Date.valueOf(startOfWeek), Date.valueOf(endOfWeek), idnv);
 	}
-//	public static void main(String[] args) {
-//		DangKyLamBo dkbo = new DangKyLamBo();
-//		try {
-//			dkbo.deleteDK("NV018");
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
+	public int CountRecordsByNgayDKAndMaLoaiCa(java.sql.Date ngayDK, String maLC) throws Exception {
+		return dklam.CountRecordsByNgayDKAndMaLoaiCa(ngayDK, maLC);
+	}
+	public static void main(String[] args) {
+		DangKyLamBo dkbo = new DangKyLamBo();
+		try {
+			System.out.println(dkbo.GetDKLamByNhanVienNextWeek("NV018"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 }

@@ -8,7 +8,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	Đăng ký nghỉ cho ngày:
+	Đăng ký nghỉ phép:
+	<br><br>
+	ngày:
 	<br>
 	Ca:
 	

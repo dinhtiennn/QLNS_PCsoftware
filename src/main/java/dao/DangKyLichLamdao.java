@@ -6,9 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import admindao.ketnoiDB;
 import bean.DangKyLamBean;
-import bean.NhanVienBean;
 
 public class DangKyLichLamdao {
 	public ArrayList<DangKyLamBean> GetAllDKL() throws Exception{
@@ -135,6 +133,24 @@ public class DangKyLichLamdao {
 	    cmd.executeUpdate();
 	    cmd.close();
 	    kn.cn.close();
+	}
+	public int CountRecordsByNgayDKAndMaLoaiCa(java.sql.Date ngayDK, String maLC) throws Exception {
+	    int count = 0;
+	    ketnoiDB kn = new ketnoiDB();
+	    kn.ketnoi();
+	    String sql = "SELECT COUNT(*) FROM DangKyLichLam WHERE NgayDK = ? AND MaLoaiCa = ?";
+	    try (PreparedStatement cmd = kn.cn.prepareStatement(sql)) {
+	        cmd.setDate(1, ngayDK);
+	        cmd.setString(2, maLC);
+	        try (ResultSet rs = cmd.executeQuery()) {
+	            if (rs.next()) {
+	                count = rs.getInt(1);
+	            }
+	        }
+	    } finally {
+	        kn.cn.close();
+	    }
+	    return count;
 	}
 
 }

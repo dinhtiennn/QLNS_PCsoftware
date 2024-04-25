@@ -1,6 +1,6 @@
 package bean;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class NhanVienBean {
 	private String maNV;
@@ -15,12 +15,17 @@ public class NhanVienBean {
 	private String tenDangNhap;
 	private String matKhau;
 	private Boolean trangThaiCongViec;
+	private String anh;
+	private Date ngayVaoLam;
+	private Date ngayKetThuc;
+	private String soTaiKhoan;
 	public NhanVienBean() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public NhanVienBean(String maNV, String tenNV, String maCV, Date ngaySinh, Boolean gioiTinh, String email,
-			String sDT, String dVCT, String chucDanh, String tenDangNhap, String matKhau, Boolean trangThaiCongViec) {
+			String sDT, String dVCT, String chucDanh, String tenDangNhap, String matKhau, Boolean trangThaiCongViec,
+			String anh, Date ngayVaoLam, Date ngayKetThuc, String soTaiKhoan) {
 		super();
 		this.maNV = maNV;
 		this.tenNV = tenNV;
@@ -34,6 +39,10 @@ public class NhanVienBean {
 		this.tenDangNhap = tenDangNhap;
 		this.matKhau = matKhau;
 		this.trangThaiCongViec = trangThaiCongViec;
+		this.anh = anh;
+		this.ngayVaoLam = ngayVaoLam;
+		this.ngayKetThuc = ngayKetThuc;
+		this.soTaiKhoan = soTaiKhoan;
 	}
 	public String getMaNV() {
 		return maNV;
@@ -107,14 +116,37 @@ public class NhanVienBean {
 	public void setTrangThaiCongViec(Boolean trangThaiCongViec) {
 		this.trangThaiCongViec = trangThaiCongViec;
 	}
+	public String getAnh() {
+		return anh;
+	}
+	public void setAnh(String anh) {
+		this.anh = anh;
+	}
+	public Date getNgayVaoLam() {
+		return ngayVaoLam;
+	}
+	public void setNgayVaoLam(Date ngayVaoLam) {
+		this.ngayVaoLam = ngayVaoLam;
+	}
+	public Date getNgayKetThuc() {
+		return ngayKetThuc;
+	}
+	public void setNgayKetThuc(Date ngayKetThuc) {
+		this.ngayKetThuc = ngayKetThuc;
+	}
+	public String getSoTaiKhoan() {
+		return soTaiKhoan;
+	}
+	public void setSoTaiKhoan(String soTaiKhoan) {
+		this.soTaiKhoan = soTaiKhoan;
+	}
 	@Override
 	public String toString() {
 		return "NhanVienBean [maNV=" + maNV + ", tenNV=" + tenNV + ", maCV=" + maCV + ", ngaySinh=" + ngaySinh
 				+ ", gioiTinh=" + gioiTinh + ", email=" + email + ", sDT=" + sDT + ", dVCT=" + dVCT + ", chucDanh="
 				+ chucDanh + ", tenDangNhap=" + tenDangNhap + ", matKhau=" + matKhau + ", trangThaiCongViec="
-				+ trangThaiCongViec + "]";
+				+ trangThaiCongViec + ", anh=" + anh + ", ngayVaoLam=" + ngayVaoLam + ", ngayKetThuc=" + ngayKetThuc
+				+ ", soTaiKhoan=" + soTaiKhoan + "]";
 	}
-	
-	
 	
 }

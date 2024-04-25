@@ -1,3 +1,6 @@
+<%@page import="bo.ThongSoKyThuatBo"%>
+<%@page import="java.sql.Date"%>
+<%@page import="bo.DangKyLamBo"%>
 <%@page import="bean.DangKyLamBean"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Locale"%>
@@ -17,10 +20,12 @@
 
 </head>
 <body>
+	
 	<%
+	ThongSoKyThuatBo tsktbo = new ThongSoKyThuatBo();
+	DangKyLamBo dklambo = new DangKyLamBo();
 	ArrayList<DangKyLamBean> dsdk = ((ArrayList<DangKyLamBean>)request.getAttribute("dsdk")!=null)?(ArrayList<DangKyLamBean>)request.getAttribute("dsdk"):(new ArrayList<DangKyLamBean>());
 	String msgSuccess = (request.getAttribute("msgSuccess")!=null)?request.getAttribute("msgSuccess").toString():"";%>
-
 	<jsp:include page="header.jsp"></jsp:include>
 	<div class="row">
 		<div class="col-2  mt-5">
@@ -67,12 +72,14 @@
 				                	// In ra các ngày từ thứ 2 đến thứ 7 của tuần
 			                    	try {
 					                	while (!startOfWeek.isAfter(endOfWeek)) {
-					                        String date = startOfWeek.toString();%>
+					                        String date = startOfWeek.toString();
+					                        int countdklam = dklambo.CountRecordsByNgayDKAndMaLoaiCa(Date.valueOf(startOfWeek), "LC001");
+					                        %>
 							       	        		<th style="width:14%" class="text-center">
 								                        <div class="form-check">
-														  <input class="form-check-input" type="checkbox" value="<%=startOfWeek%>" name="casang">
+														  <input class="form-check-input" type="checkbox" value="<%=startOfWeek%>" name="casang"  data-countdklam="<%=countdklam%>" data-maxnvmotca="<%=(tsktbo.GetThongSo()).getSoNVMotCaMax()%>">
 														  <label class="form-check-label" for="flexCheckDefault">
-														    Sáng
+														    Sáng (<%=countdklam%>/<%=(tsktbo.GetThongSo()).getSoNVMotCaMax()%>)
 														  </label>
 														</div>
 								                    </th>
@@ -91,12 +98,14 @@
 				                	// In ra các ngày từ thứ 2 đến thứ 7 của tuần
 			                    	try {
 					                	while (!startOfWeek.isAfter(endOfWeek)) {
-					                        String date = startOfWeek.toString();%>
+					                        String date = startOfWeek.toString();
+					                        int countdklam = dklambo.CountRecordsByNgayDKAndMaLoaiCa(Date.valueOf(startOfWeek), "LC002");
+					                        %>
 							       	        		<th style="width:14%" class="text-center">
 								                        <div class="form-check">
-														  <input class="form-check-input" type="checkbox" value="<%=startOfWeek%>" name="cachieu">
+														  <input class="form-check-input" type="checkbox" value="<%=startOfWeek%>" name="cachieu"  data-countdklam="<%=countdklam%>" data-maxnvmotca="<%=(tsktbo.GetThongSo()).getSoNVMotCaMax()%>">
 														  <label class="form-check-label" for="flexCheckDefault">
-														    Chiều
+														    Chiều (<%=countdklam%>/<%=(tsktbo.GetThongSo()).getSoNVMotCaMax()%>)
 														  </label>
 														</div>
 								                    </th>
@@ -115,17 +124,17 @@
 				                	// In ra các ngày từ thứ 2 đến thứ 7 của tuần
 			                    	try {
 					                	while (!startOfWeek.isAfter(endOfWeek)) {
-					                        String date = startOfWeek.toString();%>
+					                        String date = startOfWeek.toString();
+					                        int countdklam = dklambo.CountRecordsByNgayDKAndMaLoaiCa(Date.valueOf(startOfWeek), "LC003");
+					                        %>
 							       	        		<th style="width:14%" class="text-center">
 								                        <div class="form-check">
-														  <input class="form-check-input" type="checkbox" value="<%=startOfWeek%>" name="catoi">
+														  <input class="form-check-input" type="checkbox" value="<%=startOfWeek%>" name="catoi" data-countdklam="<%=countdklam%>" data-maxnvmotca="<%=(tsktbo.GetThongSo()).getSoNVMotCaMax()%>">
 														  <label class="form-check-label" for="flexCheckDefault">
-														    Tối
+														    Tối (<%=countdklam%>/<%=(tsktbo.GetThongSo()).getSoNVMotCaMax()%>)
 														  </label>
 														</div>
 								                    </th>
-					            					
-					            				
 					        	        	<%startOfWeek = startOfWeek.plusDays(1);
 					                    }
 			            			} catch (Exception e) {
@@ -252,25 +261,36 @@
 			    document.getElementById("msgsuccess").innerHTML = msgSuccess;
 		  }
 		});
-	// Hàm để đặt dấu tick cho các ô checkbox đã được đăng ký
-	function setCheckedState(dsdk) {
-	    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-	    checkboxes.forEach(function(checkbox) {
-	        var date = checkbox.value;
-	        var session = checkbox.name;
-	        if (dsdk[session] && dsdk[session].includes(date)) {
-	            checkbox.checked = true;
-	        }
-	    });
-	}
+	// Hàm để đặt dấu tick cho các ô checkbox đã được đăng ký và xử lý việc ẩn hiện checkbox dựa trên số lượng nhân viên đã đăng ký và số lượng tối đa nhân viên được đăng ký trong mỗi ca làm việc
+function setCheckedState(dsdk) {
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(function(checkbox) {
+        var date = checkbox.value;
+        var session = checkbox.name;
+        
+        // Số lượng nhân viên đã đăng ký
+        var countdklam = parseInt(checkbox.getAttribute("data-countdklam"));
+        // Số lượng tối đa nhân viên được đăng ký trong mỗi ca
+        var maxNhanVienMotCa = parseInt(checkbox.getAttribute("data-maxnvmotca"));
+
+        if (dsdk[session] && dsdk[session].includes(date)) {
+            // Đặt dấu tick cho ô checkbox đã được đăng ký
+            checkbox.checked = true;
+        }
+
+        // Kiểm tra và ẩn hiện ô checkbox dựa trên số lượng nhân viên đã đăng ký và số lượng tối đa nhân viên được đăng ký trong mỗi ca làm việc
+        if (countdklam >= maxNhanVienMotCa && !checkbox.checked) {
+            checkbox.style.display = "none"; // Ẩn ô checkbox nếu đã đạt đến số lượng tối đa nhân viên được đăng ký trong mỗi ca
+        } else {
+            checkbox.style.display = "block"; // Hiện ô checkbox nếu chưa đạt đến số lượng tối đa nhân viên được đăng ký trong mỗi ca
+        }
+    });
+}
+	
 	setCheckedState(<%= jsonString %>);	
 	
     // Giả sử dsdk là một mảng JavaScript
     var dsdk = <%=dsdk.size()%>;
-
-    // Log giá trị của dsdk ra console
-    console.log("Giá trị của dsdk là:", dsdk);
-
     // Kiểm tra giá trị của dsdk
     if (dsdk > 0) {
         // Ẩn nút Đăng ký
@@ -283,5 +303,7 @@
         // Ẩn nút Chỉnh sửa
         document.getElementById("btnChinhSua").style.display = "none";
     }
+
+
 
 </script>
