@@ -1,3 +1,5 @@
+<%@page import="java.time.LocalDate"%>
+<%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.sql.Date"%>
 <%@page import="bean.NhanVienBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -19,6 +21,7 @@
 	
 	<jsp:include page="header.jsp"></jsp:include>
 	<%
+			String msgSuccess = (request.getAttribute("msgSuccess")!=null)?request.getAttribute("msgSuccess").toString():"";
 			NhanVienBean nhanvien = (NhanVienBean)session.getAttribute("nhanvien");	
 			String anh = nhanvien.getAnh();
 			String name = nhanvien.getTenNV();
@@ -43,8 +46,15 @@
 			}else if(maCV.equals("CV003")){
 				chucVu = "Nhân viên";
 			}
+			 // Định dạng ngày
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+	        // Chuyển đổi thành đối tượng LocalDate
+	        LocalDate date = LocalDate.parse(ngayVaolam.toString(), formatter);
+
+	        // Định dạng lại thành "dd/MM/yyyy"
+	        String formattedDate = date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 	%>
-	
 	<div class="row">
 		<div class="col-2  mt-5">
 			<jsp:include page="Slidebar.jsp"></jsp:include>
@@ -56,7 +66,7 @@
 					    </div>
 			    </div>
 			    <div class="mb-3 row">
-					    <label for="hovaten" class="col-sm-2 col-form-label"><span class="required">*</span>Họ và tên:</label>
+					    <label for="hovaten" class="col-sm-2 col-form-label">Họ và tên:</label>
 					    <div class="col-sm-10">
 					      <input type="text" class="form-control-plaintext" id="hovaten" value="<%=name%>" name="name" readonly>
 					    </div>
@@ -112,7 +122,7 @@
 			    <div class="mb-3 row">
 					    <label for="ngayvaolam" class="col-sm-2 col-form-label"><span class="required">*</span>Ngày vào làm:</label>
 					    <div class="col-sm-10">
-					      <input type="text" readonly class="form-control-plaintext" id="ngayvaolam" value="<%=ngayVaolam%>" readonly>
+					      <input type="text" readonly class="form-control-plaintext" id="ngayvaolam" value="<%=formattedDate%>" readonly>
 					    </div>
 			    </div>
 			    <div class="mb-3 row">
@@ -129,9 +139,100 @@
 			    </div>
 				<div class=" mt-4">
 				        <a href="index" class="btn btn-secondary">Trang chủ</a>
-				        <button type="button" id="submit" class="btn btn-primary " name="action" value="changeinformationuser">Thay đổi</button>
+						<!-- Button trigger modal -->
+						<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+						  Chỉnh sửa thông tin cá nhân
+						</button>
 				</div>
 			</div>
 		</div>
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			       <form action="nhanvien?action=changerinf" method="post">
+			      <div class="modal-header">
+			        <h1 class="modal-title fs-5" id="exampleModalLabel">Chỉnh sửa thông tin cá nhân</h1>
+			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			      </div>
+			      <div class="modal-body">
+			      	<div class="mb-3 row">
+					    <div class="col-sm-10">
+					      <img alt="" src="<%=anh%>">
+					    </div>
+			    </div>
+			    <div class="mb-3 row">
+					    <label for="hovaten" class="col-sm-4 col-form-label">Họ và tên:</label>
+					    <div class="col-sm-8">
+					      <input type="text" class="form-control-plaintext" id="hovaten" value="<%=name%>" name="name" readonly>
+					    </div>
+			    </div>
+			    <div class="mb-3 row">
+					    <label for="email" class="col-sm-4 col-form-label">Email:</label>
+					    <div class="col-sm-8">
+					      <input type="email" class="form-control" id="email" value="<%=email%>" name="email">
+					    </div>
+			    </div>		    
+			    <div class="mb-3 row">
+					    <label for="sodienthoai" class="col-sm-4 col-form-label">Số điện thoại:</label>
+					    <div class="col-sm-8">
+					      <input type="tel" class="form-control" id="sodienthoai" value="<%=soDienThoai%>" name="sdt">
+					    </div>
+			    </div> 
+			    <div class="mb-3 row">
+					    <label for="sotaikhoan" class="col-sm-4 col-form-label">Số tài khoản:</label>
+					    <div class="col-sm-8">
+					      <input type="tel" class="form-control" id="sotaikhoan" value="<%=soTaiKhoan%>" name="stk">
+					    </div>
+			    </div>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+			        <button type="submit" class="btn btn-primary">lưu</button>
+			      </div>
+			       </form>
+			    </div>
+			  </div>
+		</div>
+		<!-- Modal Success-->
+	<div class="modal fade" id="staticBackdropSuccess" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      	<div class="modal-body">
+	        	<div class="alert alert-success" role="alert">
+	        		<span id="msgsuccess"></span>
+				</div>			
+			</div>
+	      	<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				<a href="index">		      		
+	      			<button type="button" class="btn btn-success">Trang chủ</button>
+		      	</a>
+				
+	      	</div>
+	    </div>
+	  </div>
+	</div>
 </body>
 </html>
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function() {
+	  // Lấy giá trị của các thuộc tính từ request.getAttribute
+	  var msgSuccess = "<%=msgSuccess%>";
+	  // Kiểm tra nếu một trong hai giá trị 
+	 if(msgSuccess.length > 0){
+		// Lấy tham chiếu đến modal
+		    var modalLogin = document.getElementById("staticBackdropSuccess");
+
+		    // Khởi tạo modal bằng Bootstrap JavaScript
+		    var myModal = new bootstrap.Modal(modalLogin, {
+		      backdrop: 'static',
+		      keyboard: false
+		    });
+
+		    // Hiển thị modal
+		    myModal.show();
+		    document.getElementById("msgsuccess").innerHTML = msgSuccess;
+	  }
+	});
+</script>

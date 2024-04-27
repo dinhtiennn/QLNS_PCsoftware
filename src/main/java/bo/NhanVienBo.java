@@ -1,5 +1,6 @@
 package bo;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 import bean.NhanVienBean;
@@ -18,5 +19,8 @@ public class NhanVienBo {
 	}
 	public NhanVienBean getNhanVienTheoTKvaMK( String tendangnhap,String matkhau) throws Exception{
 		return nvd.getNhanVienTheoTKvaMK(tendangnhap,matkhau);
+	}
+	public void updateNV(NhanVienBean nhanvien) throws Exception{
+		nvd.updateNV(nhanvien);
 	}
 }

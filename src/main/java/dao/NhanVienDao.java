@@ -104,4 +104,32 @@ public class NhanVienDao {
 		
 		return nvb;
 	}
+	public void updateNV(NhanVienBean nhanVien) throws Exception{
+		ketnoiDB kn = new ketnoiDB();
+	    kn.ketnoi();
+	    
+	    String sql = "UPDATE ThongTinNhanVien SET TenNV=?, MaCV=?, NgaySinh=?, GioiTinh=?, Email=?, SDT=?, DVCT=?, ChucDanh=?,MatKhau=? ,TrangThaiCongViec=?, Anh=?, NgayVaoLam=?, NgayKetThuc=?, SoTaiKhoanNhanVien=? WHERE MaNV=?";
+	    
+	    PreparedStatement cmd = kn.cn.prepareStatement(sql);
+	    
+	    cmd.setString(1, nhanVien.getTenNV());
+	    cmd.setString(2, nhanVien.getMaCV());
+	    cmd.setDate(3, nhanVien.getNgaySinh());
+	    cmd.setBoolean(4, nhanVien.getGioiTinh());
+	    cmd.setString(5, nhanVien.getEmail());
+	    cmd.setString(6, nhanVien.getsDT());
+	    cmd.setString(7, nhanVien.getdVCT());
+	    cmd.setString(8, nhanVien.getChucDanh());
+	    cmd.setString(9, nhanVien.getMatKhau());
+	    cmd.setBoolean(10, nhanVien.getTrangThaiCongViec());
+	    cmd.setString(11, nhanVien.getAnh());
+	    cmd.setDate(12, nhanVien.getNgayVaoLam());
+	    cmd.setDate(13, nhanVien.getNgayKetThuc());
+	    cmd.setString(14, nhanVien.getSoTaiKhoan());
+	    cmd.setString(15, nhanVien.getMaNV());
+	   
+	    cmd.executeUpdate();
+	    
+	    kn.cn.close();
+	}
 }

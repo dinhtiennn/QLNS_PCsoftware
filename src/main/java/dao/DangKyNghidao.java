@@ -30,6 +30,30 @@ public class DangKyNghidao {
 		rs.close();
 		return ds;
 	}
+	public ArrayList<DangKyNghiBean> GetDKNbyMaNV_Month_Year(String manv, int month, int year) throws Exception{
+		ArrayList<DangKyNghiBean> ds = new ArrayList<DangKyNghiBean>();
+		ketnoiDB kn = new ketnoiDB();
+		kn.ketnoi();
+		String sql = "select * from DangKyLichNghi where MaNV = ? and month(NgayDK)= ? and YEAR(NgayDK) = ?";
+		PreparedStatement cmd = kn.cn.prepareStatement(sql);
+		cmd.setString(1, manv);
+		cmd.setInt(2, month);
+		cmd.setInt(3, year);
+		ResultSet rs = cmd.executeQuery();
+		while(rs.next()) {
+			Long maDangkyNghi = rs.getLong("MaDKNghi");
+			String maNV = rs.getString("MaNV");
+			String maLoaiCa = rs.getString("MaLoaiCa");
+			Date ngayDK = rs.getDate("NgayDK");
+			int duyet = rs.getInt("Duyet");
+			String nguoiDuyet = rs.getString("NguoiDuyet");
+			String lyDo = rs.getString("LyDo");
+			ds.add(new DangKyNghiBean(maDangkyNghi, maNV, maLoaiCa, ngayDK, duyet, nguoiDuyet, lyDo));
+		}
+		kn.cn.close();
+		rs.close();
+		return ds;
+	}
 	public void insertDKN(DangKyNghiBean dkn) throws Exception {
 	    ketnoiDB kn = new ketnoiDB();
 	    kn.ketnoi();
