@@ -18,7 +18,7 @@ public class adminThongTinNhanViendao {
 		ResultSet rs = cmd.executeQuery();
 		while(rs.next()) {
 			String MaNV = rs.getString("MaNV");
-			String TenNV = rs.getString("TenNV");
+		    String TenNV = rs.getString("TenNV");
 			String MaCV = rs.getString("MaCV");
 			java.sql.Date NgaySinh = rs.getDate("NgaySinh");
 			Boolean GioiTinh = rs.getBoolean("GioiTinh");
@@ -28,8 +28,12 @@ public class adminThongTinNhanViendao {
 			String ChucDanh = rs.getString("ChucDanh");
 			String TenDangNhap = rs.getString("TenDangNhap");
 			String MatKhau = rs.getString("MatKhau");
-			Boolean TrangThaiCongViec = rs.getBoolean("TrangThaiCongViec");
-			ds.add(new NhanVienBean(MaNV, TenNV, MaCV, NgaySinh, GioiTinh, Email, SDT, DVCT, ChucDanh, TenDangNhap, MatKhau, TrangThaiCongViec));
+			Boolean TrangThai = rs.getBoolean("TrangThaiCongViec");
+			String anh = rs.getString("Anh");
+			java.sql.Date ngayVaoLam = rs.getDate("NgayVaoLam");
+			java.sql.Date ngayKetThuc = rs.getDate("NgayKetThuc");
+			String soTaiKhoan = rs.getString("SoTaiKhoanNhanVien");
+			ds.add( new NhanVienBean(MaNV, TenNV, MaCV, NgaySinh, GioiTinh, Email, SDT, DVCT, ChucDanh, TenDangNhap, MatKhau, TrangThai, anh, ngayVaoLam, ngayKetThuc, soTaiKhoan));
 		}
 		kn.cn.close();
 		rs.close();

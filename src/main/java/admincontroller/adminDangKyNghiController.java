@@ -40,7 +40,7 @@ public class adminDangKyNghiController extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("ADMINdangkynghi.jsp");
 			rd.forward(request, response);
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 		
 	}
