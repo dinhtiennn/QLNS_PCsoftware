@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import bean.NhanVienBean;
+import dao.ketnoiDB;
 
 public class adminNhanVienDao {
 	public ArrayList<NhanVienBean> getnhanvien() throws Exception{
@@ -20,7 +21,7 @@ public class adminNhanVienDao {
 		    String TenNV = rs.getString("TenNV");
 			String MaCV = rs.getString("MaCV");
 			Date NgaySinh = rs.getDate("NgaySinh");
-			String GioiTinh = rs.getString("GioiTinh");
+			Boolean GioiTinh = rs.getBoolean("GioiTinh");
 			String Email = rs.getString("Email");
 			String SDT = rs.getString("SDT");
 			String DVCT = rs.getString("DVCT");
@@ -28,7 +29,11 @@ public class adminNhanVienDao {
 			String TenDangNhap = rs.getString("TenDangNhap");
 			String MatKhau = rs.getString("MatKhau");
 			Boolean TrangThai = rs.getBoolean("TrangThaiCongViec");
-			ds.add( new NhanVienBean(MaNV, TenNV, MaCV, NgaySinh, TrangThai, Email, SDT, DVCT, ChucDanh, TenDangNhap, MatKhau, TrangThai));
+			String anh = rs.getString("Anh");
+			Date ngayVaoLam = rs.getDate("NgayVaoLam");
+			Date ngayKetThuc = rs.getDate("NgayKetThuc");
+			String soTaiKhoan = rs.getString("SoTaiKhoanNhanVien");
+			ds.add( new NhanVienBean(MaNV, TenNV, MaCV, NgaySinh, GioiTinh, Email, SDT, DVCT, ChucDanh, TenDangNhap, MatKhau, TrangThai, anh, ngayVaoLam, ngayKetThuc, soTaiKhoan));
 		}
 		rs.close();
 		kn.cn.close();
@@ -47,7 +52,7 @@ public class adminNhanVienDao {
 		    String TenNV = rs.getString("TenNV");
 			String MaCV = rs.getString("MaCV");
 			Date NgaySinh = rs.getDate("NgaySinh");
-			String GioiTinh = rs.getString("GioiTinh");
+			Boolean GioiTinh = rs.getBoolean("GioiTinh");
 			String Email = rs.getString("Email");
 			String SDT = rs.getString("SDT");
 			String DVCT = rs.getString("DVCT");
@@ -55,7 +60,11 @@ public class adminNhanVienDao {
 			String TenDangNhap = rs.getString("TenDangNhap");
 			String MatKhau = rs.getString("MatKhau");
 			Boolean TrangThai = rs.getBoolean("TrangThaiCongViec");
-			nvb =  new NhanVienBean(MaNV, TenNV, MaCV, NgaySinh, TrangThai, Email, SDT, DVCT, ChucDanh, TenDangNhap, MatKhau, TrangThai);
+			String anh = rs.getString("Anh");
+			Date ngayVaoLam = rs.getDate("NgayVaoLam");
+			Date ngayKetThuc = rs.getDate("NgayKetThuc");
+			String soTaiKhoan = rs.getString("SoTaiKhoanNhanVien");
+			nvb =  new NhanVienBean(MaNV, TenNV, MaCV, NgaySinh, GioiTinh, Email, SDT, DVCT, ChucDanh, TenDangNhap, MatKhau, TrangThai, anh, ngayVaoLam, ngayKetThuc, soTaiKhoan);
 		}
 		rs.close();
 		kn.cn.close();
@@ -76,7 +85,7 @@ public class adminNhanVienDao {
 		    String TenNV = rs.getString("TenNV");
 			String MaCV = rs.getString("MaCV");
 			Date NgaySinh = rs.getDate("NgaySinh");
-			String GioiTinh = rs.getString("GioiTinh");
+			Boolean GioiTinh = rs.getBoolean("GioiTinh");
 			String Email = rs.getString("Email");
 			String SDT = rs.getString("SDT");
 			String DVCT = rs.getString("DVCT");
@@ -84,7 +93,11 @@ public class adminNhanVienDao {
 			String TenDangNhap = rs.getString("TenDangNhap");
 			String MatKhau = rs.getString("MatKhau");
 			Boolean TrangThai = rs.getBoolean("TrangThaiCongViec");
-			nvb =  new NhanVienBean(MaNV, TenNV, MaCV, NgaySinh, TrangThai, Email, SDT, DVCT, ChucDanh, TenDangNhap, MatKhau, TrangThai);
+			String anh = rs.getString("Anh");
+			Date ngayVaoLam = rs.getDate("NgayVaoLam");
+			Date ngayKetThuc = rs.getDate("NgayKetThuc");
+			String soTaiKhoan = rs.getString("SoTaiKhoanNhanVien");
+			nvb =  new NhanVienBean(MaNV, TenNV, MaCV, NgaySinh, GioiTinh, Email, SDT, DVCT, ChucDanh, TenDangNhap, MatKhau, TrangThai, anh, ngayVaoLam, ngayKetThuc, soTaiKhoan);
 		}
 		rs.close();
 		kn.cn.close();
@@ -92,3 +105,4 @@ public class adminNhanVienDao {
 		return nvb;
 	}
 }
+
