@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Phương Chi Software</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
@@ -78,21 +78,24 @@
 
 <!-- Modal -->
 	<div class="modal" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" role="dialog">
-	    <div class="modal-dialog modal-dialog-centered">
-	        <div class="modal-content">
-	            <div class="modal-header">
-	                <h5 class="modal-title" id="exampleModalLabel">Thông tin nhân viên</h5>
-	                <button onclick="dongModal()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	            </div>
-	            <div class="modal-body">
-	                <div id="modalBody">
-	                
-	                </div>
-	            </div>
-	            <div class="modal-footer">
-	                <button onclick="dongModal()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-	            </div>
-	        </div>
+	    <div style="background-image: url('src/main/webapp/prf.svg');  background-size: cover;" class="modal-dialog modal-dialog-centered">
+	    	<form action="adminChinhSuaThongTinNhanVien" method="post" onsubmit="return showAlert()">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <h5 class="modal-title" id="exampleModalLabel">Thông tin nhân viên</h5>
+		                <button onclick="dongModal()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		            </div>
+		            <div class="modal-body">
+		                <div id="modalBody">
+		                
+		                </div>
+		            </div>
+		            <div class="modal-footer">
+		                <button onclick="dongModal()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+		                <button type="submit">Xác Nhận</button>
+		            </div>
+		        </div>
+	    	</form>
 	    </div>
 	</div> 
 </body>
@@ -165,13 +168,42 @@
             { label: "Ngày Kết Thúc", value: ngayketthuc },
             { label: "Số Tài Khoản", value: stknhanvien }
         ];
-
+ 		
         rows.forEach(rowData => {
             var labelElement = document.createElement("p");
-            labelElement.textContent = rowData.label + ": " + rowData.value;
+
+            labelElement.textContent = rowData.label + ": ";
+
+            if (rowData.label === "Ảnh") {
+            	var valueElement = document.createElement("div"); // Sử dụng div để chứa hình ảnh
+                var imgElement = document.createElement("img");
+                imgElement.src = rowData.value;
+                valueElement.appendChild(imgElement);
+            } else {
+            	var valueElement = document.createElement("input");
+                valueElement.value = rowData.value;
+                valueElement.setAttribute("name", rowData.label.toLowerCase()); // Thêm thuộc tính name
+            }
+            
+         	// Thêm class cho các phần tử
+            labelElement.classList.add("label");
+            valueElement.classList.add("input-value");
+
             modalBody.appendChild(labelElement);
+            modalBody.appendChild(valueElement);
         });
- 
+
+	}
+	
+	function showAlert() {
+	    var confirmation = confirm("Bạn muốn thay đổi thông tin?");
+	    if (confirmation) {
+	        alert("Thông tin đã được thay đổi!");
+	        return true; 
+	    } else {
+	    	window.location.href = "adminNhanVienController";
+	    	return false; 
+	    }
 	}
 		
 </script>

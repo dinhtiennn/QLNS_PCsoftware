@@ -3,6 +3,7 @@ package admindao;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import bean.NhanVienBean;
@@ -39,6 +40,54 @@ public class adminNhanVienDao {
 		kn.cn.close();
 		return ds;
 	}
+	
+	public void UpdateNhanVien(String maNV, String tenNV, String maCV, Date ngaySinh, Boolean gioiTinh, String email, String sDT, String dVCT, String chucDanh, String tenDangNhap, String matKhau, Boolean trangThaiCongViec, String anh, Date ngayVaoLam, String soTaiKhoan) throws Exception{
+		ketnoiDB kn = new ketnoiDB();
+		kn.ketnoi();
+		String sql="UPDATE ThongTinNhanVien SET TenNV =?, MaCV =?, NgaySinh =?, GioiTinh =?, Email =?, SDT =?, DVCT =?, ChucDanh =?, TenDangNhap =?, MatKhau =?, TrangThaiCongViec =?, Anh =?, NgayVaoLam =?, SoTaiKhoanNhanVien =? where MaNV = ?  ";
+		PreparedStatement cmd= kn.cn.prepareStatement(sql);
+		cmd.setString(1, tenNV);
+		cmd.setString(2, maCV);
+		cmd.setDate(3, ngaySinh);
+		cmd.setBoolean(4, gioiTinh);
+		cmd.setString(5, email);
+		cmd.setString(6, sDT);
+		cmd.setString(7, dVCT);
+		cmd.setString(8, chucDanh);
+		cmd.setString(9, tenDangNhap);
+		cmd.setString(10, matKhau);
+		cmd.setBoolean(11, trangThaiCongViec);
+		cmd.setString(12, anh);
+		cmd.setDate(13, ngayVaoLam);
+		cmd.setString(14, soTaiKhoan);
+		cmd.setString(15, maNV);
+		cmd.executeUpdate();
+		cmd.close();
+		kn.cn.close();
+	}
+	
+	public void UpdateNgayKetThuc(String MaNV) throws Exception {
+		admindao.ketnoiDB kn= new admindao.ketnoiDB();
+		kn.ketnoi();
+        String sql = "UPDATE ThongTinNhanVien SET NgayKetThuc = GETDATE() WHERE MaNV = ? AND TrangThaiCongViec = 0"; // Chỉ cập nhật khi trạng thái công việc là true
+
+        PreparedStatement cmd = kn.cn.prepareStatement(sql);
+        cmd.setString(1, MaNV); 
+        cmd.executeUpdate();
+
+        cmd.close();
+        kn.cn.close();
+	}
+	
+	public static void main(String[] args) {
+		try {
+			adminNhanVienDao ad= new adminNhanVienDao();
+			ad.UpdateNgayKetThuc("");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public NhanVienBean getnhanvientheoma(String manv) throws Exception{
 		NhanVienBean nvb = new NhanVienBean();
 		ketnoiDB kn = new ketnoiDB();
