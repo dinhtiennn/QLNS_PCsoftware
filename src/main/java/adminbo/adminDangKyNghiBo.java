@@ -11,4 +11,7 @@ public class adminDangKyNghiBo {
 	public ArrayList<VDangKyNghiBean> GetAllDKN() throws Exception{
 		return dkdao.GetAllDKN();
 	}
+	public void UpdateDangKyNghi(Long MaDKNghi, String NguoiDuyet) throws Exception{
+		dkdao.UpdateDangKyNghi(MaDKNghi, NguoiDuyet);
+	}
 }

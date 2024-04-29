@@ -1,3 +1,4 @@
+<%@page import="bean.NhanVienBean"%>
 <%@page import="bean.VDangKyNghiBean"%>
 <%@page import="adminbo.adminNhanVienBo"%>
 <%@page import="bean.DangKyNghiBean"%>
@@ -19,46 +20,50 @@
 		<div class="col-2  mt-5">
 			<jsp:include page="adminSlidebar.jsp"></jsp:include>
 		</div>
-		<table class="table">
-			<thead>
-		        <tr>
-		            <th>Mã Nhân Viên</th>
-		            <th>Tên Nhân Viên</th>
-		            <th>Loại Ca Làm</th>
-		            <th>Ngày Đăng Ký</th>
-		            <th>Duyệt</th>
-		            <th>Người Duyệt</th>
-		            <th>Lý Do</th> 
-		        </tr>
-   			 </thead>
-   			 <tbody>
-   			 	<%ArrayList<VDangKyNghiBean> ds = (ArrayList<VDangKyNghiBean>)request.getAttribute("BangDangKyNghi");
-		   			int n = ds.size();
-		   			for(int i=0; i<n; i++) {
-		   			VDangKyNghiBean dkb = ds.get(i);%>
-   			 	<tr>
-			           <td><%=dkb.getMaNV() %></td>  
-			           <td><%=dkb.getTenNV() %></td>     
-			           <td><%=dkb.getMaLoaiCa() %></td>      
-			           <td><%=dkb.getNgayDK() %></td>  
-			           
-		           <%if(dkb.getDuyet() == 0) {%>
-			           <td>Chờ duyệt</td>
-		           <%} else {%>
-			           <td>Đã duyệt</td>
-		           <%} %>
-		           
-		           <%if(dkb.getNguoiDuyet()==null) { %>  
-		           		<td style="color: #c6cd1e;"> </td>
-		           <%} else {%>    
-		           		<td><%=dkb.getNguoiDuyet() %></td>      
-		           <%} %>
-			           	<td><%=dkb.getLyDo() %></td>
-        	   </tr>
-   			 <%}%>
-   			 </tbody>
-
-		</table>
+		<form action="adminDuyetDangKyNghiController" method="get">
+			<table class="table">
+				<thead>
+			        <tr>
+			        	<th></th>
+			            <th>Mã Nhân Viên</th>
+			            <th>Tên Nhân Viên</th>
+			            <th>Loại Ca Làm</th>
+			            <th>Ngày Đăng Ký</th>
+			            <th>Duyệt</th>
+			            <th>Người Duyệt</th>
+			            <th>Lý Do</th> 
+			        </tr>
+	   			 </thead>
+	   			 <tbody>
+	   			 	<%ArrayList<VDangKyNghiBean> ds = (ArrayList<VDangKyNghiBean>)request.getAttribute("BangDangKyNghi");
+	   			 		NhanVienBean nhanvien = (NhanVienBean)session.getAttribute("nhanvien");
+			   			int n = ds.size();
+			   			for(int i=0; i<n; i++) {
+			   			VDangKyNghiBean dkb = ds.get(i);%>
+	   			 	<tr>
+	   			 		   <td><input type="checkbox" name="check" value="<%=dkb.getMaDkNghi() %>"></td>
+				           <td><%=dkb.getMaNV() %></td>  
+				           <td><%=dkb.getTenNV() %></td>     
+				           <td><%=dkb.getMaLoaiCa() %></td>      
+				           <td><%=dkb.getNgayDK() %></td>  
+				           
+			           <%if(dkb.getDuyet() == 0) {%>
+				           <td>Chờ duyệt</td>
+				           <td style="color: #c6cd1e;"> </td>
+			           <%} else {%>
+				           <td>Đã duyệt</td>
+				           <td><input type="text" value="<%=dkb.getNguoiDuyet() %>"></td> 
+			           <%} %>
+				           <td><%=dkb.getLyDo() %></td>
+	        	   </tr>
+	   			 <%}%>
+	   			 </tbody>
+	
+			</table>
+			<button class="btn btn-sua" type="submit" name="btn-duyet" value="<%=nhanvien.getTenNV() %>">Duyệt</button>
+		</form>	
 	</div>
 </body>
+
+
 </html>
