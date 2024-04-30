@@ -1,3 +1,5 @@
+<%@page import="java.util.Locale"%>
+<%@page import="java.text.NumberFormat"%>
 <%@page import="bean.ThongSoKiThuatBean"%>
 <%@page import="adminbo.adminNhanVienBo"%>
 <%@page import="bean.ThongKeLuongBean"%>
@@ -43,7 +45,11 @@
 		           	<td><%=tklb.getThangNam() %></td>      
 		           	<td><%=tklb.getSoCaLam() %></td> 
 		           	<td><%=tklb.getSoCaNghi() %></td> 
-		           	<td><%=tklb.getLuong()%></td>
+		           	<%
+		           	NumberFormat scientificFormat = NumberFormat.getInstance(Locale.US);
+		           	scientificFormat.setMaximumFractionDigits(2); 
+		           	%>
+		           	<td><%=scientificFormat.format((tklb.getLuong()))%> VNĐ</td>
    			 	</tr>
    			 		<%} %>
    			 	
