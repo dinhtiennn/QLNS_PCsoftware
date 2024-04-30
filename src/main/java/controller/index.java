@@ -45,7 +45,7 @@ public class index extends HttpServlet {
 				url = "adminIndex";
 			}
 			else if(maCV.equals("CV002")){
-				url = "quanli";
+				url = "quanly?action=quanlyIndex";
 			}
 			else if(maCV.equals("CV003")){
 				url = "nhanvien?action=index";

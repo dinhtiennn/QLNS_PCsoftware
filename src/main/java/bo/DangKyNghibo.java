@@ -16,4 +16,10 @@ public class DangKyNghibo {
 	public void insertDKN(DangKyNghiBean dkn) throws Exception {
 		dknghidao.insertDKN(dkn);
 	}
+	public ArrayList<DangKyNghiBean> getDSDKNtheoNgay(String NgayDK) throws Exception{
+		return dknghidao.getDSDKNtheoNgay(NgayDK);
+	}
+	public void DuyetLichNghi(String Duyet, String NguoiDuyet, String NgayDK, String MaNV) throws Exception{
+		dknghidao.DuyetLichNghi(Duyet, NguoiDuyet, NgayDK, MaNV);
+	}
 }

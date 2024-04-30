@@ -1,6 +1,8 @@
 package bo;
 
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -10,6 +12,7 @@ import java.util.Locale;
 
 import bean.DangKyLamBean;
 import dao.DangKyLichLamdao;
+import dao.ketnoiDB;
 
 public class DangKyLamBo {
 	DangKyLichLamdao dklam = new DangKyLichLamdao();
@@ -43,6 +46,9 @@ public class DangKyLamBo {
 	}
 	public int CountRecordsByNgayDKAndMaLoaiCa(java.sql.Date ngayDK, String maLC) throws Exception {
 		return dklam.CountRecordsByNgayDKAndMaLoaiCa(ngayDK, maLC);
+	}
+	public ArrayList<DangKyLamBean> GetAllDKL() throws Exception{
+		return dklam.GetAllDKL();
 	}
 	public static void main(String[] args) {
 		DangKyLamBo dkbo = new DangKyLamBo();

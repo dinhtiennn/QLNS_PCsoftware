@@ -68,5 +68,40 @@ public class DangKyNghidao {
 	    cmd.executeUpdate();
 	    kn.cn.close();
 	}
-
+	public ArrayList<DangKyNghiBean> getDSDKNtheoNgay(String NgayDK) throws Exception{
+		ArrayList<DangKyNghiBean> ds = new ArrayList<DangKyNghiBean>();
+		ketnoiDB kn = new ketnoiDB();
+		kn.ketnoi();
+		String sql = "select * from DangKyLichNghi where NgayDK=?";
+		PreparedStatement cmd = kn.cn.prepareStatement(sql);
+		cmd.setString(1, NgayDK);
+		ResultSet rs = cmd.executeQuery();
+		while(rs.next()) {
+			Long maDangkyNghi = rs.getLong("MaDKNghi");
+			String maNV = rs.getString("MaNV");
+			String maLoaiCa = rs.getString("MaLoaiCa");
+			Date ngayDK = rs.getDate("NgayDK");
+			int duyet = rs.getInt("Duyet");
+			String nguoiDuyet = rs.getString("NguoiDuyet");
+			String lyDo = rs.getString("LyDo");
+			ds.add(new DangKyNghiBean(maDangkyNghi, maNV, maLoaiCa, ngayDK, duyet, nguoiDuyet, lyDo));
+		}
+		kn.cn.close();
+		rs.close();
+		return ds;
+	}
+	public void DuyetLichNghi(String Duyet, String NguoiDuyet, String NgayDK, String MaNV) throws Exception{
+		ketnoiDB kn = new ketnoiDB();
+		kn.ketnoi();
+		String sql = "update DangKyLichNghi set Duyet=?, NguoiDuyet =? where NgayDK=? and MaNV=?";
+		PreparedStatement cmd = kn.cn.prepareStatement(sql);
+		cmd.setString(1, Duyet);
+		cmd.setString(2, NguoiDuyet);
+		cmd.setString(3, NgayDK);
+		cmd.setString(4, MaNV);
+		cmd.executeUpdate();
+		System.out.println("Duyet thanh cong");
+		kn.cn.close();
+		cmd.close();
+	}
 }
