@@ -69,5 +69,4 @@ public class adminThongKeLuongdao {
 		cmd.close();
 		kn.cn.close();
 	}
-	
 }

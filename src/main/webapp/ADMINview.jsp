@@ -34,6 +34,12 @@ input:focus-visible {
 		 	<form action="ThongSoController" method="post">
 			 	<table class="table">
 			 		<tr>
+			 			<th> Lương </th>
+			 			<td> 
+			 				<input type="text" name="luong" value="<%=tsbean.getLuong()%>">
+			 			</td>
+			 		</tr>
+			 		<tr>
 			 			<th> Hệ Số Lương </th>
 			 			<td> 
 			 				<input type="text" name="hsl" value="<%=tsbean.getHSL()%>">

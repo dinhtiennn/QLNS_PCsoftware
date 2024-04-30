@@ -1,6 +1,7 @@
 package bean;
 
 public class ThongSoKiThuatBean {
+	private long Luong;
 	private int SoCaLamMin; 
 	private int SoNVMotCaMin;
 	private int SoNVMotCaMax;
@@ -11,15 +12,22 @@ public class ThongSoKiThuatBean {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public ThongSoKiThuatBean(int soCaLamMin, int soNVMotCaMin, int soNVMotCaMax, float hSL, float hSLOT,
+	public ThongSoKiThuatBean(long luong, int soCaLamMin, int soNVMotCaMin, int soNVMotCaMax, float hSL, float hSLOT,
 			float hSLPhat) {
 		super();
+		Luong = luong;
 		SoCaLamMin = soCaLamMin;
 		SoNVMotCaMin = soNVMotCaMin;
 		SoNVMotCaMax = soNVMotCaMax;
 		HSL = hSL;
 		HSLOT = hSLOT;
 		HSLPhat = hSLPhat;
+	}
+	public long getLuong() {
+		return Luong;
+	}
+	public void setLuong(long luong) {
+		Luong = luong;
 	}
 	public int getSoCaLamMin() {
 		return SoCaLamMin;
@@ -59,8 +67,9 @@ public class ThongSoKiThuatBean {
 	}
 	@Override
 	public String toString() {
-		return "ThongSoKiThuatBean [SoCaLamMin=" + SoCaLamMin + ", SoNVMotCaMin=" + SoNVMotCaMin + ", SoNVMotCaMax="
-				+ SoNVMotCaMax + ", HSL=" + HSL + ", HSLOT=" + HSLOT + ", HSLPhat=" + HSLPhat + "]";
+		return "ThongSoKiThuatBean [Luong=" + Luong + ", SoCaLamMin=" + SoCaLamMin + ", SoNVMotCaMin=" + SoNVMotCaMin
+				+ ", SoNVMotCaMax=" + SoNVMotCaMax + ", HSL=" + HSL + ", HSLOT=" + HSLOT + ", HSLPhat=" + HSLPhat + "]";
 	}
+	
 	
 }

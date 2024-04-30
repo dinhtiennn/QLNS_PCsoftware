@@ -12,7 +12,7 @@ public class adminThongSoKyThuatbo {
 		ds = tsktdao.GetThongSo();
 		return ds;
 	}
-	public void SuaThongSo(int SoCaLamMin, int SoNVMotCaMin ,int SoNVMotCaMax ,float HSL, float HSLOT, float HSLPhat) throws Exception{
-		tsktdao.SuaThongSo(SoCaLamMin, SoNVMotCaMin, SoNVMotCaMax, HSL, HSLOT, HSLPhat);
+	public void SuaThongSo(long luong,int SoCaLamMin, int SoNVMotCaMin ,int SoNVMotCaMax ,float HSL, float HSLOT, float HSLPhat) throws Exception{
+		tsktdao.SuaThongSo(luong ,SoCaLamMin, SoNVMotCaMin, SoNVMotCaMax, HSL, HSLOT, HSLPhat);
 	}
 }

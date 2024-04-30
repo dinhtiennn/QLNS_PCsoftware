@@ -43,7 +43,7 @@
 		           	<td><%=tklb.getThangNam() %></td>      
 		           	<td><%=tklb.getSoCaLam() %></td> 
 		           	<td><%=tklb.getSoCaNghi() %></td> 
-		           	<td><%=tklb.getLuong() %></td>
+		           	<td><%=tklb.getLuong()%></td>
    			 	</tr>
    			 		<%} %>
    			 	
