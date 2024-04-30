@@ -41,12 +41,17 @@ public class adminDuyetDangKyNghiController extends HttpServlet {
 			
 			String[] gt= request.getParameterValues("check");
 			String duyet= request.getParameter("btn-duyet");
-			System.out.println(duyet);
+			String tuchoi= request.getParameter("btn-tuchoi");
 			if(duyet != null && gt != null) {
 				for(String checkbox:gt) {
 					dkbo.UpdateDangKyNghi(Long.parseLong(checkbox), duyet);
 				}
 		    }
+			if(tuchoi != null && gt != null) {
+				for(String checkbox:gt) {
+					dkbo.UpdateTuChoiDangKyNghi(Long.parseLong(checkbox), tuchoi);
+				}
+			}
 		
 			RequestDispatcher rd = request.getRequestDispatcher("adminDangKyNghiController");
 			rd.forward(request, response);

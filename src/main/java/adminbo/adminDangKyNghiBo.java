@@ -14,4 +14,7 @@ public class adminDangKyNghiBo {
 	public void UpdateDangKyNghi(Long MaDKNghi, String NguoiDuyet) throws Exception{
 		dkdao.UpdateDangKyNghi(MaDKNghi, NguoiDuyet);
 	}
+	public void UpdateTuChoiDangKyNghi(Long MaDKNghi, String NguoiDuyet) throws Exception{
+		dkdao.UpdateTuChoiDangKyNghi(MaDKNghi, NguoiDuyet);
+	}
 }

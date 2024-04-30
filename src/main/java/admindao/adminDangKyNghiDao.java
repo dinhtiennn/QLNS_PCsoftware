@@ -46,6 +46,17 @@ public class adminDangKyNghiDao {
 		kn.cn.close();
 	}
 	
+	public void UpdateTuChoiDangKyNghi(Long MaDKNghi, String NguoiDuyet) throws Exception{
+		ketnoiDB kn = new ketnoiDB();
+		kn.ketnoi();
+		String sql="UPDATE DangKyLichnghi SET Duyet = 2, NguoiDuyet = ? where MaDKNghi = ?  ";
+		PreparedStatement cmd= kn.cn.prepareStatement(sql);
+		cmd.setString(1, NguoiDuyet);
+		cmd.setLong(2, MaDKNghi);
+		cmd.executeUpdate();
+		kn.cn.close();
+	}
+	
 	public static void main(String[] args) {
 		try {
 			adminDangKyNghiDao ad = new adminDangKyNghiDao();

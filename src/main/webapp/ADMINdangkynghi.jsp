@@ -24,7 +24,8 @@
 			<table class="table">
 				<thead>
 			        <tr>
-			        	<th></th>
+			        	<th>All
+			        	<input type="checkbox" id="selectAll"></th>
 			            <th>Mã Nhân Viên</th>
 			            <th>Tên Nhân Viên</th>
 			            <th>Loại Ca Làm</th>
@@ -48,10 +49,13 @@
 				           <td><%=dkb.getNgayDK() %></td>  
 				           
 			           <%if(dkb.getDuyet() == 0) {%>
-				           <td>Chờ duyệt</td>
-				           <td style="color: #c6cd1e;"> </td>
-			           <%} else {%>
-				           <td>Đã duyệt</td>
+				           <td style="color: #c6cd1e;">Chờ duyệt</td>
+				           <td> </td>
+			           <%} if(dkb.getDuyet() == 1) {%>
+				           <td style="color: #35c51c;">Đã duyệt</td>
+				           <td><input type="text" value="<%=dkb.getNguoiDuyet() %>"></td> 
+			           <%} if(dkb.getDuyet() == 2) {%>
+			           		<td style="color: #ff0000;">Vắng</td>
 				           <td><input type="text" value="<%=dkb.getNguoiDuyet() %>"></td> 
 			           <%} %>
 				           <td><%=dkb.getLyDo() %></td>
@@ -60,10 +64,22 @@
 	   			 </tbody>
 	
 			</table>
-			<button class="btn btn-sua" type="submit" name="btn-duyet" value="<%=nhanvien.getTenNV() %>">Duyệt</button>
+			<button class="btn btn-success" type="submit" name="btn-duyet" value="<%=nhanvien.getTenNV() %>">Duyệt</button>
+			<button class="btn btn-danger" type="submit" name="btn-tuchoi" value="<%=nhanvien.getTenNV() %>">Từ Chối</button>
 		</form>	
 	</div>
 </body>
+<script>
+    // Xử lý sự kiện khi ô "Select All" được thay đổi
+    document.getElementById("selectAll").addEventListener("change", function() {
+        // Lấy ra danh sách tất cả các checkbox trong bảng
+        var checkboxes = document.querySelectorAll('input[type="checkbox"][name="check"]');
+        // Lặp qua từng checkbox và thiết lập trạng thái của nó giống với trạng thái của ô "Select All"
+        checkboxes.forEach(function(checkbox) {
+            checkbox.checked = document.getElementById("selectAll").checked;
+        });
+    });
+</script>
 
 
 </html>

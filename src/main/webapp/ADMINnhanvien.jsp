@@ -26,7 +26,7 @@
 			<thead>
 		        <tr>
 		            <th>Mã Nhân Viên</th>
-		            <th style="width: 180px;">Tên Nhân Viên</th>
+		            <th style="width: 120px;">Tên Nhân Viên</th>
 		            <th>Mã Chức Vụ</th>
 		            <th>Ngày Sinh</th>
 		            <th>Giới Tính</th>
@@ -179,7 +179,22 @@
                 var imgElement = document.createElement("img");
                 imgElement.src = rowData.value;
                 valueElement.appendChild(imgElement);
-            } else {
+            }if (rowData.label === "Trạng Thái Công Việc") {
+            	var valueElement = document.createElement("select");
+
+                // Tạo tùy chọn đầu tiên
+                var optionTrue = document.createElement("option");
+                optionTrue.value = "true";
+                optionTrue.text = "True";
+                valueElement.appendChild(optionTrue);
+
+                // Tạo tùy chọn thứ hai
+                var optionFalse = document.createElement("option");
+                optionFalse.value = "false";
+                optionFalse.text = "False";
+                valueElement.appendChild(optionFalse);
+            } 
+            else {
             	var valueElement = document.createElement("input");
                 valueElement.value = rowData.value;
                 valueElement.setAttribute("name", rowData.label.toLowerCase()); // Thêm thuộc tính name
