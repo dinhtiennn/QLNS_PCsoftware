@@ -19,7 +19,7 @@
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 	<form class="d-flex justify-content-center" role="search" action="adminNhanVienController">
-	      <input style="width: 50%;margin-top: 20px;height: 40px;" class="form-control me-2" type="search" name="txttk" placeholder="Search by manv" aria-label="Search">
+	      <input style="width: 50%;margin-top: 20px;height: 40px;" class="form-control me-2" type="search" name="txttk" placeholder="Search by name or ID" aria-label="Search">
 	      <button style="height: 40px; margin: 20px 0;" class="btn btn-outline-success" type="submit">Search</button>
     </form>
 	<div class="d-flex">
