@@ -40,9 +40,9 @@ public class adminNhanVienController extends HttpServlet {
 			HttpSession session = request.getSession();
 			adminNhanVienBo adnvbo = new adminNhanVienBo();
 			request.setAttribute("DanhSachNhanVien", adnvbo.getnhanvien());
-			String mnv= request.getParameter("txttk");
-			if(mnv != null) {
-				request.setAttribute("DanhSachNhanVien", adnvbo.getnhanvientheoma1(mnv));
+			String key= request.getParameter("txttk");
+			if(key != null) {
+				request.setAttribute("DanhSachNhanVien", adnvbo.getnhanvienTK(key));
 			}
 			RequestDispatcher rd = request.getRequestDispatcher("ADMINnhanvien.jsp");
 			rd.forward(request, response);

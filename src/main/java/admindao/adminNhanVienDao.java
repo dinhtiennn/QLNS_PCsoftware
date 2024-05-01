@@ -110,14 +110,15 @@ public class adminNhanVienDao {
 		
 		return nvb;
 	}
-	public ArrayList<NhanVienBean> getnhanvientheoma1(String manv) throws Exception{
+	public ArrayList<NhanVienBean> getnhanvienTK(String key) throws Exception{
 		ArrayList<NhanVienBean> ds = new ArrayList<NhanVienBean>();
 		NhanVienBean nvb = new NhanVienBean();
 		ketnoiDB kn = new ketnoiDB();
 		kn.ketnoi();
-		String sql = "select * from ThongTinNhanVien where MaNV = ?";
+		String sql = "select * from ThongTinNhanVien where MaNV = ? or TenNV LIKE ?";
 		PreparedStatement cmd = kn.cn.prepareStatement(sql);
-		cmd.setString(1, manv);
+		cmd.setString(1, key);
+		cmd.setString(2, "%" + key + "%");
 		ResultSet rs = cmd.executeQuery();
 		while(rs.next()) {
 			String MaNV = rs.getString("MaNV");
