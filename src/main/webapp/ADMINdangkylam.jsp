@@ -1,3 +1,4 @@
+<%@page import="java.time.LocalDate"%>
 <%@page import="bean.DangKyLamBean"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -18,6 +19,13 @@
 		<div class="col-2  mt-5">
 			<jsp:include page="adminSlidebar.jsp"></jsp:include>
 		</div>
+	<form action="adminDangKyLamController" method="post" onsubmit="return validateDate()">
+        <label for="selectedDate">Tìm kiếm từ ngày :</label>
+        <input type="date" id="selectedDate" name="selectedDate" required>
+        <label for="selectedDate">đến ngày :</label>
+        <input type="date" id="selectedDate2" name="selectedDate2" required>
+        <input type="submit" value="Search">
+    </form>
 	<table class="table" >
 			<thead>
 				<tr>
@@ -42,5 +50,18 @@
 			</tbody>
 	</table>
 	</div>
+<script>
+        // Hàm này được sử dụng để kiểm tra định dạng của ngày tháng
+        function validateDate() {
+            var selectedDate = document.getElementById("selectedDate").value;
+            // Kiểm tra xem selectedDate có đúng định dạng ngày tháng YYYY-MM-DD không
+            var regex = /^\d{4}-\d{2}-\d{2}$/;
+            if (!regex.test(selectedDate)) {
+                alert("Vui lòng chọn ngày tháng hợp lệ (YYYY-MM-DD)!");
+                return false;
+            }
+            return true;
+        }
+</script>
 </body>
 </html>

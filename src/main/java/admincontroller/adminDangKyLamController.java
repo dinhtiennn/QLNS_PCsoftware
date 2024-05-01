@@ -1,6 +1,8 @@
 package admincontroller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -38,10 +40,18 @@ public class adminDangKyLamController extends HttpServlet {
 			HttpSession session= request.getSession();
 			adminDangKyLamBo  addklbo = new adminDangKyLamBo();
 			request.setAttribute("BangDangKyLam", addklbo.GetAllDKL());
+			String StartDate = request.getParameter("selectedDate");
+			String EndDate = request.getParameter("selectedDate2");
+			if(StartDate != null && EndDate != null) {	
+				SimpleDateFormat dd = new SimpleDateFormat("yyyy-MM-dd");
+				Date S = dd.parse(StartDate);
+				Date E = dd.parse(EndDate);
+				request.setAttribute("BangDangKyLam", addklbo.getDKLLTK(S,E));
+			}
 			RequestDispatcher rd = request.getRequestDispatcher("ADMINdangkylam.jsp");
 			rd.forward(request, response);
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 
