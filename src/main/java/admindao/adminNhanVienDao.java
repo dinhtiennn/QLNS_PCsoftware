@@ -78,16 +78,6 @@ public class adminNhanVienDao {
         cmd.close();
         kn.cn.close();
 	}
-	
-	public static void main(String[] args) {
-		try {
-			adminNhanVienDao ad= new adminNhanVienDao();
-			ad.UpdateNgayKetThuc("");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
 	public NhanVienBean getnhanvientheoma(String manv) throws Exception{
 		NhanVienBean nvb = new NhanVienBean();
 		ketnoiDB kn = new ketnoiDB();
@@ -119,6 +109,39 @@ public class adminNhanVienDao {
 		kn.cn.close();
 		
 		return nvb;
+	}
+	public ArrayList<NhanVienBean> getnhanvientheoma1(String manv) throws Exception{
+		ArrayList<NhanVienBean> ds = new ArrayList<NhanVienBean>();
+		NhanVienBean nvb = new NhanVienBean();
+		ketnoiDB kn = new ketnoiDB();
+		kn.ketnoi();
+		String sql = "select * from ThongTinNhanVien where MaNV = ?";
+		PreparedStatement cmd = kn.cn.prepareStatement(sql);
+		cmd.setString(1, manv);
+		ResultSet rs = cmd.executeQuery();
+		while(rs.next()) {
+			String MaNV = rs.getString("MaNV");
+		    String TenNV = rs.getString("TenNV");
+			String MaCV = rs.getString("MaCV");
+			Date NgaySinh = rs.getDate("NgaySinh");
+			Boolean GioiTinh = rs.getBoolean("GioiTinh");
+			String Email = rs.getString("Email");
+			String SDT = rs.getString("SDT");
+			String DVCT = rs.getString("DVCT");
+			String ChucDanh = rs.getString("ChucDanh");
+			String TenDangNhap = rs.getString("TenDangNhap");
+			String MatKhau = rs.getString("MatKhau");
+			Boolean TrangThai = rs.getBoolean("TrangThaiCongViec");
+			String anh = rs.getString("Anh");
+			Date ngayVaoLam = rs.getDate("NgayVaoLam");
+			Date ngayKetThuc = rs.getDate("NgayKetThuc");
+			String soTaiKhoan = rs.getString("SoTaiKhoanNhanVien");
+			ds.add(new NhanVienBean(MaNV, TenNV, MaCV, NgaySinh, GioiTinh, Email, SDT, DVCT, ChucDanh, TenDangNhap, MatKhau, TrangThai, anh, ngayVaoLam, ngayKetThuc, soTaiKhoan));
+		}
+		rs.close();
+		kn.cn.close();
+		
+		return ds;
 	}
 	public NhanVienBean getNhanVienTheoTKvaMK( String tendangnhap,String matkhau) throws Exception{
 		NhanVienBean nvb = null;

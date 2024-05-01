@@ -22,7 +22,11 @@
 		<div class="col-2  mt-5">
 			<jsp:include page="adminSlidebar.jsp"></jsp:include>
 		</div>
-		<table id="myTable" class="table table-hover" style="font-size: 11px;">
+		<form class="d-flex justify-content-center" role="search" action="adminNhanVienController">
+		      <input class="form-control me-2" type="search" name="txttk" placeholder="Search by manv" aria-label="Search">
+		      <button class="btn btn-outline-success" type="submit">Search</button>
+	    </form>
+	    <table id="myTable" class="table table-hover" style="font-size: 11px;">
 			<thead>
 		        <tr>
 		            <th>Mã Nhân Viên</th>
@@ -45,33 +49,39 @@
 		        </tr>
 		    </thead>
 		    <tbody>
-			<%
+	    <%
 			ArrayList<NhanVienBean> ds = (ArrayList<NhanVienBean>)request.getAttribute("DanhSachNhanVien"); 
-			NhanVienBo nvbo = new NhanVienBo();
-			int n = ds.size();
-			for(int i=0; i<n; i++) {
-				NhanVienBean nvb = ds.get(i);
-				String maNV = nvb.getMaNV();%>
-			
-		        <tr onclick="moModal(this)">
-		            <td id="maNV_<%=i%>"><%=nvb.getMaNV()%></td>
-		            <td id="tenNV_<%=i%>"><%=nvbo.getnhanvientheoma(nvb.getMaNV()).getTenNV() %></td>
-		            <td id="maCV_<%=i%>"><%=nvb.getMaCV() %></td>
-		            <td id="ngaySinh_<%=i%>"><%=nvb.getNgaySinh() %></td>
-		            <td id="gioiTinh_<%=i%>"><%=nvb.getGioiTinh() %></td>
-		            <td id="email_<%=i%>"><%=nvb.getEmail() %></td>
-		            <td id="sdt_<%=i%>"><%=nvb.getsDT() %></td>
-		            <td id="dvct_<%=i%>"><%=nvb.getdVCT() %></td>
-		            <td id="chucDanh_<%=i%>"><%=nvb.getChucDanh() %></td>
-		            <td id="tenDangNhap_<%=i%>"><%=nvb.getTenDangNhap() %></td>
-		            <td id="matKhau_<%=i%>"><%=nvb.getMatKhau() %></td>
-		            <td id="trangThaiCongViec_<%=i%>"><%=nvb.getTrangThaiCongViec() %></td>
-		            <td id="anh_<%=i%>"><%=nvb.getAnh() %></td>
-		            <td id="ngayvaolam_<%=i%>"><%=nvb.getNgayVaoLam() %></td>
-		            <td id="ngayketthuc_<%=i%>"><%=nvb.getNgayKetThuc()%></td>
-		            <td id="stknhanvien_<%=i%>"><%=nvb.getSoTaiKhoan()%></td>
-		        </tr>
+			if(ds.size()==0){%>
+				<td>Không Tìm Thấy</td>
 			<%}%>
+			<%if(ds.size() != 0){%>
+		    
+				
+				<%NhanVienBo nvbo = new NhanVienBo();
+				int n = ds.size();
+				for(int i=0; i<n; i++) {
+					NhanVienBean nvb = ds.get(i);
+					String maNV = nvb.getMaNV();%>
+			        <tr onclick="moModal(this)">
+			            <td id="maNV_<%=i%>"><%=nvb.getMaNV()%></td>
+			            <td id="tenNV_<%=i%>"><%=nvbo.getnhanvientheoma(nvb.getMaNV()).getTenNV() %></td>
+			            <td id="maCV_<%=i%>"><%=nvb.getMaCV() %></td>
+			            <td id="ngaySinh_<%=i%>"><%=nvb.getNgaySinh() %></td>
+			            <td id="gioiTinh_<%=i%>"><%=nvb.getGioiTinh() %></td>
+			            <td id="email_<%=i%>"><%=nvb.getEmail() %></td>
+			            <td id="sdt_<%=i%>"><%=nvb.getsDT() %></td>
+			            <td id="dvct_<%=i%>"><%=nvb.getdVCT() %></td>
+			            <td id="chucDanh_<%=i%>"><%=nvb.getChucDanh() %></td>
+			            <td id="tenDangNhap_<%=i%>"><%=nvb.getTenDangNhap() %></td>
+			            <td id="matKhau_<%=i%>"><%=nvb.getMatKhau() %></td>
+			            <td id="trangThaiCongViec_<%=i%>"><%=nvb.getTrangThaiCongViec() %></td>
+			            <td id="anh_<%=i%>"><%=nvb.getAnh() %></td>
+			            <td id="ngayvaolam_<%=i%>"><%=nvb.getNgayVaoLam() %></td>
+			            <td id="ngayketthuc_<%=i%>"><%=nvb.getNgayKetThuc()%></td>
+			            <td id="stknhanvien_<%=i%>"><%=nvb.getSoTaiKhoan()%></td>
+			        </tr>
+				<%}		
+			}%>
 			</tbody>
 		</table>
 	</div>
