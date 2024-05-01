@@ -33,16 +33,14 @@ String username = (request.getAttribute("tendangnhap")!=null)?request.getAttribu
 String baoloilogin = (request.getAttribute("baoloilogin")!=null)?request.getAttribute("baoloilogin").toString():"";
 %>
 </head>
-<body>
+<body style="background-image: url('assets/imgs/backgroundLogin.png'); background-size: 100% 100%; background-position: center; background-repeat: no-repeat; background-attachment: fixed;">
 	<div class="container mt-5">
-		<h1 class="d-flex justify-content-center">Cổng thông tin nhân sự</h1>
 		<main class="form-signin w-100 m-auto">
 			<form class="text-center" action="login" method="POST">
 				<input type="hidden" name="hanhDong" value="dang-nhap"/>
 			
 				<img class="mb-4" src="<%=url %>/img/logo/logo.png"
 					alt="" width="72">
-				<h1 class="h3 mb-3 fw-normal">ĐĂNG NHẬP</h1>
 				<span class="required" id="msg-err-login"><%=baoloilogin%></span>
 				<div class="form-floating mb-3">
 					<input type="text" class="form-control" id="tenDangNhap" value="<%=username%>"
@@ -52,7 +50,7 @@ String baoloilogin = (request.getAttribute("baoloilogin")!=null)?request.getAttr
 					<input type="password" class="form-control" id="matKhau" 
             			placeholder="Mật khẩu" name="matkhau"> <label for="matKhau">Mật khẩu</label>
 				</div>
-				 <button class="w-100 btn btn-lg btn-primary" id="submit" disabled type="submit">Đăng nhập</button>
+				 <button class="w-100 btn btn-lg btn-primary" id="submit" disabled type="submit">Login</button>
 				<!-- <a href="dangky.jsp">Đăng ký tài khoản mới</a> -->
 				<p class="mt-5 mb-3 text-muted">&copy; 2017–2025</p>
 			</form>

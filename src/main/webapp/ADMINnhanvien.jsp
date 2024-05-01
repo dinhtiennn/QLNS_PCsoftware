@@ -18,14 +18,14 @@
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
+	<form class="d-flex justify-content-center" role="search" action="adminNhanVienController">
+	      <input style="width: 50%;margin-top: 20px;height: 40px;" class="form-control me-2" type="search" name="txttk" placeholder="Search by manv" aria-label="Search">
+	      <button style="height: 40px; margin: 20px 0;" class="btn btn-outline-success" type="submit">Search</button>
+    </form>
 	<div class="d-flex">
 		<div class="col-2  mt-5">
 			<jsp:include page="adminSlidebar.jsp"></jsp:include>
 		</div>
-		<form class="d-flex justify-content-center" role="search" action="adminNhanVienController">
-		      <input class="form-control me-2" type="search" name="txttk" placeholder="Search by manv" aria-label="Search">
-		      <button class="btn btn-outline-success" type="submit">Search</button>
-	    </form>
 	    <table id="myTable" class="table table-hover" style="font-size: 11px;">
 			<thead>
 		        <tr>

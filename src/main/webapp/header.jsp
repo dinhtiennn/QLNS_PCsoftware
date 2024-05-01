@@ -16,7 +16,7 @@
       <div class="col">
          <div class="d-flex justify-content-start">
           <a href="index">
-		  		<img style="width: 100px" alt="" src="https://img.freepik.com/vetores-premium/design-de-logotipo-de-conectividade-de-pessoas-de-amizade-de-trabalho-em-equipe_18099-4788.jpg?w=740">
+		  <img style="width: 100px" alt="" src="assets/imgs/Logo.png">
 		  </a>
         </div>
       </div>

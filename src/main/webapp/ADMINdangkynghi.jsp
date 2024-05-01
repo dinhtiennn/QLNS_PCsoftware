@@ -53,10 +53,10 @@
 				           <td> </td>
 			           <%} if(dkb.getDuyet() == 1) {%>
 				           <td style="color: #35c51c;">Đã duyệt</td>
-				           <td><input type="text" value="<%=dkb.getNguoiDuyet() %>"></td> 
+				           <td><%=dkb.getNguoiDuyet() %></td> 
 			           <%} if(dkb.getDuyet() == 2) {%>
 			           		<td style="color: #ff0000;">Vắng</td>
-				           <td><input type="text" value="<%=dkb.getNguoiDuyet() %>"></td> 
+				           <td><%=dkb.getNguoiDuyet() %></td> 
 			           <%} %>
 				           <td><%=dkb.getLyDo() %></td>
 	        	   </tr>
