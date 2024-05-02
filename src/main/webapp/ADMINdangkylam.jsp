@@ -22,7 +22,7 @@
 	<form action="adminDangKyLamController" method="post" onsubmit="return validateDate()">
         <label for="selectedDate">Tìm kiếm từ ngày :</label>
         <input type="date" id="selectedDate" name="selectedDate" required>
-        <label for="selectedDate">đến ngày :</label>
+        <label for="selectedDate2">đến ngày :</label>
         <input type="date" id="selectedDate2" name="selectedDate2" required>
         <input type="submit" value="Search">
     </form>
@@ -57,6 +57,10 @@
             // Kiểm tra xem selectedDate có đúng định dạng ngày tháng YYYY-MM-DD không
             var regex = /^\d{4}-\d{2}-\d{2}$/;
             if (!regex.test(selectedDate)) {
+                alert("Vui lòng chọn ngày tháng hợp lệ (YYYY-MM-DD)!");
+                return false;
+            }
+            if (!regex.test(selectedDate2)) {
                 alert("Vui lòng chọn ngày tháng hợp lệ (YYYY-MM-DD)!");
                 return false;
             }

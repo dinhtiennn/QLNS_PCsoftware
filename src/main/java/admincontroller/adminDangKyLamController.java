@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import adminbo.adminDangKyLamBo;
-import admindao.adminDangKyLamdao;
 
 /**
  * Servlet implementation class adminDangKyLamController
