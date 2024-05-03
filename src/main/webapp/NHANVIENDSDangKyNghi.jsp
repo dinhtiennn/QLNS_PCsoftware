@@ -37,6 +37,7 @@
 					<jsp:include page="Slidebar.jsp"></jsp:include>
 				</div>
 				<div class="col mt-5">
+					<h2 class="mb-5">Danh sách đăng ký nghỉ của tháng: <%=thang%></h2>
 					<div class="row container">
 						<form action="nhanvien?action=showarrdkn" method="post">
 						 	<div class="row">
@@ -82,7 +83,7 @@
 					<div class="row">
 						<div class="col-6  mt-5">
 									<%if(dsdk.size()==0){%>
-										<%=msg%>
+										<span ><%=msg%></span>
 									<%}else{%>
 										<table class="table">
 											  <thead>

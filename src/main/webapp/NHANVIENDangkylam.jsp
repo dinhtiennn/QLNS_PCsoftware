@@ -25,7 +25,8 @@
 	ThongSoKyThuatBo tsktbo = new ThongSoKyThuatBo();
 	DangKyLamBo dklambo = new DangKyLamBo();
 	ArrayList<DangKyLamBean> dsdk = ((ArrayList<DangKyLamBean>)request.getAttribute("dsdk")!=null)?(ArrayList<DangKyLamBean>)request.getAttribute("dsdk"):(new ArrayList<DangKyLamBean>());
-	String msgSuccess = (request.getAttribute("msgSuccess")!=null)?request.getAttribute("msgSuccess").toString():"";%>
+	String msgSuccess = (request.getAttribute("msgSuccess")!=null)?request.getAttribute("msgSuccess").toString():"";
+	String socadadangky = (request.getAttribute("socadadangky")!=null)?request.getAttribute("socadadangky").toString():"";%>
 	<jsp:include page="header.jsp"></jsp:include>
 	<div class="row">
 	
@@ -33,13 +34,25 @@
 			<jsp:include page="Slidebar.jsp"></jsp:include>
 		</div>
 		<div class="col-10 mt-4">
+				<h2 class="text-center mb-3">Bảng đăng ký làm việc tuần tiếp theo</h2>
+		 		<div class="mb-3 row">
+					    <label class="col-sm-2 col-form-label">Số ca đã đăng kí cho tháng này:</label>
+					    <div class="col-sm-10">
+					      <span class="form-control-plaintext"><%=socadadangky %></span>
+					    </div>
+			    </div>
+			     <div class="mb-3 row">
+					    <label for="hovaten" class="col-sm-2 col-form-label">Số ca làm tối thiểu 1 tháng:</label>
+					    <div class="col-sm-10">
+					      <span class="form-control-plaintext"><%=tsktbo.GetThongSo().getSoCaLamMin()%></span>
+					    </div>
+			    </div>
 	    	<%
 	    	LocalDate currentDate = LocalDate.now();
 			if(currentDate.getDayOfWeek().toString().equalsIgnoreCase("Thursday") || currentDate.getDayOfWeek().toString().equalsIgnoreCase("Friday") ||currentDate.getDayOfWeek().toString().equalsIgnoreCase("Saturday")){%>
 				<form action="nhanvien?action=workregistration" method="post">
 				<div class="col-10 mt-4">
-					<h2 class="text-center mb-3">Đăng ký làm việc cho tuần sau</h2>
-			   		<div class="container-fluid">
+			   		<div class="container-fluid text-center">
 			        <table class="table table-bordered">
 			            <thead>
 			                <tr>

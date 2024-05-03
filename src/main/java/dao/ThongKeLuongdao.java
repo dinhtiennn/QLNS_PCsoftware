@@ -74,4 +74,48 @@ public class ThongKeLuongdao {
 		cmd.executeUpdate();
 		kn.cn.close();
 	}
+	public ArrayList<ThongKeLuongBean> getTKLTheoMaNV(String manv) throws Exception{
+		ArrayList<ThongKeLuongBean> ds = new ArrayList<ThongKeLuongBean>();
+		ketnoiDB kn = new ketnoiDB();
+		kn.ketnoi();
+		String sql = "select * from ThongKeLuong where MaNV = ?";
+		PreparedStatement cmd = kn.cn.prepareStatement(sql);
+		cmd.setString(1, manv);
+		ResultSet rs = cmd.executeQuery();
+		while(rs.next()) {
+			long MaThongKe = rs.getLong("MaThongKe");
+		    String MaNV = rs.getString("MaNV");
+			Date ThangNam = rs.getDate("ThangNam");
+			int SoCaLam = rs.getInt("SoCaLam");
+			int SoCaNghi = rs.getInt("SoCaNghi");
+			float Luong = rs.getFloat("Luong");
+			ds.add( new ThongKeLuongBean(MaThongKe, MaNV, ThangNam, SoCaLam, SoCaNghi, Luong));
+		}
+		rs.close();
+		kn.cn.close();
+		return ds;
+	}
+	public ArrayList<ThongKeLuongBean>  getTKLTheoMaNV_Thang_Nam(String manv,int thang , int nam) throws Exception{
+		ArrayList<ThongKeLuongBean> ds = new ArrayList<ThongKeLuongBean>();
+		ketnoiDB kn = new ketnoiDB();
+		kn.ketnoi();
+		String sql = "select * from ThongKeLuong where MaNV = ? and month(ThangNam)= ? and YEAR(ThangNam) = ?";
+		PreparedStatement cmd = kn.cn.prepareStatement(sql);
+		cmd.setString(1, manv);
+		cmd.setInt(2, thang);
+		cmd.setInt(3, nam);
+		ResultSet rs = cmd.executeQuery();
+		while(rs.next()) {
+			long MaThongKe = rs.getLong("MaThongKe");
+		    String MaNV = rs.getString("MaNV");
+			Date ThangNam = rs.getDate("ThangNam");
+			int SoCaLam = rs.getInt("SoCaLam");
+			int SoCaNghi = rs.getInt("SoCaNghi");
+			float Luong = rs.getFloat("Luong");
+			ds.add(new ThongKeLuongBean(MaThongKe, MaNV, ThangNam, SoCaLam, SoCaNghi, Luong));
+		}
+		rs.close();
+		kn.cn.close();
+		return ds;
+	}
 }

@@ -20,6 +20,9 @@
 	  <li class="nav-item">
 	    <a class="nav-link" href="nhanvien?action=showarrdkn">Danh sách nghỉ</a>
 	  </li>
+	  <li class="nav-item">
+	    <a class="nav-link" href="nhanvien?action=showarrluong">Thống kê lương</a>
+	  </li>
 	</ul>
 </body>
 </html>

@@ -98,25 +98,25 @@
 					    </div>
 			    </div>
 			    <div class="mb-3 row">
-					    <label for="email" class="col-sm-2 col-form-label"><span class="required">*</span>Email:</label>
+					    <label for="email" class="col-sm-2 col-form-label">Email:</label>
 					    <div class="col-sm-10">
 					      <input type="email" class="form-control-plaintext" id="email" value="<%=email%>" name="email" readonly>
 					    </div>
 			    </div>		    
 			    <div class="mb-3 row">
-					    <label for="sodienthoai" class="col-sm-2 col-form-label"><span class="required">*</span>Số điện thoại:</label>
+					    <label for="sodienthoai" class="col-sm-2 col-form-label">Số điện thoại:</label>
 					    <div class="col-sm-10">
 					      <input type="number" class="form-control-plaintext" id="sodienthoai" value="<%=soDienThoai%>" name="phonenumber" readonly>
 					    </div>
 			    </div> 
 			    <div class="mb-3 row">
-					    <label for="donvicongtac" class="col-sm-2 col-form-label"><span class="required">*</span>Đơn vị công tác:</label>
+					    <label for="donvicongtac" class="col-sm-2 col-form-label">Đơn vị công tác:</label>
 					    <div class="col-sm-10">
 					      <input type="text" class="form-control-plaintext" id="donvicongtac" value="<%=dVCT%>" name="dvct" readonly>
 					    </div>
 			    </div>
 			    <div class="mb-3 row">
-					    <label for="chucdanh" class="col-sm-2 col-form-label"><span class="required">*</span>Chức danh:</label>
+					    <label for="chucdanh" class="col-sm-2 col-form-label">Chức danh:</label>
 					    <div class="col-sm-10">
 					      <input type="text" class="form-control-plaintext" id="chucdanh" value="<%=chucDanh%>" name="chucdanh" readonly>
 					    </div>
@@ -128,7 +128,7 @@
 					    </div>
 			    </div>   
 			    <div class="mb-3 row">
-					    <label for="ngayvaolam" class="col-sm-2 col-form-label"><span class="required">*</span>Ngày vào làm:</label>
+					    <label for="ngayvaolam" class="col-sm-2 col-form-label">Ngày vào làm:</label>
 					    <div class="col-sm-10">
 					      <input type="text" readonly class="form-control-plaintext" id="ngayvaolam" value="<%=formattedDate%>" readonly>
 					    </div>
