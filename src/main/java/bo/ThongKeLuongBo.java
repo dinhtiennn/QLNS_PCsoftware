@@ -68,4 +68,10 @@ public class ThongKeLuongBo {
 	public ArrayList<ThongKeLuongBean> getTKLTamTheoThangNam(int thang, int nam) throws Exception{
 		return tkdao.getTKLTamTheoThangNam(thang, nam);
 	}
+	public ArrayList<ThongKeLuongBean> getTKLTheoMaNV(String manv) throws Exception{
+		return tkdao.getTKLTheoMaNV(manv);
+	}
+	public ArrayList<ThongKeLuongBean>  getTKLTheoMaNV_Thang_Nam(String manv,int thang , int nam) throws Exception{
+		return tkdao.getTKLTheoMaNV_Thang_Nam(manv,thang, nam);
+	}
 }

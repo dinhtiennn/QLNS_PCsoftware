@@ -16,9 +16,11 @@ import javax.servlet.http.HttpSession;
 import bean.DangKyLamBean;
 import bean.DangKyNghiBean;
 import bean.NhanVienBean;
+import bean.ThongKeLuongBean;
 import bo.DangKyLamBo;
 import bo.DangKyNghibo;
 import bo.NhanVienBo;
+import bo.ThongKeLuongBo;
 
 /**
  * Servlet implementation class nhanviencontroller
@@ -60,8 +62,9 @@ public class NhanVienController extends HttpServlet {
 				showDsDonDkNghi(request, response);
 			}else if(action.equals("changerpass")){
 				changePass(request, response);
+			}else if(action.equals("showarrluong")){
+				showarrluong(request, response);
 			}
-			System.out.println(action);
 		}
 		
 	}
@@ -119,6 +122,7 @@ public class NhanVienController extends HttpServlet {
 		String[] caChieu = request.getParameterValues("cachieu");
 		String[] caToi = request.getParameterValues("catoi");
 		DangKyLamBo dklbo = new DangKyLamBo();
+		LocalDate date = LocalDate.now();
 		HttpSession session = request.getSession();
 		if((NhanVienBean)session.getAttribute("nhanvien")!=null) {
 			NhanVienBean nv = (NhanVienBean)session.getAttribute("nhanvien");
@@ -163,6 +167,7 @@ public class NhanVienController extends HttpServlet {
 						request.setAttribute("msgSuccess", "Chỉnh sửa thành công!");
 					}
 				}
+				request.setAttribute("socadadangky", dklbo.GetDKLamByNhanVienAndMonth(nv.getMaNV(), date.getMonthValue()).size());
 				request.setAttribute("dsdk", dklbo.GetDKLamByNhanVienNextWeek(nv.getMaNV()));
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -273,10 +278,44 @@ public class NhanVienController extends HttpServlet {
 		}else {				
 			request.setAttribute("msg", "Danh sách trống!");
 		}
-		
-		
 		request.setAttribute("thang", thang);
 		request.setAttribute("nam", nam);
+		RequestDispatcher rd = request.getRequestDispatcher(url);
+		rd.forward(request, response);
+	}
+	public void showarrluong(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
+		HttpSession session = request.getSession();
+		ThongKeLuongBo tklbo= new ThongKeLuongBo();
+		NhanVienBean nv = (NhanVienBean)session.getAttribute("nhanvien");
+		String url = "";
+		LocalDate lcdate = LocalDate.now();
+		String thang = request.getParameter("thang");
+		String nam = request.getParameter("nam");
+		System.out.println(thang+"/"+nam);
+		if(thang==null && nam==null) {				
+			try {
+				ArrayList<ThongKeLuongBean> ds = tklbo.getTKLTheoMaNV(nv.getMaNV());
+				request.setAttribute("tk", ds);
+				System.out.println("TKL:" + ds);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(thang!=null && nam!=null){
+			try {
+				ArrayList<ThongKeLuongBean> ds = tklbo.getTKLTheoMaNV_Thang_Nam(nv.getMaNV(),Integer.parseInt(thang), Integer.parseInt(nam));
+				System.out.println("TKL:" + ds);
+				if(ds.size()!=0) {
+					request.setAttribute("tk", ds);
+				}else {
+					request.setAttribute("msg", "Không có thống kê lương của tháng đã chọn!");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			request.setAttribute("thang", thang);
+			request.setAttribute("nam", nam);
+		}
+		url = "NHANVIENThongKeLuong.jsp";
 		RequestDispatcher rd = request.getRequestDispatcher(url);
 		rd.forward(request, response);
 	}
