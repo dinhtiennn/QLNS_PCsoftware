@@ -16,8 +16,8 @@
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
-	<div class="d-flex">
-		<div class="col-2  mt-5">
+	<div style="position: relative; justify-content: center;" class="d-flex align-items-center">
+		<div class="col-2 menu-content" >
 			<jsp:include page="adminSlidebar.jsp"></jsp:include>
 		</div>
 		<form action="adminDuyetDangKyNghiController" method="get">
@@ -55,7 +55,7 @@
 				           <td style="color: #35c51c;">Đã duyệt</td>
 				           <td><%=dkb.getNguoiDuyet() %></td> 
 			           <%} if(dkb.getDuyet() == 2) {%>
-			           		<td style="color: #ff0000;">Vắng</td>
+			           		<td style="color: #ff0000;">Không duyệt</td>
 				           <td><%=dkb.getNguoiDuyet() %></td> 
 			           <%} %>
 				           <td><%=dkb.getLyDo() %></td>
