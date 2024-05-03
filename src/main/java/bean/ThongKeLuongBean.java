@@ -22,6 +22,19 @@ public class ThongKeLuongBean {
 		SoCaNghi = soCaNghi;
 		Luong = luong;
 	}
+	public ThongKeLuongBean(String maNV, int soCaLam, int soCaNghi) {
+		super();
+		MaNV = maNV;
+		SoCaLam = soCaLam;
+		SoCaNghi = soCaNghi;
+	}
+	public ThongKeLuongBean(String maNV,Date thangNam, int soCaLam, int soCaNghi) {
+		super();
+		MaNV = maNV;
+		ThangNam = thangNam;
+		SoCaLam = soCaLam;
+		SoCaNghi = soCaNghi;
+	}
 	public Long getMaThongKe() {
 		return MaThongKe;
 	}

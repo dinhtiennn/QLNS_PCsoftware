@@ -68,18 +68,13 @@
 			                	while (!startOfWeek.isAfter(endOfWeek)) {
 			                		int n =0;
 			                        String date = startOfWeek.toString();
-			            				for (DangKyLamBean bangdangkybean : ds) {
-			            					if(bangdangkybean.getNgayDK().toString().equals(date)){%>
-						                        <%if(bangdangkybean.getMaLoaica().equals("LC001")){
 						                        n=1;%>
 							       	        		<th style="width:14%" class="text-center">
-							       	        		<a href="quanly?action=showemployeesworkingtogether&date=<%=date%>&lc=<%=bangdangkybean.getMaLoaica()%>">							       	        		
+							       	        		<a href="quanly?action=showemployeesworkingtogether&date=<%=date%>&lc=LC001">							       	        		
 							       	        			Sáng
 							       	        		</a>
 								                    </th>
-						                        <%}%>
-			            				<%}%>
-			            				<% }%>
+						                       
 			        	        	<%
 			                        startOfWeek = startOfWeek.plusDays(1);%>
 			                        <%if(n==0){ %>
@@ -103,18 +98,12 @@
 			                	while (!startOfWeek.isAfter(endOfWeek)) {
 			                		int n =0;
 			                        String date = startOfWeek.toString();
-			            				for (DangKyLamBean bangdangkybean : ds) {
-			            					if(bangdangkybean.getNgayDK().toString().equals(date)){%>
-						                        <%if(bangdangkybean.getMaLoaica().equals("LC002")){
 						                        n=1;%>
 							       	        		<th style="width:14%" class="text-center">
-							       	        			<a href="quanly?action=showemployeesworkingtogether&date=<%=date%>&lc=<%=bangdangkybean.getMaLoaica()%>">	       	        		
+							       	        			<a href="quanly?action=showemployeesworkingtogether&date=<%=date%>&lc=LC002">	       	        		
 							       	        				Chiều
 							       	        			</a>
 								                    </th>
-						                        <%}%>
-			            				<%}%>
-			            				<% }%>
 			        	        	<%
 			                        startOfWeek = startOfWeek.plusDays(1);%>
 			                        <%if(n==0){ %>
@@ -139,18 +128,12 @@
 			                	while (!startOfWeek.isAfter(endOfWeek)) {
 			                		int n =0;
 			                        String date = startOfWeek.toString();
-			            				for (DangKyLamBean bangdangkybean : ds) {
-			            					if(bangdangkybean.getNgayDK().toString().equals(date)){%>
-						                        <%if(bangdangkybean.getMaLoaica().equals("LC003")){
 						                        n=1;%>
 							       	        		<th style="width:14%" class="text-center">
-														<a href="quanly?action=showemployeesworkingtogether&date=<%=date%>&lc=<%=bangdangkybean.getMaLoaica()%>">		       	        		
+														<a href="quanly?action=showemployeesworkingtogether&date=<%=date%>&lc=LC003">		       	        		
 							       	        				Tối
 							       	        			</a>
 								                    </th>
-						                        <%}%>
-			            				<%}%>
-			            				<% }%>
 			        	        	<%
 			                        startOfWeek = startOfWeek.plusDays(1);%>
 			                        <%if(n==0){ %>

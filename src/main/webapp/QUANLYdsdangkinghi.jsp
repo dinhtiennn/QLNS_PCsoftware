@@ -52,8 +52,11 @@
 				    	  	trangthaiduyet = "Đang chờ duyêt";
 				    	} else if(item.getDuyet()==1){
 				    		trangthaiduyet = "Duyệt";
-				    	} else 
+				    	} else if(item.getDuyet()==2){
 				    		trangthaiduyet = "Không Duyệt";
+				    	}
+				    	else 
+				    		trangthaiduyet = "Vắng";
 				      	if(item.getDuyet()==0){%> 		
 				      <td><%=trangthaiduyet%>
 				      <a href="quanly?action=duyetlichnghi&duyet=1&nguoiduyet=<%=nhanvien.getTenNV()%>&ngaydk=<%=item.getNgayDK()%>&manv=<%=item.getMaNV()%>">

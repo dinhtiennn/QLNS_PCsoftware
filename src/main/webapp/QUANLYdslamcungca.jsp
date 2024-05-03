@@ -70,6 +70,11 @@
 				      <td><%=nvbo.getnhanvientheoma(item.getMaNV()).getTenNV()%></td>
 				      <td><%=nvbo.getnhanvientheoma(item.getMaNV()).getChucDanh()%></td>
 				      <td><%=nvbo.getnhanvientheoma(item.getMaNV()).getdVCT()%></td>
+				      <td>
+				      	<a href="quanly?action=danhvangkhongphep&maloaica=<%=item.getMaLoaica()%>&nguoiduyet=<%=nhanvien.getTenNV()%>&ngaydk=<%=date%>&manv=<%=item.getMaNV()%>">
+							<button type="button" class="btn btn-warning">Vắng</button>
+						</a>
+				      </td>
 				    </tr>
 				  <%i++;} %>
 				  </tbody>

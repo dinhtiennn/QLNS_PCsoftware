@@ -50,6 +50,15 @@ public class DangKyLamBo {
 	public ArrayList<DangKyLamBean> GetAllDKL() throws Exception{
 		return dklam.GetAllDKL();
 	}
+	public ArrayList<DangKyLamBean> GetDKLbyMaNV_Month_Year(String manv, int month, int year) throws Exception{
+		return dklam.GetDKLbyMaNV_Month_Year(manv, month, year);
+	}
+	public ArrayList<DangKyLamBean> getDKL_BD_KT(java.util.Date ngayBatDau , java.util.Date ngayKetThuc) throws Exception{
+		return dklam.getDKL_BD_KT(ngayBatDau, ngayKetThuc);
+	}
+	public ArrayList<DangKyLamBean> GetDKLbyMonth_Year(int month, int year) throws Exception{
+		return dklam.GetDKLbyMonth_Year(month, year);
+	}
 	public static void main(String[] args) {
 		DangKyLamBo dkbo = new DangKyLamBo();
 		try {

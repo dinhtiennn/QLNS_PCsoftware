@@ -1,3 +1,5 @@
+<%@page import="bean.NhanVienBean"%>
+<%@page import="bo.NhanVienBo"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.time.DayOfWeek"%>
 <%@page import="java.time.LocalDate"%>
@@ -41,102 +43,66 @@
 			<jsp:include page="QUANLYslidebar.jsp"></jsp:include>
 		</div>
 		<div class="col-10">
-				<%
-			ArrayList<DangKyLamBean> ds = (ArrayList<DangKyLamBean>)request.getAttribute("bdk");
-			// Lấy ngày hiện tại
-			LocalDate currentDate = LocalDate.now();
-			
-			// Lấy ngày đầu tiên của tháng
-			LocalDate firstDayOfMonth = LocalDate.of(currentDate.getYear(), currentDate.getMonth(), 1);
-			
-			// Lấy ngày cuối cùng của tháng
-			LocalDate lastDayOfMonth = firstDayOfMonth.withDayOfMonth(firstDayOfMonth.lengthOfMonth());
-			
-			// Tìm ngày thứ hai của tuần đầu tiên
-			LocalDate firstDayOfWeek = firstDayOfMonth;
-			while (firstDayOfWeek.getDayOfWeek() != DayOfWeek.MONDAY) {
-			    firstDayOfWeek = firstDayOfWeek.minusDays(1);
-			}
-			
-			// Tạo và hiển thị bảng thời khóa biểu cho mỗi tuần
-			while (firstDayOfWeek.isBefore(lastDayOfMonth) || firstDayOfWeek.isEqual(lastDayOfMonth)) {
-			    LocalDate lastDayOfWeek = firstDayOfWeek.plusDays(6).isAfter(lastDayOfMonth) ? lastDayOfMonth : firstDayOfWeek.plusDays(6);
-			
-			    // Tạo bảng thời khóa biểu cho một tuần
-			    %><h2>Lịch làm từ <%=firstDayOfWeek.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))%> đến <%=lastDayOfWeek.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))%></h2>
-			    <table class="table table-bordered">
-			    <tr>
-			    <th style="width:14%" class="text-center table-primary">Thứ hai<br/> <%=firstDayOfWeek.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) %> </th>
-			    <th style="width:14%" class="text-center table-primary">Thứ ba<br/> <%=firstDayOfWeek.plusDays(1).format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))%> </th>
-			    <th style="width:14%" class="text-center table-primary">Thứ tư<br/> <%=firstDayOfWeek.plusDays(2).format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) %></th>
-			    <th style="width:14%" class="text-center table-primary">Thứ năm<br/> <%=firstDayOfWeek.plusDays(3).format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) %></th>
-			    <th style="width:14%" class="text-center table-primary">Thứ sáu<br/> <%=firstDayOfWeek.plusDays(4).format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) %> </th>
-			    <th style="width:14%" class="text-center table-primary">Thứ bảy<br/> <%=firstDayOfWeek.plusDays(5).format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) %>  </th>
-			    <th style="width:14%" class="text-center table-primary">Chủ nhật (Nghỉ)<br/> <%=firstDayOfWeek.plusDays(6).format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) %> </th>
-			    </tr>
-			    <tr>
+			<form action="quanly?action=showMonthlySchedule" method="post" onsubmit="return validateDate()">
+			        <label for="selectedDate">Tìm kiếm từ ngày :</label>
+			        <input type="date" id="selectedDate" name="ngayBatDau" required>
+			        <label for="selectedDate">đến ngày :</label>
+			        <input type="date" id="selectedDate2" name="ngayKetThuc" required>
+			        <input type="submit" value="Search">
+			    </form>
 			    <%
-			    for (int i = 0; i < 7; i++) {
-			    	int n = 0;
-			        if (firstDayOfWeek.plusDays(i).isBefore(firstDayOfMonth) || firstDayOfWeek.plusDays(i).isAfter(lastDayOfMonth)) {
-			            %><td>&nbsp;</td><%
-			        } else {
-			        	for(DangKyLamBean item : ds){
-			        		if(item.getNgayDK().toString().equals(firstDayOfWeek.plusDays(i).toString()) && item.getMaLoaica().equals("LC001")){
-			        			%><td style="width:14%" class="text-center">Sáng</td><%
-			        			n =1;
-			        		}
-			        	}
-			        	if(n==0){        		
-			        		%><td>&nbsp;</td><%
-			        	}
-			        }
-			    }
-			    %></tr>
-			    <tr><%
-			    for (int i = 0; i < 7; i++) {
-			    	int n = 0;
-			        if (firstDayOfWeek.plusDays(i).isBefore(firstDayOfMonth) || firstDayOfWeek.plusDays(i).isAfter(lastDayOfMonth)) {
-			        	%><td>&nbsp;</td><%
-			        } else {
-			        	for(DangKyLamBean item : ds){
-			        		if(item.getNgayDK().toString().equals(firstDayOfWeek.plusDays(i).toString()) && item.getMaLoaica().equals("LC002")){
-			        			%><td style="width:14%" class="text-center">Chiều</td><%
-			        			n =1;
-			        		}
-			        	}
-			        	if(n==0){        		
-			        		%><td>&nbsp;</td><%
-			        	}
-			        }
-			    }
-			    %></tr>
-			    <tr><%
-			    for (int i = 0; i < 7; i++) {
-			    	int n = 0;
-			        if (firstDayOfWeek.plusDays(i).isBefore(firstDayOfMonth) || firstDayOfWeek.plusDays(i).isAfter(lastDayOfMonth)) {
-			        	%><td>&nbsp;</td><%
-			        } else {
-			        	for(DangKyLamBean item : ds){
-			        		if(item.getNgayDK().toString().equals(firstDayOfWeek.plusDays(i).toString()) && item.getMaLoaica().equals("LC003")){
-			        			%><td style="width:14%" class="text-center">Tối</td><%
-			        			n =1;
-			        		}
-			        	}
-			        	if(n==0){        		
-			        		%><td>&nbsp;</td><%
-			        	}
-			        }
-			    }%>
-			    </tr>
-			   </table>
-				<%
-			    // Chuyển sang tuần tiếp theo
-			    firstDayOfWeek = firstDayOfWeek.plusDays(7);
-			}
-			%>
+				ArrayList<DangKyLamBean> ds = ((ArrayList<DangKyLamBean>)request.getAttribute("ds_dkn")!=null)?(ArrayList<DangKyLamBean>)request.getAttribute("ds_dkn"):new ArrayList<DangKyLamBean>();
+				NhanVienBo nvbo = new NhanVienBo();
+				int i = 1;
+				NhanVienBean nhanvien = (NhanVienBean)session.getAttribute("nhanvien");
+				%>
+				<table class="table">
+					<thead>
+					    <tr>
+					      <th scope="col">#</th>
+					      <th scope="col">Mã nhân viên</th>
+					      <th scope="col">Tên nhân viên</th>
+					      <th scope="col">Mã loại ca</th>
+					      <th scope="col">Ngày đăng ký</th>
+					    </tr>
+					</thead>
+					<tbody>
+					<%for(DangKyLamBean item : ds){%>
+						<tr>
+					      <th scope="row"><%=i%></th>
+					      <td><%=item.getMaNV()%></td>
+					      <td><%=nvbo.getnhanvientheoma(item.getMaNV()).getTenNV()%></td>
+					      <%
+					      String tenloaica = "";
+					      if(item.getMaLoaica().equals("LC001")){
+					    	  tenloaica = "Ca sáng";
+					      }else if(item.getMaLoaica().equals("LC002")){
+					    	  tenloaica = "Ca chiều";
+					      }else if(item.getMaLoaica().equals("LC003")){
+					    	  tenloaica = "Ca tối";
+					      }
+					      %>
+					      <td><%=tenloaica%></td>
+					      <td><%=item.getNgayDK()%></td>	
+					    </tr>
+					  <%i++;}%>
+					</tbody>
+				</table>
 		</div>
 	
 	</div>
+	<script>
+        // Hàm này được sử dụng để kiểm tra định dạng của ngày tháng
+        function validateDate() {
+            var selectedDate = document.getElementById("selectedDate").value;
+            // Kiểm tra xem selectedDate có đúng định dạng ngày tháng YYYY-MM-DD không
+            var regex = /^\d{4}-\d{2}-\d{2}$/;
+            if (!regex.test(selectedDate)) {
+                alert("Vui lòng chọn ngày tháng hợp lệ (YYYY-MM-DD)!");
+                return false;
+            }
+            return true;
+        }
+	</script>
 </body>
 </html>

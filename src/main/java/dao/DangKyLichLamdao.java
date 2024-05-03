@@ -152,5 +152,70 @@ public class DangKyLichLamdao {
 	    }
 	    return count;
 	}
-
+	public ArrayList<DangKyLamBean> getDKL_BD_KT(Date ngayBatDau , Date ngayKetThuc) throws Exception{
+		ArrayList<DangKyLamBean> ds = new ArrayList<DangKyLamBean>();
+		ketnoiDB kn = new ketnoiDB();
+		kn.ketnoi();
+		String sql = "SELECT * FROM DangKyLichLam WHERE NgayDK BETWEEN ? AND ?";
+		PreparedStatement cmd = kn.cn.prepareStatement(sql);
+		SimpleDateFormat dd= new SimpleDateFormat("yyyy-MM-dd");
+		String Sdate= dd.format(ngayBatDau);	// Doi ngay ra chuoi theo dd
+		Date S= dd.parse(Sdate);
+		String Edate= dd.format(ngayKetThuc);
+		Date E= dd.parse(Edate);
+		cmd.setDate(1,new java.sql.Date(S.getTime()));
+		cmd.setDate(2, new java.sql.Date(E.getTime()));
+		ResultSet rs = cmd.executeQuery();
+		while(rs.next()) {
+			Long MaDKLam = rs.getLong("MaDKLam");
+			String MaNV = rs.getString("MaNV");
+			String MaLoaiCa = rs.getString("MaLoaiCa");
+			Date NgayDK = rs.getDate("NgayDK");
+			ds.add(new DangKyLamBean(MaDKLam, MaNV, MaLoaiCa, NgayDK));
+		}
+		kn.cn.close();
+		rs.close();
+		return ds;
+	}
+	public ArrayList<DangKyLamBean> GetDKLbyMaNV_Month_Year(String manv, int month, int year) throws Exception{
+		ArrayList<DangKyLamBean> ds = new ArrayList<DangKyLamBean>();
+		ketnoiDB kn = new ketnoiDB();
+		kn.ketnoi();
+		String sql = "select * from DangKyLichLam where MaNV = ? and month(NgayDK)= ? and YEAR(NgayDK) = ?";
+		PreparedStatement cmd = kn.cn.prepareStatement(sql);
+		cmd.setString(1, manv);
+		cmd.setInt(2, month);
+		cmd.setInt(3, year);
+		ResultSet rs = cmd.executeQuery();
+		while(rs.next()) {
+			Long maDKlam = rs.getLong("MaDKLam");
+			String maNV = rs.getString("MaNV");
+			String maLoaiCa = rs.getString("MaLoaiCa");
+			Date ngayDK = rs.getDate("NgayDK");
+			ds.add(new DangKyLamBean(maDKlam, maNV, maLoaiCa, ngayDK));
+		}
+		kn.cn.close();
+		rs.close();
+		return ds;
+	}
+	public ArrayList<DangKyLamBean> GetDKLbyMonth_Year(int month, int year) throws Exception{
+		ArrayList<DangKyLamBean> ds = new ArrayList<DangKyLamBean>();
+		ketnoiDB kn = new ketnoiDB();
+		kn.ketnoi();
+		String sql = "select * from DangKyLichLam where month(NgayDK)= ? and YEAR(NgayDK) = ?";
+		PreparedStatement cmd = kn.cn.prepareStatement(sql);
+		cmd.setInt(1, month);
+		cmd.setInt(2, year);
+		ResultSet rs = cmd.executeQuery();
+		while(rs.next()) {
+			Long maDKlam = rs.getLong("MaDKLam");
+			String maNV = rs.getString("MaNV");
+			String maLoaiCa = rs.getString("MaLoaiCa");
+			Date ngayDK = rs.getDate("NgayDK");
+			ds.add(new DangKyLamBean(maDKlam, maNV, maLoaiCa, ngayDK));
+		}
+		kn.cn.close();
+		rs.close();
+		return ds;
+	}
 }

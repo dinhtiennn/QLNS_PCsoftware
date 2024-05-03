@@ -104,4 +104,91 @@ public class DangKyNghidao {
 		kn.cn.close();
 		cmd.close();
 	}
+	public void DanhVangKhongPhep(String MaNV, String MaLoaiCa, String NgayDK ,String NguoiDuyet) throws Exception{
+		ketnoiDB kn = new ketnoiDB();
+		kn.ketnoi();
+		String sql = "insert into DangKyLichNghi (MaNV, MaLoaiCa, NgayDK, Duyet, NguoiDuyet, LyDo) VALUES (?, ?, ?, 3, ?, 'Vắng không phép')";
+		PreparedStatement cmd = kn.cn.prepareStatement(sql);
+		cmd.setString(1, MaNV);
+		cmd.setString(2, MaLoaiCa);
+		cmd.setString(3, NgayDK);
+		cmd.setString(4, NguoiDuyet);
+		cmd.executeUpdate();
+		System.out.println("Duyet thanh cong");
+		kn.cn.close();
+		cmd.close();
+	}
+	public void XoaLichLam(String MaNV, String MaLoaiCa, String NgayDK) throws Exception{
+		ketnoiDB kn = new ketnoiDB();
+		kn.ketnoi();
+		String sql="DELETE FROM DangKyLichLam WHERE MaNV = ? AND MaLoaiCa = ? AND NgayDK = ?;";
+		PreparedStatement cmd= kn.cn.prepareStatement(sql);
+		cmd.setString(1, MaNV);
+		cmd.setString(2, MaLoaiCa);
+		cmd.setString(3, NgayDK);
+		cmd.executeUpdate();
+		cmd.close();
+		System.out.println("Da xoa");
+		kn.cn.close();
+	}
+	public void XoaLichNghi(String MaNV, String MaLoaiCa, String NgayDK) throws Exception{
+		ketnoiDB kn = new ketnoiDB();
+		kn.ketnoi();
+		String sql="DELETE FROM DangKyLichNghi WHERE MaNV = ? AND MaLoaiCa = ? AND NgayDK = ? AND Duyet=2;";
+		PreparedStatement cmd= kn.cn.prepareStatement(sql);
+		cmd.setString(1, MaNV);
+		cmd.setString(2, MaLoaiCa);
+		cmd.setString(3, NgayDK);
+		cmd.executeUpdate();
+		cmd.close();
+		System.out.println("Da xoa");
+		kn.cn.close();
+	}
+	public ArrayList<DangKyNghiBean> getNVvangkhongphep(String manv, int month, int year) throws Exception{
+		ArrayList<DangKyNghiBean> ds = new ArrayList<DangKyNghiBean>();
+		ketnoiDB kn = new ketnoiDB();
+		kn.ketnoi();
+		String sql = "select * from DangKyLichNghi where MaNV = ? and month(NgayDK)= ? and YEAR(NgayDK) = ? and Duyet=3";
+		PreparedStatement cmd = kn.cn.prepareStatement(sql);
+		cmd.setString(1, manv);
+		cmd.setInt(2, month);
+		cmd.setInt(3, year);
+		ResultSet rs = cmd.executeQuery();
+		while(rs.next()) {
+			Long maDangkyNghi = rs.getLong("MaDKNghi");
+			String maNV = rs.getString("MaNV");
+			String maLoaiCa = rs.getString("MaLoaiCa");
+			Date ngayDK = rs.getDate("NgayDK");
+			int duyet = rs.getInt("Duyet");
+			String nguoiDuyet = rs.getString("NguoiDuyet");
+			String lyDo = rs.getString("LyDo");
+			ds.add(new DangKyNghiBean(maDangkyNghi, maNV, maLoaiCa, ngayDK, duyet, nguoiDuyet, lyDo));
+		}
+		kn.cn.close();
+		rs.close();
+		return ds;
+	}
+	public ArrayList<DangKyNghiBean> getDS_DKLN_BDKT(String ngayBatDau, String ngayKetThuc) throws Exception{
+		ArrayList<DangKyNghiBean> ds = new ArrayList<DangKyNghiBean>();
+		ketnoiDB kn = new ketnoiDB();
+		kn.ketnoi();
+		String sql = "SELECT * FROM DangKyLichNghi WHERE NgayDK BETWEEN ? AND ?";
+		PreparedStatement cmd = kn.cn.prepareStatement(sql);
+		cmd.setString(1, ngayBatDau);
+		cmd.setString(2, ngayKetThuc);
+		ResultSet rs = cmd.executeQuery();
+		while(rs.next()) {
+			Long maDangkyNghi = rs.getLong("MaDKNghi");
+			String maNV = rs.getString("MaNV");
+			String maLoaiCa = rs.getString("MaLoaiCa");
+			Date ngayDK = rs.getDate("NgayDK");
+			int duyet = rs.getInt("Duyet");
+			String nguoiDuyet = rs.getString("NguoiDuyet");
+			String lyDo = rs.getString("LyDo");
+			ds.add(new DangKyNghiBean(maDangkyNghi, maNV, maLoaiCa, ngayDK, duyet, nguoiDuyet, lyDo));
+		}
+		kn.cn.close();
+		rs.close();
+		return ds;
+	}
 }
