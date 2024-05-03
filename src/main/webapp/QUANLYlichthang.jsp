@@ -47,7 +47,14 @@
 			        <label for="selectedDate">Tìm kiếm từ ngày :</label>
 			        <input type="date" id="selectedDate" name="ngayBatDau" required>
 			        <label for="selectedDate">đến ngày :</label>
-			        <input type="date" id="selectedDate2" name="ngayKetThuc" required>
+			        <input type="date" id="selectedDate2" name="ngayKetThuc">
+			        <label for="chonca">và ca :</label>
+			        <select id="calam" name="calam">
+			        	<option>Chọn Ca</option>
+						<option value="LC001">Sáng</option>
+						<option value="LC002">Chiều</option>
+						<option value="LC003">Tối</option>
+					</select>
 			        <input type="submit" value="Search">
 			    </form>
 			    <%

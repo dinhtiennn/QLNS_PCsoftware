@@ -109,23 +109,39 @@ public class QuanLyController extends HttpServlet {
 
 			String ngayBatDau = request.getParameter("ngayBatDau");
 			String ngayKetThuc = request.getParameter("ngayKetThuc");
+			String caLam = request.getParameter("calam");
 			ArrayList<DangKyLamBean> ds_dkl = null;
 			DangKyLamBo dklbo = new DangKyLamBo();
 			
-			System.out.println(ngayBatDau + ngayKetThuc);
+			System.out.println(ngayBatDau + ngayKetThuc + caLam);
 			LocalDate date = LocalDate.now();
 			String thang = Integer.toString(date.getMonthValue());
 			String nam = Integer.toString(date.getYear());
+			
 			if(ngayBatDau == null && ngayKetThuc == null) {
 				ds_dkl = dklbo.GetDKLbyMonth_Year(Integer.parseInt(thang), Integer.parseInt(nam));
 				request.setAttribute("ds_dkn",ds_dkl);
-			}else
-			if(ngayBatDau != null && ngayKetThuc != null) {
+			}else if(ngayBatDau != null && (ngayKetThuc.trim()).length()== 0) {
+				if(caLam.equals("Chọn Ca")) {
+					ds_dkl = dklbo.getDSDKLtheoNgay(ngayBatDau);
+					request.setAttribute("ds_dkn",ds_dkl);					
+				}
+				else {
+					ds_dkl = dklbo.getDSDKLtheoNgay_LoaiCa(ngayBatDau, caLam);
+					request.setAttribute("ds_dkn",ds_dkl);	
+				}
+			}else if(ngayBatDau != null && ngayKetThuc != null) {
 				SimpleDateFormat dd = new SimpleDateFormat("yyyy-MM-dd");
 				Date S = dd.parse(ngayBatDau);
 				Date E = dd.parse(ngayKetThuc);
-				ds_dkl = dklbo.getDKL_BD_KT(S, E);
-				request.setAttribute("ds_dkn",ds_dkl);
+				if(caLam.equals("Chọn Ca")) {
+					ds_dkl = dklbo.getDKL_BD_KT(S, E);
+					request.setAttribute("ds_dkn",ds_dkl);					
+				}
+				else {
+					ds_dkl = dklbo.getDKL_BD_KT_MLC(S, E, caLam);
+					request.setAttribute("ds_dkn",ds_dkl);	
+				}
 			}
 			
 			RequestDispatcher rd = request.getRequestDispatcher(url);
@@ -329,7 +345,7 @@ public class QuanLyController extends HttpServlet {
 			ArrayList<DangKyNghiBean> ds_dkn = null;
 			DangKyNghibo dbo = new DangKyNghibo();
 			
-			if(ngayBatDau != null && ngayKetThuc == null) {
+			if(ngayBatDau != null && (ngayKetThuc.trim()).length()== 0) {
 				ds_dkn = dbo.getDSDKNtheoNgay(ngayBatDau);
 				request.setAttribute("ds_dkn",ds_dkn);
 			}else

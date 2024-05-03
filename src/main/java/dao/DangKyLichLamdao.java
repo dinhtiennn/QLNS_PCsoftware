@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import bean.DangKyLamBean;
+import bean.DangKyNghiBean;
 
 public class DangKyLichLamdao {
 	public ArrayList<DangKyLamBean> GetAllDKL() throws Exception{
@@ -156,7 +157,7 @@ public class DangKyLichLamdao {
 		ArrayList<DangKyLamBean> ds = new ArrayList<DangKyLamBean>();
 		ketnoiDB kn = new ketnoiDB();
 		kn.ketnoi();
-		String sql = "SELECT * FROM DangKyLichLam WHERE NgayDK BETWEEN ? AND ?";
+		String sql = "SELECT * FROM DangKyLichLam WHERE NgayDK BETWEEN ? AND ? order by NgayDK";
 		PreparedStatement cmd = kn.cn.prepareStatement(sql);
 		SimpleDateFormat dd= new SimpleDateFormat("yyyy-MM-dd");
 		String Sdate= dd.format(ngayBatDau);	// Doi ngay ra chuoi theo dd
@@ -213,6 +214,71 @@ public class DangKyLichLamdao {
 			String maLoaiCa = rs.getString("MaLoaiCa");
 			Date ngayDK = rs.getDate("NgayDK");
 			ds.add(new DangKyLamBean(maDKlam, maNV, maLoaiCa, ngayDK));
+		}
+		kn.cn.close();
+		rs.close();
+		return ds;
+	}
+	public ArrayList<DangKyLamBean> getDSDKLtheoNgay(String NgayDK) throws Exception{
+		ArrayList<DangKyLamBean> ds = new ArrayList<DangKyLamBean>();
+		ketnoiDB kn = new ketnoiDB();
+		kn.ketnoi();
+		String sql = "select * from DangKyLichLam where NgayDK=?";
+		PreparedStatement cmd = kn.cn.prepareStatement(sql);
+		cmd.setString(1, NgayDK);
+		ResultSet rs = cmd.executeQuery();
+		while(rs.next()) {
+			Long maDKLam = rs.getLong("MaDKLam");
+			String maNV = rs.getString("MaNV");
+			String maLoaiCa = rs.getString("MaLoaiCa");
+			Date ngayDK = rs.getDate("NgayDK");
+			ds.add(new DangKyLamBean(maDKLam, maNV, maLoaiCa, ngayDK));
+		}
+		kn.cn.close();
+		rs.close();
+		return ds;
+	}
+	public ArrayList<DangKyLamBean> getDSDKLtheoNgay_LoaiCa(String NgayDK, String MaLoaiCa) throws Exception{
+		ArrayList<DangKyLamBean> ds = new ArrayList<DangKyLamBean>();
+		ketnoiDB kn = new ketnoiDB();
+		kn.ketnoi();
+		String sql = "select * from DangKyLichLam where NgayDK=? and MaLoaiCa = ?";
+		PreparedStatement cmd = kn.cn.prepareStatement(sql);
+		cmd.setString(1, NgayDK);
+		cmd.setString(2, MaLoaiCa);
+		ResultSet rs = cmd.executeQuery();
+		while(rs.next()) {
+			Long maDKLam = rs.getLong("MaDKLam");
+			String maNV = rs.getString("MaNV");
+			String maLoaiCa = rs.getString("MaLoaiCa");
+			Date ngayDK = rs.getDate("NgayDK");
+			ds.add(new DangKyLamBean(maDKLam, maNV, maLoaiCa, ngayDK));
+		}
+		kn.cn.close();
+		rs.close();
+		return ds;
+	}
+	public ArrayList<DangKyLamBean> getDKL_BD_KT_MLC(Date ngayBatDau , Date ngayKetThuc, String MaLoaiCa) throws Exception{
+		ArrayList<DangKyLamBean> ds = new ArrayList<DangKyLamBean>();
+		ketnoiDB kn = new ketnoiDB();
+		kn.ketnoi();
+		String sql = "SELECT * FROM DangKyLichLam WHERE NgayDK BETWEEN ? AND ? and MaLoaiCa= ? order by NgayDK";
+		PreparedStatement cmd = kn.cn.prepareStatement(sql);
+		SimpleDateFormat dd= new SimpleDateFormat("yyyy-MM-dd");
+		String Sdate= dd.format(ngayBatDau);	// Doi ngay ra chuoi theo dd
+		Date S= dd.parse(Sdate);
+		String Edate= dd.format(ngayKetThuc);
+		Date E= dd.parse(Edate);
+		cmd.setDate(1,new java.sql.Date(S.getTime()));
+		cmd.setDate(2, new java.sql.Date(E.getTime()));
+		cmd.setString(3, MaLoaiCa);
+		ResultSet rs = cmd.executeQuery();
+		while(rs.next()) {
+			Long MaDKLam = rs.getLong("MaDKLam");
+			String MaNV = rs.getString("MaNV");
+			String maLoaiCa = rs.getString("MaLoaiCa");
+			Date NgayDK = rs.getDate("NgayDK");
+			ds.add(new DangKyLamBean(MaDKLam, MaNV, maLoaiCa, NgayDK));
 		}
 		kn.cn.close();
 		rs.close();

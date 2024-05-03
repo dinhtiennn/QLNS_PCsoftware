@@ -3,6 +3,7 @@ package bo;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -59,10 +60,19 @@ public class DangKyLamBo {
 	public ArrayList<DangKyLamBean> GetDKLbyMonth_Year(int month, int year) throws Exception{
 		return dklam.GetDKLbyMonth_Year(month, year);
 	}
+	public ArrayList<DangKyLamBean> getDSDKLtheoNgay(String NgayDK) throws Exception{
+		return dklam.getDSDKLtheoNgay(NgayDK);
+	}
+	public ArrayList<DangKyLamBean> getDSDKLtheoNgay_LoaiCa(String NgayDK, String MaLoaiCa) throws Exception{
+		return dklam.getDSDKLtheoNgay_LoaiCa(NgayDK, MaLoaiCa);
+	}
+	public ArrayList<DangKyLamBean> getDKL_BD_KT_MLC(java.util.Date ngayBatDau , java.util.Date ngayKetThuc, String MaLoaiCa) throws Exception{
+		return dklam.getDKL_BD_KT_MLC(ngayBatDau, ngayKetThuc, MaLoaiCa);
+	}
 	public static void main(String[] args) {
 		DangKyLamBo dkbo = new DangKyLamBo();
 		try {
-			System.out.println(dkbo.GetDKLamByNhanVienNextWeek("NV018"));
+			System.out.println(dkbo.getDSDKLtheoNgay("2024-05-01"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

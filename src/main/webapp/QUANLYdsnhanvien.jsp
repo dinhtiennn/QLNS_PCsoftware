@@ -73,7 +73,11 @@
 		            <th>Chức Danh</th>
 		            <th>Tài Khoản</th>
 		            <th>Mật Khẩu</th>
-		            <th>Trạng Thái Công Việc</th> 
+		            <th>Trạng Thái Công Việc</th>
+		            <th>Ảnh</th> 
+		            <th>Ngày Vào Làm</th> 
+		            <th>Ngày Kết Thúc</th> 
+		            <th>Số Tài Khoản</th> 
 		        </tr>
 		    </thead>
 		    <tbody>
@@ -82,18 +86,18 @@
 			int n = ds.size();
 			for(int i=0; i<n; i++) {
 				NhanVienBean nvb = ds.get(i);%>
-		        <tr>
-		            <td><%=nvb.getMaNV()%></td>
-		            <td><%=nvb.getTenNV() %></td>
-		            <td><%=nvb.getMaCV() %></td>
-		            <td><%=nvb.getNgaySinh() %></td>
-		            <td><%=nvb.getGioiTinh() %></td>
-		            <td><%=nvb.getEmail() %></td>
-		            <td><%=nvb.getsDT() %></td>
-		            <td><%=nvb.getdVCT() %></td>
-		            <td><%=nvb.getChucDanh() %></td>
-		            <td><%=nvb.getTenDangNhap() %></td>
-		            <td><%=nvb.getMatKhau() %></td>
+		        <tr onclick="moModal(this)">
+		            <td id="maNV_<%=i%>"><%=nvb.getMaNV()%></td>
+		            <td id="tenNV_<%=i%>"><%=nvb.getTenNV()%></td>
+		            <td id="maCV_<%=i%>"><%=nvb.getMaCV() %></td>
+		            <td id="ngaySinh_<%=i%>"><%=nvb.getNgaySinh() %></td>
+		            <td id="gioiTinh_<%=i%>"><%=nvb.getGioiTinh() %></td>
+		            <td id="email_<%=i%>"><%=nvb.getEmail() %></td>
+		            <td id="sdt_<%=i%>"><%=nvb.getsDT() %></td>
+		            <td id="dvct_<%=i%>"><%=nvb.getdVCT() %></td>
+		            <td id="chucDanh_<%=i%>"><%=nvb.getChucDanh() %></td>
+		            <td id="tenDangNhap_<%=i%>"><%=nvb.getTenDangNhap() %></td>
+		            <td id="matKhau_<%=i%>"><%=nvb.getMatKhau() %></td>
 		            <%
 		            String trangthaicongviec = "";
 		            if(nvb.getTrangThaiCongViec()==true){
@@ -102,7 +106,7 @@
 		            else
 		            	trangthaicongviec = "Đang nghỉ việc";
 		            %>
-		        	<td><%=trangthaicongviec%>
+		        	<td id="trangThaiCongViec_<%=i%>"><%=trangthaicongviec%>
 		            <%if(nvb.getTrangThaiCongViec()==true){%>
 		            	<a href="quanly?action=danhsachnhanvien&ttcv=0&manv=<%=nvb.getMaNV()%>">
 							<button type="button" class="btn btn-warning">Dừng làm việc</button>
@@ -113,14 +117,40 @@
 				  		</a>
 		            <%}%>
 		            </td>
+		            <td id="anh_<%=i%>"><%=nvb.getAnh() %></td>
+			        <td id="ngayvaolam_<%=i%>"><%=nvb.getNgayVaoLam() %></td>
+			        <td id="ngayketthuc_<%=i%>"><%=nvb.getNgayKetThuc()%></td>
+			        <td id="stknhanvien_<%=i%>"><%=nvb.getSoTaiKhoan()%></td>
 		        </tr>
 			<%}%>
 			</tbody>
 		</table>
 		</div>
 	</div>
-	<!-- The Modal -->
-	<div id="myModal" class="modal">
+	<!-- Modal sua ttnvien-->
+	<div class="modal" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" role="dialog">
+	    <div style="background-image: url('src/main/webapp/prf.svg');  background-size: cover;" class="modal-dialog modal-dialog-centered">
+	    	<form action="adminChinhSuaThongTinNhanVien" method="post" onsubmit="return showAlert()">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <h5 class="modal-title" id="exampleModalLabel">Thông tin nhân viên</h5>
+		                <button onclick="dongModal()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		            </div>
+		            <div class="modal-body">
+		                <div id="modalBody">
+		                
+		                </div>
+		            </div>
+		            <div class="modal-footer">
+		                <button onclick="dongModal()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+		                <button type="submit">Xác Nhận</button>
+		            </div>
+		        </div>
+	    	</form>
+	    </div>
+	</div>
+	<!-- The Modal Them NV -->
+	<div id="myModalThemNV" class="modal">
 	
 		  <!-- Modal content -->
 		  <form action="quanly?action=themnhanvien" method="post">
@@ -150,9 +180,10 @@
 		<div id="successMessage" style="display: none;">Thêm nhân viên thành công!</div>
 	</div>
 </body>
+
 <script type="text/javascript">
 	//Get the modal
-	var modal = document.getElementById("myModal");
+	var modal = document.getElementById("myModalThemNV");
 	
 	// Get the button that opens the modal
 	var btn = document.getElementById("openModalBtn");
@@ -212,5 +243,126 @@
 	    }
 	  };
 	}
+</script>
+<script type="text/javascript">
+	//Lấy modal
+	var modal = document.getElementById("myModal");
+	
+	// Lấy nút để mở modal
+	var btnOpenModal = document.querySelector("tr");
+	
+	// Lấy phần tử <span> đóng modal
+	var spanCloseModal = document.getElementsByClassName("close")[0];
+	
+
+	
+	// Khi người dùng click vào <span> (x), đóng modal
+	function dongModal() {
+	    modal.style.display = "none";
+	}
+	
+	// Khi người dùng click bất kỳ nơi nào ngoài modal, đóng modal
+	window.onclick = function(event) {
+	    if (event.target == modal) {
+	        modal.style.display = "none";
+	    }
+	}
+	function moModal(row) {
+		modal.style.display = "block";
+        // Lấy các giá trị từ các ô trong hàng được nhấp vào
+        var maNV = row.querySelector("[id^='maNV_']").textContent;
+        var tenNV = row.querySelector("[id^='tenNV_']").textContent;
+        var maCV = row.querySelector("[id^='maCV_']").textContent;
+        var ngaySinh = row.querySelector("[id^='ngaySinh_']").textContent;
+        var gioiTinh = row.querySelector("[id^='gioiTinh_']").textContent;
+        var email = row.querySelector("[id^='email_']").textContent;
+        var sdt = row.querySelector("[id^='sdt_']").textContent;
+        var dvct = row.querySelector("[id^='dvct_']").textContent;
+        var chucDanh = row.querySelector("[id^='chucDanh_']").textContent;
+        var tenDangNhap = row.querySelector("[id^='tenDangNhap_']").textContent;
+        var matKhau = row.querySelector("[id^='matKhau_']").textContent;
+        var trangThaiCongViec = row.querySelector("[id^='trangThaiCongViec_']").textContent;
+        var anh = row.querySelector("[id^='anh_']").textContent;
+        var ngayvaolam = row.querySelector("[id^='ngayvaolam_']").textContent;
+        var ngayketthuc = row.querySelector("[id^='ngayketthuc_']").textContent;
+        var stknhanvien = row.querySelector("[id^='stknhanvien_']").textContent;
+	
+     	// Hiển thị các giá trị trong modal
+        var modalBody = document.getElementById("modalBody");
+        // Xóa nội dung cũ của modalBody
+        modalBody.innerHTML = "";
+
+        // Tạo và thêm các phần tử <p> vào modalBody
+        var rows = [
+            { label: "Mã Nhân Viên", value: maNV },
+            { label: "Tên Nhân Viên", value: tenNV },
+            { label: "Mã Chức Vụ", value: maCV },
+            { label: "Ngày Sinh", value: ngaySinh },
+            { label: "Giới Tính", value: gioiTinh },
+            { label: "Email", value: email },
+            { label: "Số Điện Thoại", value: sdt },
+            { label: "Đơn Vị Công Tác", value: dvct },
+            { label: "Chức Danh", value: chucDanh },
+            { label: "Tên Đăng Nhập", value: tenDangNhap },
+            { label: "Mật Khẩu", value: matKhau },
+            { label: "Trạng Thái Công Việc", value: trangThaiCongViec },
+            { label: "Ảnh", value: anh },
+            { label: "Ngày Vào Làm", value: ngayvaolam },
+            { label: "Ngày Kết Thúc", value: ngayketthuc },
+            { label: "Số Tài Khoản", value: stknhanvien }
+        ];
+ 		
+        rows.forEach(rowData => {
+            var labelElement = document.createElement("p");
+
+            labelElement.textContent = rowData.label + ": ";
+
+            if (rowData.label === "Ảnh") {
+            	var valueElement = document.createElement("div"); // Sử dụng div để chứa hình ảnh
+                var imgElement = document.createElement("img");
+                imgElement.src = rowData.value;
+                valueElement.appendChild(imgElement);
+            }if (rowData.label === "Trạng Thái Công Việc") {
+            	var valueElement = document.createElement("select");
+
+                // Tạo tùy chọn đầu tiên
+                var optionTrue = document.createElement("option");
+                optionTrue.value = "true";
+                optionTrue.text = "True";
+                valueElement.appendChild(optionTrue);
+
+                // Tạo tùy chọn thứ hai
+                var optionFalse = document.createElement("option");
+                optionFalse.value = "false";
+                optionFalse.text = "False";
+                valueElement.appendChild(optionFalse);
+            } 
+            else {
+            	var valueElement = document.createElement("input");
+                valueElement.value = rowData.value;
+                valueElement.setAttribute("name", rowData.label.toLowerCase()); // Thêm thuộc tính name
+            }
+            
+         	// Thêm class cho các phần tử
+            labelElement.classList.add("label");
+            valueElement.classList.add("input-value");
+
+            modalBody.appendChild(labelElement);
+            modalBody.appendChild(valueElement);
+        });
+
+	}
+	
+	function showAlert() {
+	    var confirmation = confirm("Bạn muốn thay đổi thông tin?");
+	    if (confirmation) {
+	        alert("Thông tin đã được thay đổi!");
+	        return true; 
+	    } else {
+	    	window.location.href = "adminNhanVienController";
+	    	return false; 
+	    }
+	}
+		
 </script>
 </html>
