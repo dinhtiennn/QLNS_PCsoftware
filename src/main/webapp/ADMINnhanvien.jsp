@@ -22,6 +22,7 @@
 	      <input style="width: 50%;margin-top: 20px;height: 40px;" class="form-control me-2" type="search" name="txttk" placeholder="Search by name or ID" aria-label="Search">
 	      <button style="height: 40px; margin: 20px 0;" class="btn btn-outline-success" type="submit">Search</button>
     </form>
+   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ThemNhanSu">Thêm mới nhân sự</button>
 	<div class="d-flex">
 		<div class="col-2  mt-5">
 			<jsp:include page="adminSlidebar.jsp"></jsp:include>
@@ -107,7 +108,45 @@
 		        </div>
 	    	</form>
 	    </div>
-	</div> 
+	</div>
+<!--modal 2  -->
+<div class="modal fade" id="ThemNhanSu" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Nhập thông tin nhân sự</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        	<label for="tennv">Tên NV:</label>
+		    <input type="text" id="tennv" name="tennv"> <br>
+		    <label for="ngaysinh">Ngày Sinh:</label>
+		    <input type="date" id="selectedDate" name="selectedDate" required> <br>
+		    <label for="manv">Giới tính:</label>
+		    <input type="radio" name="gender" value="male"> Nam
+		    <input type="radio" name="gender" value="female"> Nữ <br>
+		    <label for="tennv">Email:</label>
+		    <input type="email" id="email" name="email"><br>
+		    <label for="manv">Số điện thoại:</label>
+		    <input type="text" id="sdt" name="sdt"><br>
+		    <label for="tennv">Tên đăng nhập:</label>
+		    <input type="text" id="tendn" name="tendn"><br>
+		    <label for="manv">Mật khẩu:</label>
+		    <input type="text" id="mk" name="mk"><br>
+		    <label for="tennv">Ảnh:</label>
+		    <input type="file" name="image" accept="image/*"><br>
+		    <label for="manv">Số tài khoản:</label>
+		    <input type="text" id="stk" name="stk">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Xác nhận</button>
+      </div>
+    </div>
+  </div>
+</div>
+	
+
 </body>
 
 

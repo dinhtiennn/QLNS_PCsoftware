@@ -122,32 +122,32 @@
 	<!-- The Modal -->
 	<div id="myModal" class="modal">
 	
-	  <!-- Modal content -->
-	  <form action="quanly?action=themnhanvien" method="post">
-	  <div class="modal-content">
-	    <span class="close">&times;</span>
-	    <label for="tennv">Tên NV:</label>
-	    <input type="text" id="tennv" name="tennv">
-	    <label for="ngaysinh">Ngày Sinh:</label>
-	    <input type="text" id="ngaysinh" name="ngaysinh">
-	    <label for="manv">Giới tính:</label>
-	    <input type="text" id="gioitinh" name="gioitinh">
-	    <label for="tennv">Email:</label>
-	    <input type="text" id="email" name="email">
-	    <label for="manv">Số điện thoại:</label>
-	    <input type="text" id="sdt" name="sdt">
-	    <label for="tennv">Tên đăng nhập:</label>
-	    <input type="text" id="tendn" name="tendn">
-	    <label for="manv">Mật khẩu:</label>
-	    <input type="text" id="mk" name="mk">
-	    <label for="tennv">Ảnh:</label>
-	    <input type="text" id="anh" name="anh">
-	    <label for="manv">Số tài khoản:</label>
-	    <input type="text" id="stk" name="stk">
-	    <button id="submitBtn">Thêm nhân viên</button>
-	  </div>
-	  </form>
-	<div id="successMessage" style="display: none;">Thêm nhân viên thành công!</div>
+		  <!-- Modal content -->
+		  <form action="quanly?action=themnhanvien" method="post">
+		  <div class="modal-content">
+		    <span class="close">&times;</span>
+		    <label for="tennv">Tên NV:</label>
+		    <input type="text" id="tennv" name="tennv">
+		    <label for="ngaysinh">Ngày Sinh:</label>
+		    <input type="text" id="ngaysinh" name="ngaysinh">
+		    <label for="manv">Giới tính:</label>
+		    <input type="text" id="gioitinh" name="gioitinh">
+		    <label for="tennv">Email:</label>
+		    <input type="text" id="email" name="email">
+		    <label for="manv">Số điện thoại:</label>
+		    <input type="text" id="sdt" name="sdt">
+		    <label for="tennv">Tên đăng nhập:</label>
+		    <input type="text" id="tendn" name="tendn">
+		    <label for="manv">Mật khẩu:</label>
+		    <input type="text" id="mk" name="mk">
+		    <label for="tennv">Ảnh:</label>
+		    <input type="text" id="anh" name="anh">
+		    <label for="manv">Số tài khoản:</label>
+		    <input type="text" id="stk" name="stk">
+		    <button id="submitBtn">Thêm nhân viên</button>
+		  </div>
+		  </form>
+		<div id="successMessage" style="display: none;">Thêm nhân viên thành công!</div>
 	</div>
 </body>
 <script type="text/javascript">
