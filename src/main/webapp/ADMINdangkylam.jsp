@@ -15,40 +15,45 @@
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
-	<div class="d-flex">
-		<div class="col-2  mt-5">
+	<div style="margin-top: 72px;" class="d-flex justify-content-center">
+		<div >
 			<jsp:include page="adminSlidebar.jsp"></jsp:include>
 		</div>
-	<form action="adminDangKyLamController" method="post" onsubmit="return validateDate()">
-        <label for="selectedDate">Tìm kiếm từ ngày :</label>
-        <input type="date" id="selectedDate" name="selectedDate" required>
-        <label for="selectedDate2">đến ngày :</label>
-        <input type="date" id="selectedDate2" name="selectedDate2" required>
-        <input type="submit" value="Search">
-    </form>
-	<table class="table" >
-			<thead>
-				<tr>
-					<th>Mã Đăng Ký </th>
-					<th>Mã Nhân viên</th>
-					<th>Mã Loại Ca</th>
-					<th>Ngày Đăng Ký</th>
-				</tr>
-			</thead>
-			<tbody>
-			<% ArrayList<DangKyLamBean> ds = (ArrayList<DangKyLamBean>)request.getAttribute("BangDangKyLam");
-			int n = ds.size();
-			for(int i =0; i<n;i++){
-				DangKyLamBean dkb = ds.get(i);%>
-				<tr>
-					<td><%=dkb.getMaDkLam()%></td>
-					<td><%=dkb.getMaNV()%></td>
-					<td><%=dkb.getMaLoaica()%></td>
-					<td><%=dkb.getNgayDK()%></td>
-				</tr>	
-			<%}%>
-			</tbody>
-	</table>
+		<div class="">
+			<div style="margin: 20px 0 20px 0; text-align: center;">
+				<h1>Thống Kê Lương Nhân Viên</h1>
+			</div>
+			<form action="adminDangKyLamController" method="post" onsubmit="return validateDate()">
+		        <label for="selectedDate">Tìm kiếm từ ngày :</label>
+		        <input type="date" id="selectedDate" name="selectedDate" required>
+		        <label for="selectedDate2">đến ngày :</label>
+		        <input type="date" id="selectedDate2" name="selectedDate2" required>
+		        <input type="submit" value="Search">
+		    </form>
+			<table class="table" >
+					<thead>
+						<tr>
+							<th>Mã Đăng Ký </th>
+							<th>Mã Nhân viên</th>
+							<th>Mã Loại Ca</th>
+							<th>Ngày Đăng Ký</th>
+						</tr>
+					</thead>
+					<tbody>
+					<% ArrayList<DangKyLamBean> ds = (ArrayList<DangKyLamBean>)request.getAttribute("BangDangKyLam");
+					int n = ds.size();
+					for(int i =0; i<n;i++){
+						DangKyLamBean dkb = ds.get(i);%>
+						<tr>
+							<td><%=dkb.getMaDkLam()%></td>
+							<td><%=dkb.getMaNV()%></td>
+							<td><%=dkb.getMaLoaica()%></td>
+							<td><%=dkb.getNgayDK()%></td>
+						</tr>	
+					<%}%>
+					</tbody>
+			</table>
+		</div>
 	</div>
 <script>
         // Hàm này được sử dụng để kiểm tra định dạng của ngày tháng

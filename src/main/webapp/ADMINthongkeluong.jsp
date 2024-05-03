@@ -17,45 +17,50 @@
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
-	<div class="d-flex">
-		<div class="col-2  mt-5">
+	<div class="d-flex justify-content-center">
+		<div class="">
 			<jsp:include page="adminSlidebar.jsp"></jsp:include>
 		</div>
-		<table class="table">
-			<thead>
-		        <tr>
-		            <th>Mã Nhân Viên</th>
-		            <th>Tên Nhân Viên</th>
-		            <th>Tháng-Năm Làm Việc</th>
-		            <th>Số Ca Làm</th>
-		            <th>Số Ca Nghỉ</th>
-		            <th>Lương</th> 
-		        </tr>
-   			 </thead>
-   			 <tbody>
-   			 	<%ArrayList<ThongKeLuongBean> ds = (ArrayList<ThongKeLuongBean>)request.getAttribute("ThongKeLuong");
-   			 	adminNhanVienBo adnvbo = new adminNhanVienBo();
-	   			
-		   			int n = ds.size();
-		   			for(int i=0; i<n; i++) {
-		   				ThongKeLuongBean tklb = ds.get(i);%>
-   			 	<tr> 
-			 		<td><%=tklb.getMaNV()%></td>
-		           	<td><%=adnvbo.getnhanvientheoma(tklb.getMaNV()).getTenNV() %></td>     
-		           	<td><%=tklb.getThangNam() %></td>      
-		           	<td><%=tklb.getSoCaLam() %></td> 
-		           	<td><%=tklb.getSoCaNghi() %></td> 
-		           	<%
-		           	NumberFormat scientificFormat = NumberFormat.getInstance(Locale.US);
-		           	scientificFormat.setMaximumFractionDigits(2); 
-		           	%>
-		           	<td><%=scientificFormat.format((tklb.getLuong()))%> VNĐ</td>
-   			 	</tr>
-   			 		<%} %>
-   			 	
-   			 </tbody>
-
-		</table>
+		<div>
+			<div style="margin: 85px 0  20px 0; text-align: center;">
+				<h1>Thống Kê Lương Nhân Viên</h1>
+			</div>
+			<table class="table">
+				<thead>
+			        <tr>
+			            <th>Mã Nhân Viên</th>
+			            <th>Tên Nhân Viên</th>
+			            <th>Tháng-Năm Làm Việc</th>
+			            <th>Số Ca Làm</th>
+			            <th>Số Ca Nghỉ</th>
+			            <th>Lương</th> 
+			        </tr>
+	   			 </thead>
+	   			 <tbody>
+	   			 	<%ArrayList<ThongKeLuongBean> ds = (ArrayList<ThongKeLuongBean>)request.getAttribute("ThongKeLuong");
+	   			 	adminNhanVienBo adnvbo = new adminNhanVienBo();
+		   			
+			   			int n = ds.size();
+			   			for(int i=0; i<n; i++) {
+			   				ThongKeLuongBean tklb = ds.get(i);%>
+	   			 	<tr> 
+				 		<td><%=tklb.getMaNV()%></td>
+			           	<td><%=adnvbo.getnhanvientheoma(tklb.getMaNV()).getTenNV() %></td>     
+			           	<td><%=tklb.getThangNam() %></td>      
+			           	<td><%=tklb.getSoCaLam() %></td> 
+			           	<td><%=tklb.getSoCaNghi() %></td> 
+			           	<%
+			           	NumberFormat scientificFormat = NumberFormat.getInstance(Locale.US);
+			           	scientificFormat.setMaximumFractionDigits(2); 
+			           	%>
+			           	<td><%=scientificFormat.format((tklb.getLuong()))%> VNĐ</td>
+	   			 	</tr>
+	   			 		<%} %>
+	   			 	
+	   			 </tbody>
+	
+			</table>
+		</div>
 	</div>
 </body>
 </html>

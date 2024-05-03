@@ -16,57 +16,63 @@
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
+	
 	<div style="position: relative; justify-content: center;" class="d-flex align-items-center">
-		<div class="col-2 menu-content" >
+		<div style="position: fixed; top: 132px; left: 0; height: 100%;" class="col-2 menu-content" >
 			<jsp:include page="adminSlidebar.jsp"></jsp:include>
 		</div>
-		<form action="adminDuyetDangKyNghiController" method="get">
-			<table class="table">
-				<thead>
-			        <tr>
-			        	<th>All
-			        	<input type="checkbox" id="selectAll"></th>
-			            <th>Mã Nhân Viên</th>
-			            <th>Tên Nhân Viên</th>
-			            <th>Loại Ca Làm</th>
-			            <th>Ngày Đăng Ký</th>
-			            <th>Duyệt</th>
-			            <th>Người Duyệt</th>
-			            <th>Lý Do</th> 
-			        </tr>
-	   			 </thead>
-	   			 <tbody>
-	   			 	<%ArrayList<VDangKyNghiBean> ds = (ArrayList<VDangKyNghiBean>)request.getAttribute("BangDangKyNghi");
-	   			 		NhanVienBean nhanvien = (NhanVienBean)session.getAttribute("nhanvien");
-			   			int n = ds.size();
-			   			for(int i=0; i<n; i++) {
-			   			VDangKyNghiBean dkb = ds.get(i);%>
-	   			 	<tr>
-	   			 		   <td><input type="checkbox" name="check" value="<%=dkb.getMaDkNghi() %>"></td>
-				           <td><%=dkb.getMaNV() %></td>  
-				           <td><%=dkb.getTenNV() %></td>     
-				           <td><%=dkb.getMaLoaiCa() %></td>      
-				           <td><%=dkb.getNgayDK() %></td>  
-				           
-			           <%if(dkb.getDuyet() == 0) {%>
-				           <td style="color: #c6cd1e;">Chờ duyệt</td>
-				           <td> </td>
-			           <%} if(dkb.getDuyet() == 1) {%>
-				           <td style="color: #35c51c;">Đã duyệt</td>
-				           <td><%=dkb.getNguoiDuyet() %></td> 
-			           <%} if(dkb.getDuyet() == 2) {%>
-			           		<td style="color: #ff0000;">Không duyệt</td>
-				           <td><%=dkb.getNguoiDuyet() %></td> 
-			           <%} %>
-				           <td><%=dkb.getLyDo() %></td>
-	        	   </tr>
-	   			 <%}%>
-	   			 </tbody>
-	
-			</table>
-			<button class="btn btn-success" type="submit" name="btn-duyet" value="<%=nhanvien.getTenNV() %>">Duyệt</button>
-			<button class="btn btn-danger" type="submit" name="btn-tuchoi" value="<%=nhanvien.getTenNV() %>">Từ Chối</button>
-		</form>	
+		<div>
+			<div style="margin: 85px 0  20px 0; text-align: center;">
+				<h1>Danh Sách Nhân Viên Đăng Ký Nghỉ</h1>
+			</div>
+			<form action="adminDuyetDangKyNghiController" method="get">
+				<table class="table">
+					<thead>
+				        <tr>
+				        	<th>All
+				        	<input type="checkbox" id="selectAll"></th>
+				            <th>Mã Nhân Viên</th>
+				            <th>Tên Nhân Viên</th>
+				            <th>Loại Ca Làm</th>
+				            <th>Ngày Đăng Ký</th>
+				            <th>Duyệt</th>
+				            <th>Người Duyệt</th>
+				            <th>Lý Do</th> 
+				        </tr>
+		   			 </thead>
+		   			 <tbody>
+		   			 	<%ArrayList<VDangKyNghiBean> ds = (ArrayList<VDangKyNghiBean>)request.getAttribute("BangDangKyNghi");
+		   			 		NhanVienBean nhanvien = (NhanVienBean)session.getAttribute("nhanvien");
+				   			int n = ds.size();
+				   			for(int i=0; i<n; i++) {
+				   			VDangKyNghiBean dkb = ds.get(i);%>
+		   			 	<tr>
+		   			 		   <td><input type="checkbox" name="check" value="<%=dkb.getMaDkNghi() %>"></td>
+					           <td><%=dkb.getMaNV() %></td>  
+					           <td><%=dkb.getTenNV() %></td>     
+					           <td><%=dkb.getMaLoaiCa() %></td>      
+					           <td><%=dkb.getNgayDK() %></td>  
+					           
+				           <%if(dkb.getDuyet() == 0) {%>
+					           <td style="color: #c6cd1e;">Chờ duyệt</td>
+					           <td> </td>
+				           <%} if(dkb.getDuyet() == 1) {%>
+					           <td style="color: #35c51c;">Đã duyệt</td>
+					           <td><%=dkb.getNguoiDuyet() %></td> 
+				           <%} if(dkb.getDuyet() == 2) {%>
+				           		<td style="color: #ff0000;">Không duyệt</td>
+					           <td><%=dkb.getNguoiDuyet() %></td> 
+				           <%} %>
+					           <td><%=dkb.getLyDo() %></td>
+		        	   </tr>
+		   			 <%}%>
+		   			 </tbody>
+		
+				</table>
+				<button class="btn btn-success" type="submit" name="btn-duyet" value="<%=nhanvien.getTenNV() %>">Duyệt</button>
+				<button class="btn btn-danger" type="submit" name="btn-tuchoi" value="<%=nhanvien.getTenNV() %>">Từ Chối</button>
+			</form>	
+		</div>
 	</div>
 </body>
 <script>

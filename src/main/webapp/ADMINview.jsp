@@ -17,11 +17,7 @@ input {
 input:focus-visible {
 	outline : none;
 }
-.menu-icon {
-  cursor: pointer;
-  color: #000;
-  padding: 10px;
-}
+
 .menu-content {
   display: block;
   padding: 10px;
@@ -38,12 +34,12 @@ input:focus-visible {
 <body>
 <jsp:include page="header.jsp"></jsp:include>
 
-	<div style="position: relative; justify-content: center;" class="d-flex align-items-center" >
+	<div style="position: relative; justify-content: center;margin-top: 69px;" class="d-flex align-items-center" >
 		<div class="col-2 menu-content" >
 			<jsp:include page="adminSlidebar.jsp"></jsp:include>
 		</div>
 		
-		<div>
+		<div class="mt-3">
 			<h1>Bảng Thông Số Kỹ Thuật</h1>
 		 	<% ThongSoKiThuatBean tsbean = (ThongSoKiThuatBean)request.getAttribute("BangThongSo"); %>
 		

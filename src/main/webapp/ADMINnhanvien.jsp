@@ -14,17 +14,47 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 <style type="text/css">
 
+.addBTN {
+    background-color: #5d88cd !important;
+    height: 40px;
+}
+
+.addBTN:hover  {
+	cursor: pointer;
+	opacity: 0.8;
+}
+
+.searchBTN {
+	border: 1px solid #5d88cd !important;
+	color: #5d88cd !important;
+}
+
+.searchBTN:hover {
+	background-color: #5d88cd !important;
+	color: #fff !important;
+}
+
+.center {
+	margin-top: 85px;
+	text-align: center;
+}
+
 </style>
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
-	<form class="d-flex justify-content-center" role="search" action="adminNhanVienController">
-	      <input style="width: 50%;margin-top: 20px;height: 40px;" class="form-control me-2" type="search" name="txttk" placeholder="Search by name or ID" aria-label="Search">
-	      <button style="height: 40px; margin: 20px 0;" class="btn btn-outline-success" type="submit">Search</button>
-    </form>
-   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ThemNhanSu">Thêm mới nhân sự</button>
-	<div class="d-flex">
-		<div class="col-2  mt-5">
+	<div class="center">
+		<h1>Danh Sách Nhân Viên</h1>
+	</div>
+	<div class="d-flex justify-content-center align-items-center">
+		<form style="width: 50%" class="d-flex justify-content-center" role="search" action="adminNhanVienController">
+		      <input style="width: 50%;margin-top: 20px;height: 40px;" class="form-control me-2" type="search" name="txttk" placeholder="Search by name or ID" aria-label="Search">
+		      <button style="height: 40px; margin: 20px 0;" class="btn searchBTN" type="submit">Search</button>
+	    </form>
+	   <button type="button" class="btn btn-primary addBTN" data-bs-toggle="modal" data-bs-target="#ThemNhanSu">Thêm mới nhân sự</button>
+	</div>
+	<div class="d-flex justify-content-center">
+		<div class="col-2">
 			<jsp:include page="adminSlidebar.jsp"></jsp:include>
 		</div>
 	    <table id="myTable" class="table table-hover" style="font-size: 11px;">

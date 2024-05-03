@@ -12,18 +12,8 @@
 		color: red;
 	}
 </style>
-<header class="p-3 text-bg-light">
+<header style="position: fixed;z-index: 1;top:0; width: 100%;" class="p-3 text-bg-light">
  <div class="row align-items-center">
-      <div class="col">
-         <div class="d-flex justify-content-start">
-		  <div class="menu-icon" onclick="toggleMenu()">
-		  	<i class="fa-solid fa-bars"></i>
-		  </div>
-          <a href="index">
-		  <img style="width: 100px" alt="" src="assets/imgs/Logo.png">
-		  </a>
-        </div>
-      </div>
       <div class="col">
         <div class="d-flex justify-content-end ">
           	<%

@@ -13,7 +13,7 @@
     width: 30%; /* Chiều rộng ban đầu của thẻ div */
     overflow: hidden;
     transition: width 0.5s; /* Animation chuyển động */
-    background-color: #f0f0f0;
+    background-color: #5d88cd;
 }
 
 .slideFull.active {
@@ -30,6 +30,10 @@
     display: none;
 }
 
+.nav li a{
+   	color: #fff !important;
+}
+
 .icons {
     display: flex;
     flex-direction: column; /* Hiển thị các icon trên cùng một hàng dọc */
@@ -40,6 +44,7 @@
 .icons i {
     font-size: 24px;
     margin-top: 40px;
+    color: #fff;
 }
 
 .slideFull.active .icons {
@@ -50,13 +55,19 @@
     display: block; /* Hiển thị danh sách li khi ở full size */
     margin-top: 30px;
 }
+
+.menu-icon {
+  cursor: pointer;
+  color: #000;
+  padding: 10px;
+}
 </style>
 </head>
 <body>
-	<div style="position: fixed; top: 132px; left: 0; height: 100%;" class="d-flex">
+	<div style="position: fixed; top: 69px; left: 0; height: 100%;" class="d-flex">
         <div class="justify-content-start slideFull" id="menuContent">
         	<a href="index">
-				<img style="height: 70px;width: 180px;" alt="" src="assets/imgs/Logomenu.png">
+				<img style="height: 70px;width: 197px;" alt="" src="assets/imgs/LogoCT.jpg">
 			</a>
             <div class="icons">
                 <a href="ThongSoController"><i class="fas fa-cogs"></i></a>
@@ -88,7 +99,7 @@
                 
             </ul>
         </div>
-        <div style="background-color: #f0f0f0;" class="menu-icon" onclick="toggleSize()">
+        <div style="background-color: #fff;" class="menu-icon" onclick="toggleSize()">
             <i style="margin-top: 16px;" class="fas fa-bars"></i>
         </div>
     </div>

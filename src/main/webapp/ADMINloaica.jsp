@@ -14,36 +14,35 @@
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
-	<div class="d-flex">
-		<div class="col-2  mt-5">
+	<div class="d-flex justify-content-center">
+		<div class="">
 			<jsp:include page="adminSlidebar.jsp"></jsp:include>
 		</div>
-		<table class="table" >
-			<thead>
-				<tr>
-					<th>Mã Loại Ca</th>
-					<th>Tên Loại Ca</th>
-				</tr>
-			</thead>
-			<tbody>
-				<%
-					ArrayList<LoaiCaBean> ds = (ArrayList<LoaiCaBean>)request.getAttribute("BangLoaiCa");
-				int n = ds.size();
-				for(int i =0; i<n;i++){
-					LoaiCaBean lcb = ds.get(i);%>
+		<div>
+			<div style="margin: 85px 0  20px 0; text-align: center;">
+				<h1>Danh Sách Phân Loại Ca Làm</h1>
+			</div>
+			<table style="margin-top: 20px; width: 900px" class="table" >
+				<thead>
 					<tr>
-						<td><%=lcb.getMaLoaiCa() %></td>
-						<td><%=lcb.getTenLoaiCa() %></td>
-					</tr>	
-				<%}%>
-			</tbody>
-			
-			
-		
-		
-		
-		</table>
-		
+						<th>Mã Loại Ca</th>
+						<th>Tên Loại Ca</th>
+					</tr>
+				</thead>
+				<tbody>
+					<%
+						ArrayList<LoaiCaBean> ds = (ArrayList<LoaiCaBean>)request.getAttribute("BangLoaiCa");
+					int n = ds.size();
+					for(int i =0; i<n;i++){
+						LoaiCaBean lcb = ds.get(i);%>
+						<tr>
+							<td><%=lcb.getMaLoaiCa() %></td>
+							<td><%=lcb.getTenLoaiCa() %></td>
+						</tr>	
+					<%}%>
+				</tbody>
+			</table>
+		</div>
 		
 	</div>
 </body>
