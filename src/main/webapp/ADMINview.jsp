@@ -24,11 +24,11 @@ input:focus-visible {
 }
 .menu-content {
   display: block;
-  background-color: #f9f9f9;
   padding: 10px;
-  border: 1px solid #ccc;
   animation-duration: 0.5s;
   overflow: hidden; /* Ẩn phần nội dung vượt quá kích thước của phần tử */
+  position: fixed;
+  top: 132px;
 }
 
 
@@ -38,12 +38,12 @@ input:focus-visible {
 <body>
 <jsp:include page="header.jsp"></jsp:include>
 
-	<div class="d-flex align-items-center" >
-		<div class="col-2  mt-5 menu-content" >
+	<div style="position: relative; justify-content: center;" class="d-flex align-items-center" >
+		<div class="col-2 menu-content" >
 			<jsp:include page="adminSlidebar.jsp"></jsp:include>
 		</div>
 		
-		<div style="margin-left: 260px;">
+		<div>
 			<h1>Bảng Thông Số Kỹ Thuật</h1>
 		 	<% ThongSoKiThuatBean tsbean = (ThongSoKiThuatBean)request.getAttribute("BangThongSo"); %>
 		

@@ -10,10 +10,10 @@
 
 .slideFull {
 	position: relative;
-    width: 20%; /* Chiều rộng ban đầu của thẻ div */
-    background-color: #f0f0f0;
+    width: 30%; /* Chiều rộng ban đầu của thẻ div */
     overflow: hidden;
     transition: width 0.5s; /* Animation chuyển động */
+    background-color: #f0f0f0;
 }
 
 .slideFull.active {
@@ -39,7 +39,7 @@
 
 .icons i {
     font-size: 24px;
-    margin-bottom: 8px;
+    margin-top: 40px;
 }
 
 .slideFull.active .icons {
@@ -48,14 +48,15 @@
 
 .slideFull.active .nav li {
     display: block; /* Hiển thị danh sách li khi ở full size */
+    margin-top: 30px;
 }
 </style>
 </head>
 <body>
-	<div class="d-flex">
+	<div style="position: fixed; top: 132px; left: 0; height: 100%;" class="d-flex">
         <div class="justify-content-start slideFull" id="menuContent">
         	<a href="index">
-				<img style="width: 100px" alt="" src="assets/imgs/Logomenu.png">
+				<img style="height: 70px;width: 180px;" alt="" src="assets/imgs/Logomenu.png">
 			</a>
             <div class="icons">
                 <a href="ThongSoController"><i class="fas fa-cogs"></i></a>
@@ -64,9 +65,6 @@
                 <a href="adminLoaiCaController"><i class="fas fa-clock"></i></a>
                 <a href="adminThongKeLuongController"><i class="fas fa-chart-bar"></i></a>
                 <a href="adminDangKyLamController"><i class="fas fa-calendar-check"></i></a>
-                <a href="#"><i class="fas fa-plus"></i></a>
-                <a href="#"><i class="fas fa-plus"></i></a>
-                <a href="#"><i class="fas fa-plus"></i></a>
             </div>
             <ul class="nav flex-column">
                 <li class="nav-item">
@@ -87,19 +85,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="adminDangKyLamController">Bảng Đăng Ký Lịch Làm</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Thêm Chức Năng</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Thêm Chức Năng</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Thêm Chức Năng</a>
-                </li>
+                
             </ul>
         </div>
-        <div class="menu-icon" onclick="toggleSize()">
-            <i class="fas fa-bars"></i>
+        <div style="background-color: #f0f0f0;" class="menu-icon" onclick="toggleSize()">
+            <i style="margin-top: 16px;" class="fas fa-bars"></i>
         </div>
     </div>
 </body>
