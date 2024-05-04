@@ -2255,8 +2255,8 @@ p {
 			      </div>
 			      <div class="modal-body">
 			      	<div class="mb-3 row">
-					    <div class="col-sm-10">
-					      <img alt="" src="<%=anh%>">
+					    <div style="margin: auto; text-align: center;" class="col-sm-10">
+					      <img style="width: 150px;height: 150px;border-radius: 50%;object-fit: cover;" alt="" src="<%=anh%>">
 					    </div>
 			    </div>
 			    <div class="mb-3 row">
