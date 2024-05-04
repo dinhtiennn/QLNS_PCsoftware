@@ -1118,6 +1118,11 @@ button.bg-white:focus {
 
 .rounded-circle {
     border-radius: 50% !important;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin-top: 26px;
+    box-shadow: 6px 7px 10px 0px rgba(0, 0, 0, 0.1) !important;
 }
 
 .d-none {
@@ -2074,7 +2079,7 @@ p {
 	                            <div class="col-lg-3 order-lg-2">
 	                                <div class="card-profile-image">
 	                                    <a href="#">
-	                                    	<img class="rounded-circle" alt="" src="<%=anh%>">
+	                                    	<img style="box-shadow: 6px 7px 10px 0px rgba(0, 0, 0, 0.1) !important;" class="rounded-circle" alt="" src="<%=anh%>">
 	                                    </a>
 	                                </div>
 	                            </div>
