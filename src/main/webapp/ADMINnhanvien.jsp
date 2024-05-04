@@ -14,17 +14,47 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 <style type="text/css">
 
+.addBTN {
+    background-color: #5d88cd !important;
+    height: 40px;
+}
+
+.addBTN:hover  {
+	cursor: pointer;
+	opacity: 0.8;
+}
+
+.searchBTN {
+	border: 1px solid #5d88cd !important;
+	color: #5d88cd !important;
+}
+
+.searchBTN:hover {
+	background-color: #5d88cd !important;
+	color: #fff !important;
+}
+
+.center {
+	margin-top: 85px;
+	text-align: center;
+}
+
 </style>
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
-	<form class="d-flex justify-content-center" role="search" action="adminNhanVienController">
-	      <input style="width: 50%;margin-top: 20px;height: 40px;" class="form-control me-2" type="search" name="txttk" placeholder="Search by name or ID" aria-label="Search">
-	      <button style="height: 40px; margin: 20px 0;" class="btn btn-outline-success" type="submit">Search</button>
-    </form>
-   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ThemNhanSu">Thêm mới nhân sự</button>
-	<div class="d-flex">
-		<div class="col-2  mt-5">
+	<div class="center">
+		<h1>Danh Sách Nhân Viên</h1>
+	</div>
+	<div class="d-flex justify-content-center align-items-center">
+		<form style="width: 50%" class="d-flex justify-content-center" role="search" action="adminNhanVienController">
+		      <input style="width: 50%;margin-top: 20px;height: 40px;" class="form-control me-2" type="search" name="txttk" placeholder="Search by name or ID" aria-label="Search">
+		      <button style="height: 40px; margin: 20px 0;" class="btn searchBTN" type="submit">Search</button>
+	    </form>
+	   <button type="button" class="btn btn-primary addBTN" data-bs-toggle="modal" data-bs-target="#ThemNhanSu">Thêm mới nhân sự</button>
+	</div>
+	<div class="d-flex justify-content-center">
+		<div class="col-2">
 			<jsp:include page="adminSlidebar.jsp"></jsp:include>
 		</div>
 	    <table id="myTable" class="table table-hover" style="font-size: 11px;">
@@ -118,7 +148,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
         <div class="modal-body">
-	      <form action="adminNhanVienController" method="post" onsubmit="return validateForm()">
+	      <form action="adminNhanVienController" method="get" onsubmit="return validateForm()">
 			      	<label for="tennv">Tên NV:</label>
 				    <input type="text" id="tennv" name="tennv"> <br>
 				    <label for="ngaysinh">Ngày Sinh:</label>
@@ -126,6 +156,10 @@
 				    <label for="manv">Giới tính:</label>
 				    <input type="radio" name="gender" value="male"> Nam
 				    <input type="radio" name="gender" value="female">Nữ<br>
+				    <label for="manv">Chức vụ:</label>
+				    <input type="radio" name="cv" value="CV003"> Nhân viên
+				    <input type="radio" name="cv" value="CV002"> Quản Lý
+				    <input type="radio" name="cv" value="CV001">Admin<br>
 				    <label for="tennv">Email:</label>
 				    <input type="email" id="email" name="email"><br>
 				    <label for="manv">Số điện thoại:</label>
@@ -147,6 +181,7 @@
     </div>
   </div>
 </div>
+
 	
 
 </body>
@@ -271,15 +306,10 @@
 	    	return false; 
 	    }
 	}
-	function validateDate() {
-        var selectedDate = document.getElementById("selectedDate").value;
+	function validateDate(selectedDate) {
         // Kiểm tra xem selectedDate có đúng định dạng ngày tháng YYYY-MM-DD không
         var regex = /^\d{4}-\d{2}-\d{2}$/;
-        if (!regex.test(selectedDate)) {
-            alert("Vui lòng chọn ngày tháng hợp lệ (YYYY-MM-DD)!");
-            return false;
-        }
-        return true;
+        return regex.test(selectedDate);
     }
 	 function validateEmail(email){
 		 var regex = [a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$;
@@ -290,10 +320,16 @@
 		 var regex = /(((\+|)84)|0)(3|5|7|8|9)+([0-9]{8})\b/;
 		 return regex.test(sdt);
 	 }
+	 function validateName(tennv) {
+		    // Mẫu để kiểm tra họ và tên: Họ đầu tiên, có thể có dấu, tiếp theo là một hoặc nhiều tên, mỗi tên cách nhau bởi dấu cách
+		    var mau = /^[A-Za-zÀ-ỹ]+\s([A-Za-zÀ-ỹ]+\s?)+$/;
+		    return mau.test(tennv);
+		}
 	 function validateForm() {
          var tennv = document.getElementById("tennv").value;
          var ngaysinh = document.getElementById("selectedDate").value;
          var gender = document.getElementsByName("gender");
+         var cv = document.getElementsByName("cv");
          var email = document.getElementById("email").value;
          var sdt = document.getElementById("sdt").value;
          var tendn = document.getElementById("tendn").value;
@@ -302,16 +338,20 @@
          var stk = document.getElementById("stk").value;
 
          // Kiểm tra tính hợp lệ của các trường
-         if (tennv == "") {
-             alert("Vui lòng nhập tên nhân viên!");
+         if (tennv == ""|| !validateName(tennv)) {
+             alert("Vui lòng nhập tên nhân viên hợp lệ !");
              return false;
          }
-         if (ngaysinh == "") {
-             alert("Vui lòng chọn ngày sinh!");
+         if (ngaysinh == "" || !validateDate(ngaysinh)) {
+             alert("Vui lòng nhập ngày sinh hợp lệ !");
              return false;
          }
          if (gender == null) {
              alert("Vui lòng chọn giới tính!");
+             return false;
+         }
+         if (cv == null) {
+             alert("Vui lòng chọn chức vụ !");
              return false;
          }
          if (email == "" || !validateEmail(email)) {
@@ -338,7 +378,6 @@
              alert("Vui lòng nhập số tài khoản hợp lệ!");
              return false;
          }
-
          return true;
      }	
 </script>
