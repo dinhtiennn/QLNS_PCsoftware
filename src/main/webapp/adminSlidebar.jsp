@@ -34,6 +34,10 @@
    	color: #000 !important;
 }
 
+.nav li a:hover{
+   	text-decoration: underline;
+}
+
 .icons {
     display: flex;
     flex-direction: column; /* Hiển thị các icon trên cùng một hàng dọc */
@@ -67,7 +71,7 @@
 	<div style="position: fixed; top: 0; left: 0; height: 100%; z-index:2;" class="d-flex">
         <div class="justify-content-start slideFull" id="menuContent">
         	<a href="index">
-				<img style="height: 70px;width: 197px;" alt="" src="assets/imgs/Logomenu.png">
+				<img style="margin-top: 12px; height: 70px;width: 197px;" alt="" src="assets/imgs/Logomenu.png">
 			</a>
             <div class="icons">
                 <a href="ThongSoController"><i class="fas fa-cogs"></i></a>
@@ -100,7 +104,7 @@
             </ul>
         </div>
         <div style="background-color: #eceff8; box-shadow: 7px 0 15px rgba(0, 0, 0, 0.1);" class="menu-icon" onclick="toggleSize()">
-            <i style="margin-top: 16px;" class="fas fa-bars"></i>
+            <i style="margin-top: 28px;" class="fas fa-bars"></i>
         </div>
     </div>
 </body>

@@ -43,78 +43,82 @@
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
-	<div class="center">
-		<h1>Danh Sách Nhân Viên</h1>
-	</div>
-	<div class="d-flex justify-content-center align-items-center">
-		<form style="width: 50%" class="d-flex justify-content-center" role="search" action="adminNhanVienController">
-		      <input style="width: 50%;margin-top: 20px;height: 40px;" class="form-control me-2" type="search" name="txttk" placeholder="Search by name or ID" aria-label="Search">
-		      <button style="height: 40px; margin: 20px 0;" class="btn searchBTN" type="submit">Search</button>
-	    </form>
-	   <button type="button" class="btn btn-primary addBTN" data-bs-toggle="modal" data-bs-target="#ThemNhanSu">Thêm mới nhân sự</button>
-	</div>
+	
 	<div class="d-flex justify-content-center">
+	
 		<div class="col-2">
 			<jsp:include page="adminSlidebar.jsp"></jsp:include>
 		</div>
-	    <table id="myTable" class="table table-hover" style="font-size: 11px;">
-			<thead>
-		        <tr>
-		            <th>Mã Nhân Viên</th>
-		            <th style="width: 120px;">Tên Nhân Viên</th>
-		            <th>Mã Chức Vụ</th>
-		            <th>Ngày Sinh</th>
-		            <th>Giới Tính</th>
-		            <th>Email</th>
-		            <th>Số Điện Thoại</th>
-		            <th>Đơn Vị Công Tác</th>
-		            <th>Chức Danh</th>
-		            <th>Tài Khoản</th>
-		            <th>Mật Khẩu</th>
-		            <th>Trạng Thái Công Việc</th>
-		            <th>Ảnh</th> 
-		            <th>Ngày Vào Làm</th> 
-		            <th>Ngày Kết Thúc</th> 
-		            <th>Số Tài Khoản</th> 
-		           
-		        </tr>
-		    </thead>
-		    <tbody>
-	    <%
-			ArrayList<NhanVienBean> ds = (ArrayList<NhanVienBean>)request.getAttribute("DanhSachNhanVien"); 
-			if(ds.size()==0){%>
-				<td>Không Tìm Thấy</td>
-			<%}%>
-			<%if(ds.size() != 0){%>
-		    
-				
-				<%NhanVienBo nvbo = new NhanVienBo();
-				int n = ds.size();
-				for(int i=0; i<n; i++) {
-					NhanVienBean nvb = ds.get(i);
-					String maNV = nvb.getMaNV();%>
-			        <tr onclick="moModal(this)">
-			            <td id="maNV_<%=i%>"><%=nvb.getMaNV()%></td>
-			            <td id="tenNV_<%=i%>"><%=nvbo.getnhanvientheoma(nvb.getMaNV()).getTenNV() %></td>
-			            <td id="maCV_<%=i%>"><%=nvb.getMaCV() %></td>
-			            <td id="ngaySinh_<%=i%>"><%=nvb.getNgaySinh() %></td>
-			            <td id="gioiTinh_<%=i%>"><%=nvb.getGioiTinh() %></td>
-			            <td id="email_<%=i%>"><%=nvb.getEmail() %></td>
-			            <td id="sdt_<%=i%>"><%=nvb.getsDT() %></td>
-			            <td id="dvct_<%=i%>"><%=nvb.getdVCT() %></td>
-			            <td id="chucDanh_<%=i%>"><%=nvb.getChucDanh() %></td>
-			            <td id="tenDangNhap_<%=i%>"><%=nvb.getTenDangNhap() %></td>
-			            <td id="matKhau_<%=i%>"><%=nvb.getMatKhau() %></td>
-			            <td id="trangThaiCongViec_<%=i%>"><%=nvb.getTrangThaiCongViec() %></td>
-			            <td id="anh_<%=i%>"><%=nvb.getAnh() %></td>
-			            <td id="ngayvaolam_<%=i%>"><%=nvb.getNgayVaoLam() %></td>
-			            <td id="ngayketthuc_<%=i%>"><%=nvb.getNgayKetThuc()%></td>
-			            <td id="stknhanvien_<%=i%>"><%=nvb.getSoTaiKhoan()%></td>
+		<div class="">
+			<div class="center">
+				<h1>Danh Sách Nhân Viên</h1>
+			</div>
+			<div class="d-flex justify-content-center align-items-center">
+				<form style="width: 50%" class="d-flex justify-content-center" role="search" action="adminNhanVienController">
+				      <input style="width: 50%;margin-top: 20px;height: 40px;" class="form-control me-2" type="search" name="txttk" placeholder="Search by name or ID" aria-label="Search">
+				      <button style="height: 40px; margin: 20px 0;" class="btn searchBTN" type="submit">Search</button>
+			    </form>
+			   <button type="button" class="btn btn-primary addBTN" data-bs-toggle="modal" data-bs-target="#ThemNhanSu">Thêm mới nhân sự</button>
+			</div>
+		    <table id="myTable" class="table table-hover" style="font-size: 11px;">
+				<thead>
+			        <tr>
+			            <th>Mã Nhân Viên</th>
+			            <th style="width: 120px;">Tên Nhân Viên</th>
+			            <th>Mã Chức Vụ</th>
+			            <th>Ngày Sinh</th>
+			            <th>Giới Tính</th>
+			            <th>Email</th>
+			            <th>Số Điện Thoại</th>
+			            <th>Đơn Vị Công Tác</th>
+			            <th>Chức Danh</th>
+			            <th>Tài Khoản</th>
+			            <th>Mật Khẩu</th>
+			            <th>Trạng Thái Công Việc</th>
+			            <th>Ảnh</th> 
+			            <th>Ngày Vào Làm</th> 
+			            <th>Ngày Kết Thúc</th> 
+			            <th>Số Tài Khoản</th> 
+			           
 			        </tr>
-				<%}		
-			}%>
-			</tbody>
-		</table>
+			    </thead>
+			    <tbody>
+		    <%
+				ArrayList<NhanVienBean> ds = (ArrayList<NhanVienBean>)request.getAttribute("DanhSachNhanVien"); 
+				if(ds.size()==0){%>
+					<td>Không Tìm Thấy</td>
+				<%}%>
+				<%if(ds.size() != 0){%>
+			    
+					
+					<%NhanVienBo nvbo = new NhanVienBo();
+					int n = ds.size();
+					for(int i=0; i<n; i++) {
+						NhanVienBean nvb = ds.get(i);
+						String maNV = nvb.getMaNV();%>
+				        <tr onclick="moModal(this)">
+				            <td id="maNV_<%=i%>"><%=nvb.getMaNV()%></td>
+				            <td id="tenNV_<%=i%>"><%=nvbo.getnhanvientheoma(nvb.getMaNV()).getTenNV() %></td>
+				            <td id="maCV_<%=i%>"><%=nvb.getMaCV() %></td>
+				            <td id="ngaySinh_<%=i%>"><%=nvb.getNgaySinh() %></td>
+				            <td id="gioiTinh_<%=i%>"><%=nvb.getGioiTinh() %></td>
+				            <td id="email_<%=i%>"><%=nvb.getEmail() %></td>
+				            <td id="sdt_<%=i%>"><%=nvb.getsDT() %></td>
+				            <td id="dvct_<%=i%>"><%=nvb.getdVCT() %></td>
+				            <td id="chucDanh_<%=i%>"><%=nvb.getChucDanh() %></td>
+				            <td id="tenDangNhap_<%=i%>"><%=nvb.getTenDangNhap() %></td>
+				            <td id="matKhau_<%=i%>"><%=nvb.getMatKhau() %></td>
+				            <td id="trangThaiCongViec_<%=i%>"><%=nvb.getTrangThaiCongViec() %></td>
+				            <td id="anh_<%=i%>"><%=nvb.getAnh() %></td>
+				            <td id="ngayvaolam_<%=i%>"><%=nvb.getNgayVaoLam() %></td>
+				            <td id="ngayketthuc_<%=i%>"><%=nvb.getNgayKetThuc()%></td>
+				            <td id="stknhanvien_<%=i%>"><%=nvb.getSoTaiKhoan()%></td>
+				        </tr>
+					<%}		
+				}%>
+				</tbody>
+			</table>
+		</div>
 	</div>
 
 <!-- Modal -->

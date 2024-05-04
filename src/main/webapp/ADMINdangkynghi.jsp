@@ -17,8 +17,8 @@
 <body>
 <jsp:include page="header.jsp"></jsp:include>
 	
-	<div style="position: relative; justify-content: center;" class="d-flex align-items-center">
-		<div style="position: fixed; top: 132px; left: 0; height: 100%;" class="col-2 menu-content" >
+	<div class="d-flex align-items-center justify-content-center;">
+		<div class="col-2 menu-content" >
 			<jsp:include page="adminSlidebar.jsp"></jsp:include>
 		</div>
 		<div>
