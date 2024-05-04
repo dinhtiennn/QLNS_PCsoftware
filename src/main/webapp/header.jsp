@@ -12,7 +12,7 @@
 		color: red;
 	}
 </style>
-<header style="position: fixed;z-index: 1;top:0; width: 100%;" class="p-3 text-bg-light">
+<header style="position: fixed;z-index: 1;top:0; width: 100%; background: linear-gradient(to bottom, #93ccf6, #fff);" class="p-3 text-bg-light">
  <div class="row align-items-center">
       <div class="col">
         <div class="d-flex justify-content-end ">

@@ -13,7 +13,7 @@
     width: 30%; /* Chiều rộng ban đầu của thẻ div */
     overflow: hidden;
     transition: width 0.5s; /* Animation chuyển động */
-    background-color: #5d88cd;
+    background-color: #11134b;
 }
 
 .slideFull.active {
