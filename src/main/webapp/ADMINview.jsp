@@ -27,6 +27,12 @@ input:focus-visible {
   top: 132px;
 }
 
+.ts-content {
+	box-shadow: var(--bs-box-shadow) !important;
+    width: 40%;
+    height: 40%;
+    padding: 24px;
+}
 
 
 </style>
@@ -39,8 +45,8 @@ input:focus-visible {
 			<jsp:include page="adminSlidebar.jsp"></jsp:include>
 		</div>
 		
-		<div class="mt-3">
-			<h1>Bảng Thông Số Kỹ Thuật</h1>
+		<div class="mt-3 ts-content">
+			<h1 class="text-center">Bảng Thông Số Kỹ Thuật</h1>
 		 	<% ThongSoKiThuatBean tsbean = (ThongSoKiThuatBean)request.getAttribute("BangThongSo"); %>
 		
 		 	
@@ -95,7 +101,7 @@ input:focus-visible {
 			 		</tr>
 		 			
 			 	</table>
-			 	<div>
+			 	<div class="text-center">
 			 		<button class="btn btn-primary" id="submit" type="submit">Xác Nhận</button>
 			 	</div>
 		 	</form>
