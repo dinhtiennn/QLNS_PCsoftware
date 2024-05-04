@@ -314,7 +314,6 @@
 	 function validateEmail(email){
 		 var regex = [a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$;
 		 return regex.test(email);
-			
 	 }
 	 function validatePhonenumber(sdt){
 		 var regex = /(((\+|)84)|0)(3|5|7|8|9)+([0-9]{8})\b/;
@@ -322,8 +321,8 @@
 	 }
 	 function validateName(tennv) {
 		    // Mẫu để kiểm tra họ và tên: Họ đầu tiên, có thể có dấu, tiếp theo là một hoặc nhiều tên, mỗi tên cách nhau bởi dấu cách
-		    var mau = /^[A-Za-zÀ-ỹ]+\s([A-Za-zÀ-ỹ]+\s?)+$/;
-		    return mau.test(tennv);
+		    var regex = /^[A-Za-zÀ-ỹ]+\s([A-Za-zÀ-ỹ]+\s?)+$/;
+		    return regex.test(tennv);
 		}
 	 function validateForm() {
          var tennv = document.getElementById("tennv").value;
