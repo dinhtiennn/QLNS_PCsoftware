@@ -154,28 +154,28 @@
         <div class="modal-body">
 	      <form action="adminNhanVienController" method="get" onsubmit="return validateForm()">
 			      	<label for="tennv">Tên NV:</label>
-				    <input type="text" id="tennv" name="tennv"> <br>
-				    <label for="ngaysinh">Ngày Sinh:</label>
-				    <input type="date" id="selectedDate" name="selectedDate"> <br>
-				    <label for="manv">Giới tính:</label>
-				    <input type="radio" name="gender" value="male"> Nam
-				    <input type="radio" name="gender" value="female">Nữ<br>
-				    <label for="manv">Chức vụ:</label>
-				    <input type="radio" name="cv" value="CV003"> Nhân viên
-				    <input type="radio" name="cv" value="CV002"> Quản Lý
-				    <input type="radio" name="cv" value="CV001">Admin<br>
-				    <label for="tennv">Email:</label>
-				    <input type="email" id="email" name="email"><br>
-				    <label for="manv">Số điện thoại:</label>
-				    <input type="text" id="sdt" name="sdt"><br>
-				    <label for="tennv">Tên đăng nhập:</label>
-				    <input type="text" id="tendn" name="tendn"><br>
-				    <label for="manv">Mật khẩu:</label>
-				    <input type="text" id="mk" name="mk"><br>
-				    <label for="tennv">Ảnh:</label>
-				    <input type="file" name="image" accept="image/*"><br>
-				    <label for="manv">Số tài khoản:</label>
-				    <input type="text" id="stk" name="stk">
+				    <input type="text" id="tennv" name="tennv" required="required"> <br>
+				    <label for="selectedDate">Ngày Sinh:</label>
+				    <input type="date" id="selectedDate" name="selectedDate" required="required"> <br>
+				    Giới tính:
+				    <input type="radio" name="gender" value="true" required="required"> Nam
+				    <input type="radio" name="gender" value="false" required="required">Nữ<br>
+				    Chức vụ:
+				    <input type="radio" name="cv" value="CV003" required="required"> Nhân viên
+				    <input type="radio" name="cv" value="CV002" required="required"> Quản Lý
+				    <input type="radio" name="cv" value="CV001" required="required">Admin<br>
+				    <label for="email">Email:</label>
+				    <input type="email" id="email" name="email" required="required"><br>
+				    <label for="sdt">Số điện thoại:</label>
+				    <input type="text" id="sdt" name="sdt" required="required"><br>
+				    <label for="tendn">Tên đăng nhập:</label>
+				    <input type="text" id="tendn" name="tendn" required="required"><br>
+				    <label for="mk">Mật khẩu:</label>
+				    <input type="text" id="mk" name="mk" required="required"><br>
+				    Ảnh:
+				    <input type="file" name="image" accept="image/*" required="required"><br>
+				    <label for="stk">Số tài khoản:</label>
+				    <input type="text" id="stk" name="stk" required="required">
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 		        <button type="submit" class="btn btn-primary">Xác nhận</button>
@@ -310,75 +310,54 @@
 	    	return false; 
 	    }
 	}
-	function validateDate(selectedDate) {
-        // Kiểm tra xem selectedDate có đúng định dạng ngày tháng YYYY-MM-DD không
+	// Hàm kiểm tra ngày tháng
+    function validateDate(selectedDate) {
         var regex = /^\d{4}-\d{2}-\d{2}$/;
         return regex.test(selectedDate);
     }
-	 function validateEmail(email){
-		 var regex = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
-		 return regex.test(email);
-	 }
-	 function validatePhonenumber(sdt){
-		 var regex = /(((\+|)84)|0)(3|5|7|8|9)+([0-9]{8})\b/;
-		 return regex.test(sdt);
-	 }
-	 function validateName(tennv) {
-		    // Mẫu để kiểm tra họ và tên: Họ đầu tiên, có thể có dấu, tiếp theo là một hoặc nhiều tên, mỗi tên cách nhau bởi dấu cách
-		    var regex = /^[A-Za-zÀ-ỹ]+\s([A-Za-zÀ-ỹ]+\s?)+$/;
-		    return regex.test(tennv);
-		}
-	 function validateForm() {
-         var tennv = document.getElementById("tennv").value;
-         var ngaysinh = document.getElementById("selectedDate").value;
-         var gender = document.getElementsByName("gender");
-         var cv = document.getElementsByName("cv");
-         var email = document.getElementById("email").value;
-         var sdt = document.getElementById("sdt").value;
-         var tendn = document.getElementById("tendn").value;
-         var mk = document.getElementById("mk").value;
-         var image = document.getElementById("image").value;
-         var stk = document.getElementById("stk").value;
 
+    // Hàm kiểm tra email
+    function validateEmail(email){
+        var regex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+        return regex.test(email);
+    }
+
+    // Hàm kiểm tra số điện thoại
+    function validatePhonenumber(sdt){
+        var regex = /([\+84|84|0]+(3|5|7|8|9|1[2|6|8|9]))+([0-9]{8})\b/;
+        return regex.test(sdt);
+    }
+
+    // Hàm kiểm tra tên
+    function validateName(tennv) {
+        var regex = /^[A-Za-zÀ-ỹ]+\s([A-Za-zÀ-ỹ]+\s?)+$/;
+        return regex.test(tennv);
+    }
+	 function validateForm() {
+		 console.log("Tao Chạy tới được đây rồi ");
+		 var tennv = document.getElementById('tennv').value;
+         var selectedDate = document.getElementById('selectedDate').value;
+         var email = document.getElementById('email').value;
+         var sdt = document.getElementById('sdt').value;
          // Kiểm tra tính hợp lệ của các trường
-         if (tennv == ""|| !validateName(tennv)) {
+         if (!validateName(tennv)) {
              alert("Vui lòng nhập tên nhân viên hợp lệ !");
+             console.log("Tao Chạy tới được đây rồi ");
              return false;
          }
-         if (ngaysinh == "" || !validateDate(ngaysinh)) {
+         if (!validateDate(ngaysinh)) {
              alert("Vui lòng nhập ngày sinh hợp lệ !");
+             console.log("Tao Chạy tới được đây rồi 2 ");
              return false;
          }
-         if (gender == null) {
-             alert("Vui lòng chọn giới tính!");
-             return false;
-         }
-         if (cv == null) {
-             alert("Vui lòng chọn chức vụ !");
-             return false;
-         }
-         if (email == "" || !validateEmail(email)) {
+         if (!validateEmail(email)) {
              alert("Vui lòng nhập địa chỉ email hợp lệ!");
+             console.log("Tao Chạy tới được đây rồi 3 ");
              return false;
          }
-         if (sdt == "" || !validatePhonenumber(sdt)) {
+         if (!validatePhonenumber(sdt)) {
              alert("Vui lòng nhập số điện thoại hợp lệ!");
-             return false;
-         }
-         if (tendn == "") {
-             alert("Vui lòng nhập tên đăng nhập!");
-             return false;
-         }
-         if (mk == "") {
-             alert("Vui lòng nhập mật khẩu!");
-             return false;
-         }
-         if (image == "") {
-             alert("Vui lòng chọn ảnh!");
-             return false;
-         }
-         if (stk == "" || isNaN(stk)) {
-             alert("Vui lòng nhập số tài khoản hợp lệ!");
+             console.log("Tao Chạy tới được đây rồi 4 ");
              return false;
          }
          return true;
