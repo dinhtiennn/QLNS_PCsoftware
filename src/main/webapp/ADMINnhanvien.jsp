@@ -14,47 +14,17 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 <style type="text/css">
 
-.addBTN {
-    background-color: #5d88cd !important;
-    height: 40px;
-}
-
-.addBTN:hover  {
-	cursor: pointer;
-	opacity: 0.8;
-}
-
-.searchBTN {
-	border: 1px solid #5d88cd !important;
-	color: #5d88cd !important;
-}
-
-.searchBTN:hover {
-	background-color: #5d88cd !important;
-	color: #fff !important;
-}
-
-.center {
-	margin-top: 85px;
-	text-align: center;
-}
-
 </style>
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
-	<div class="center">
-		<h1>Danh Sách Nhân Viên</h1>
-	</div>
-	<div class="d-flex justify-content-center align-items-center">
-		<form style="width: 50%" class="d-flex justify-content-center" role="search" action="adminNhanVienController">
-		      <input style="width: 50%;margin-top: 20px;height: 40px;" class="form-control me-2" type="search" name="txttk" placeholder="Search by name or ID" aria-label="Search">
-		      <button style="height: 40px; margin: 20px 0;" class="btn searchBTN" type="submit">Search</button>
-	    </form>
-	   <button type="button" class="btn btn-primary addBTN" data-bs-toggle="modal" data-bs-target="#ThemNhanSu">Thêm mới nhân sự</button>
-	</div>
-	<div class="d-flex justify-content-center">
-		<div class="col-2">
+	<form class="d-flex justify-content-center" role="search" action="adminNhanVienController">
+	      <input style="width: 50%;margin-top: 20px;height: 40px;" class="form-control me-2" type="search" name="txttk" placeholder="Search by name or ID" aria-label="Search">
+	      <button style="height: 40px; margin: 20px 0;" class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ThemNhanSu">Thêm mới nhân sự</button>
+	<div class="d-flex">
+		<div class="col-2  mt-5">
 			<jsp:include page="adminSlidebar.jsp"></jsp:include>
 		</div>
 	    <table id="myTable" class="table table-hover" style="font-size: 11px;">
@@ -147,31 +117,33 @@
         <h1 class="modal-title fs-5" id="staticBackdropLabel">Nhập thông tin nhân sự</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        	<label for="tennv">Tên NV:</label>
-		    <input type="text" id="tennv" name="tennv"> <br>
-		    <label for="ngaysinh">Ngày Sinh:</label>
-		    <input type="date" id="selectedDate" name="selectedDate" required> <br>
-		    <label for="manv">Giới tính:</label>
-		    <input type="radio" name="gender" value="male"> Nam
-		    <input type="radio" name="gender" value="female"> Nữ <br>
-		    <label for="tennv">Email:</label>
-		    <input type="email" id="email" name="email"><br>
-		    <label for="manv">Số điện thoại:</label>
-		    <input type="text" id="sdt" name="sdt"><br>
-		    <label for="tennv">Tên đăng nhập:</label>
-		    <input type="text" id="tendn" name="tendn"><br>
-		    <label for="manv">Mật khẩu:</label>
-		    <input type="text" id="mk" name="mk"><br>
-		    <label for="tennv">Ảnh:</label>
-		    <input type="file" name="image" accept="image/*"><br>
-		    <label for="manv">Số tài khoản:</label>
-		    <input type="text" id="stk" name="stk">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Xác nhận</button>
-      </div>
+        <div class="modal-body">
+	      <form action="adminNhanVienController" method="post" onsubmit="return validateForm()">
+			      	<label for="tennv">Tên NV:</label>
+				    <input type="text" id="tennv" name="tennv"> <br>
+				    <label for="ngaysinh">Ngày Sinh:</label>
+				    <input type="date" id="selectedDate" name="selectedDate"> <br>
+				    <label for="manv">Giới tính:</label>
+				    <input type="radio" name="gender" value="male"> Nam
+				    <input type="radio" name="gender" value="female">Nữ<br>
+				    <label for="tennv">Email:</label>
+				    <input type="email" id="email" name="email"><br>
+				    <label for="manv">Số điện thoại:</label>
+				    <input type="text" id="sdt" name="sdt"><br>
+				    <label for="tennv">Tên đăng nhập:</label>
+				    <input type="text" id="tendn" name="tendn"><br>
+				    <label for="manv">Mật khẩu:</label>
+				    <input type="text" id="mk" name="mk"><br>
+				    <label for="tennv">Ảnh:</label>
+				    <input type="file" name="image" accept="image/*"><br>
+				    <label for="manv">Số tài khoản:</label>
+				    <input type="text" id="stk" name="stk">
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+		        <button type="submit" class="btn btn-primary">Xác nhận</button>
+		      </div>      
+	    </form>
+	  </div>
     </div>
   </div>
 </div>
@@ -299,6 +271,75 @@
 	    	return false; 
 	    }
 	}
-		
+	function validateDate() {
+        var selectedDate = document.getElementById("selectedDate").value;
+        // Kiểm tra xem selectedDate có đúng định dạng ngày tháng YYYY-MM-DD không
+        var regex = /^\d{4}-\d{2}-\d{2}$/;
+        if (!regex.test(selectedDate)) {
+            alert("Vui lòng chọn ngày tháng hợp lệ (YYYY-MM-DD)!");
+            return false;
+        }
+        return true;
+    }
+	 function validateEmail(email){
+		 var regex = [a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$;
+		 return regex.test(email);
+			
+	 }
+	 function validatePhonenumber(sdt){
+		 var regex = /(((\+|)84)|0)(3|5|7|8|9)+([0-9]{8})\b/;
+		 return regex.test(sdt);
+	 }
+	 function validateForm() {
+         var tennv = document.getElementById("tennv").value;
+         var ngaysinh = document.getElementById("selectedDate").value;
+         var gender = document.getElementsByName("gender");
+         var email = document.getElementById("email").value;
+         var sdt = document.getElementById("sdt").value;
+         var tendn = document.getElementById("tendn").value;
+         var mk = document.getElementById("mk").value;
+         var image = document.getElementById("image").value;
+         var stk = document.getElementById("stk").value;
+
+         // Kiểm tra tính hợp lệ của các trường
+         if (tennv == "") {
+             alert("Vui lòng nhập tên nhân viên!");
+             return false;
+         }
+         if (ngaysinh == "") {
+             alert("Vui lòng chọn ngày sinh!");
+             return false;
+         }
+         if (gender == null) {
+             alert("Vui lòng chọn giới tính!");
+             return false;
+         }
+         if (email == "" || !validateEmail(email)) {
+             alert("Vui lòng nhập địa chỉ email hợp lệ!");
+             return false;
+         }
+         if (sdt == "" || !validatePhonenumber(sdt)) {
+             alert("Vui lòng nhập số điện thoại hợp lệ!");
+             return false;
+         }
+         if (tendn == "") {
+             alert("Vui lòng nhập tên đăng nhập!");
+             return false;
+         }
+         if (mk == "") {
+             alert("Vui lòng nhập mật khẩu!");
+             return false;
+         }
+         if (image == "") {
+             alert("Vui lòng chọn ảnh!");
+             return false;
+         }
+         if (stk == "" || isNaN(stk)) {
+             alert("Vui lòng nhập số tài khoản hợp lệ!");
+             return false;
+         }
+
+         return true;
+     }	
 </script>
 </html>
