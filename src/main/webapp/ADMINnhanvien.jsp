@@ -312,7 +312,7 @@
         return regex.test(selectedDate);
     }
 	 function validateEmail(email){
-		 var regex = [a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$;
+		 var regex = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
 		 return regex.test(email);
 	 }
 	 function validatePhonenumber(sdt){

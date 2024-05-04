@@ -1630,7 +1630,7 @@ a.text-white:focus {
 }
 
 .form-control-label {
-    font-size: 1.075rem;
+    font-size: 1rem;
     font-weight: 600;
     color: #525f7f;
 }

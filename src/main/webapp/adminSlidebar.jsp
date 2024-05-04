@@ -13,7 +13,7 @@
     width: 30%; /* Chiều rộng ban đầu của thẻ div */
     overflow: hidden;
     transition: width 0.5s; /* Animation chuyển động */
-    background-color: #11134b;
+    background-color: #eceff8;
 }
 
 .slideFull.active {
@@ -31,20 +31,20 @@
 }
 
 .nav li a{
-   	color: #fff !important;
+   	color: #000 !important;
 }
 
 .icons {
     display: flex;
     flex-direction: column; /* Hiển thị các icon trên cùng một hàng dọc */
     align-items: flex-start; /* Căn các icon sang trái */
-    padding: 0 10px;
+    padding: 0 36px;
 }
 
 .icons i {
     font-size: 24px;
     margin-top: 40px;
-    color: #fff;
+    color: #000;
 }
 
 .slideFull.active .icons {
@@ -64,10 +64,10 @@
 </style>
 </head>
 <body>
-	<div style="position: fixed; top: 69px; left: 0; height: 100%;" class="d-flex">
+	<div style="position: fixed; top: 0; left: 0; height: 100%; z-index:2;" class="d-flex">
         <div class="justify-content-start slideFull" id="menuContent">
         	<a href="index">
-				<img style="height: 70px;width: 197px;" alt="" src="assets/imgs/LogoCT.jpg">
+				<img style="height: 70px;width: 197px;" alt="" src="assets/imgs/Logomenu.png">
 			</a>
             <div class="icons">
                 <a href="ThongSoController"><i class="fas fa-cogs"></i></a>
@@ -79,10 +79,10 @@
             </div>
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link" href="ThongSoController">Thông số kĩ thuật</a>
+                    <a class="nav-link" href="ThongSoController">Thông Số Kỹ Thuật</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="adminNhanVienController">Thông tin nhân viên</a>
+                    <a class="nav-link" href="adminNhanVienController">Thông Tin Nhân Viên</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="adminDangKyNghiController">Bảng Đăng Ký Nghỉ</a>
@@ -99,7 +99,7 @@
                 
             </ul>
         </div>
-        <div style="background-color: #fff;" class="menu-icon" onclick="toggleSize()">
+        <div style="background-color: #eceff8; box-shadow: 7px 0 15px rgba(0, 0, 0, 0.1);" class="menu-icon" onclick="toggleSize()">
             <i style="margin-top: 16px;" class="fas fa-bars"></i>
         </div>
     </div>
