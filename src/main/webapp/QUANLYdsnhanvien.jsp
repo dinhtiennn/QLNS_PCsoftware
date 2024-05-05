@@ -149,7 +149,7 @@
 		       	</div>
 			    <div class="mb-3">
 				    <label for="ngaysinh" class="form-label">Ngày Sinh:</label>
-				    <input type="text" class="form-control" id="ngaysinh" name="ngaysinh">
+				    <input type="date" class="form-control" id="ngaysinh" name="ngaysinh">
 		       	</div>
 			    <div class="mb-3">
 				    <label for="manv" class="form-label">Giới tính:</label>
