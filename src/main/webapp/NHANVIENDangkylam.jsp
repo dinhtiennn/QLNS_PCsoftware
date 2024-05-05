@@ -34,7 +34,7 @@
 			<jsp:include page="Slidebar.jsp"></jsp:include>
 		</div>
 		<div class="col-10 mt-4">
-				<h2 class="text-center mb-3">Bảng đăng ký làm việc tuần tiếp theo</h2>
+				<h2 class="text-center mb-3">Đăng ký làm việc tuần tiếp theo</h2>
 		 		<div class="mb-3 row">
 					    <label class="col-sm-2 col-form-label">Số ca đã đăng kí cho tháng này:</label>
 					    <div class="col-sm-10">
