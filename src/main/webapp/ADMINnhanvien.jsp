@@ -190,9 +190,12 @@
     </div>
   </div>
 </div>
-
-	
-
+<%
+	String a = (String) request.getAttribute("DaThem");
+	if(a != null){
+%>
+	<h1><%=a %></h1>
+<%}%>
 </body>
 
 

@@ -44,6 +44,20 @@ public class adminNhanVienController extends HttpServlet {
 			if(key != null) {
 				request.setAttribute("DanhSachNhanVien", adnvbo.getnhanvienTK(key));
 			}
+			String tennv = request.getParameter("tennv");
+			String selectedDate = request.getParameter("selectedDate");
+			String gender = request.getParameter("gender");
+			String cv = request.getParameter("cv");
+			String email = request.getParameter("email");
+			String sdt = request.getParameter("sdt");
+			String tendn = request.getParameter("tendn");
+			String mk = request.getParameter("mk");
+			String image = request.getParameter("image");
+			String stk = request.getParameter("stk");
+			if(tennv != null && selectedDate != null && gender != null && cv != null && email != null && sdt != null && tendn != null && mk != null && image != null && stk != null) {
+				request.setAttribute("DaThem", "DaThem");
+
+			}
 			RequestDispatcher rd = request.getRequestDispatcher("ADMINnhanvien.jsp");
 			rd.forward(request, response);
 
