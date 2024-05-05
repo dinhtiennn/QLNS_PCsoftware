@@ -32,7 +32,7 @@
 	       	String nam = (request.getAttribute("nam")!=null)?request.getAttribute("nam").toString():"";
 	        String msg = (request.getAttribute("msg")!=null)?request.getAttribute("msg").toString():"";
 		%>
-		<div class="row">
+		<div style="margin-top: 65px;" class="row">
 				<div class="col-2  mt-5">
 					<jsp:include page="Slidebar.jsp"></jsp:include>
 				</div>

@@ -21,7 +21,7 @@
 		</div>
 		<div class="">
 			<div style="margin: 20px 0 20px 0; text-align: center;">
-				<h1>Thống Kê Lương Nhân Viên</h1>
+				<h1>Danh Sách Nhân Viên Đăng Ký Làm</h1>
 			</div>
 			<form action="adminDangKyLamController" method="post" onsubmit="return validateDate()">
 		        <label for="selectedDate">Tìm kiếm từ ngày :</label>

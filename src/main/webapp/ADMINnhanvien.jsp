@@ -109,7 +109,12 @@
 				            <td id="tenDangNhap_<%=i%>"><%=nvb.getTenDangNhap() %></td>
 				            <td id="matKhau_<%=i%>"><%=nvb.getMatKhau() %></td>
 				            <td id="trangThaiCongViec_<%=i%>"><%=nvb.getTrangThaiCongViec() %></td>
-				            <td id="anh_<%=i%>"><%=nvb.getAnh() %></td>
+			            <%if(nvb.getAnh()!=null) {%>
+				            <td id="anh_<%=i%>">Đã có ảnh</td>
+			            <%}else{ %>
+			            
+				            <td id="anh_<%=i%>">Chưa có ảnh</td>
+			            <%} %>
 				            <td id="ngayvaolam_<%=i%>"><%=nvb.getNgayVaoLam() %></td>
 				            <td id="ngayketthuc_<%=i%>"><%=nvb.getNgayKetThuc()%></td>
 				            <td id="stknhanvien_<%=i%>"><%=nvb.getSoTaiKhoan()%></td>

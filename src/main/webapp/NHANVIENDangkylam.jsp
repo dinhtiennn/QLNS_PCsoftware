@@ -28,7 +28,7 @@
 	String msgSuccess = (request.getAttribute("msgSuccess")!=null)?request.getAttribute("msgSuccess").toString():"";
 	String socadadangky = (request.getAttribute("socadadangky")!=null)?request.getAttribute("socadadangky").toString():"";%>
 	<jsp:include page="header.jsp"></jsp:include>
-	<div class="row">
+	<div style="margin-top: 65px;" class="row">
 	
 		<div class="col-2  mt-5">
 			<jsp:include page="Slidebar.jsp"></jsp:include>

@@ -43,7 +43,7 @@
 			        String msgSuccess = (request.getAttribute("msgSuccess")!=null)?request.getAttribute("msgSuccess").toString():"";
 		%>
 		
-		<div class="row">
+		<div style="margin-top: 65px;" class="row">
 			<div class="col-2  mt-5">
 				<jsp:include page="Slidebar.jsp"></jsp:include>
 			</div>
