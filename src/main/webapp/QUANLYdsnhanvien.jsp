@@ -51,14 +51,18 @@
 </style>
 </head>
 <body>
-<jsp:include page="header.jsp"></jsp:include>
+	<jsp:include page="header.jsp"></jsp:include>
 	<div class="row">
 		<div class="col-2 mt-5">
 			<jsp:include page="QUANLYslidebar.jsp"></jsp:include>
 		</div>
 		<div class="col-10 mt-4">
-			<h2>ALOOOOOOOOOOOOOOOOOOOOOO</h2>
-				<button type="button" class="btn btn-warning" id="openModalBtn">Thêm mới nhân viên</button>
+				<!-- <button type="button" class="btn btn-warning" id="openModalBtn">Thêm mới nhân viên</button> -->
+				
+				<!-- Button trigger modal -->
+				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModalThemNV">
+				  Thêm mới nhân sự
+				</button>
 			<table  class="table" style="font-size: 11px;">
 			<thead>
 		        <tr>
@@ -127,6 +131,73 @@
 		</table>
 		</div>
 	</div>
+	
+	
+	<!-- Modal add employees -->
+	<div class="modal fade" id="myModalThemNV" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	    <form action="quanly?action=addemployess" method="post">
+		      <div class="modal-header">
+		        <h1 class="modal-title fs-5" id="exampleModalLabel">Thêm mới nhân sự</h1>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body">
+		       	<div class="mb-3">
+			        <label for="tennv" class="form-label">Tên NV:</label>
+				    <input type="text" class="form-control" id="tennv" name="tennv">
+		       	</div>
+			    <div class="mb-3">
+				    <label for="ngaysinh" class="form-label">Ngày Sinh:</label>
+				    <input type="text" class="form-control" id="ngaysinh" name="ngaysinh">
+		       	</div>
+			    <div class="mb-3">
+				    <label for="manv" class="form-label">Giới tính:</label>
+				    <input type="text" class="form-control" id="gioitinh" name="gioitinh">
+		       	</div>
+			    <div class="mb-3">
+				    <label for="tennv" class="form-label">Email:</label>
+				    <input type="text" class="form-control" id="email" name="email">
+		       	</div>
+			    <div class="mb-3">
+				    <label for="manv" class="form-label">Số điện thoại:</label>
+				    <input type="text" class="form-control" id="sdt" name="sdt">
+		       	</div>
+			    <!-- <div class="mb-3">
+				    <label for="dvct" class="form-label">Đơn vị công tác:</label>
+				    <input type="text" class="form-control" id="dvct" name="dvct">
+		       	</div>
+			    <div class="mb-3">
+				    <label for="chucdanh" class="form-label">Chức danh:</label>
+				    <input type="text" class="form-control" id="chucdanh" name="chucdanh">
+		       	</div> -->
+			    <div class="mb-3">
+				    <label for="tennv" class="form-label">Tên đăng nhập:</label>
+				    <input type="text" class="form-control" id="tendn" name="tendn">
+		       	</div>
+			    <div class="mb-3">
+				    <label for="manv" class="form-label">Mật khẩu:</label>
+				    <input type="text" class="form-control" id="mk" name="mk">
+		       	</div>
+			    <div class="mb-3">
+				    <label for="tennv" class="form-label">Ảnh:</label>
+				    <input type="text" class="form-control" id="anh" name="anh">
+		       	</div>
+			    <div class="mb-3">
+				    <label for="manv" class="form-label">Số tài khoản:</label>
+				    <input type="text" class="form-control" id="stk" name="stk">
+		       	</div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+		        <button type="submit" class="btn btn-primary">Lưu thông tin nhân viên</button>
+		      </div>
+	      </form>
+	    </div>
+	  </div>
+	</div>
+	
+	
 	<!-- Modal sua ttnvien-->
 	<div class="modal" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" role="dialog">
 	    <div style="background-image: url('src/main/webapp/prf.svg');  background-size: cover;" class="modal-dialog modal-dialog-centered">
@@ -359,7 +430,7 @@
 	        alert("Thông tin đã được thay đổi!");
 	        return true; 
 	    } else {
-	    	window.location.href = "adminNhanVienController";
+	    	window.location.href = "QuanLy?action=danhsachnhanvien";
 	    	return false; 
 	    }
 	}

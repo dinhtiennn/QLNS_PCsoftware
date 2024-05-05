@@ -63,7 +63,7 @@ public class QuanLyController extends HttpServlet {
 				danhvangkhongphep(request, response);	
 			}else if(action.equals("danhsachnhanvien")) {
 				danhsachnhanvien(request, response);
-			}else if(action.equals("themnhanvien")) {
+			}else if(action.equals("addemployess")) {
 				themnhanvien(request, response);
 			}else if(action.equals("thongkeluong")) {
 				thongkeluong(request, response);

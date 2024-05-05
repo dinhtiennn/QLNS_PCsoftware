@@ -157,7 +157,6 @@ public class NhanVienDao {
 		cmd.setString(8, anh);
 		cmd.setString(9, soTaiKhoan);
 		cmd.executeUpdate();
-		System.out.println("+1 con gà bị lùa vào công ty!!!!!!!!!!");
 		cmd.close();
 		kn.cn.close();
 	}

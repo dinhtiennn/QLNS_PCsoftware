@@ -250,7 +250,6 @@
         var modalBody = document.getElementById("modalBody");
         // Xóa nội dung cũ của modalBody
         modalBody.innerHTML = "";
-
         // Tạo và thêm các phần tử <p> vào modalBody
         var rows = [
             { label: "Mã Nhân Viên", value: maNV },
@@ -270,7 +269,6 @@
             { label: "Ngày Kết Thúc", value: ngayketthuc },
             { label: "Số Tài Khoản", value: stknhanvien }
         ];
- 		
         rows.forEach(rowData => {
             var labelElement = document.createElement("p");
 
