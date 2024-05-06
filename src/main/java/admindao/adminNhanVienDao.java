@@ -41,10 +41,21 @@ public class adminNhanVienDao {
 		return ds;
 	}
 	
-	public void UpdateNhanVien(String maNV, String tenNV, String maCV, Date ngaySinh, Boolean gioiTinh, String email, String sDT, String dVCT, String chucDanh, String tenDangNhap, String matKhau, Boolean trangThaiCongViec, String anh, Date ngayVaoLam, String soTaiKhoan) throws Exception{
+	public void BTW(String maNV) throws Exception {
 		ketnoiDB kn = new ketnoiDB();
 		kn.ketnoi();
-		String sql="UPDATE ThongTinNhanVien SET TenNV =?, MaCV =?, NgaySinh =?, GioiTinh =?, Email =?, SDT =?, DVCT =?, ChucDanh =?, TenDangNhap =?, MatKhau =?, TrangThaiCongViec =?, Anh =?, NgayVaoLam =?, SoTaiKhoanNhanVien =? where MaNV = ?  ";
+		String sql= "UPDATE ThongTinNhanVien SET NgayKetThuc = NULL WHERE MaNV=?";
+		PreparedStatement cmd= kn.cn.prepareStatement(sql);
+		cmd.setString(1, maNV);
+		cmd.executeUpdate();
+		cmd.close();
+		kn.cn.close();
+	}
+	
+	public void UpdateNhanVien(String maNV, String tenNV, String maCV, Date ngaySinh, Boolean gioiTinh, String email, String sDT, String dVCT, String chucDanh, String tenDangNhap, String matKhau, Boolean trangThaiCongViec, Date ngayVaoLam, String soTaiKhoan) throws Exception{
+		ketnoiDB kn = new ketnoiDB();
+		kn.ketnoi();
+		String sql="UPDATE ThongTinNhanVien SET TenNV =?, MaCV =?, NgaySinh =?, GioiTinh =?, Email =?, SDT =?, DVCT =?, ChucDanh =?, TenDangNhap =?, MatKhau =?, TrangThaiCongViec =?, NgayVaoLam =?, SoTaiKhoanNhanVien =? where MaNV = ?  ";
 		PreparedStatement cmd= kn.cn.prepareStatement(sql);
 		cmd.setString(1, tenNV);
 		cmd.setString(2, maCV);
@@ -57,10 +68,9 @@ public class adminNhanVienDao {
 		cmd.setString(9, tenDangNhap);
 		cmd.setString(10, matKhau);
 		cmd.setBoolean(11, trangThaiCongViec);
-		cmd.setString(12, anh);
-		cmd.setDate(13, ngayVaoLam);
-		cmd.setString(14, soTaiKhoan);
-		cmd.setString(15, maNV);
+		cmd.setDate(12, ngayVaoLam);
+		cmd.setString(13, soTaiKhoan);
+		cmd.setString(14, maNV);
 		cmd.executeUpdate();
 		cmd.close();
 		kn.cn.close();

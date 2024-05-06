@@ -50,28 +50,30 @@ public class adminChinhSuaThongTinNhanVien extends HttpServlet {
 			String matKhau = request.getParameter("mật khẩu");
 			String trangThaiCongViec = request.getParameter("trạng thái công việc");
 			String ngayVaoLam = request.getParameter("ngày vào làm");
-			String ngayKetThuc = request.getParameter("ngày kết thúc");
 			String stk = request.getParameter("số tài khoản");
-
+			
 			if (manv != null && Boolean.parseBoolean(trangThaiCongViec) == false) {
 				adnvbo.UpdateNhanVien(manv, tennv, macv, Date.valueOf(ngaySinh), Boolean.parseBoolean(gioiTinh), email,
 										sdt, DVCT, chucDanh, tenDangNhap, matKhau,
-										Boolean.parseBoolean(trangThaiCongViec), null, Date.valueOf(ngayVaoLam), stk);
+										Boolean.parseBoolean(trangThaiCongViec), Date.valueOf(ngayVaoLam), stk);
 				adnvbo.UpdateNgayKetThuc(manv);
 				System.out.println("Da Duoi Viec");
 			}
 
+			if (manv != null && Boolean.parseBoolean(trangThaiCongViec) == true) {
+				adnvbo.BTW(manv);
+				System.out.println("Djt con me may lam tiep de");
+			}
 			
-			
-			 if(manv != null && tennv != null && macv != null && ngaySinh != null && gioiTinh != null && email != null && sdt != null && DVCT != null && 
+			if(manv != null && tennv != null && macv != null && ngaySinh != null && gioiTinh != null && email != null && sdt != null && DVCT != null && 
 					 chucDanh != null && tenDangNhap != null && matKhau != null && trangThaiCongViec != null && ngayVaoLam != null && stk != null) 
-			 { 
+			{ 
 				 
-				 adnvbo.UpdateNhanVien(manv, tennv, macv, Date.valueOf(ngaySinh), Boolean.parseBoolean(gioiTinh), email,
+				adnvbo.UpdateNhanVien(manv, tennv, macv, Date.valueOf(ngaySinh), Boolean.parseBoolean(gioiTinh), email,
 						 				sdt, DVCT, chucDanh, tenDangNhap, matKhau,
-						 				Boolean.parseBoolean(trangThaiCongViec), null, Date.valueOf(ngayVaoLam), stk); 
-				 System.out.println("DaSuaThongTin"); 
-			 }
+						 				Boolean.parseBoolean(trangThaiCongViec), Date.valueOf(ngayVaoLam), stk); 
+				System.out.println("DaSuaThongTin"); 
+			}
 			 
 			 
 

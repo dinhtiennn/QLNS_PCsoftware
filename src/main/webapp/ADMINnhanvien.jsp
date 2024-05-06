@@ -108,7 +108,7 @@
 				            <td id="chucDanh_<%=i%>"><%=nvb.getChucDanh() %></td>
 				            <td id="tenDangNhap_<%=i%>"><%=nvb.getTenDangNhap() %></td>
 				            <td id="matKhau_<%=i%>"><%=nvb.getMatKhau() %></td>
-				            <td id="trangThaiCongViec_<%=i%>"><%=(nvb.getTrangThaiCongViec()==true)?"Đang Hoạt Động":"Đã Nghỉ Việc" %></td>
+				            <td id="trangThaiCongViec_<%=i%>"><%=nvb.getTrangThaiCongViec()%></td>
 				            
 			            <%if(nvb.getAnh()!=null) {%>
 				            <td id="anh_<%=i%>">Đã có ảnh</td>
@@ -135,8 +135,8 @@
 
 <!-- Modal -->
 	<div class="modal" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" role="dialog">
-	    <div style="background-image: url('src/main/webapp/prf.svg');  background-size: cover;" class="modal-dialog modal-dialog-centered">
-	    	<form action="adminChinhSuaThongTinNhanVien" method="post" onsubmit="return showAlert()">
+	    <div class="modal-dialog modal-dialog-centered">
+	    	<form action="adminChinhSuaThongTinNhanVien" method="get" onsubmit="return showAlert()">
 		        <div class="modal-content">
 		            <div class="modal-header">
 		                <h5 class="modal-title" id="exampleModalLabel">Thông tin nhân viên</h5>
@@ -144,7 +144,7 @@
 		            </div>
 		            <div class="modal-body">
 		                <div id="modalBody">
-		                
+		                	
 		                </div>
 		            </div>
 		            <div class="modal-footer">
@@ -240,8 +240,7 @@
         var chucDanh = row.querySelector("[id^='chucDanh_']").textContent;
         var tenDangNhap = row.querySelector("[id^='tenDangNhap_']").textContent;
         var matKhau = row.querySelector("[id^='matKhau_']").textContent;
-        var trangThaiCongViec = row.querySelector("[id^='trangThaiCongViec_']").textContent;
-        var anh = row.querySelector("[id^='anh_']").textContent;
+        var trangThaiCongViec = row.querySelector("[id^='trangThaiCongViec_']").value;
         var ngayvaolam = row.querySelector("[id^='ngayvaolam_']").textContent;
         var ngayketthuc = row.querySelector("[id^='ngayketthuc_']").textContent;
         var stknhanvien = row.querySelector("[id^='stknhanvien_']").textContent;
@@ -264,7 +263,6 @@
             { label: "Tên Đăng Nhập", value: tenDangNhap },
             { label: "Mật Khẩu", value: matKhau },
             { label: "Trạng Thái Công Việc", value: trangThaiCongViec },
-            { label: "Ảnh", value: anh },
             { label: "Ngày Vào Làm", value: ngayvaolam },
             { label: "Ngày Kết Thúc", value: ngayketthuc },
             { label: "Số Tài Khoản", value: stknhanvien }
@@ -274,12 +272,8 @@
 
             labelElement.textContent = rowData.label + ": ";
 
-            if (rowData.label === "Ảnh") {
-            	var valueElement = document.createElement("div"); // Sử dụng div để chứa hình ảnh
-                var imgElement = document.createElement("img");
-                imgElement.src = rowData.value;
-                valueElement.appendChild(imgElement);
-            }if (rowData.label === "Trạng Thái Công Việc") {
+            
+            if (rowData.label === "Trạng Thái Công Việc") {
             	var valueElement = document.createElement("select");
 
                 // Tạo tùy chọn đầu tiên
@@ -293,12 +287,14 @@
                 optionFalse.value = "false";
                 optionFalse.text = "False";
                 valueElement.appendChild(optionFalse);
+                valueElement.setAttribute("name", rowData.label.toLowerCase()); // Thêm thuộc tính name
             } 
             else {
             	var valueElement = document.createElement("input");
                 valueElement.value = rowData.value;
                 valueElement.setAttribute("name", rowData.label.toLowerCase()); // Thêm thuộc tính name
             }
+            
             
          	// Thêm class cho các phần tử
             labelElement.classList.add("label");
@@ -307,7 +303,21 @@
             modalBody.appendChild(labelElement);
             modalBody.appendChild(valueElement);
         });
-
+        console.log(maNV);
+        console.log(tenNV);
+        console.log(maCV);
+        console.log(ngaySinh);
+        console.log(gioiTinh);
+        console.log(email);
+        console.log(sdt);
+        console.log(dvct);
+        console.log(chucDanh);
+        console.log(tenDangNhap);
+        console.log(matKhau);
+        console.log(trangThaiCongViec);
+        console.log(ngayvaolam);
+        console.log(ngayketthuc);
+        console.log(stknhanvien);
 	}
 	
 	function showAlert() {

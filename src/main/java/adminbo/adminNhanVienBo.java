@@ -18,10 +18,13 @@ public class adminNhanVienBo {
 	public NhanVienBean getnhanvientheoma(String manv) throws Exception{
 		return adnvdao.getnhanvientheoma(manv);
 	}
-	public void UpdateNhanVien(String maNV, String tenNV, String maCV, Date ngaySinh, Boolean gioiTinh, String email, String sDT, String dVCT, String chucDanh, String tenDangNhap, String matKhau, Boolean trangThaiCongViec, String anh, Date ngayVaoLam, String soTaiKhoan) throws Exception{
-		adnvdao.UpdateNhanVien(maNV, tenNV, maCV, ngaySinh, gioiTinh, email, sDT, dVCT, chucDanh, tenDangNhap, matKhau, trangThaiCongViec, anh, ngayVaoLam, soTaiKhoan);
+	public void UpdateNhanVien(String maNV, String tenNV, String maCV, Date ngaySinh, Boolean gioiTinh, String email, String sDT, String dVCT, String chucDanh, String tenDangNhap, String matKhau, Boolean trangThaiCongViec, Date ngayVaoLam, String soTaiKhoan) throws Exception{
+		adnvdao.UpdateNhanVien(maNV, tenNV, maCV, ngaySinh, gioiTinh, email, sDT, dVCT, chucDanh, tenDangNhap, matKhau, trangThaiCongViec,  ngayVaoLam, soTaiKhoan);
 	}
 	public void UpdateNgayKetThuc(String MaNV) throws Exception {
 		adnvdao.UpdateNgayKetThuc(MaNV);
+	}
+	public void BTW(String maNV) throws Exception {
+		adnvdao.BTW(maNV);
 	}
 }

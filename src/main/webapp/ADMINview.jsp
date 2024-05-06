@@ -32,20 +32,21 @@ input:focus-visible {
     width: 40%;
     height: 40%;
     padding: 24px;
+    margin-top: 105px;
 }
 
 
 </style>
 </head>
 <body>
-<jsp:include page="header.jsp"></jsp:include>
+	<jsp:include page="header.jsp"></jsp:include>
 
-	<div style="position: relative; justify-content: center;margin-top: 69px;" class="d-flex align-items-center" >
+	<div class="d-flex justify-content-center align-items-center" >
 		<div class="col-2 menu-content" >
 			<jsp:include page="adminSlidebar.jsp"></jsp:include>
 		</div>
 		
-		<div class="mt-3 ts-content">
+		<div class="ts-content">
 			<h1 class="text-center">Bảng Thông Số Kỹ Thuật</h1>
 		 	<% ThongSoKiThuatBean tsbean = (ThongSoKiThuatBean)request.getAttribute("BangThongSo"); %>
 		

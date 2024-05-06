@@ -19,11 +19,12 @@
     width: 75%;
     height: 40%;
     padding: 24px;
-    margin: 90px 0 20px 0;
+    margin: 100px 0 20px 0;
 }
 </style>
 </head>
 <body>
+
 <jsp:include page="header.jsp"></jsp:include>
 	
 	<div class="d-flex align-items-center justify-content-center;">
