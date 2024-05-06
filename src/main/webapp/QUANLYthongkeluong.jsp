@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Thống Kê Lương</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
@@ -21,7 +21,7 @@
 <body>
 <jsp:include page="header.jsp"></jsp:include>
 	<div class="row">
-		<div class="col-2  mt-5">
+		<div class="col-2  mt-5" style="margin-top: 8rem !important;">
 			<jsp:include page="QUANLYslidebar.jsp"></jsp:include>
 		</div>
 		<%
@@ -36,8 +36,7 @@
 	       	String nam = (request.getAttribute("nam")!=null)?request.getAttribute("nam").toString():"";
 	        String msg = (request.getAttribute("msg")!=null)?request.getAttribute("msg").toString():"";
 		%>
-		<div class="col-10 mt-4">
-			<h1>ALOOOOOOOOOOOOOOOOOOOOOO</h1>
+		<div class="col-10 mt-4" style="margin-top: 8rem !important;" >
 			<div class="row container">
 				<%=msg%>
 				<form action="quanly?action=thongkeluong" method="post">
@@ -76,7 +75,7 @@
 											<%if(tkl.size()==0){%>
 												<%=msg%>
 											<%}else{%>
-												<table class="table">
+												<table class="table table-hover">
 													  <thead>
 													    <tr>
 													      <th scope="col">#</th>

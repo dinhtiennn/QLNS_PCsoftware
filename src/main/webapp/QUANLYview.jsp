@@ -11,21 +11,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Trang Chủ</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
-<div class="row">
-	<div class="col-2  mt-5">
+<div class="d-flex justify-content-center">
+	<div class="col-2 mt-5" style="margin-top: 8rem !important;" >
 		<jsp:include page="QUANLYslidebar.jsp"></jsp:include>
 	</div>
-	<div class="col-10 mt-4">
-			<h1>ALOOOOOOOOOOOOOOOOOOOO</h1>
-			 <h2 class="text-center mb-3">Lịch trình tuần hiện tại</h2>
-   		<div class="container-fluid">
+	<div class="col-10 mt-4" style="margin-top: 10rem !important;">
+		<h2 class="text-center mb-4">Lịch trình tuần hiện tại</h2>
+   		<div class="container-fluid col-10 mt-5">
 	    	<%
 
 	    			    	LocalDate currentDate = LocalDate.now();
@@ -150,5 +149,6 @@
 	        </table>
 		</div>
 	</div>
+</div>	
 </body>
 </html>

@@ -8,22 +8,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Danh Sách Nghỉ Làm</title>
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 		<div class="row">
-			<div class="col-2  mt-5">
+			<div class="col-2  mt-5" style="margin-top: 8rem !important;">
 				<jsp:include page="QUANLYslidebar.jsp"></jsp:include>
 			</div>
-			<div class="col-6  mt-5">
-				<h1>ALOOOOOOOOOOOOOOOOOOOOOO</h1>
+			<div class="col-6  mt-5" style="margin-top: 8rem !important;">
 				<form action="quanly?action=danhsachnghilam" method="post" onsubmit="return validateDate()">
 			        <label for="selectedDate">Tìm kiếm từ ngày :</label>
 			        <input type="date" id="selectedDate" name="ngayBatDau" required>
 			        <label for="selectedDate">đến ngày :</label>
 			        <input type="date" id="selectedDate2" name="ngayKetThuc">
-			        <input type="submit" value="Search">
+			        <input type="submit" value="Tìm Kiếm" class="btn btn-primary">
 			    </form>
 			    <%
 				ArrayList<DangKyNghiBean> ds = ((ArrayList<DangKyNghiBean>)request.getAttribute("ds_dkn")!=null)?(ArrayList<DangKyNghiBean>)request.getAttribute("ds_dkn"):new ArrayList<DangKyNghiBean>();

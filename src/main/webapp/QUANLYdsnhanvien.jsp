@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Danh Sách Nhân Viên</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
@@ -52,92 +52,86 @@
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
-	<div class="row">
-		<div class="col-2 mt-5">
-			<jsp:include page="QUANLYslidebar.jsp"></jsp:include>
-		</div>
-		<div class="col-10 mt-4">
-				<!-- <button type="button" class="btn btn-warning" id="openModalBtn">Thêm mới nhân viên</button> -->
-				
+	
+		<div class="row">
+			<div class="col-2 mt-5" style="margin-top: 8rem !important;">
+				<jsp:include page="QUANLYslidebar.jsp"></jsp:include>
+			</div>
+			<div class="col-10" style="margin-top: 8rem !important;">
+					<!-- <button type="button" class="btn btn-warning" id="openModalBtn">Thêm mới nhân viên</button> -->
+					
 				<!-- Button trigger modal -->
 				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModalThemNV">
 				  Thêm mới nhân sự
 				</button>
-			<table  class="table" style="font-size: 11px;">
-			<thead>
-		        <tr>
-		            <th>Mã Nhân Viên</th>
-		            <th style="width: 180px;">Tên Nhân Viên</th>
-		            <th>Mã Chức Vụ</th>
-		            <th>Ngày Sinh</th>
-		            <th>Giới Tính</th>
-		            <th>Email</th>
-		            <th>Số Điện Thoại</th>
-		            <th>Đơn Vị Công Tác</th>
-		            <th>Chức Danh</th>
-		            <th>Tài Khoản</th>
-		            <th>Mật Khẩu</th>
-		            <th>Trạng Thái Công Việc</th>
-		            <th>Ảnh</th> 
-		            <th>Ngày Vào Làm</th> 
-		            <th>Ngày Kết Thúc</th> 
-		            <th>Số Tài Khoản</th> 
-		        </tr>
-		    </thead>
-		    <tbody>
-			<%
-			ArrayList<NhanVienBean> ds = (ArrayList<NhanVienBean>)request.getAttribute("ds_nv"); 
-			int n = ds.size();
-			for(int i=0; i<n; i++) {
-				NhanVienBean nvb = ds.get(i);%>
-		        <tr onclick="moModal(this)">
-		            <td id="maNV_<%=i%>"><%=nvb.getMaNV()%></td>
-		            <td id="tenNV_<%=i%>"><%=nvb.getTenNV()%></td>
-		            <td id="maCV_<%=i%>"><%=nvb.getMaCV() %></td>
-		            <td id="ngaySinh_<%=i%>"><%=nvb.getNgaySinh() %></td>
-		            <td id="gioiTinh_<%=i%>"><%=nvb.getGioiTinh() %></td>
-		            <td id="email_<%=i%>"><%=nvb.getEmail() %></td>
-		            <td id="sdt_<%=i%>"><%=nvb.getsDT() %></td>
-		            <td id="dvct_<%=i%>"><%=nvb.getdVCT() %></td>
-		            <td id="chucDanh_<%=i%>"><%=nvb.getChucDanh() %></td>
-		            <td id="tenDangNhap_<%=i%>"><%=nvb.getTenDangNhap() %></td>
-		            <td id="matKhau_<%=i%>"><%=nvb.getMatKhau() %></td>
-		            <%
-		            String trangthaicongviec = "";
-		            if(nvb.getTrangThaiCongViec()==true){
-		            	trangthaicongviec = "Đang làm việc";
-		            }
-		            else
-		            	trangthaicongviec = "Đang nghỉ việc";
-		            %>
-		        	<td id="trangThaiCongViec_<%=i%>"><%=trangthaicongviec%>
-		            <%if(nvb.getTrangThaiCongViec()==true){%>
-		            	<a href="quanly?action=danhsachnhanvien&ttcv=0&manv=<%=nvb.getMaNV()%>">
-							<button type="button" class="btn btn-warning">Dừng làm việc</button>
-				  		</a>
-		            <%}if(nvb.getTrangThaiCongViec()!= true){%>
-		            	<a href="quanly?action=danhsachnhanvien&ttcv=1&manv=<%=nvb.getMaNV()%>">
-							<button type="button" class="btn btn-warning">Tiếp tục làm</button>
-				  		</a>
-		            <%}%>
-		            </td>
-		            <td id="anh_<%=i%>"><%=nvb.getAnh() %></td>
-			        <td id="ngayvaolam_<%=i%>"><%=nvb.getNgayVaoLam() %></td>
-			        <td id="ngayketthuc_<%=i%>"><%=nvb.getNgayKetThuc()%></td>
-			        <td id="stknhanvien_<%=i%>"><%=nvb.getSoTaiKhoan()%></td>
-		        </tr>
-			<%}%>
-			</tbody>
-		</table>
-		</div>
-	</div>
-	
+					<table  class="table table-hover" style="font-size: 11px;">
+					<thead>
+				        <tr>
+				            <th style="width: 100px;">Mã Nhân Viên</th>
+				            <th style="width: 180px;">Tên Nhân Viên</th>
+				            <th style="width: 100px;">Mã Chức Vụ</th>
+				            <th style="width: 100px;">Ngày Sinh</th>
+				            <th style="width: 80px;">Giới Tính</th>
+				            <th >Email</th>
+				            <th style="width: 100px;">Số Điện Thoại</th>
+				            <th>Đơn Vị Công Tác</th>
+				            <th>Chức Danh</th>
+				            <th style="width: 80px;">Tài Khoản</th>
+				            <th style="width: 80px;">Mật Khẩu</th>
+				            <th style="width: 100px;">Trạng Thái Công Việc</th>
+				            <th>Ảnh</th> 
+				            <th style="width: 100px;">Ngày Vào Làm</th> 
+				            <th style="width: 100px;">Ngày Kết Thúc</th> 
+				            <th>Số Tài Khoản</th> 
+				        </tr>
+				    </thead>
+				    <tbody>
+					<%
+					ArrayList<NhanVienBean> ds = (ArrayList<NhanVienBean>)request.getAttribute("ds_nv"); 
+					int n = ds.size();
+					for(int i=0; i<n; i++) {
+						NhanVienBean nvb = ds.get(i);%>
+				        <tr onclick="moModal(this)">
+				            <td id="maNV_<%=i%>"><%=nvb.getMaNV()%></td>
+				            <td id="tenNV_<%=i%>"><%=nvb.getTenNV() %></td>
+				            <td id="maCV_<%=i%>"><%=nvb.getMaCV() %></td>
+				            <td id="ngaySinh_<%=i%>"><%=nvb.getNgaySinh() %></td>
+				            <td id="gioiTinh_<%=i%>"><%=(nvb.getGioiTinh()==true)?"Nam":"Nữ" %></td>
+				            <td id="email_<%=i%>"><%=nvb.getEmail() %></td>
+				            <td id="sdt_<%=i%>"><%=nvb.getsDT() %></td>
+				            <td id="dvct_<%=i%>"><%=nvb.getdVCT() %></td>
+				            <td id="chucDanh_<%=i%>"><%=nvb.getChucDanh() %></td>
+				            <td id="tenDangNhap_<%=i%>"><%=nvb.getTenDangNhap() %></td>
+				            <td id="matKhau_<%=i%>"><%=nvb.getMatKhau() %></td>
+				            <td id="trangThaiCongViec_<%=i%>"><%=nvb.getTrangThaiCongViec()%></td>
+				            
+			            <%if(nvb.getAnh()!=null) {%>
+				            <td id="anh_<%=i%>">Đã có ảnh</td>
+			            <%}else{ %>
+				            <td id="anh_<%=i%>">Chưa có ảnh</td>
+			            <%} %>
+			            
+				            <td id="ngayvaolam_<%=i%>"><%=nvb.getNgayVaoLam() %></td>
+				            
+			        	<%if(nvb.getNgayKetThuc()!=null) {%>
+				            <td id="ngayketthuc_<%=i%>"><%=nvb.getNgayKetThuc()%></td>
+			            <%} else { %>
+				            <td id="ngayketthuc_<%=i%>"></td>
+				        <%} %>
+				        
+				            <td id="stknhanvien_<%=i%>"><%=nvb.getSoTaiKhoan()%></td>
+				        </tr>
+					<%}%>
+					</tbody>
+				</table>
+			</div>
+		</div>	
 	
 	<!-- Modal add employees -->
 	<div class="modal fade" id="myModalThemNV" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
 	    <div class="modal-content">
-	    <form action="quanly?action=addemployess" method="post">
+	    <form action="quanly?action=themnhanvien" method="post">
 		      <div class="modal-header">
 		        <h1 class="modal-title fs-5" id="exampleModalLabel">Thêm mới nhân sự</h1>
 		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -149,12 +143,15 @@
 		       	</div>
 			    <div class="mb-3">
 				    <label for="ngaysinh" class="form-label">Ngày Sinh:</label>
-				    <input type="date" class="form-control" id="ngaysinh" name="ngaysinh">
+				    <input type="date" class="form-control" id="ngaysinh" name="ngaysinh" required="required">
 		       	</div>
 			    <div class="mb-3">
-				    <label for="manv" class="form-label">Giới tính:</label>
-				    <input type="text" class="form-control" id="gioitinh" name="gioitinh">
-		       	</div>
+				    <label for="gioitinh" class="form-label">Giới tính:</label>
+				    <select class="form-select" id="gioitinh" name="gioitinh">
+				        <option value="true">Nam</option>
+				        <option value="false">Nữ</option>
+				    </select>
+				</div>
 			    <div class="mb-3">
 				    <label for="tennv" class="form-label">Email:</label>
 				    <input type="text" class="form-control" id="email" name="email">
@@ -190,8 +187,9 @@
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-		        <button type="submit" class="btn btn-primary">Lưu thông tin nhân viên</button>
+		        <button type="submit" id="saveEmployeeBtn" class="btn btn-primary">Lưu thông tin nhân viên</button>
 		      </div>
+		      
 	      </form>
 	    </div>
 	  </div>
@@ -201,7 +199,7 @@
 	<!-- Modal sua ttnvien-->
 	<div class="modal" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" role="dialog">
 	    <div style="background-image: url('src/main/webapp/prf.svg');  background-size: cover;" class="modal-dialog modal-dialog-centered">
-	    	<form action="adminChinhSuaThongTinNhanVien" method="post" onsubmit="return showAlert()">
+	    	<form action="quanly?action=suattnhanvien" method="post" onsubmit="return showAlert()">
 		        <div class="modal-content">
 		            <div class="modal-header">
 		                <h5 class="modal-title" id="exampleModalLabel">Thông tin nhân viên</h5>
@@ -352,8 +350,7 @@
         var chucDanh = row.querySelector("[id^='chucDanh_']").textContent;
         var tenDangNhap = row.querySelector("[id^='tenDangNhap_']").textContent;
         var matKhau = row.querySelector("[id^='matKhau_']").textContent;
-        var trangThaiCongViec = row.querySelector("[id^='trangThaiCongViec_']").textContent;
-        var anh = row.querySelector("[id^='anh_']").textContent;
+        var trangThaiCongViec = row.querySelector("[id^='trangThaiCongViec_']").value;
         var ngayvaolam = row.querySelector("[id^='ngayvaolam_']").textContent;
         var ngayketthuc = row.querySelector("[id^='ngayketthuc_']").textContent;
         var stknhanvien = row.querySelector("[id^='stknhanvien_']").textContent;
@@ -362,7 +359,6 @@
         var modalBody = document.getElementById("modalBody");
         // Xóa nội dung cũ của modalBody
         modalBody.innerHTML = "";
-
         // Tạo và thêm các phần tử <p> vào modalBody
         var rows = [
             { label: "Mã Nhân Viên", value: maNV },
@@ -377,23 +373,17 @@
             { label: "Tên Đăng Nhập", value: tenDangNhap },
             { label: "Mật Khẩu", value: matKhau },
             { label: "Trạng Thái Công Việc", value: trangThaiCongViec },
-            { label: "Ảnh", value: anh },
             { label: "Ngày Vào Làm", value: ngayvaolam },
             { label: "Ngày Kết Thúc", value: ngayketthuc },
             { label: "Số Tài Khoản", value: stknhanvien }
         ];
- 		
         rows.forEach(rowData => {
             var labelElement = document.createElement("p");
 
             labelElement.textContent = rowData.label + ": ";
 
-            if (rowData.label === "Ảnh") {
-            	var valueElement = document.createElement("div"); // Sử dụng div để chứa hình ảnh
-                var imgElement = document.createElement("img");
-                imgElement.src = rowData.value;
-                valueElement.appendChild(imgElement);
-            }if (rowData.label === "Trạng Thái Công Việc") {
+            
+            if (rowData.label === "Trạng Thái Công Việc") {
             	var valueElement = document.createElement("select");
 
                 // Tạo tùy chọn đầu tiên
@@ -407,12 +397,14 @@
                 optionFalse.value = "false";
                 optionFalse.text = "False";
                 valueElement.appendChild(optionFalse);
+                valueElement.setAttribute("name", rowData.label.toLowerCase()); // Thêm thuộc tính name
             } 
             else {
             	var valueElement = document.createElement("input");
                 valueElement.value = rowData.value;
                 valueElement.setAttribute("name", rowData.label.toLowerCase()); // Thêm thuộc tính name
             }
+            
             
          	// Thêm class cho các phần tử
             labelElement.classList.add("label");
@@ -421,7 +413,21 @@
             modalBody.appendChild(labelElement);
             modalBody.appendChild(valueElement);
         });
-
+        console.log(maNV);
+        console.log(tenNV);
+        console.log(maCV);
+        console.log(ngaySinh);
+        console.log(gioiTinh);
+        console.log(email);
+        console.log(sdt);
+        console.log(dvct);
+        console.log(chucDanh);
+        console.log(tenDangNhap);
+        console.log(matKhau);
+        console.log(trangThaiCongViec);
+        console.log(ngayvaolam);
+        console.log(ngayketthuc);
+        console.log(stknhanvien);
 	}
 	
 	function showAlert() {
@@ -430,10 +436,62 @@
 	        alert("Thông tin đã được thay đổi!");
 	        return true; 
 	    } else {
-	    	window.location.href = "QuanLy?action=danhsachnhanvien";
+	    	window.location.href = "adminNhanVienController";
 	    	return false; 
 	    }
 	}
-		
+	// Hàm kiểm tra ngày tháng
+    function validateDate(selectedDate) {
+        var regex = /^\d{4}-\d{2}-\d{2}$/;
+        return regex.test(selectedDate);
+    }
+
+    // Hàm kiểm tra email
+    function validateEmail(email){
+        var regex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+        return regex.test(email);
+    }
+
+    // Hàm kiểm tra số điện thoại
+    function validatePhonenumber(sdt){
+        var regex = /([\+84|84|0]+(3|5|7|8|9|1[2|6|8|9]))+([0-9]{8})\b/;
+        return regex.test(sdt);
+    }
+
+    // Hàm kiểm tra tên
+    function validateName(tennv) {
+        var regex = /^[A-Za-zÀ-ỹ]+\s([A-Za-zÀ-ỹ]+\s?)+$/;
+        return regex.test(tennv);
+    }
+	 function validateForm() {
+		 console.log("Tao Chạy tới được đây rồi ");
+		 var tennv = document.getElementById('tennv').value;
+         var selectedDate = document.getElementById('selectedDate').value;
+         var email = document.getElementById('email').value;
+         var sdt = document.getElementById('sdt').value;
+         // Kiểm tra tính hợp lệ của các trường
+         if (!validateName(tennv)) {
+             alert("Vui lòng nhập tên nhân viên hợp lệ !");
+             console.log("Tao Chạy tới được đây rồi ");
+             return false;
+         }
+         if (!validateDate(ngaysinh)) {
+             alert("Vui lòng nhập ngày sinh hợp lệ !");
+             console.log("Tao Chạy tới được đây rồi 2 ");
+             return false;
+         }
+         if (!validateEmail(email)) {
+             alert("Vui lòng nhập địa chỉ email hợp lệ!");
+             console.log("Tao Chạy tới được đây rồi 3 ");
+             return false;
+         }
+         if (!validatePhonenumber(sdt)) {
+             alert("Vui lòng nhập số điện thoại hợp lệ!");
+             console.log("Tao Chạy tới được đây rồi 4 ");
+             return false;
+         }
+         return true;
+     }	
 </script>
+
 </html>

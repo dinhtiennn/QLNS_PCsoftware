@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Danh Sách Làm Việc</title>
 </head>
 <body>
 		<jsp:include page="header.jsp"></jsp:include>
@@ -43,8 +43,8 @@
 			        String formattedDate = date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 		%>
 		
-		<div class="row">
-			<div class="col-2  mt-5">
+		<div style="margin-top: 65px;" class="row">
+			<div class="col-2  mt-5" style="margin-top: 8rem !important;">
 				<jsp:include page="QUANLYslidebar.jsp"></jsp:include>
 			</div>
 			<div class="col-6  mt-5">

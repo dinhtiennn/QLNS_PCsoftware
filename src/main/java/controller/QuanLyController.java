@@ -1,8 +1,10 @@
 package controller;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -14,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import adminbo.adminNhanVienBo;
 import bean.DangKyLamBean;
 import bean.DangKyNghiBean;
 import bean.NhanVienBean;
@@ -63,12 +66,14 @@ public class QuanLyController extends HttpServlet {
 				danhvangkhongphep(request, response);	
 			}else if(action.equals("danhsachnhanvien")) {
 				danhsachnhanvien(request, response);
-			}else if(action.equals("addemployess")) {
+			}else if(action.equals("themnhanvien")) {
 				themnhanvien(request, response);
 			}else if(action.equals("thongkeluong")) {
 				thongkeluong(request, response);
 			}else if(action.equals("danhsachnghilam")) {
 				danhsachnghilam(request, response);
+			}else if(action.equals("suattnhanvien")) {
+				suattnhanvien(request, response);
 			}
 		}
 	}
@@ -175,17 +180,34 @@ public class QuanLyController extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
+	private static boolean isOverdue(String ngaydk) throws ParseException {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		LocalDate ngayDangKy = LocalDate.parse(ngaydk, formatter);
+		LocalDate currentDate = LocalDate.now();
+		
+		// Kiểm tra nếu ngày đăng ký + 1 ngày lớn hơn ngày hiện tại thì chưa qua hạn
+		return ngayDangKy.plusDays(1).isAfter(currentDate);
+	}
 	public void duyetlichnghi(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
 		String url = "QUANLYdsdangkinghi.jsp";
 		System.out.println(url);
 		try {
-			ArrayList<DangKyNghiBean> ds_dkn = null;
 			DangKyNghibo dbo = new DangKyNghibo();
+			ArrayList<DangKyNghiBean> ds_dkn = new ArrayList<DangKyNghiBean>();
+			ds_dkn = dbo.GetAllDKN();
 			String duyet = request.getParameter("duyet");
 			String nguoiduyet = request.getParameter("nguoiduyet");
 			String ngaydk = request.getParameter("ngaydk");
 			String manv = request.getParameter("manv");
 			String maloaica = request.getParameter("maloaica");
+			 // Kiểm tra nếu trạng thái là "Đang chờ duyệt" và ngày đăng ký đã qua hạn
+	        for (DangKyNghiBean dangKyNghiBean : ds_dkn) {
+	        	if (!isOverdue(dangKyNghiBean.getNgayDK().toString())== true && dangKyNghiBean.getDuyet()==0) {
+	        		// Tự động chuyển sang trạng thái "Không duyệt"
+	        		dbo.DuyetLichNghi("2", "", dangKyNghiBean.getNgayDK().toString(), dangKyNghiBean.getMaNV());
+	        		System.out.println( ngaydk+ duyet+"djtme dung co bug");
+	        	}
+			}
 			if(duyet.equals("1")) {
 				dbo.DuyetLichNghi(duyet, nguoiduyet, ngaydk, manv);
 				dbo.XoaLichLam(manv, maloaica, ngaydk);
@@ -269,8 +291,66 @@ public class QuanLyController extends HttpServlet {
 			
 			nvbo.ThemNhanVien_QL(tennv, java.sql.Date.valueOf(ngaysinh), Boolean.parseBoolean(gioitinh), email, sdt, tendn, stk, anh, anh);
 			ds_nv = nvbo.getnhanvien();
+			
 			request.setAttribute("ds_nv", ds_nv);
 			
+			RequestDispatcher rd = request.getRequestDispatcher(url);
+			rd.forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void suattnhanvien(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
+		String url = "QUANLYdsnhanvien.jsp";
+		System.out.println(url);
+		try {
+			request.setCharacterEncoding("utf-8");
+			response.setCharacterEncoding("utf-8");
+			adminNhanVienBo adnvbo = new adminNhanVienBo();
+			NhanVienBo nvbo = new NhanVienBo();
+			ArrayList<NhanVienBean> ds_nv = null;
+			
+			String manv = request.getParameter("mã nhân viên");
+			String tennv = request.getParameter("tên nhân viên");
+			String macv = request.getParameter("mã chức vụ");
+			String ngaySinh = request.getParameter("ngày sinh");
+			String gioiTinh = request.getParameter("giới tính");
+			String email = request.getParameter("email");
+			String sdt = request.getParameter("số điện thoại");
+			String DVCT = request.getParameter("đơn vị công tác");
+			String chucDanh = request.getParameter("chức danh");
+			String tenDangNhap = request.getParameter("tên đăng nhập");
+			String matKhau = request.getParameter("mật khẩu");
+			String trangThaiCongViec = request.getParameter("trạng thái công việc");
+			String ngayVaoLam = request.getParameter("ngày vào làm");
+			String ngayKetThuc = request.getParameter("ngày kết thúc");
+			String stk = request.getParameter("số tài khoản");
+
+			if (manv != null && Boolean.parseBoolean(trangThaiCongViec) == false) {
+				adnvbo.UpdateNhanVien(manv, tennv, macv, java.sql.Date.valueOf(ngaySinh), Boolean.parseBoolean(gioiTinh), email,
+										sdt, DVCT, chucDanh, tenDangNhap, matKhau,
+										Boolean.parseBoolean(trangThaiCongViec), java.sql.Date.valueOf(ngayVaoLam), stk);
+				adnvbo.UpdateNgayKetThuc(manv);
+				System.out.println("Da Duoi Viec");
+			}
+
+			if (manv != null && Boolean.parseBoolean(trangThaiCongViec) == true) {
+				adnvbo.BTW(manv);
+				System.out.println("Djt con me may lam tiep de");
+			}
+			
+			if(manv != null && tennv != null && macv != null && ngaySinh != null && gioiTinh != null && email != null && sdt != null && DVCT != null && 
+					 chucDanh != null && tenDangNhap != null && matKhau != null && trangThaiCongViec != null && ngayVaoLam != null && stk != null) 
+			{ 
+				 
+				adnvbo.UpdateNhanVien(manv, tennv, macv, java.sql.Date.valueOf(ngaySinh), Boolean.parseBoolean(gioiTinh), email,
+						 				sdt, DVCT, chucDanh, tenDangNhap, matKhau,
+						 				Boolean.parseBoolean(trangThaiCongViec), java.sql.Date.valueOf(ngayVaoLam), stk); 
+				System.out.println("DaSuaThongTin"); 
+			}
+			ds_nv = nvbo.getnhanvien();
+			request.setAttribute("ds_nv", ds_nv);
+			 
 			RequestDispatcher rd = request.getRequestDispatcher(url);
 			rd.forward(request, response);
 		} catch (Exception e) {
@@ -339,11 +419,13 @@ public class QuanLyController extends HttpServlet {
 			request.setCharacterEncoding("utf-8");
 			response.setCharacterEncoding("utf-8");
 			HttpSession session = request.getSession();
+			LocalDate date = LocalDate.now();
 
 			String ngayBatDau = request.getParameter("ngayBatDau");
 			String ngayKetThuc = request.getParameter("ngayKetThuc");
 			ArrayList<DangKyNghiBean> ds_dkn = null;
 			DangKyNghibo dbo = new DangKyNghibo();
+			request.setAttribute("ds_dkn", dbo.getDSDKNtheoNgay(date.toString()));;
 			
 			if(ngayBatDau != null && (ngayKetThuc.trim()).length()== 0) {
 				ds_dkn = dbo.getDSDKNtheoNgay(ngayBatDau);
