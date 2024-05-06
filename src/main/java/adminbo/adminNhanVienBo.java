@@ -27,4 +27,8 @@ public class adminNhanVienBo {
 	public void BTW(String maNV) throws Exception {
 		adnvdao.BTW(maNV);
 	}
+	public void ThemNhanVien_QL(String tenNV, String maCV, java.util.Date ngaySinh, Boolean gioiTinh, String email, String sDT, String tenDangNhap, String matKhau,
+			String anh, String soTaiKhoan) throws Exception {
+		adnvdao.ThemNhanVien_QL(tenNV, maCV, ngaySinh, gioiTinh, email, sDT, tenDangNhap, matKhau, anh, soTaiKhoan);
+	}
 }

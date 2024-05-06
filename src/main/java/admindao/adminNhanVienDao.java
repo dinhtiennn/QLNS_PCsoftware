@@ -187,5 +187,33 @@ public class adminNhanVienDao {
 		
 		return nvb;
 	}
+	public void ThemNhanVien_QL(String tenNV, String maCV, java.util.Date ngaySinh, Boolean gioiTinh, String email, String sDT, String tenDangNhap, String matKhau,
+			String anh, String soTaiKhoan) throws Exception {
+		ketnoiDB kn = new ketnoiDB();
+		kn.ketnoi();
+		String sql="declare @newMaNV int, @newMaNV_Str nvarchar(10)\r\n"
+				+ "select @newMaNV = max(CAST(SUBSTRING(MaNV, 3,LEN(MaNV) - 2) as int)) + 1 from ThongTinNhanVien\r\n"
+				+ "if @newMaNV < 100 set @newMaNV_Str = '0'+ cast(@newMaNV as nvarchar(10))\r\n"
+				+ "else set @newMaNV_Str = CAST(@newMaNV as nvarchar(10))\r\n"
+				+ "insert into ThongTinNhanVien(MaNV,TenNV,MaCV,NgaySinh,GioiTinh,Email,SDT,DVCT,ChucDanh,TenDangNhap, MatKhau, TrangThaiCongViec, Anh, NgayVaoLam, NgayKetThuc, SoTaiKhoanNhanVien)\r\n"
+				+ "values ('NV'+ cast(@newMaNV_Str as nvarchar(10)),?,?,?,?,?,?,'Team Design','Teammate',?,?,'True',?,GETDATE(),null,?)";
+		PreparedStatement cmd= kn.cn.prepareStatement(sql);
+		cmd.setString(1, tenNV);
+		SimpleDateFormat dd= new SimpleDateFormat("yyyy-MM-dd"); 
+		String tam= dd.format(ngaySinh);
+		java.util.Date n2= dd.parse(tam);
+		cmd.setString(2, maCV);
+		cmd.setDate(3, new java.sql.Date(n2.getTime()));
+		cmd.setBoolean(4, gioiTinh);
+		cmd.setString(5, email);
+		cmd.setString(6, sDT);
+		cmd.setString(7, tenDangNhap);
+		cmd.setString(8, matKhau);
+		cmd.setString(9, anh);
+		cmd.setString(10, soTaiKhoan);
+		cmd.executeUpdate();
+		cmd.close();
+		kn.cn.close();
+	}
 }
 
