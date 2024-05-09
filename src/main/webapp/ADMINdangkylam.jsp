@@ -67,6 +67,7 @@
         // Hàm này được sử dụng để kiểm tra định dạng của ngày tháng
         function validateDate() {
             var selectedDate = document.getElementById("selectedDate").value;
+            var selectedDate2 = document.getElementById("selectedDate2").value;
             // Kiểm tra xem selectedDate có đúng định dạng ngày tháng YYYY-MM-DD không
             var regex = /^\d{4}-\d{2}-\d{2}$/;
             if (!regex.test(selectedDate)) {

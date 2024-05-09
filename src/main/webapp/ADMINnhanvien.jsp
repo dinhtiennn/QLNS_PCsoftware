@@ -303,21 +303,6 @@
             modalBody.appendChild(labelElement);
             modalBody.appendChild(valueElement);
         });
-        console.log(maNV);
-        console.log(tenNV);
-        console.log(maCV);
-        console.log(ngaySinh);
-        console.log(gioiTinh);
-        console.log(email);
-        console.log(sdt);
-        console.log(dvct);
-        console.log(chucDanh);
-        console.log(tenDangNhap);
-        console.log(matKhau);
-        console.log(trangThaiCongViec);
-        console.log(ngayvaolam);
-        console.log(ngayketthuc);
-        console.log(stknhanvien);
 	}
 	
 	function showAlert() {
@@ -362,12 +347,10 @@
          // Kiểm tra tính hợp lệ của các trường
          if (!validateName(tennv)) {
              alert("Vui lòng nhập tên nhân viên hợp lệ !");
-             console.log("Tao Chạy tới được đây rồi ");
              return false;
          }
          if (!validateDate(ngaysinh)) {
              alert("Vui lòng nhập ngày sinh hợp lệ !");
-             console.log("Tao Chạy tới được đây rồi 2 ");
              return false;
          }
          if (!validateEmail(email)) {
@@ -377,7 +360,6 @@
          }
          if (!validatePhonenumber(sdt)) {
              alert("Vui lòng nhập số điện thoại hợp lệ!");
-             console.log("Tao Chạy tới được đây rồi 4 ");
              return false;
          }
          return true;
