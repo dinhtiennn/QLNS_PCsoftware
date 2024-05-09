@@ -18,6 +18,7 @@
 <body>
 		<jsp:include page="header.jsp"></jsp:include>
 		<%
+			LocalDate dateNow = LocalDate.now();
 			DangKyLamBo dklambo = new DangKyLamBo();
 			NhanVienBo nvbo = new NhanVienBo();
 			NhanVienBean nhanvien = (NhanVienBean)session.getAttribute("nhanvien"); 
@@ -32,17 +33,18 @@
 			}else if(loaicaString.equals("LC003")){
 				loaica = "Ca tối";
 			}
-			        // Định dạng ngày
-			        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			
+	        // Định dạng ngày
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-			        // Chuyển đổi thành đối tượng LocalDate
-			        LocalDate date = LocalDate.parse(dateString, formatter);
+	        // Chuyển đổi thành đối tượng LocalDate
+	        LocalDate date = LocalDate.parse(dateString, formatter);
 
-			        // Định dạng lại thành "dd/MM/yyyy"
-			        String formattedDate = date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-			        String msgSuccess = (request.getAttribute("msgSuccess")!=null)?request.getAttribute("msgSuccess").toString():"";
-		%>
-		
+	        // Định dạng lại thành "dd/MM/yyyy"
+	        String formattedDate = date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+	        String msgSuccess = (request.getAttribute("msgSuccess")!=null)?request.getAttribute("msgSuccess").toString():"";
+
+	        %>
 		<div style="margin-top: 65px;" class="row">
 			<div class="col-2  mt-5">
 				<jsp:include page="Slidebar.jsp"></jsp:include>
@@ -77,9 +79,11 @@
 			</div>
 			<div class="col-4  mt-5 px-5">
 				<!-- Button trigger modal -->
-				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-				   Đăng kí nghỉ phép cho ngày này
-				</button>
+				<%if (dateNow.isBefore(date)) {%>
+					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+					   Đăng kí nghỉ phép cho ngày này
+					</button>
+	        	<%}%>
 			</div>
 		</div>
 <!-- Modal -->

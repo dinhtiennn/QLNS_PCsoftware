@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -45,26 +46,31 @@ public class NhanVienController extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		String action = request.getParameter("action");
-		if(action != null) {
-			if(action.equals("index")) {
-				index(request, response);
-			}else if(action.equals("showmonthlyschedule")) {
-				showMonthlySchedule(request, response);
-			}else if(action.equals("workregistration")){
-				workRegistration(request, response);
-			}else if(action.equals("showemployeesworkingtogether")){
-				showEmployeesWorkingTogether(request, response);
-			}else if(action.equals("dknghi")){
-				dangKyNghi(request, response);
-			}else if(action.equals("changerinf")){
-				changerinformation(request, response);
-			}else if(action.equals("showarrdkn")){
-				showDsDonDkNghi(request, response);
-			}else if(action.equals("changerpass")){
-				changePass(request, response);
-			}else if(action.equals("showarrluong")){
-				showarrluong(request, response);
+		HttpSession session = request.getSession();
+		if((NhanVienBean)session.getAttribute("nhanvien")!=null) {			
+			if(action != null) {
+				if(action.equals("index")) {
+					index(request, response);
+				}else if(action.equals("showmonthlyschedule")) {
+					showMonthlySchedule(request, response);
+				}else if(action.equals("workregistration")){
+					workRegistration(request, response);
+				}else if(action.equals("showemployeesworkingtogether")){
+					showEmployeesWorkingTogether(request, response);
+				}else if(action.equals("dknghi")){
+					dangKyNghi(request, response);
+				}else if(action.equals("changerinf")){
+					changerinformation(request, response);
+				}else if(action.equals("showarrdkn")){
+					showDsDonDkNghi(request, response);
+				}else if(action.equals("changerpass")){
+					changePass(request, response);
+				}else if(action.equals("showarrluong")){
+					showarrluong(request, response);
+				}
 			}
+		}else {
+			response.sendRedirect("login");			
 		}
 		
 	}

@@ -94,7 +94,7 @@
 											  %>						
 											    <tr>
 											      <th scope="row"></th>
-											      <td><%=item.getThangNam().getMonth()%>/<%=item.getThangNam().getYear()+1900%></td>
+											      <td><%=item.getThangNam().getMonth()+1%>/<%=item.getThangNam().getYear()+1900%></td>
 											      <td><%=item.getSoCaLam()%></td>
 											      <td><%=item.getSoCaNghi()%></td>
 											      <%NumberFormat scientificFormat = NumberFormat.getInstance(Locale.US);

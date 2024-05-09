@@ -231,25 +231,26 @@
 		        <div class="mb-3 row">
 					    <label for="password" class="col-sm-4 col-form-label">Mật khẩu cũ:</label>
 					    <div class="col-sm-8 ">
-					      <input type="password" class="form-control" id="password" name="matkhaucu" required="required">
+					      <input type="password" class="form-control" id="password" name="matkhaucu" required="required" >
 					    </div>
 			    </div>   
+			    <span id="msg" style="color: red;"></span>
 			    <div class="mb-3 row">
 					    <label for="newpassword" class="col-sm-4 col-form-label">Mật khẩu mới:</label>
 					    <div class="col-sm-8">
-					      <input type="password" class="form-control" id="newpassword" name="matkhaumoi" required="required">
+					      <input type="password" class="form-control" id="newpassword" name="matkhaumoi" required="required" onkeyup="kiemTraMatKhau()">
 					    </div>
 			    </div>   
 			    <div class="mb-3 row">
 					    <label for="renewpassword" class="col-sm-4 col-form-label">Nhập lại mật khẩu:</label>
 					    <div class="col-sm-8">
-					      <input type="password" class="form-control" id="renewpassword" name="matkhaumoi2" required="required">
+					      <input type="password" class="form-control" id="renewpassword" name="matkhaumoi2" required="required" onkeyup="kiemTraMatKhau()">
 					    </div>
 			    </div>   
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-		        <button type="submit" class="btn btn-primary">Đổi mật khẩu</button>
+		        <button type="submit" class="btn btn-primary" id="submit">Đổi mật khẩu</button>
 		      </div>
 		      </form>
 		    </div>
@@ -344,4 +345,18 @@ document.addEventListener("DOMContentLoaded", function() {
 		    document.getElementById("msgsuccess").innerHTML = msgSuccess;
 	  }
 	});
+
+function kiemTraMatKhau(){
+	matKhau = document.getElementById("newpassword").value;
+	matKhauNhapLai = document.getElementById("renewpassword").value;
+	if(matKhau!=matKhauNhapLai){
+		document.getElementById("msg").innerHTML = "Mật khẩu không khớp!";
+		document.getElementById("submit").disabled = "disabled";
+		return false;
+	}else{
+		document.getElementById("msg").innerHTML = "";
+		document.getElementById("submit").removeAttribute("disabled");
+		return true;
+	}
+}
 </script>
