@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import adminbo.adminDangKyLamBo;
 import adminbo.adminNhanVienBo;
 import bean.DangKyLamBean;
 import bean.DangKyNghiBean;
@@ -74,6 +75,8 @@ public class QuanLyController extends HttpServlet {
 				danhsachnghilam(request, response);
 			}else if(action.equals("suattnhanvien")) {
 				suattnhanvien(request, response);
+			}else if(action.equals("thongkelichlam")) {
+				thongkelichlam(request, response);
 			}
 		}
 	}
@@ -380,7 +383,6 @@ public class QuanLyController extends HttpServlet {
 				thang = Integer.toString(date.getMonthValue());
 				nam = Integer.toString(date.getYear());
 			}
-				//Nếu tkl.size!=0 ->k có nút duyệt
 				tkl = tkbo.getTKLTheoThangNam(Integer.parseInt(thang), Integer.parseInt(nam));
 				if(tkl.size()==0) {
 					tkl = tkbo.getTKLTamTheoThangNam(Integer.parseInt(thang), Integer.parseInt(nam));
@@ -437,6 +439,47 @@ public class QuanLyController extends HttpServlet {
 			}
 			
 			System.out.println(ngayBatDau + ngayKetThuc);
+			RequestDispatcher rd = request.getRequestDispatcher(url);
+			rd.forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void thongkelichlam(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
+		String url = "QUANLYdangkylam.jsp";
+		System.out.println(url);
+		try {
+			request.setCharacterEncoding("utf-8");
+			response.setCharacterEncoding("utf-8");
+			HttpSession session= request.getSession();
+			
+			adminDangKyLamBo  addklbo = new adminDangKyLamBo();
+			DangKyLamBo dklbo = new DangKyLamBo();
+			String month = request.getParameter("thang");
+			String year = request.getParameter("nam");
+			
+			if(month == null && year == null) {
+				LocalDate currentDate = LocalDate.now();
+				String currentMonth = Integer.toString(currentDate.getMonthValue());
+				String currentYear = Integer.toString(currentDate.getYear());
+				request.setAttribute("BangDangKyLam", addklbo.thongkecalam(Integer.parseInt(currentMonth),Long.parseLong(currentYear)));
+				request.setAttribute("thang", currentMonth);
+			}
+			if(month != null && year != null) {	
+				int m = Integer.parseInt(month);
+				long y = Long.parseLong(year);
+				System.out.println(month + year);
+				request.setAttribute("BangDangKyLam", addklbo.thongkecalam(m,y));
+				request.setAttribute("thang", m);
+			}
+			
+			String manv = request.getParameter("maNV");
+			String btn_xemchitiet = request.getParameter("btn_xemchitiet");
+			if(btn_xemchitiet != null && month != null && year != null) {
+				request.setAttribute("ChiTiet", dklbo.GetDKLbyMaNV_Month_Year(manv, Integer.parseInt(month) , Integer.parseInt(year)));
+				request.setAttribute("thang", month);
+			}
+			
 			RequestDispatcher rd = request.getRequestDispatcher(url);
 			rd.forward(request, response);
 		} catch (Exception e) {

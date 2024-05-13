@@ -32,21 +32,25 @@
 			<div style="text-align: center;">
 				<h1>Danh Sách Nhân Viên Đăng Ký Làm</h1>
 			</div>
-			<form action="adminDangKyLamController" method="get">
+			<form id="form_id" action="adminDangKyLamController" method="post">
+			<input type="hidden" id="maNV_hidden" name="maNV" value="">
+				<%
+				String month = (request.getAttribute("month")!=null)?request.getAttribute("month").toString():"";
+				%>
 		        <label for="month">Chọn Tháng:</label>
 		        <select name="month" id="month">
-		            <option value="1">Tháng 1</option>
-		            <option value="2">Tháng 2</option>
-		            <option value="3">Tháng 3</option>
-		            <option value="4">Tháng 4</option>
-		            <option value="5">Tháng 5</option>
-		            <option value="6">Tháng 6</option>
-		            <option value="7">Tháng 7</option>
-		            <option value="8">Tháng 8</option>
-		            <option value="9">Tháng 9</option>
-		            <option value="10">Tháng 10</option>
-		            <option value="11">Tháng 11</option>
-		            <option value="12">Tháng 12</option>
+		            <option value="1"  <%= (month.equals("1") ? "selected=\"selected\"" : "") %>> 1</option>
+			            <option value="2"  <%= (month.equals("2") ? "selected=\"selected\"" : "") %>> 2</option>
+			            <option value="3"  <%= (month.equals("3") ? "selected=\"selected\"" : "") %>> 3</option>
+			            <option value="4"  <%= (month.equals("4") ? "selected=\"selected\"" : "") %>> 4</option>
+			            <option value="5"  <%= (month.equals("5") ? "selected=\"selected\"" : "") %>> 5</option>
+			            <option value="6"  <%= (month.equals("6") ? "selected=\"selected\"" : "") %>> 6</option>
+			            <option value="7"  <%= (month.equals("7") ? "selected=\"selected\"" : "") %>> 7</option>
+			            <option value="8"  <%= (month.equals("8") ? "selected=\"selected\"" : "") %>> 8</option>
+			            <option value="9"  <%= (month.equals("9") ? "selected=\"selected\"" : "") %>> 9</option>
+			            <option value="10" <%= (month.equals("10") ? "selected=\"selected\"" : "") %>> 10</option>
+			            <option value="11" <%= (month.equals("11") ? "selected=\"selected\"" : "") %>> 11</option>
+			            <option value="12" <%= (month.equals("12") ? "selected=\"selected\"" : "") %>> 12</option>
 		        </select>
 				<label for="year">Chọn Năm:</label>
 			        <select name="year" id="year">
@@ -58,8 +62,7 @@
 			            <% } %>
 			        </select>
 		        <input type="submit" value="Search">
-		    </form>
-		    <%ArrayList<DangKyLamBean> ChiTiet = (ArrayList<DangKyLamBean>) request.getAttribute("ChiTiet"); %>
+		    <%ArrayList<DangKyLamBean> ChiTiet = (ArrayList<DangKyLamBean>)request.getAttribute("ChiTiet"); %>
 		    <%if(ChiTiet == null){ %>
 			<table class="table" >
 					<thead>
@@ -77,7 +80,7 @@
 						<tr>
 							<td><%=tkb.getMaNV()%></td>
 							<td><%=tkb.getSocalam()%></td>
-							<td><a href="adminDangKyLamController?manv=<%=tkb.getMaNV()%>">Xem Chi Tiết</a></td>
+							<td><input type="submit" value="Xem chi tiết" name="btn_xemchitiet" onClick="submitForm('<%=tkb.getMaNV()%>')"></td>
 						</tr>	
 					<%}%>
 					</tbody>
@@ -106,7 +109,18 @@
 					</tbody>
 			</table>
 			<%}%>
+		    </form>
 		</div>
 	</div>
+	
+<script>
+function submitForm(maNV) {
+    // Đặt giá trị mã nhân viên vào input hidden
+    document.getElementById("maNV_hidden").value = maNV;
+    // Gửi form
+    document.getElementById("form_id").submit();
+}
+</script>
+	
 </body>
 </html>

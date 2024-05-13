@@ -23,6 +23,9 @@
 	  <li class="nav-item">
 	    <a class="nav-link" href="quanly?action=danhsachnghilam">Danh sách nghỉ làm</a>
 	  </li>
+	  <li class="nav-item">
+	    <a class="nav-link" href="quanly?action=thongkelichlam">Thống kê lịch làm</a>
+	  </li>
 	</ul>
 </body>
 </html>

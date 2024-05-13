@@ -182,7 +182,7 @@ public class DangKyLichLamdao {
 		ArrayList<DangKyLamBean> ds = new ArrayList<DangKyLamBean>();
 		ketnoiDB kn = new ketnoiDB();
 		kn.ketnoi();
-		String sql = "select * from DangKyLichLam where MaNV = ? and month(NgayDK)= ? and YEAR(NgayDK) = ?";
+		String sql = "select * from DangKyLichLam where MaNV = ? and month(NgayDK)= ? and YEAR(NgayDK) = ? order by NgayDK";
 		PreparedStatement cmd = kn.cn.prepareStatement(sql);
 		cmd.setString(1, manv);
 		cmd.setInt(2, month);
