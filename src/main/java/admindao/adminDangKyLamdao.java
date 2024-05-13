@@ -7,14 +7,18 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import bean.DangKyLamBean;
+import bean.NhanVienBean;
+import bean.thongkecalambean;
+import dao.ketnoiDB;
 
 public class adminDangKyLamdao {
-	public ArrayList<DangKyLamBean> GetAllDKL() throws Exception{
+	public ArrayList<DangKyLamBean> GetDKLtheoma(String Manv ) throws Exception{
 		ArrayList<DangKyLamBean> ds = new ArrayList<DangKyLamBean>();
 		ketnoiDB kn = new ketnoiDB();
 		kn.ketnoi();
-		String sql = "select * from DangKyLichLam";
+		String sql = "select * from DangKyLichLam where MaNV = ?";
 		PreparedStatement cmd = kn.cn.prepareStatement(sql);
+		cmd.setString(1, Manv);
 		ResultSet rs = cmd.executeQuery();
 		while(rs.next()) {
 			Long MaDKLam = rs.getLong("MaDKLam");
@@ -67,5 +71,28 @@ public class adminDangKyLamdao {
 		cmd.close();
 		kn.cn.close();
 	}
-	
+	public ArrayList<thongkecalambean> thongkecalam( int thang ,long nam) throws Exception{
+		ArrayList<thongkecalambean> ds = new ArrayList<thongkecalambean>();
+		NhanVienBean nvb = null;
+		ketnoiDB kn = new ketnoiDB();
+		kn.ketnoi();
+		String sql = "SELECT MaNV, COUNT(*) AS total_shifts\r\n"
+				+ "FROM DangKyLichLam\r\n"
+				+ "WHERE MONTH(NgayDK) = ?\r\n"
+				+ "AND YEAR(NgayDK) = ? \r\n"
+				+ "GROUP BY MaNV;";
+		PreparedStatement cmd = kn.cn.prepareStatement(sql);
+		cmd.setInt(1, thang);
+		cmd.setLong(2, nam);
+		ResultSet rs = cmd.executeQuery();
+		while(rs.next()) {
+			String MaNV = rs.getString("MaNV");
+			long SoCL = rs.getInt("total_shifts");
+			ds.add(new thongkecalambean(MaNV,SoCL));
+			}
+		rs.close();
+		kn.cn.close();
+		
+		return ds;
+	}
 }

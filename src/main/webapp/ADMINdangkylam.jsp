@@ -1,3 +1,4 @@
+<%@page import="bean.thongkecalambean"%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="bean.DangKyLamBean"%>
 <%@page import="java.util.ArrayList"%>
@@ -31,55 +32,81 @@
 			<div style="text-align: center;">
 				<h1>Danh Sách Nhân Viên Đăng Ký Làm</h1>
 			</div>
-			<form action="adminDangKyLamController" method="post" onsubmit="return validateDate()">
-		        <label for="selectedDate">Tìm kiếm từ ngày :</label>
-		        <input type="date" id="selectedDate" name="selectedDate" required>
-		        <label for="selectedDate2">đến ngày :</label>
-		        <input type="date" id="selectedDate2" name="selectedDate2" required>
+			<form action="adminDangKyLamController" method="get">
+		        <label for="month">Chọn Tháng:</label>
+		        <select name="month" id="month">
+		            <option value="1">Tháng 1</option>
+		            <option value="2">Tháng 2</option>
+		            <option value="3">Tháng 3</option>
+		            <option value="4">Tháng 4</option>
+		            <option value="5">Tháng 5</option>
+		            <option value="6">Tháng 6</option>
+		            <option value="7">Tháng 7</option>
+		            <option value="8">Tháng 8</option>
+		            <option value="9">Tháng 9</option>
+		            <option value="10">Tháng 10</option>
+		            <option value="11">Tháng 11</option>
+		            <option value="12">Tháng 12</option>
+		        </select>
+				<label for="year">Chọn Năm:</label>
+			        <select name="year" id="year">
+			            <% 
+			                long currentYear = java.time.LocalDate.now().getYear();
+			                for (long i = currentYear; i >= currentYear - 10; i--) {
+			            %>
+			            <option value="<%= i %>"><%= i %></option>
+			            <% } %>
+			        </select>
 		        <input type="submit" value="Search">
 		    </form>
+		    <%ArrayList<DangKyLamBean> ChiTiet = (ArrayList<DangKyLamBean>) request.getAttribute("ChiTiet"); %>
+		    <%if(ChiTiet == null){ %>
 			<table class="table" >
 					<thead>
 						<tr>
-							<th>Mã Đăng Ký </th>
 							<th>Mã Nhân viên</th>
-							<th>Mã Loại Ca</th>
-							<th>Ngày Đăng Ký</th>
+							<th>Số ca làm trong tháng</th>
+							<th>Chi tiết ca làm</th>
 						</tr>
 					</thead>
 					<tbody>
-					<% ArrayList<DangKyLamBean> ds = (ArrayList<DangKyLamBean>)request.getAttribute("BangDangKyLam");
+					<% ArrayList<thongkecalambean> ds = (ArrayList<thongkecalambean>)request.getAttribute("BangDangKyLam");
 					int n = ds.size();
 					for(int i =0; i<n;i++){
-						DangKyLamBean dkb = ds.get(i);%>
+						thongkecalambean tkb = ds.get(i);%>
 						<tr>
-							<td><%=dkb.getMaDkLam()%></td>
-							<td><%=dkb.getMaNV()%></td>
-							<td><%=dkb.getMaLoaica()%></td>
-							<td><%=dkb.getNgayDK()%></td>
+							<td><%=tkb.getMaNV()%></td>
+							<td><%=tkb.getSocalam()%></td>
+							<td><a href="adminDangKyLamController?manv=<%=tkb.getMaNV()%>">Xem Chi Tiết</a></td>
 						</tr>	
 					<%}%>
 					</tbody>
 			</table>
+			<%}%>
+			<%if(ChiTiet != null){ %>
+			<table class="table" >
+					<thead>
+						<tr>
+							<th>Mã Nhân viên</th>
+							<th>Mã Loại ca</th>
+							<th>Ngày Đăng ký</th>
+						</tr>
+					</thead>
+					<tbody>
+					<% 
+					int n = ChiTiet.size();
+					for(int i =0; i<n;i++){
+						DangKyLamBean tkb = ChiTiet.get(i);%>
+						<tr>
+							<td><%=tkb.getMaNV()%></td>
+							<td><%=tkb.getMaLoaica()%></td>
+							<td><%=tkb.getNgayDK()%></td>
+						</tr>	
+					<%}%>
+					</tbody>
+			</table>
+			<%}%>
 		</div>
 	</div>
-<script>
-        // Hàm này được sử dụng để kiểm tra định dạng của ngày tháng
-        function validateDate() {
-            var selectedDate = document.getElementById("selectedDate").value;
-            var selectedDate2 = document.getElementById("selectedDate2").value;
-            // Kiểm tra xem selectedDate có đúng định dạng ngày tháng YYYY-MM-DD không
-            var regex = /^\d{4}-\d{2}-\d{2}$/;
-            if (!regex.test(selectedDate)) {
-                alert("Vui lòng chọn ngày tháng hợp lệ (YYYY-MM-DD)!");
-                return false;
-            }
-            if (!regex.test(selectedDate2)) {
-                alert("Vui lòng chọn ngày tháng hợp lệ (YYYY-MM-DD)!");
-                return false;
-            }
-            return true;
-        }
-</script>
 </body>
 </html>

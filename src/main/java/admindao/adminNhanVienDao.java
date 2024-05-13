@@ -1,5 +1,6 @@
 package admindao;
 
+import java.lang.reflect.Array;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,6 +8,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import bean.NhanVienBean;
+import bean.thongkecalambean;
+import controller.main;
 import dao.ketnoiDB;
 
 public class adminNhanVienDao {
