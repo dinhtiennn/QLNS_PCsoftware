@@ -55,7 +55,7 @@
 	        // Định dạng lại thành "dd/MM/yyyy"
 	        String formattedDate = date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 	%>
-	<div class="d-flex">
+	<div class="d-flex" style="margin-top: 52px;">
 		<div class="col-2 mt-5">
 			<%
 			if(nhanvien.getMaCV().equals("CV001")){
@@ -304,24 +304,25 @@
 			    </div>
 			  </div>
 		</div>
-		<!-- Modal Success-->
-	<div class="modal fade" id="staticBackdropSuccess" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      	<div class="modal-body">
-	        	<div class="alert alert-success" role="alert">
-	        		<span id="msgsuccess"></span>
-				</div>			
-			</div>
-	      	<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-				<a href="index">		      		
-	      			<button type="button" class="btn btn-success">Trang chủ</button>
-		      	</a>
-				
-	      	</div>
-	    </div>
-	  </div>
+			<!-- Modal Success-->
+		<div class="modal fade" id="staticBackdropSuccess" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      	<div class="modal-body">
+		        	<div class="alert alert-success" role="alert">
+		        		<span id="msgsuccess"></span>
+					</div>			
+				</div>
+		      	<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<a href="index">		      		
+		      			<button type="button" class="btn btn-success">Trang chủ</button>
+			      	</a>
+					
+		      	</div>
+		    </div>
+		  </div>
+		</div>
 	</div>
 </body>
 </html>

@@ -37,7 +37,7 @@
 					<jsp:include page="Slidebar.jsp"></jsp:include>
 				</div>
 				<div class="col mt-5">
-					<h2 class="mb-5">Danh sách đăng ký nghỉ của tháng: <%=thang%></h2>
+					<h2 class="mb-5 px-5 mx-5">Danh sách đăng ký nghỉ của tháng: <%=thang%></h2>
 					<div class="row container">
 						<form action="nhanvien?action=showarrdkn" method="post">
 						 	<div class="row">

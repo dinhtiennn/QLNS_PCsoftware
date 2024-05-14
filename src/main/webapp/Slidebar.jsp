@@ -7,22 +7,34 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<ul class="nav flex-column">
-	  <li class="nav-item">
-	    <a class="nav-link" href="index">Trang chủ</a>
-	  </li>
-	  <li class="nav-item">
-	    <a class="nav-link" href="nhanvien?action=showmonthlyschedule">Lịch trình tháng</a>
-	  </li>
-	  <li class="nav-item">
-	    <a class="nav-link" href="nhanvien?action=workregistration">Đăng ký làm việc</a>
-	  </li>
-	  <li class="nav-item">
-	    <a class="nav-link" href="nhanvien?action=showarrdkn">Danh sách nghỉ</a>
-	  </li>
-	  <li class="nav-item">
-	    <a class="nav-link" href="nhanvien?action=showarrluong">Thống kê lương</a>
-	  </li>
-	</ul>
+	<div class="d-flex flex-column flex-shrink-0 p-3 bg-body" style="width: 280px;">
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item">
+        <a href="index" class="nav-link link-body-emphasis" aria-current="page">
+          Lịch trình tuần hiện tại
+        </a>
+      </li>
+      <li>
+        <a href="nhanvien?action=workregistration" class="nav-link link-body-emphasis">
+          Đăng ký làm việc
+        </a>
+      </li>
+      <li>
+        <a href="nhanvien?action=showmonthlyschedule" class="nav-link link-body-emphasis">
+          Lịch trình tháng
+        </a>
+      </li>
+      <li>
+        <a href="nhanvien?action=showarrdkn" class="nav-link link-body-emphasis">
+          Danh sách nghỉ
+        </a>
+      </li>
+      <li>
+        <a href="nhanvien?action=showarrluong" class="nav-link link-body-emphasis">
+          Thống kê lương
+        </a>
+      </li>
+    </ul>
+    </div>
 </body>
 </html>

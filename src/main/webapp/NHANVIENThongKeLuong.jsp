@@ -27,7 +27,7 @@
     String msg = (request.getAttribute("msg")!=null)?request.getAttribute("msg").toString():"";
     ArrayList<ThongKeLuongBean> tkl = ((ArrayList<ThongKeLuongBean>)request.getAttribute("tk")!=null)?(ArrayList<ThongKeLuongBean>)request.getAttribute("tk"):new ArrayList<ThongKeLuongBean>();
 				if(tkl.size()!=0){%>
-					<h2 class="mb-5">Danh sách thống kê lương <%=((thang).trim().length()!=0)?"tháng":""%>: <%=thang%></h2>
+					<h2 class="mb-5 px-5 mx-5">Danh sách thống kê lương <%=((thang).trim().length()!=0)?"tháng":""%>: <%=thang%></h2>
 					<%}else if(tkl.size()==0){%>
 					<h2 class="mb-5"><%=msg%></h2>
 					<%}%>
