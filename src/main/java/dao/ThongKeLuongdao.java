@@ -140,5 +140,31 @@ public class ThongKeLuongdao {
 		kn.cn.close();
 		return ds;
 	}
-	
+	public void DuyetLuongTheoThangNam_Moi(TKeLuongBean tlb) throws Exception{
+		ketnoiDB kn = new ketnoiDB();
+		kn.ketnoi();
+		String sql = "insert into ThongKeLuong (MaNV, ThangNam, SoCaLam, SoCaNghi, Luong) values (?, ?, ?, ?, ?)";
+		PreparedStatement cmd = kn.cn.prepareStatement(sql);
+		cmd.setString(1, tlb.getMaNV());
+		SimpleDateFormat dd= new SimpleDateFormat("yyyy-MM-dd");
+		String Sdate= dd.format(tlb.getThangNam());	// Doi ngay ra chuoi theo dd
+		java.util.Date s = dd.parse(Sdate);
+		cmd.setDate(2,new java.sql.Date(s.getTime()));
+		cmd.setInt(3, tlb.getSoCaLam());
+		cmd.setInt(4, tlb.getSoCaNghiKhongPhep());
+		cmd.setFloat(5, tlb.getLuong());
+		cmd.executeUpdate();
+		kn.cn.close();
+	}
+	public void XoaTKL(int thang, int nam) throws Exception {
+	    ketnoiDB kn = new ketnoiDB();
+	    kn.ketnoi();
+	    String sql = "delete from ThongKeLuong where MONTH(ThangNam) = ? and YEAR(ThangNam) = ?";
+	    PreparedStatement cmd = kn.cn.prepareStatement(sql);
+	    cmd.setInt(1,thang);
+	    cmd.setInt(2, nam);
+	    cmd.executeUpdate();
+	    cmd.close();
+	    kn.cn.close();
+	}
 }

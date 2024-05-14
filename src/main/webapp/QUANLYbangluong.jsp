@@ -39,10 +39,10 @@
 		%>
 		<div class="col-10 mt-4" style="margin-top: 8rem !important;" >
 			<div class="row container">
-						    <div style="text-align: center;">
-								<h1>Tính lương</h1>
-							</div>
-				<form action="quanly?action=thongkeluong" method="post">
+			<div style="text-align: center;">
+				<h1>Bảng lương</h1>
+			</div>
+				<form action="quanly?action=bangluong" method="post">
 				 	<div class="row">
 						    <div class="col-sm-4">
 						       <select class="form-control col" id="month" name="thang">
@@ -73,31 +73,21 @@
 									      <th>Mã NV</th>
 									      <th>Số ca làm</th>
 									      <th>Số ca nghỉ không phép</th>
-									      <th>Tổng số ca nghỉ</th>
-									      <th>Lương tạm tính</th>
-									      <th>Lương thưởng</th>
-									      <th>Lương phạt</th>
 									      <th>Tổng lương</th>
 									    </tr>
 									  </thead>
 									  <tbody>
 									  <%int i = 1;
-									  for(TKeLuongBean item : tkl_tam){
+									  for(ThongKeLuongBean item : tkl){
 									  %>						
 									    <tr>
 									      <th scope="row"><%=i%></th>
 									      <td><%=item.getMaNV()%></td>
 									      <td><%=item.getSoCaLam()%></td>
-									      <td><%=item.getSoCaNghiKhongPhep()%></td>
-									      <td><%=item.getTongSoCaNghi() %></td>
+									      <td><%=item.getSoCaNghi()%></td>
 									      <%NumberFormat scientificFormat = NumberFormat.getInstance(Locale.US);
 									      scientificFormat.setMaximumFractionDigits(2);%>
 									      <td><%=scientificFormat.format(item.getLuong())%> VND
-									      <input type="hidden" name="luongtam<%= i %>" value="<%= item.getLuong() %>"></td>
-									      <td><input type="number" class="form-control" name="luongthuong<%= i %>" value="0" step="0.01"></td>
-			                                <td><input type="number" class="form-control" name="luongphat<%= i %>" value="0" step="0.01"></td>
-			                                <td><input type="text" class="form-control-plaintext" readonly value="<%=(request.getAttribute("tongluong" + (i))==null)?"":scientificFormat.format(request.getAttribute("tongluong" + (i))) + "VND"%> "> 
-			                                <input type="hidden" class="form-control-plaintext" name="tongluong<%= i %>" readonly value="<%=(request.getAttribute("tongluong" + (i))==null)?"":request.getAttribute("tongluong" + (i))%> "> </td>
 									    </tr>
 									  <%i++;}%>
 									  </tbody>
@@ -105,26 +95,9 @@
 								</div>
 						</div>
 					 </div>
-					<div class="col-sm-4">
-						<button type="submit" class="btn btn-primary" name="duyet">Cập nhật</button>			
-						<button type="submit" class="btn btn-primary" name="tinhluongtam">Tạm tính</button>					
-			    	</div>
 				</form>
 			</div>
 		</div>
 	</div>
-	
-<script>
-function calculateTotalSalary() {
-    const rows = document.querySelectorAll('table tbody tr');
-    rows.forEach(row => {
-        const luongTamTinh = parseFloat(row.querySelector('input[name^="luongtam"]').value) || 0;
-        const luongThuong = parseFloat(row.querySelector('input[name^="luongthuong"]').value) || 0;
-        const luongPhat = parseFloat(row.querySelector('input[name^="luongphat"]').value) || 0;
-        const tongLuong = luongTamTinh + luongThuong - luongPhat;
-        row.querySelector('input[name^="tongluong"]').value = tongLuong.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' VND';
-    });
-}
-</script>
 </body>
 </html>

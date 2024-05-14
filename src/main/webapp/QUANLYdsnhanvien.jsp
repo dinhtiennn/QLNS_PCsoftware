@@ -58,6 +58,9 @@
 				<jsp:include page="QUANLYslidebar.jsp"></jsp:include>
 			</div>
 			<div class="col-10" style="margin-top: 8rem !important;">
+			<div style="text-align: center;">
+				<h1>Danh sách nhân viên</h1>
+			</div>
 					<!-- <button type="button" class="btn btn-warning" id="openModalBtn">Thêm mới nhân viên</button> -->
 					
 				<!-- Button trigger modal -->

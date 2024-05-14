@@ -79,6 +79,12 @@ public class ThongKeLuongBo {
 	public ArrayList<TKeLuongBean> getTKLTamTheoThangNam_Moi(int thang, int nam) throws Exception{
 		return tkdao.getTKLTamTheoThangNam_Moi(thang, nam);
 	}
+	public void DuyetLuongTheoThangNam_Moi(TKeLuongBean tlb) throws Exception{
+		tkdao.DuyetLuongTheoThangNam_Moi(tlb);
+	}
+	public void XoaTKL(int thang, int nam) throws Exception {
+	    tkdao.XoaTKL(thang, nam);
+	}
 //	public static void main(String[] args) {
 //		ThongKeLuongBo tkbo = new ThongKeLuongBo();
 //		ArrayList<TKeLuongBean> tkl = new ArrayList<TKeLuongBean>();

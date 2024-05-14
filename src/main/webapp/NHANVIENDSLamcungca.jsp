@@ -50,6 +50,7 @@
 				<jsp:include page="Slidebar.jsp"></jsp:include>
 			</div>
 			<div class="col-6  mt-5">
+				<h2 class="text-center mb-3">Danh sách nhân viên:</h2>
 				<br>
 				<br>
 					Ngày: <%=formattedDate%> 

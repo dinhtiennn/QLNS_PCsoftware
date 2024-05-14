@@ -53,32 +53,39 @@ public class QuanLyController extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		String action = request.getParameter("action");
 		System.out.println(action);
-		if(action != null) {
-			if(action.equals("quanlyIndex")) {
-				quanlyIndex(request, response);
-			}else if(action.equals("showMonthlySchedule")) {
-				showMonthlySchedule(request, response);
-			}else if(action.equals("xemdsdangkinghi")){
-				xemdsdangkinghi(request, response);
-			}else if(action.equals("showemployeesworkingtogether")){
-				showEmployeesWorkingTogether(request, response);
-			}else if(action.equals("duyetlichnghi")) {
-				duyetlichnghi(request, response);	
-			}else if(action.equals("danhvangkhongphep")) {
-				danhvangkhongphep(request, response);	
-			}else if(action.equals("danhsachnhanvien")) {
-				danhsachnhanvien(request, response);
-			}else if(action.equals("themnhanvien")) {
-				themnhanvien(request, response);
-			}else if(action.equals("thongkeluong")) {
-				thongkeluong(request, response);
-			}else if(action.equals("danhsachnghilam")) {
-				danhsachnghilam(request, response);
-			}else if(action.equals("suattnhanvien")) {
-				suattnhanvien(request, response);
-			}else if(action.equals("thongkelichlam")) {
-				thongkelichlam(request, response);
+		HttpSession session = request.getSession();
+		if((NhanVienBean)session.getAttribute("nhanvien")!=null) {			
+			if(action != null) {
+				if(action.equals("quanlyIndex")) {
+					quanlyIndex(request, response);
+				}else if(action.equals("showMonthlySchedule")) {
+					showMonthlySchedule(request, response);
+				}else if(action.equals("xemdsdangkinghi")){
+					xemdsdangkinghi(request, response);
+				}else if(action.equals("showemployeesworkingtogether")){
+					showEmployeesWorkingTogether(request, response);
+				}else if(action.equals("duyetlichnghi")) {
+					duyetlichnghi(request, response);	
+				}else if(action.equals("danhvangkhongphep")) {
+					danhvangkhongphep(request, response);	
+				}else if(action.equals("danhsachnhanvien")) {
+					danhsachnhanvien(request, response);
+				}else if(action.equals("themnhanvien")) {
+					themnhanvien(request, response);
+				}else if(action.equals("thongkeluong")) {
+					thongkeluong(request, response);
+				}else if(action.equals("danhsachnghilam")) {
+					danhsachnghilam(request, response);
+				}else if(action.equals("suattnhanvien")) {
+					suattnhanvien(request, response);
+				}else if(action.equals("thongkelichlam")) {
+					thongkelichlam(request, response);
+				}else if(action.equals("bangluong")) {
+					bangluong(request, response);
+				}
 			}
+		}else {
+			response.sendRedirect("login");			
 		}
 	}
 
@@ -385,42 +392,72 @@ public class QuanLyController extends HttpServlet {
 				thang = Integer.toString(date.getMonthValue());
 				nam = Integer.toString(date.getYear());
 			}
-//				tkl = tkbo.getTKLTheoThangNam(Integer.parseInt(thang), Integer.parseInt(nam));
-				tkl = tkbo.getTKLTheoThangNam(Integer.parseInt(thang), Integer.parseInt(nam));
-				if(tkl.size()==0) {
-					tkl_tam = tkbo.getTKLTamTheoThangNam_Moi(Integer.parseInt(thang), Integer.parseInt(nam));
-					
-					System.out.println(tkl_tam);
-					for (TKeLuongBean thongKeLuongBean : tkl_tam) {
-						thongKeLuongBean.setLuong(tkbo.TinhLuong(tsktbo.GetThongSo(),thongKeLuongBean.getSoCaLam(), thongKeLuongBean.getSoCaNghiKhongPhep()));
-					}
-					request.setAttribute("thang", thang);
-					request.setAttribute("nam", nam);
-					request.setAttribute("tkl_tam", tkl_tam);
-					request.setAttribute("msg", "Danh sách tạm tính:");
-				}else {
-					request.setAttribute("thang", thang);
-					request.setAttribute("nam", nam);
-					request.setAttribute("tkl", tkl);
+
+				tkl_tam = tkbo.getTKLTamTheoThangNam_Moi(Integer.parseInt(thang), Integer.parseInt(nam));
+				
+				System.out.println(tkl_tam);
+				for (TKeLuongBean thongKeLuongBean : tkl_tam) {
+					thongKeLuongBean.setLuong(tkbo.TinhLuong(tsktbo.GetThongSo(),thongKeLuongBean.getSoCaLam(), thongKeLuongBean.getSoCaNghiKhongPhep()));
 				}
-				 if (request.getParameter("tinhluongtam") != null) {
-			            for (int i = 0; i < tkl_tam.size(); i++) {
-			            	double luongTamTinh = Double.parseDouble(request.getParameter("luongtam" + (i + 1)));
-			                double luongThuong = Double.parseDouble(request.getParameter("luongthuong" + (i + 1)));
-			                double luongPhat = Double.parseDouble(request.getParameter("luongphat" + (i + 1)));
-			                double tongLuong = luongTamTinh + luongThuong - luongPhat;
-			                System.out.println(tongLuong);
-			                // Cập nhật lại giá trị tổng lương
-			                request.setAttribute("tongluong" + (i + 1), tongLuong);
-			            }
-				 }
+				request.setAttribute("thang", thang);
+				request.setAttribute("nam", nam);
+				request.setAttribute("tkl_tam", tkl_tam);
+				request.setAttribute("msg", "Danh sách tạm tính:");
+			
+			if(request.getParameter("tinhluongtam") != null) {
+		            for (int i = 0; i < tkl_tam.size(); i++) {
+		            	double luongTamTinh = Double.parseDouble(request.getParameter("luongtam" + (i + 1)));
+		                double luongThuong = Double.parseDouble(request.getParameter("luongthuong" + (i + 1)));
+		                double luongPhat = Double.parseDouble(request.getParameter("luongphat" + (i + 1)));
+		                double tongLuong = luongTamTinh + luongThuong - luongPhat;
+		                System.out.println(tongLuong);
+		                // Cập nhật lại giá trị tổng lương
+		                request.setAttribute("tongluong" + (i + 1), tongLuong);
+		            }
+			 }
 			System.out.println(tkl);
 			if(request.getParameter("duyet") != null) {
-				for (ThongKeLuongBean thongKeLuongBean : tkl) {
-					tkbo.DuyetLuongTheoThangNam(thongKeLuongBean);
-				}
+				tkbo.XoaTKL(Integer.parseInt(thang), Integer.parseInt(nam));
+				for (int i = 0; i < tkl_tam.size(); i++) {
+	            	double tongLuong = Double.parseDouble(request.getParameter("tongluong" + (i + 1)));
+	            	 tkl_tam.get(i).setLuong((float)tongLuong);
+	            	 tkbo.DuyetLuongTheoThangNam_Moi(tkl_tam.get(i));
+	            	 request.setAttribute("tkl_tam", tkl_tam);
+	            }
 			}
+			RequestDispatcher rd = request.getRequestDispatcher(url);
+			rd.forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void bangluong(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
+		String url = "QUANLYbangluong.jsp";
+		System.out.println(url);
+		try {
+			request.setCharacterEncoding("utf-8");
+			response.setCharacterEncoding("utf-8");
+			HttpSession session = request.getSession();
+			NhanVienBean nhanvien = (NhanVienBean)session.getAttribute("nhanvien");
+			DangKyNghibo dknbo = new DangKyNghibo();
+			DangKyLamBo dklbo = new DangKyLamBo();
+			NhanVienBo nvbo = new NhanVienBo();
+			ThongKeLuongBo tkbo = new ThongKeLuongBo();
 			
+			ArrayList<NhanVienBean> nvbean = nvbo.getnhanvien();
+			ArrayList<ThongKeLuongBean> tkl = new ArrayList<ThongKeLuongBean>();
+			String thang = request.getParameter("thang");
+			String nam = request.getParameter("nam");
+			ThongSoKyThuatBo tsktbo = new ThongSoKyThuatBo();
+			if(thang == null && nam == null) {				
+				LocalDate date = LocalDate.now();
+				thang = Integer.toString(date.getMonthValue());
+				nam = Integer.toString(date.getYear());
+			}
+			tkl = tkbo.getTKLTheoThangNam(Integer.parseInt(thang), Integer.parseInt(nam));
+			request.setAttribute("thang", thang);
+			request.setAttribute("nam", nam);
+			request.setAttribute("tkl", tkl);
 			RequestDispatcher rd = request.getRequestDispatcher(url);
 			rd.forward(request, response);
 		} catch (Exception e) {

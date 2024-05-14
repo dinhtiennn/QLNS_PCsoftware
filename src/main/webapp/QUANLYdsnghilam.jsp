@@ -17,6 +17,9 @@
 				<jsp:include page="QUANLYslidebar.jsp"></jsp:include>
 			</div>
 			<div class="col-6  mt-5" style="margin-top: 8rem !important;">
+			<div style="text-align: center;">
+				<h1>Danh sách nghỉ làm</h1>
+			</div>
 				<form action="quanly?action=danhsachnghilam" method="post" onsubmit="return validateDate()">
 			        <label for="selectedDate">Tìm kiếm từ ngày :</label>
 			        <input type="date" id="selectedDate" name="ngayBatDau" required>

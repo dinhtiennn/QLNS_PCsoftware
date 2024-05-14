@@ -16,35 +16,80 @@
 .dkl-content {
     box-shadow: var(--bs-box-shadow) !important;
     width: 65%;
-    height: 40%;}
-table {
-            border-collapse: collapse;
-            width: 100%;
-        }
+    height: 40%;
+    padding: 24px;
+    margin: 100px 0 20px 0;
+}
+/* Center the form container */
+.selectDate {
+    margin-top: 20px;
+}
 
-        th, td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: center;
-        }
-		
-        th {
-            background-color: #f2f2f2;
-        }
-        h2{
-        	text-align: center;
-        	padding: 48px 0px 16px 0px;
-    		font-size: larger;
-        }
+/* Style each form section */
+.selectDate > div {
+    margin: 10px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 200px;
+}
+
+/* Label styling */
+label {
+    display: block;
+    margin-bottom: 8px;
+    margin-right: 8px;
+    font-weight: bold;
+    color: #333;
+    line-height: 2.3;
+}
+
+/* Select box styling */
+select {
+    width: 100%;
+    height: 40px;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* Submit button styling */
+input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .d-flex {
+        flex-direction: column;
+    }
+
+    .d-flex > div {
+        width: 100%;
+    }
+}
 </style>
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
-	<div class="row">
-		<div class="col-2 mt-5" style="margin-top: 8rem !important;">
+	<div class="d-flex justify-content-center">
+		<div>
 		<jsp:include page="QUANLYslidebar.jsp"></jsp:include>
 	</div>
-	<div class="col-10" style="margin-top: 7rem !important;">
 		<div class="dkl-content">
 			<div style="text-align: center;">
 				<h1>Danh Sách Nhân Viên Đăng Ký Làm</h1>
@@ -54,6 +99,8 @@ table {
 				<%
 		        String thang = (request.getAttribute("thang")!=null)?request.getAttribute("thang").toString():"";
 				%>
+				<div class="selectDate d-flex justify-content-center align-item-center">
+			        <div class="d-flex justify-content-center align-item-center">
 			        <label for="month">Chọn Tháng:</label>
 			        <select name="thang" id="month">
 			            <option value="1"  <%= (thang.equals("1") ? "selected=\"selected\"" : "") %>> 1</option>
@@ -69,6 +116,8 @@ table {
 			            <option value="11" <%= (thang.equals("11") ? "selected=\"selected\"" : "") %>> 11</option>
 			            <option value="12" <%= (thang.equals("12") ? "selected=\"selected\"" : "") %>> 12</option>
 			        </select>
+			        </div>
+			        <div class="d-flex justify-content-center align-item-center">
 					<label for="year">Chọn Năm:</label>
 				        <select name="nam" id="year">
 				            <% 
@@ -78,7 +127,9 @@ table {
 				            <option value="<%= i %>"><%= i %></option>
 				            <% } %>
 				        </select>
-			        <input type="submit" value="Search">
+				    </div>    
+			        <input type="submit" value="Search" style="height: 40px;line-height: 1; margin-left: 8px; margin-top: 31px;">
+			    </div>
 			    <%ArrayList<DangKyLamBean> ChiTiet = (ArrayList<DangKyLamBean>) request.getAttribute("ChiTiet"); %>
 			    <%if(ChiTiet == null){ %>
 				<table class="table">
@@ -136,7 +187,6 @@ table {
 				<%}%>
 		    </form>
 		</div>
-	</div>
 	</div>
 
 <script>
