@@ -1,3 +1,6 @@
+<%@page import="bo.ThongSoKyThuatBo"%>
+<%@page import="bean.ThongSoKiThuatBean"%>
+<%@page import="bo.ThongKeLuongBo"%>
 <%@page import="java.util.Locale"%>
 <%@page import="java.text.NumberFormat"%>
 <%@page import="bean.ThongKeLuongBean"%>
@@ -25,7 +28,15 @@
 	String thang = (request.getAttribute("thang")!=null)?request.getAttribute("thang").toString():"";
    	String nam = (request.getAttribute("nam")!=null)?request.getAttribute("nam").toString():"";
     String msg = (request.getAttribute("msg")!=null)?request.getAttribute("msg").toString():"";
+    ThongKeLuongBo tklbo = new ThongKeLuongBo();
+    ThongSoKyThuatBo tsktbo = new ThongSoKyThuatBo();
     ArrayList<ThongKeLuongBean> tkl = ((ArrayList<ThongKeLuongBean>)request.getAttribute("tk")!=null)?(ArrayList<ThongKeLuongBean>)request.getAttribute("tk"):new ArrayList<ThongKeLuongBean>();
+    ThongSoKiThuatBean tskt = new ThongSoKiThuatBean();
+    try {
+    	tskt =  tsktbo.GetThongSo();
+    } catch (Exception e) {
+    	e.printStackTrace();
+    }
 				if(tkl.size()!=0){%>
 					<h2 class="mb-5 px-5 mx-5">Danh sách thống kê lương <%=((thang).trim().length()!=0)?"tháng":""%>: <%=thang%></h2>
 					<%}else if(tkl.size()==0){%>
@@ -84,13 +95,21 @@
 											      <th scope="col">#</th>
 											      <th scope="col">Tháng</th>
 											      <th scope="col">Số ca làm</th>
-											      <th scope="col">Số ca nghỉ</th>
-											      <th scope="col">Lương</th>
+											      <th scope="col">Số ca nghỉ không phép</th>
+											      <th scope="col">Tạm tính</th>
+											      <th scope="col">Thưởng/phạt</th>
+											      <th scope="col">Tổng</th>
 											    </tr>
 											  </thead>
 											  <tbody>
 											  <%int i = 1;
 											  for(ThongKeLuongBean item : tkl){
+												  double luong = 0;
+												  try {
+													  luong = tklbo.TinhLuong(tskt, item.getSoCaLam(), item.getSoCaNghi());
+												  } catch (Exception e) {
+													  e.printStackTrace();
+												  }
 											  %>						
 											    <tr>
 											      <th scope="row"></th>
@@ -99,6 +118,8 @@
 											      <td><%=item.getSoCaNghi()%></td>
 											      <%NumberFormat scientificFormat = NumberFormat.getInstance(Locale.US);
 											      scientificFormat.setMaximumFractionDigits(2);%>
+											      <td></td>
+											      <td></td>
 											      <td><%=scientificFormat.format(item.getLuong())%> VND</td>
 											    </tr>
 											  <%i++;} %>
