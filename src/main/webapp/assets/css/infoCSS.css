@@ -1537,6 +1537,7 @@ a.text-white:focus {
 
 .main-content {
     position: relative;
+    margin-top: 16px;
 }
 
 .main-content .navbar-top {

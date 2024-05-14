@@ -25,6 +25,7 @@ input:focus-visible {
   overflow: hidden; /* Ẩn phần nội dung vượt quá kích thước của phần tử */
   position: fixed;
   top: 132px;
+  z-index: 1000;
 }
 
 .ts-content {

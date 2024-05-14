@@ -39,6 +39,125 @@
 	text-align: center;
 }
 
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); 
+}
+
+.modal-content {
+	width: 150% !important;
+}
+
+#myModal {
+	animation: fadeIn 0.5s ease-in-out;
+}
+
+/* CSS cho modalBody */
+#modalBody {
+    padding: 20px;
+    background-color: #f8f9fa; /* Màu nền nhẹ */
+    border-radius: 10px; /* Bo tròn góc */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px); /* Bắt đầu từ vị trí cao hơn */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); /* Kết thúc tại vị trí ban đầu */
+    }
+}
+
+#modalBody .form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px; /* Khoảng cách giữa các dòng */
+}
+
+#modalBody p.label {
+    flex: 1; /* Để nhãn có thể co giãn */
+    font-weight: bold;
+    margin-right: 10px; /* Khoảng cách giữa nhãn và input */
+    margin-bottom: 0; /* Bỏ margin bottom mặc định của thẻ p */
+}
+
+#modalBody input.input-value, 
+#modalBody select.input-value {
+    flex: 2; /* Để input chiếm nhiều không gian hơn */
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    background-color: #fff; /* Màu nền trắng */
+    transition: border-color 0.3s ease;
+}
+
+#modalBody input.input-value:focus, 
+#modalBody select.input-value:focus {
+    border-color: #5d88cd; /* Màu viền khi focus */
+    outline: none; /* Bỏ viền mặc định khi focus */
+}
+
+/* CSS cho modal header và footer */
+.modal-header, .modal-footer {
+    border-bottom: 1px solid #dee2e6;
+    border-top: 1px solid #dee2e6;
+}
+
+.modal-title {
+    font-size: 1.5rem;
+    color: #343a40; /* Màu tiêu đề modal */
+}
+
+.modal-footer .btn-secondary, .modal-footer .btn-primary {
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.modal-footer .btn-secondary {
+    background-color: #6c757d; /* Màu nút đóng */
+}
+
+.modal-footer .btn-primary {
+    background-color: #5d88cd; /* Màu nút xác nhận */
+}
+
+.modal-footer .btn-primary:hover {
+    background-color: #4e6fb6; /* Màu nút xác nhận khi hover */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #modalBody {
+        padding: 10px;
+    }
+
+    .modal-title {
+        font-size: 1.25rem;
+    }
+
+    #modalBody .form-group {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #modalBody p.label {
+        margin-bottom: 5px;
+    }
+
+    #modalBody input.input-value, 
+    #modalBody select.input-value {
+        width: 100%;
+    }
+}
+
 </style>
 </head>
 <body>
@@ -149,7 +268,7 @@
 		            </div>
 		            <div class="modal-footer">
 		                <button onclick="dongModal()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-		                <button type="submit">Xác Nhận</button>
+		                <button type="submit" class="btn btn-primary">Xác Nhận</button>
 		            </div>
 		        </div>
 	    	</form>
@@ -227,82 +346,80 @@
 	    }
 	}
 	function moModal(row) {
-		modal.style.display = "block";
-        // Lấy các giá trị từ các ô trong hàng được nhấp vào
-        var maNV = row.querySelector("[id^='maNV_']").textContent;
-        var tenNV = row.querySelector("[id^='tenNV_']").textContent;
-        var maCV = row.querySelector("[id^='maCV_']").textContent;
-        var ngaySinh = row.querySelector("[id^='ngaySinh_']").textContent;
-        var gioiTinh = row.querySelector("[id^='gioiTinh_']").textContent;
-        var email = row.querySelector("[id^='email_']").textContent;
-        var sdt = row.querySelector("[id^='sdt_']").textContent;
-        var dvct = row.querySelector("[id^='dvct_']").textContent;
-        var chucDanh = row.querySelector("[id^='chucDanh_']").textContent;
-        var tenDangNhap = row.querySelector("[id^='tenDangNhap_']").textContent;
-        var matKhau = row.querySelector("[id^='matKhau_']").textContent;
-        var trangThaiCongViec = row.querySelector("[id^='trangThaiCongViec_']").value;
-        var ngayvaolam = row.querySelector("[id^='ngayvaolam_']").textContent;
-        var ngayketthuc = row.querySelector("[id^='ngayketthuc_']").textContent;
-        var stknhanvien = row.querySelector("[id^='stknhanvien_']").textContent;
-	
-     	// Hiển thị các giá trị trong modal
-        var modalBody = document.getElementById("modalBody");
-        // Xóa nội dung cũ của modalBody
-        modalBody.innerHTML = "";
-        // Tạo và thêm các phần tử <p> vào modalBody
-        var rows = [
-            { label: "Mã Nhân Viên", value: maNV },
-            { label: "Tên Nhân Viên", value: tenNV },
-            { label: "Mã Chức Vụ", value: maCV },
-            { label: "Ngày Sinh", value: ngaySinh },
-            { label: "Giới Tính", value: gioiTinh },
-            { label: "Email", value: email },
-            { label: "Số Điện Thoại", value: sdt },
-            { label: "Đơn Vị Công Tác", value: dvct },
-            { label: "Chức Danh", value: chucDanh },
-            { label: "Tên Đăng Nhập", value: tenDangNhap },
-            { label: "Mật Khẩu", value: matKhau },
-            { label: "Trạng Thái Công Việc", value: trangThaiCongViec },
-            { label: "Ngày Vào Làm", value: ngayvaolam },
-            { label: "Ngày Kết Thúc", value: ngayketthuc },
-            { label: "Số Tài Khoản", value: stknhanvien }
-        ];
-        rows.forEach(rowData => {
-            var labelElement = document.createElement("p");
+	    modal.style.display = "block";
+	    // Lấy các giá trị từ các ô trong hàng được nhấp vào
+	    var maNV = row.querySelector("[id^='maNV_']").textContent;
+	    var tenNV = row.querySelector("[id^='tenNV_']").textContent;
+	    var maCV = row.querySelector("[id^='maCV_']").textContent;
+	    var ngaySinh = row.querySelector("[id^='ngaySinh_']").textContent;
+	    var gioiTinh = row.querySelector("[id^='gioiTinh_']").textContent;
+	    var email = row.querySelector("[id^='email_']").textContent;
+	    var sdt = row.querySelector("[id^='sdt_']").textContent;
+	    var dvct = row.querySelector("[id^='dvct_']").textContent;
+	    var chucDanh = row.querySelector("[id^='chucDanh_']").textContent;
+	    var tenDangNhap = row.querySelector("[id^='tenDangNhap_']").textContent;
+	    var matKhau = row.querySelector("[id^='matKhau_']").textContent;
+	    var trangThaiCongViec = row.querySelector("[id^='trangThaiCongViec_']").value;
+	    var ngayvaolam = row.querySelector("[id^='ngayvaolam_']").textContent;
+	    var ngayketthuc = row.querySelector("[id^='ngayketthuc_']").textContent;
+	    var stknhanvien = row.querySelector("[id^='stknhanvien_']").textContent;
 
-            labelElement.textContent = rowData.label + ": ";
+	    // Hiển thị các giá trị trong modal
+	    var modalBody = document.getElementById("modalBody");
+	    // Xóa nội dung cũ của modalBody
+	    modalBody.innerHTML = "";
+	    // Tạo và thêm các phần tử <p> vào modalBody
+	    var rows = [
+	        { label: "Mã Nhân Viên", value: maNV },
+	        { label: "Tên Nhân Viên", value: tenNV },
+	        { label: "Mã Chức Vụ", value: maCV },
+	        { label: "Ngày Sinh", value: ngaySinh },
+	        { label: "Giới Tính", value: gioiTinh },
+	        { label: "Email", value: email },
+	        { label: "Số Điện Thoại", value: sdt },
+	        { label: "Đơn Vị Công Tác", value: dvct },
+	        { label: "Chức Danh", value: chucDanh },
+	        { label: "Tên Đăng Nhập", value: tenDangNhap },
+	        { label: "Mật Khẩu", value: matKhau },
+	        { label: "Trạng Thái Công Việc", value: trangThaiCongViec },
+	        { label: "Ngày Vào Làm", value: ngayvaolam },
+	        { label: "Ngày Kết Thúc", value: ngayketthuc },
+	        { label: "Số Tài Khoản", value: stknhanvien }
+	    ];
+	    rows.forEach(rowData => {
+	        var formGroup = document.createElement("div");
+	        formGroup.classList.add("form-group");
 
-            
-            if (rowData.label === "Trạng Thái Công Việc") {
-            	var valueElement = document.createElement("select");
+	        var labelElement = document.createElement("p");
+	        labelElement.textContent = rowData.label + ": ";
+	        labelElement.classList.add("label");
 
-                // Tạo tùy chọn đầu tiên
-                var optionTrue = document.createElement("option");
-                optionTrue.value = "true";
-                optionTrue.text = "True";
-                valueElement.appendChild(optionTrue);
+	        var valueElement;
+	        if (rowData.label === "Trạng Thái Công Việc") {
+	            valueElement = document.createElement("select");
+	            valueElement.classList.add("input-value");
 
-                // Tạo tùy chọn thứ hai
-                var optionFalse = document.createElement("option");
-                optionFalse.value = "false";
-                optionFalse.text = "False";
-                valueElement.appendChild(optionFalse);
-                valueElement.setAttribute("name", rowData.label.toLowerCase()); // Thêm thuộc tính name
-            } 
-            else {
-            	var valueElement = document.createElement("input");
-                valueElement.value = rowData.value;
-                valueElement.setAttribute("name", rowData.label.toLowerCase()); // Thêm thuộc tính name
-            }
-            
-            
-         	// Thêm class cho các phần tử
-            labelElement.classList.add("label");
-            valueElement.classList.add("input-value");
+	            var optionTrue = document.createElement("option");
+	            optionTrue.value = "true";
+	            optionTrue.text = "True";
+	            valueElement.appendChild(optionTrue);
 
-            modalBody.appendChild(labelElement);
-            modalBody.appendChild(valueElement);
-        });
+	            var optionFalse = document.createElement("option");
+	            optionFalse.value = "false";
+	            optionFalse.text = "False";
+	            valueElement.appendChild(optionFalse);
+	            valueElement.setAttribute("name", rowData.label.toLowerCase());
+	        } else {
+	            valueElement = document.createElement("input");
+	            valueElement.value = rowData.value;
+	            valueElement.classList.add("input-value");
+	            valueElement.setAttribute("name", rowData.label.toLowerCase());
+	        }
+
+	        formGroup.appendChild(labelElement);
+	        formGroup.appendChild(valueElement);
+	        modalBody.appendChild(formGroup);
+	    });
 	}
 	
 	function showAlert() {
