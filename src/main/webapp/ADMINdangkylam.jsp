@@ -20,6 +20,68 @@
     padding: 24px;
     margin: 100px 0 20px 0;
 }
+/* Center the form container */
+.selectDate {
+    margin-top: 20px;
+}
+
+/* Style each form section */
+.selectDate > div {
+    margin: 10px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 200px;
+}
+
+/* Label styling */
+label {
+    display: block;
+    margin-bottom: 8px;
+    margin-right: 8px;
+    font-weight: bold;
+    color: #333;
+    line-height: 2.3;
+}
+
+/* Select box styling */
+select {
+    width: 100%;
+    height: 40px;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* Submit button styling */
+input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .d-flex {
+        flex-direction: column;
+    }
+
+    .d-flex > div {
+        width: 100%;
+    }
+}
 </style>
 </head>
 <body>
@@ -33,82 +95,89 @@
 				<h1>Danh Sách Nhân Viên Đăng Ký Làm</h1>
 			</div>
 			<form id="form_id" action="adminDangKyLamController" method="post">
-			<input type="hidden" id="maNV_hidden" name="maNV" value="">
-				<%
-				String month = (request.getAttribute("month")!=null)?request.getAttribute("month").toString():"";
-				%>
-		        <label for="month">Chọn Tháng:</label>
-		        <select name="month" id="month">
-		            <option value="1"  <%= (month.equals("1") ? "selected=\"selected\"" : "") %>> 1</option>
-			            <option value="2"  <%= (month.equals("2") ? "selected=\"selected\"" : "") %>> 2</option>
-			            <option value="3"  <%= (month.equals("3") ? "selected=\"selected\"" : "") %>> 3</option>
-			            <option value="4"  <%= (month.equals("4") ? "selected=\"selected\"" : "") %>> 4</option>
-			            <option value="5"  <%= (month.equals("5") ? "selected=\"selected\"" : "") %>> 5</option>
-			            <option value="6"  <%= (month.equals("6") ? "selected=\"selected\"" : "") %>> 6</option>
-			            <option value="7"  <%= (month.equals("7") ? "selected=\"selected\"" : "") %>> 7</option>
-			            <option value="8"  <%= (month.equals("8") ? "selected=\"selected\"" : "") %>> 8</option>
-			            <option value="9"  <%= (month.equals("9") ? "selected=\"selected\"" : "") %>> 9</option>
-			            <option value="10" <%= (month.equals("10") ? "selected=\"selected\"" : "") %>> 10</option>
-			            <option value="11" <%= (month.equals("11") ? "selected=\"selected\"" : "") %>> 11</option>
-			            <option value="12" <%= (month.equals("12") ? "selected=\"selected\"" : "") %>> 12</option>
-		        </select>
-				<label for="year">Chọn Năm:</label>
-			        <select name="year" id="year">
-			            <% 
-			                long currentYear = java.time.LocalDate.now().getYear();
-			                for (long i = currentYear; i >= currentYear - 10; i--) {
-			            %>
-			            <option value="<%= i %>"><%= i %></option>
-			            <% } %>
-			        </select>
-		        <input type="submit" value="Search">
-		    <%ArrayList<DangKyLamBean> ChiTiet = (ArrayList<DangKyLamBean>)request.getAttribute("ChiTiet"); %>
-		    <%if(ChiTiet == null){ %>
-			<table class="table" >
-					<thead>
-						<tr>
-							<th>Mã Nhân viên</th>
-							<th>Số ca làm trong tháng</th>
-							<th>Chi tiết ca làm</th>
-						</tr>
-					</thead>
-					<tbody>
-					<% ArrayList<thongkecalambean> ds = (ArrayList<thongkecalambean>)request.getAttribute("BangDangKyLam");
-					int n = ds.size();
-					for(int i =0; i<n;i++){
-						thongkecalambean tkb = ds.get(i);%>
-						<tr>
-							<td><%=tkb.getMaNV()%></td>
-							<td><%=tkb.getSocalam()%></td>
-							<td><input type="submit" value="Xem chi tiết" name="btn_xemchitiet" onClick="submitForm('<%=tkb.getMaNV()%>')"></td>
-						</tr>	
-					<%}%>
-					</tbody>
-			</table>
-			<%}%>
-			<%if(ChiTiet != null){ %>
-			<table class="table" >
-					<thead>
-						<tr>
-							<th>Mã Nhân viên</th>
-							<th>Mã Loại ca</th>
-							<th>Ngày Đăng ký</th>
-						</tr>
-					</thead>
-					<tbody>
-					<% 
-					int n = ChiTiet.size();
-					for(int i =0; i<n;i++){
-						DangKyLamBean tkb = ChiTiet.get(i);%>
-						<tr>
-							<td><%=tkb.getMaNV()%></td>
-							<td><%=tkb.getMaLoaica()%></td>
-							<td><%=tkb.getNgayDK()%></td>
-						</tr>	
-					<%}%>
-					</tbody>
-			</table>
-			<%}%>
+				<input type="hidden" id="maNV_hidden" name="maNV" value="">
+					<%
+					String month = (request.getAttribute("month")!=null)?request.getAttribute("month").toString():"";
+					%>
+			        <div class="selectDate d-flex justify-content-center align-item-center">
+			        	<div class="d-flex justify-content-center align-item-center">
+			        		<label for="month">Tháng:</label>
+					        <select name="month" id="month">
+					            <option value="1"  <%= (month.equals("1") ? "selected=\"selected\"" : "") %>> 1</option>
+						            <option value="2"  <%= (month.equals("2") ? "selected=\"selected\"" : "") %>> 2</option>
+						            <option value="3"  <%= (month.equals("3") ? "selected=\"selected\"" : "") %>> 3</option>
+						            <option value="4"  <%= (month.equals("4") ? "selected=\"selected\"" : "") %>> 4</option>
+						            <option value="5"  <%= (month.equals("5") ? "selected=\"selected\"" : "") %>> 5</option>
+						            <option value="6"  <%= (month.equals("6") ? "selected=\"selected\"" : "") %>> 6</option>
+						            <option value="7"  <%= (month.equals("7") ? "selected=\"selected\"" : "") %>> 7</option>
+						            <option value="8"  <%= (month.equals("8") ? "selected=\"selected\"" : "") %>> 8</option>
+						            <option value="9"  <%= (month.equals("9") ? "selected=\"selected\"" : "") %>> 9</option>
+						            <option value="10" <%= (month.equals("10") ? "selected=\"selected\"" : "") %>> 10</option>
+						            <option value="11" <%= (month.equals("11") ? "selected=\"selected\"" : "") %>> 11</option>
+						            <option value="12" <%= (month.equals("12") ? "selected=\"selected\"" : "") %>> 12</option>
+					        </select>
+			        	</div>
+			        	
+			        	<div class="d-flex justify-content-center align-item-center">
+							<label for="year">Năm:</label>
+						        <select name="year" id="year">
+						            <% 
+						                long currentYear = java.time.LocalDate.now().getYear();
+						                for (long i = currentYear; i >= currentYear - 10; i--) {
+						            %>
+						            <option value="<%= i %>"><%= i %></option>
+						            <% } %>
+						        </select>
+			        	</div>
+				        <input type="submit" value="Search" style="height: 40px;line-height: 1; margin-left: 8px; margin-top: 31px;">
+			        </div>
+			    <%ArrayList<DangKyLamBean> ChiTiet = (ArrayList<DangKyLamBean>)request.getAttribute("ChiTiet"); %>
+			    <%if(ChiTiet == null){ %>
+				<table class="table" >
+						<thead>
+							<tr>
+								<th>Mã Nhân viên</th>
+								<th>Số ca làm trong tháng</th>
+								<th>Chi tiết ca làm</th>
+							</tr>
+						</thead>
+						<tbody>
+						<% ArrayList<thongkecalambean> ds = (ArrayList<thongkecalambean>)request.getAttribute("BangDangKyLam");
+						int n = ds.size();
+						for(int i =0; i<n;i++){
+							thongkecalambean tkb = ds.get(i);%>
+							<tr>
+								<td><%=tkb.getMaNV()%></td>
+								<td><%=tkb.getSocalam()%></td>
+								<td><input type="submit" value="Xem chi tiết" name="btn_xemchitiet" onClick="submitForm('<%=tkb.getMaNV()%>')"></td>
+							</tr>	
+						<%}%>
+						</tbody>
+				</table>
+				<%}%>
+				<%if(ChiTiet != null){ %>
+				<table class="table" >
+						<thead>
+							<tr>
+								<th>Mã Nhân viên</th>
+								<th>Mã Loại ca</th>
+								<th>Ngày Đăng ký</th>
+							</tr>
+						</thead>
+						<tbody>
+						<% 
+						int n = ChiTiet.size();
+						for(int i =0; i<n;i++){
+							DangKyLamBean tkb = ChiTiet.get(i);%>
+							<tr>
+								<td><%=tkb.getMaNV()%></td>
+								<td><%=tkb.getMaLoaica()%></td>
+								<td><%=tkb.getNgayDK()%></td>
+							</tr>	
+						<%}%>
+						</tbody>
+				</table>
+				<%}%>
 		    </form>
 		</div>
 	</div>
