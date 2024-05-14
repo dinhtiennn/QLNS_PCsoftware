@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import bean.TKeLuongBean;
 import bean.ThongKeLuongBean;
 import bean.ThongSoKiThuatBean;
 import dao.ThongKeLuongdao;
@@ -74,4 +75,21 @@ public class ThongKeLuongBo {
 	public ArrayList<ThongKeLuongBean>  getTKLTheoMaNV_Thang_Nam(String manv,int thang , int nam) throws Exception{
 		return tkdao.getTKLTheoMaNV_Thang_Nam(manv,thang, nam);
 	}
+	
+	public ArrayList<TKeLuongBean> getTKLTamTheoThangNam_Moi(int thang, int nam) throws Exception{
+		return tkdao.getTKLTamTheoThangNam_Moi(thang, nam);
+	}
+//	public static void main(String[] args) {
+//		ThongKeLuongBo tkbo = new ThongKeLuongBo();
+//		ArrayList<TKeLuongBean> tkl = new ArrayList<TKeLuongBean>();
+//		try {
+//			tkl = tkbo.getTKLTamTheoThangNam_Moi(4, 2024);
+//			for (TKeLuongBean tKeLuongBean : tkl) {
+//				System.out.println(tKeLuongBean);
+//			}
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 }

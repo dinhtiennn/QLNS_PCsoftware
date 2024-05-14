@@ -1,6 +1,4 @@
-/dao/
-/admindao/
-/adminbo/
-/admincontroller/
 /bean/
+/dao/
+/bo/
 /controller/

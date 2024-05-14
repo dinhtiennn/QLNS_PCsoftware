@@ -21,6 +21,7 @@ import adminbo.adminNhanVienBo;
 import bean.DangKyLamBean;
 import bean.DangKyNghiBean;
 import bean.NhanVienBean;
+import bean.TKeLuongBean;
 import bean.ThongKeLuongBean;
 import bo.DangKyLamBo;
 import bo.DangKyNghibo;
@@ -375,6 +376,7 @@ public class QuanLyController extends HttpServlet {
 			
 			ArrayList<NhanVienBean> nvbean = nvbo.getnhanvien();
 			ArrayList<ThongKeLuongBean> tkl = new ArrayList<ThongKeLuongBean>();
+			ArrayList<TKeLuongBean> tkl_tam = new ArrayList<TKeLuongBean>();
 			String thang = request.getParameter("thang");
 			String nam = request.getParameter("nam");
 			ThongSoKyThuatBo tsktbo = new ThongSoKyThuatBo();
@@ -383,24 +385,35 @@ public class QuanLyController extends HttpServlet {
 				thang = Integer.toString(date.getMonthValue());
 				nam = Integer.toString(date.getYear());
 			}
+//				tkl = tkbo.getTKLTheoThangNam(Integer.parseInt(thang), Integer.parseInt(nam));
 				tkl = tkbo.getTKLTheoThangNam(Integer.parseInt(thang), Integer.parseInt(nam));
 				if(tkl.size()==0) {
-					tkl = tkbo.getTKLTamTheoThangNam(Integer.parseInt(thang), Integer.parseInt(nam));
+					tkl_tam = tkbo.getTKLTamTheoThangNam_Moi(Integer.parseInt(thang), Integer.parseInt(nam));
 					
-					System.out.println(tkl);
-					for (ThongKeLuongBean thongKeLuongBean : tkl) {
-						thongKeLuongBean.setLuong(tkbo.TinhLuong(tsktbo.GetThongSo(),thongKeLuongBean.getSoCaLam(), thongKeLuongBean.getSoCaNghi()));
+					System.out.println(tkl_tam);
+					for (TKeLuongBean thongKeLuongBean : tkl_tam) {
+						thongKeLuongBean.setLuong(tkbo.TinhLuong(tsktbo.GetThongSo(),thongKeLuongBean.getSoCaLam(), thongKeLuongBean.getSoCaNghiKhongPhep()));
 					}
 					request.setAttribute("thang", thang);
 					request.setAttribute("nam", nam);
-					request.setAttribute("tkl", tkl);
+					request.setAttribute("tkl_tam", tkl_tam);
 					request.setAttribute("msg", "Danh sách tạm tính:");
 				}else {
 					request.setAttribute("thang", thang);
 					request.setAttribute("nam", nam);
 					request.setAttribute("tkl", tkl);
-				}	
-
+				}
+				 if (request.getParameter("tinhluongtam") != null) {
+			            for (int i = 0; i < tkl_tam.size(); i++) {
+			            	double luongTamTinh = Double.parseDouble(request.getParameter("luongtam" + (i + 1)));
+			                double luongThuong = Double.parseDouble(request.getParameter("luongthuong" + (i + 1)));
+			                double luongPhat = Double.parseDouble(request.getParameter("luongphat" + (i + 1)));
+			                double tongLuong = luongTamTinh + luongThuong - luongPhat;
+			                System.out.println(tongLuong);
+			                // Cập nhật lại giá trị tổng lương
+			                request.setAttribute("tongluong" + (i + 1), tongLuong);
+			            }
+				 }
 			System.out.println(tkl);
 			if(request.getParameter("duyet") != null) {
 				for (ThongKeLuongBean thongKeLuongBean : tkl) {

@@ -1,3 +1,4 @@
+<%@page import="bean.TKeLuongBean"%>
 <%@page import="java.util.Locale"%>
 <%@page import="java.text.NumberFormat"%>
 <%@page import="java.time.LocalDate"%>
@@ -31,30 +32,20 @@
 	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			
 	        ArrayList<ThongKeLuongBean> tkl =  ((ArrayList<ThongKeLuongBean>)request.getAttribute("tkl")!=null)?(ArrayList<ThongKeLuongBean>)request.getAttribute("tkl"):new ArrayList<ThongKeLuongBean>();
-			
+	        ArrayList<TKeLuongBean> tkl_tam =  ((ArrayList<TKeLuongBean>)request.getAttribute("tkl_tam")!=null)?(ArrayList<TKeLuongBean>)request.getAttribute("tkl_tam"):new ArrayList<TKeLuongBean>();			
 	        String thang = (request.getAttribute("thang")!=null)?request.getAttribute("thang").toString():"";
 	       	String nam = (request.getAttribute("nam")!=null)?request.getAttribute("nam").toString():"";
 	        String msg = (request.getAttribute("msg")!=null)?request.getAttribute("msg").toString():"";
 		%>
 		<div class="col-10 mt-4" style="margin-top: 8rem !important;" >
 			<div class="row container">
-				<%=msg%>
 				<form action="quanly?action=thongkeluong" method="post">
 				 	<div class="row">
 						    <div class="col-sm-4">
 						       <select class="form-control col" id="month" name="thang">
-							        <option value="1" <%= (thang.equals("1") ? "selected=\"selected\"" : "") %>>1</option>
-							        <option value="2" <%= (thang.equals("2") ? "selected=\"selected\"" : "") %>>2</option>
-							        <option value="3" <%= (thang.equals("3") ? "selected=\"selected\"" : "") %>>3</option>
-							        <option value="4" <%= (thang.equals("4") ? "selected=\"selected\"" : "") %>>4</option>
-							        <option value="5" <%= (thang.equals("5") ? "selected=\"selected\"" : "") %>>5</option>
-							        <option value="6" <%= (thang.equals("6") ? "selected=\"selected\"" : "") %>>6</option>
-							        <option value="7" <%= (thang.equals("7") ? "selected=\"selected\"" : "") %>>7</option>
-							        <option value="8" <%= (thang.equals("8") ? "selected=\"selected\"" : "") %>>8</option>
-							        <option value="9" <%= (thang.equals("9") ? "selected=\"selected\"" : "") %>>9</option>
-							        <option value="10" <%= (thang.equals("10") ? "selected=\"selected\"" : "") %>>10</option>
-							        <option value="11" <%= (thang.equals("11") ? "selected=\"selected\"" : "") %>>11</option>
-							        <option value="12" <%= (thang.equals("12") ? "selected=\"selected\"" : "") %>>12</option>
+							        <% for (int i = 1; i <= 12; i++) { %>
+							          <option value="<%= i %>" <%= (thang.equals(String.valueOf(i)) ? "selected=\"selected\"" : "") %>><%= i %></option>
+							        <% } %>
 							      </select>
 						    </div>
 						    <div class="col-sm-4">
@@ -71,18 +62,58 @@
 						      <button type="submit" class="btn btn-primary" >Tìm kiếm</button>
 						    </div>
 						    <div class="row">
-								<div class="col-6  mt-5">
+								<div class="col-10">
 											<%if(tkl.size()==0){%>
 												<%=msg%>
-											<%}else{%>
 												<table class="table table-hover">
 													  <thead>
 													    <tr>
-													      <th scope="col">#</th>
-													      <th scope="col">Mã NV</th>
-													      <th scope="col">Số ca làm</th>
-													      <th scope="col">Số ca nghỉ</th>
-													      <th scope="col">Lương</th>
+													      <th>#</th>
+													      <th>Mã NV</th>
+													      <th>Số ca làm</th>
+													      <th>Số ca nghỉ không phép</th>
+													      <th>Tổng số ca nghỉ</th>
+													      <th>Lương tạm tính</th>
+													      <th>Lương thưởng</th>
+													      <th>Lương phạt</th>
+													      <th>Tổng lương</th>
+													    </tr>
+													  </thead>
+													  <tbody>
+													  <%int i = 1;
+													  for(TKeLuongBean item : tkl_tam){
+													  %>						
+													    <tr>
+													      <th scope="row"><%=i%></th>
+													      <td><%=item.getMaNV()%></td>
+													      <td><%=item.getSoCaLam()%></td>
+													      <td><%=item.getSoCaNghiKhongPhep()%></td>
+													      <td><%=item.getTongSoCaNghi() %></td>
+													      <%NumberFormat scientificFormat = NumberFormat.getInstance(Locale.US);
+													      scientificFormat.setMaximumFractionDigits(2);%>
+													      <td><%=scientificFormat.format(item.getLuong())%> VND
+													      <input type="hidden" name="luongtam<%= i %>" value="<%= item.getLuong() %>"></td>
+													      <td><input type="number" class="form-control" name="luongthuong<%= i %>" value="0" step="0.01"></td>
+							                                <td><input type="number" class="form-control" name="luongphat<%= i %>" value="0" step="0.01"></td>
+							                                <td><input type="text" class="form-control-plaintext" name="tongluong<%= i %>" readonly value="<%=(request.getAttribute("tongluong" + (i))==null)?"":scientificFormat.format(request.getAttribute("tongluong" + (i))) + "VNĐ"%> "></td>
+													    </tr>
+													  <%i++;} %>
+													  </tbody>
+													</table>
+											<%}
+											if(tkl.size() != 0){%>
+												<table class="table table-hover">
+													  <thead>
+													    <tr>
+													      <th>#</th>
+													      <th>Mã NV</th>
+													      <th>Số ca làm</th>
+													      <th>Số ca nghỉ không phép</th>
+													      <th>Tổng số ca nghỉ</th>
+													      <th>Lương tạm tính</th>
+													      <th>Lương thưởng</th>
+													      <th>Lương phạt</th>
+													      <th>Tổng lương</th>
 													    </tr>
 													  </thead>
 													  <tbody>
@@ -94,9 +125,13 @@
 													      <td><%=item.getMaNV()%></td>
 													      <td><%=item.getSoCaLam()%></td>
 													      <td><%=item.getSoCaNghi()%></td>
+													      <td>#</td>
 													      <%NumberFormat scientificFormat = NumberFormat.getInstance(Locale.US);
 													      scientificFormat.setMaximumFractionDigits(2);%>
 													      <td><%=scientificFormat.format(item.getLuong())%> VND</td>
+													      <td>#</td>
+													      <td>#</td>
+													      <td>#</td>
 													    </tr>
 													  <%i++;} %>
 													  </tbody>
@@ -107,12 +142,27 @@
 					 </div>
 					<div class="col-sm-4">
 					<%if(msg.length()!=0){%>
-						<button type="submit" class="btn btn-primary" name="duyet">Duyệt</button>									
+						<button type="submit" class="btn btn-primary" name="duyet">Duyệt</button>
+						<button type="submit" class="btn btn-primary" name="tinhluongtam">Tạm tính</button>					
 					<%}%>
 			    	</div>
 				</form>
 			</div>
 		</div>
-	</div>	
+	</div>
+	
+<script>
+function calculateTotalSalary() {
+    const rows = document.querySelectorAll('table tbody tr');
+    rows.forEach(row => {
+        const luongTamTinh = parseFloat(row.querySelector('input[name^="luongtam"]').value);
+        const luongThuong = parseFloat(row.querySelector('input[name^="luongthuong"]').value);
+        const luongPhat = parseFloat(row.querySelector('input[name^="luongphat"]').value);
+        const tongLuong = luongTamTinh + luongThuong - luongPhat;
+        row.querySelector('input[name^="tongluong"]').value = tongLuong.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' VND';
+    });
+}
+</script>
+	
 </body>
 </html>

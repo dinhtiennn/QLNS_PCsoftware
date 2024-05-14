@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import bean.NhanVienBean;
+import bean.TKeLuongBean;
 import bean.ThongKeLuongBean;
 import bo.DangKyLamBo;
 import bo.DangKyNghibo;
@@ -118,4 +119,26 @@ public class ThongKeLuongdao {
 		kn.cn.close();
 		return ds;
 	}
+	public ArrayList<TKeLuongBean> getTKLTamTheoThangNam_Moi(int thang, int nam) throws Exception{
+		ArrayList<TKeLuongBean> ds = new ArrayList<TKeLuongBean>();
+		ketnoiDB kn = new ketnoiDB();
+		kn.ketnoi();
+		String sql = "select * from dbo.TKeLuongTam2(?, ?)";
+		PreparedStatement cmd = kn.cn.prepareStatement(sql);
+		cmd.setInt(1, thang);
+		cmd.setInt(2, nam);
+		ResultSet rs = cmd.executeQuery();
+		while(rs.next()) {
+		    String MaNV = rs.getString("MaNV");
+		    Date ThangNam = rs.getDate("ThangNam");
+			int SoCaLam = rs.getInt("TongSoCaLam");
+			int SoCaNghiKhongPhep = rs.getInt("SoCaNghiKhongPhep");
+			int TongSoCaNghi = rs.getInt("TongSoCaNghi");
+			ds.add( new TKeLuongBean(MaNV, ThangNam ,SoCaLam, TongSoCaNghi, SoCaNghiKhongPhep));
+		}
+		rs.close();
+		kn.cn.close();
+		return ds;
+	}
+	
 }
