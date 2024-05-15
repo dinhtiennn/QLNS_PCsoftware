@@ -57,6 +57,7 @@ public class adminDangKyLamController extends HttpServlet {
 				request.setAttribute("BangDangKyLam", addklbo.thongkecalam(m,y));
 				request.setAttribute("month", m);
 			}
+			
 			String manv = request.getParameter("maNV");
 			String btn_xemchitiet = request.getParameter("btn_xemchitiet");
 			if(manv != null && btn_xemchitiet != null) {

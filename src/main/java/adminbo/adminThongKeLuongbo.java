@@ -10,4 +10,7 @@ public class adminThongKeLuongbo {
 	public ArrayList<ThongKeLuongBean> getAllThongKeLuong() throws Exception{
 		return adtkl.getAllThongKeLuong();
 	}
+	public ArrayList<ThongKeLuongBean> getTKLthang(int thang, long nam) throws Exception{
+		return adtkl.getTKLthang(thang, nam);
+	}
 }

@@ -1,6 +1,7 @@
 package admincontroller;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -36,8 +37,22 @@ public class adminThongKeLuongController extends HttpServlet {
 			response.setCharacterEncoding("utf-8");
 			HttpSession session= request.getSession();
 			adminThongKeLuongbo adtklbo = new adminThongKeLuongbo();
-			request.setAttribute("ThongKeLuong", adtklbo.getAllThongKeLuong());
+			String month = request.getParameter("month");
+			String year = request.getParameter("year");
 			
+			if (month == null && year == null) {
+				LocalDate currentDate = LocalDate.now();
+				int currentMonth = currentDate.getMonthValue();
+				long currentYear = currentDate.getYear();
+				request.setAttribute("ThongKeLuong", adtklbo.getTKLthang(currentMonth, currentYear));
+				request.setAttribute("month", currentMonth);
+			}
+			if(month != null && year != null) {	
+				int m = Integer.parseInt(month);
+				long y = Long.parseLong(year);
+				request.setAttribute("ThongKeLuong", adtklbo.getTKLthang(m, y));
+				request.setAttribute("month", m);
+			}
 			RequestDispatcher rd = request.getRequestDispatcher("ADMINthongkeluong.jsp");
 			rd.forward(request, response);
 		} catch (Exception e) {

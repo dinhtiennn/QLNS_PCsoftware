@@ -28,6 +28,28 @@ public class adminThongKeLuongdao {
 		kn.cn.close();
 		return ds;
 	}
+	public ArrayList<ThongKeLuongBean> getTKLthang(int thang, long nam) throws Exception{
+		ArrayList<ThongKeLuongBean> ds = new ArrayList<ThongKeLuongBean>();
+		ketnoiDB kn = new ketnoiDB();
+		kn.ketnoi();
+		String sql = "select * from ThongKeLuong WHERE MONTH(ThangNam) = ? AND YEAR(ThangNam) = ? ";
+		PreparedStatement cmd = kn.cn.prepareStatement(sql);
+		cmd.setInt(1, thang);
+		cmd.setLong(2, nam);
+		ResultSet rs = cmd.executeQuery();
+		while(rs.next()) {
+			Long MaThongKe = rs.getLong("MaThongKe");
+			String MaNV = rs.getString("MaNV");
+			Date ThangNam = rs.getDate("ThangNam");
+			int SoCaLam = rs.getInt("SoCaLam");
+			int SoCaNghi = rs.getInt("SoCaNghi");
+			float Luong = rs.getFloat("Luong");
+			ds.add(new ThongKeLuongBean(MaThongKe, MaNV, ThangNam, SoCaLam, SoCaNghi, Luong));
+		}
+		rs.close();
+		kn.cn.close();
+		return ds;
+	}
 	
 	public void ThemThongKeLuong(String maNV, Date thangNam, int soCaLam, int soCaNghi, float luong) throws Exception{
 		ketnoiDB kn = new ketnoiDB();

@@ -34,6 +34,43 @@
 			<div style="text-align: center;">
 				<h1>Thống Kê Lương Nhân Viên</h1>
 			</div>
+			<form id="form_id" action="adminThongKeLuongController" method="post">
+				<input type="hidden" id="maNV_hidden" name="maNV" value="">
+					<%
+					String month = (request.getAttribute("month")!=null)?request.getAttribute("month").toString():"";
+					%>
+			        <div class="selectDate d-flex justify-content-center align-item-center">
+			        	<div class="d-flex justify-content-center align-item-center">
+			        		<label for="month">Tháng:</label>
+					        <select name="month" id="month">
+					            <option value="1"  <%= (month.equals("1") ? "selected=\"selected\"" : "") %>> 1</option>
+						            <option value="2"  <%= (month.equals("2") ? "selected=\"selected\"" : "") %>> 2</option>
+						            <option value="3"  <%= (month.equals("3") ? "selected=\"selected\"" : "") %>> 3</option>
+						            <option value="4"  <%= (month.equals("4") ? "selected=\"selected\"" : "") %>> 4</option>
+						            <option value="5"  <%= (month.equals("5") ? "selected=\"selected\"" : "") %>> 5</option>
+						            <option value="6"  <%= (month.equals("6") ? "selected=\"selected\"" : "") %>> 6</option>
+						            <option value="7"  <%= (month.equals("7") ? "selected=\"selected\"" : "") %>> 7</option>
+						            <option value="8"  <%= (month.equals("8") ? "selected=\"selected\"" : "") %>> 8</option>
+						            <option value="9"  <%= (month.equals("9") ? "selected=\"selected\"" : "") %>> 9</option>
+						            <option value="10" <%= (month.equals("10") ? "selected=\"selected\"" : "") %>> 10</option>
+						            <option value="11" <%= (month.equals("11") ? "selected=\"selected\"" : "") %>> 11</option>
+						            <option value="12" <%= (month.equals("12") ? "selected=\"selected\"" : "") %>> 12</option>
+					        </select>
+			        	</div>
+			        	
+			        	<div class="d-flex justify-content-center align-item-center">
+							<label for="year">Năm:</label>
+						        <select name="year" id="year">
+						            <% 
+						                long currentYear = java.time.LocalDate.now().getYear();
+						                for (long i = currentYear; i >= currentYear - 10; i--) {
+						            %>
+						            <option value="<%= i %>"><%= i %></option>
+						            <% } %>
+						        </select>
+			        	</div>
+				        <input type="submit" value="Search" style="height: 40px;line-height: 1; margin-left: 8px; margin-top: 31px;">
+			        </div>
 			<table class="table">
 				<thead>
 			        <tr>
@@ -69,6 +106,7 @@
 	   			 </tbody>
 	
 			</table>
+		</form>	
 		</div>
 	</div>
 </body>
