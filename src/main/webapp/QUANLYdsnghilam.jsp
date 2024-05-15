@@ -9,6 +9,58 @@
 <head>
 <meta charset="UTF-8">
 <title>Danh Sách Nghỉ Làm</title>
+<script src="https://kit.fontawesome.com/ba968237f2.js" crossorigin="anonymous"></script>
+<style type="text/css">
+/* Đặt các thành phần vào hàng */
+form {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin: 24px 0;
+}
+
+/* Tạo kiểu cho các nhãn */
+form label {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+/* Tạo kiểu cho các ô nhập */
+form input[type="date"],
+form input[type="submit"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* Tạo kiểu cho nút bấm */
+form input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Thay đổi màu nền khi di chuột qua nút bấm */
+form input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Đảm bảo rằng các thành phần không quá lớn */
+form input[type="date"],
+form input[type="submit"] {
+    max-width: 200px;
+}
+
+/* Tạo khoảng cách giữa các thành phần */
+form > * {
+    margin: 5px 0;
+}
+
+</style>
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
@@ -16,14 +68,14 @@
 			<div class="col-2  mt-5" style="margin-top: 8rem !important;">
 				<jsp:include page="QUANLYslidebar.jsp"></jsp:include>
 			</div>
-			<div class="col-6  mt-5" style="margin-top: 8rem !important;">
-			<div style="text-align: center;">
-				<h1>Danh sách nghỉ làm</h1>
-			</div>
+			<div class="col-10  mt-5" style="margin-top: 8rem !important; margin: auto;">
+				<div style="text-align: center;">
+					<h1>Danh sách nghỉ làm</h1>
+				</div>
 				<form action="quanly?action=danhsachnghilam" method="post" onsubmit="return validateDate()">
-			        <label for="selectedDate">Tìm kiếm từ ngày :</label>
+			        <label for="selectedDate">Từ ngày :</label>
 			        <input type="date" id="selectedDate" name="ngayBatDau" required>
-			        <label for="selectedDate">đến ngày :</label>
+			        <label for="selectedDate">Đến ngày :</label>
 			        <input type="date" id="selectedDate2" name="ngayKetThuc">
 			        <input type="submit" value="Tìm Kiếm" class="btn btn-primary">
 			    </form>
@@ -64,10 +116,10 @@
 					      	if(item.getDuyet()==0){%> 		
 					      <td><%=trangthaiduyet%>
 					      <a href="quanly?action=duyetlichnghi&duyet=1&nguoiduyet=<%=nhanvien.getTenNV()%>&ngaydk=<%=item.getNgayDK()%>&manv=<%=item.getMaNV()%>">
-							<button type="button" class="btn btn-warning">Duyệt</button>
+							<button type="button" class="btn btn-success"><i class="fa-solid fa-check"></i></button>
 						  </a>
 						  <a href="quanly?action=duyetlichnghi&duyet=2<%%>&nguoiduyet=<%=nhanvien.getTenNV()%>&ngaydk=<%=item.getNgayDK()%>&manv=<%=item.getMaNV()%>">
-							<button type="button" class="btn btn-warning">Không Duyệt</button>
+							<button type="button" class="btn btn-danger"><i class="fa-solid fa-xmark"></i></button>
 						  </a>
 					      </td>
 					      <td>Chưa có người duyệt</td>

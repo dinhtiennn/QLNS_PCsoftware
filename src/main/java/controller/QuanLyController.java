@@ -159,7 +159,8 @@ public class QuanLyController extends HttpServlet {
 					request.setAttribute("ds_dkn",ds_dkl);	
 				}
 			}
-			
+			request.setAttribute("ngayBatDau", ngayBatDau);
+			request.setAttribute("ngayKetThuc", ngayKetThuc);
 			RequestDispatcher rd = request.getRequestDispatcher(url);
 			rd.forward(request, response);
 		} catch (Exception e) {

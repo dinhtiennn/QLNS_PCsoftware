@@ -97,7 +97,7 @@
 											      <th scope="col">Số ca làm</th>
 											      <th scope="col">Số ca nghỉ không phép</th>
 											      <th scope="col">Tạm tính</th>
-											      <th scope="col">Thưởng/phạt</th>
+											      <th scope="col">Thưởng</th>
 											      <th scope="col">Tổng</th>
 											    </tr>
 											  </thead>

@@ -101,24 +101,24 @@ input[type="submit"]:hover {
 				%>
 				<div class="selectDate d-flex justify-content-center align-item-center">
 			        <div class="d-flex justify-content-center align-item-center">
-			        <label for="month">Chọn Tháng:</label>
-			        <select name="thang" id="month">
-			            <option value="1"  <%= (thang.equals("1") ? "selected=\"selected\"" : "") %>> 1</option>
-			            <option value="2"  <%= (thang.equals("2") ? "selected=\"selected\"" : "") %>> 2</option>
-			            <option value="3"  <%= (thang.equals("3") ? "selected=\"selected\"" : "") %>> 3</option>
-			            <option value="4"  <%= (thang.equals("4") ? "selected=\"selected\"" : "") %>> 4</option>
-			            <option value="5"  <%= (thang.equals("5") ? "selected=\"selected\"" : "") %>> 5</option>
-			            <option value="6"  <%= (thang.equals("6") ? "selected=\"selected\"" : "") %>> 6</option>
-			            <option value="7"  <%= (thang.equals("7") ? "selected=\"selected\"" : "") %>> 7</option>
-			            <option value="8"  <%= (thang.equals("8") ? "selected=\"selected\"" : "") %>> 8</option>
-			            <option value="9"  <%= (thang.equals("9") ? "selected=\"selected\"" : "") %>> 9</option>
-			            <option value="10" <%= (thang.equals("10") ? "selected=\"selected\"" : "") %>> 10</option>
-			            <option value="11" <%= (thang.equals("11") ? "selected=\"selected\"" : "") %>> 11</option>
-			            <option value="12" <%= (thang.equals("12") ? "selected=\"selected\"" : "") %>> 12</option>
-			        </select>
+				        <label for="month">Tháng:</label>
+				        <select name="thang" id="month">
+				            <option value="1"  <%= (thang.equals("1") ? "selected=\"selected\"" : "") %>> 1</option>
+				            <option value="2"  <%= (thang.equals("2") ? "selected=\"selected\"" : "") %>> 2</option>
+				            <option value="3"  <%= (thang.equals("3") ? "selected=\"selected\"" : "") %>> 3</option>
+				            <option value="4"  <%= (thang.equals("4") ? "selected=\"selected\"" : "") %>> 4</option>
+				            <option value="5"  <%= (thang.equals("5") ? "selected=\"selected\"" : "") %>> 5</option>
+				            <option value="6"  <%= (thang.equals("6") ? "selected=\"selected\"" : "") %>> 6</option>
+				            <option value="7"  <%= (thang.equals("7") ? "selected=\"selected\"" : "") %>> 7</option>
+				            <option value="8"  <%= (thang.equals("8") ? "selected=\"selected\"" : "") %>> 8</option>
+				            <option value="9"  <%= (thang.equals("9") ? "selected=\"selected\"" : "") %>> 9</option>
+				            <option value="10" <%= (thang.equals("10") ? "selected=\"selected\"" : "") %>> 10</option>
+				            <option value="11" <%= (thang.equals("11") ? "selected=\"selected\"" : "") %>> 11</option>
+				            <option value="12" <%= (thang.equals("12") ? "selected=\"selected\"" : "") %>> 12</option>
+				        </select>
 			        </div>
 			        <div class="d-flex justify-content-center align-item-center">
-					<label for="year">Chọn Năm:</label>
+						<label for="year">Năm:</label>
 				        <select name="nam" id="year">
 				            <% 
 				                long currentYear = java.time.LocalDate.now().getYear();
