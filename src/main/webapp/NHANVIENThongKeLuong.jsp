@@ -118,8 +118,8 @@
 											      <td><%=item.getSoCaNghi()%></td>
 											      <%NumberFormat scientificFormat = NumberFormat.getInstance(Locale.US);
 											      scientificFormat.setMaximumFractionDigits(2);%>
-											      <td></td>
-											      <td></td>
+											      <td><%=scientificFormat.format(tklbo.TinhLuong(tskt, item.getSoCaLam(), item.getSoCaNghi()))%> VND</td>
+											      <td><%=scientificFormat.format(item.getLuong()-tklbo.TinhLuong(tskt, item.getSoCaLam(), item.getSoCaNghi())) %> VND</td>
 											      <td><%=scientificFormat.format(item.getLuong())%> VND</td>
 											    </tr>
 											  <%i++;} %>
