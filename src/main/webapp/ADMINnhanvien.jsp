@@ -156,6 +156,7 @@
     #modalBody select.input-value {
         width: 100%;
     }
+    
 }
 
 </style>

@@ -75,7 +75,6 @@
 			</a>
             <div class="icons">
                 <a href="quanly?action=quanlyIndex"><i class="fa-solid fa-house"></i></a>
-                <a href="quanly?action=showMonthlySchedule"><i class="fas fa-calendar-alt"></i></a>
                 <a href="quanly?action=thongkeluong"><i class="fa-solid fa-cash-register"></i></a>
                 <a href="quanly?action=bangluong"><i class="fa-solid fa-money-bill"></i></a>
                 <a href="quanly?action=danhsachnhanvien"><i class="fa-solid fa-users"></i></a>
@@ -85,9 +84,6 @@
             <ul class="nav flex-column">
                 <li class="nav-item">
                     <a class="nav-link" href="quanly?action=quanlyIndex">Trang chủ</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="quanly?action=showMonthlySchedule">Lịch trình tháng</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="quanly?action=thongkeluong">Thống kê lương</a>

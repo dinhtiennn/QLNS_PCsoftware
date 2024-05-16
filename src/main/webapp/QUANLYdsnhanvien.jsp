@@ -142,7 +142,7 @@
 		      <div class="modal-body">
 		       	<div class="mb-3">
 			        <label for="tennv" class="form-label">Tên NV:</label>
-				    <input type="text" class="form-control" id="tennv" name="tennv">
+				    <input type="text" class="form-control" id="tennv" name="tennv" required="required">
 		       	</div>
 			    <div class="mb-3">
 				    <label for="ngaysinh" class="form-label">Ngày Sinh:</label>
@@ -157,11 +157,11 @@
 				</div>
 			    <div class="mb-3">
 				    <label for="tennv" class="form-label">Email:</label>
-				    <input type="text" class="form-control" id="email" name="email">
+				    <input type="email" class="form-control" id="email" name="email" required="required">
 		       	</div>
 			    <div class="mb-3">
 				    <label for="manv" class="form-label">Số điện thoại:</label>
-				    <input type="text" class="form-control" id="sdt" name="sdt">
+				    <input type="text" class="form-control" id="sdt" name="sdt" required="required">
 		       	</div>
 			    <!-- <div class="mb-3">
 				    <label for="dvct" class="form-label">Đơn vị công tác:</label>
@@ -173,19 +173,15 @@
 		       	</div> -->
 			    <div class="mb-3">
 				    <label for="tennv" class="form-label">Tên đăng nhập:</label>
-				    <input type="text" class="form-control" id="tendn" name="tendn">
+				    <input type="text" class="form-control" id="tendn" name="tendn" required="required">
 		       	</div>
 			    <div class="mb-3">
 				    <label for="manv" class="form-label">Mật khẩu:</label>
-				    <input type="text" class="form-control" id="mk" name="mk">
-		       	</div>
-			    <div class="mb-3">
-				    <label for="tennv" class="form-label">Ảnh:</label>
-				    <input type="text" class="form-control" id="anh" name="anh">
+				    <input type="text" class="form-control" id="mk" name="mk" required="required">
 		       	</div>
 			    <div class="mb-3">
 				    <label for="manv" class="form-label">Số tài khoản:</label>
-				    <input type="text" class="form-control" id="stk" name="stk">
+				    <input type="text" class="form-control" id="stk" name="stk" required="required">
 		       	</div>
 		      </div>
 		      <div class="modal-footer">
