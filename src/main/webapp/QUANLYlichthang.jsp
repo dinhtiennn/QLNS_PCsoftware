@@ -24,7 +24,6 @@
         th, td {
             border: 1px solid black;
             padding: 8px;
-            text-align: center;
         }
 		
         th {
@@ -35,6 +34,62 @@
         	padding: 48px 0px 16px 0px;
     		font-size: larger;
         }
+        select {
+		    width: 10%;
+		    height: 40px;
+		    padding: 8px;
+		    margin-bottom: 10px;
+		    border: 1px solid #ccc;
+		    border-radius: 4px;
+		    font-size: 16px;
+		}
+        form {
+		    display: flex;
+		    justify-content: center;
+		    flex-wrap: wrap;
+		    gap: 10px;
+		    align-items: center;
+		    margin: 24px 0;
+		}
+		
+		/* Tạo kiểu cho các nhãn */
+		form label {
+		    font-weight: bold;
+		    margin-right: 5px;
+		}
+		
+		/* Tạo kiểu cho các ô nhập */
+		form input[type="date"],
+		form input[type="submit"] {
+		    padding: 10px;
+		    border: 1px solid #ccc;
+		    border-radius: 4px;
+		    font-size: 16px;
+		}
+		
+		/* Tạo kiểu cho nút bấm */
+		form input[type="submit"] {
+		    background-color: #007bff;
+		    color: white;
+		    cursor: pointer;
+		    transition: background-color 0.3s;
+		}
+		
+		/* Thay đổi màu nền khi di chuột qua nút bấm */
+		form input[type="submit"]:hover {
+		    background-color: #0056b3;
+		}
+		
+		/* Đảm bảo rằng các thành phần không quá lớn */
+		form input[type="date"],
+		form input[type="submit"] {
+		    max-width: 200px;
+		}
+		
+		/* Tạo khoảng cách giữa các thành phần */
+		form > * {
+		    margin: 5px 0;
+		}
     </style>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
@@ -47,13 +102,12 @@
 				<h1>Lịch trình tháng</h1>
 			</div>
 			<form action="quanly?action=showMonthlySchedule" method="post" onsubmit="return validateDate()">
-		        <label for="selectedDate">Tìm kiếm từ ngày :</label>
-		        <input type="date" id="selectedDate" name="ngayBatDau" required>
-		        <label for="selectedDate">đến ngày :</label>
-		        <input type="date" id="selectedDate2" name="ngayKetThuc">
-		        <label for="chonca">và ca :</label>
+		        <label for="selectedDate">Từ ngày: </label>
+		        <input type="date" id="selectedDate" name="ngayBatDau" required value="<%=(request.getAttribute("ngayBatDau") != null)?request.getAttribute("ngayBatDau"):"" %>">
+		        <label for="selectedDate">Đến ngày: </label>
+		        <input type="date" id="selectedDate2" name="ngayKetThuc" value="<%=(request.getAttribute("ngayKetThuc") != null)?request.getAttribute("ngayKetThuc"):"" %>">
+		        <label for="chonca">Ca: </label>
 		        <select id="calam" name="calam">
-		        	<option>Chọn Ca</option>
 					<option value="LC001">Sáng</option>
 					<option value="LC002">Chiều</option>
 					<option value="LC003">Tối</option>

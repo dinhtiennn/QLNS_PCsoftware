@@ -39,7 +39,7 @@
 		%>
 		<div class="col-10 mt-4" style="margin-top: 8rem !important;" >
 			<div class="row container">
-						    <div style="text-align: center;">
+						    <div style="text-align: center;margin-bottom: 24px;">
 								<h1>Tính lương</h1>
 							</div>
 				<form action="quanly?action=thongkeluong" method="post">
@@ -64,7 +64,7 @@
 						  	<div class="col-sm-4">
 						      <button type="submit" class="btn btn-primary" >Tìm kiếm</button>
 						    </div>
-						    <div class="row">
+						    <div class="row" style="margin-top: 24px;">
 								<div class="col-10">
 								<table class="table table-hover">
 									  <thead>
