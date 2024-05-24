@@ -1,3 +1,4 @@
+<%@page import="bo.NhanVienBo"%>
 <%@page import="bean.thongkecalambean"%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="bean.DangKyLamBean"%>
@@ -97,6 +98,7 @@ input[type="submit"]:hover {
 			<form id="form_id" action="quanly?action=thongkelichlam" method="post">
 			<input type="hidden" id="maNV_hidden" name="maNV" value="">
 				<%
+				NhanVienBo nvbo = new NhanVienBo();
 		        String thang = (request.getAttribute("thang")!=null)?request.getAttribute("thang").toString():"";
 				%>
 				<div class="selectDate d-flex justify-content-center align-item-center">
@@ -136,6 +138,7 @@ input[type="submit"]:hover {
 						<thead>
 							<tr>
 								<th>Mã Nhân viên</th>
+								<th>Tên Nhân viên</th>
 								<th>Số ca làm trong tháng</th>
 								<th>Chi tiết ca làm</th>
 							</tr>
@@ -147,6 +150,7 @@ input[type="submit"]:hover {
 							thongkecalambean tkb = ds.get(i);%>
 							<tr >
 								<td><%=tkb.getMaNV()%></td>
+								<td><%=nvbo.getnhanvientheoma(tkb.getMaNV()).getTenNV()%></td>
 								<td><%=tkb.getSocalam()%></td>
 								<td><input type="submit" value="Xem chi tiết" name="btn_xemchitiet" onClick="submitForm('<%=tkb.getMaNV()%>')"></td>
 							</tr>	
@@ -159,6 +163,7 @@ input[type="submit"]:hover {
 						<thead>
 							<tr>
 								<th>Mã Nhân viên</th>
+								<th>Tên Nhân viên</th>
 								<th>Mã Loại ca</th>
 								<th>Ngày Đăng ký</th>
 							</tr>
@@ -178,6 +183,7 @@ input[type="submit"]:hover {
 							}%>
 							<tr>
 								<td><%=tkb.getMaNV()%></td>
+								<td><%=nvbo.getnhanvientheoma(tkb.getMaNV()).getTenNV()%></td>
 								<td><%=tenloaica%></td>
 								<td><%=tkb.getNgayDK()%></td>
 							</tr>	

@@ -490,6 +490,8 @@ public class QuanLyController extends HttpServlet {
 			}
 			
 			System.out.println(ngayBatDau + ngayKetThuc);
+			request.setAttribute("ngayBatDau", ngayBatDau);
+			request.setAttribute("ngayKetThuc", ngayKetThuc);
 			RequestDispatcher rd = request.getRequestDispatcher(url);
 			rd.forward(request, response);
 		} catch (Exception e) {

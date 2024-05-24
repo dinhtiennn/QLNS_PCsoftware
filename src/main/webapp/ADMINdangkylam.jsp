@@ -1,3 +1,4 @@
+<%@page import="bo.NhanVienBo"%>
 <%@page import="bean.thongkecalambean"%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="bean.DangKyLamBean"%>
@@ -131,23 +132,28 @@ input[type="submit"]:hover {
 			        	</div>
 				        <input type="submit" value="Search" style="height: 40px;line-height: 1; margin-left: 8px; margin-top: 31px;">
 			        </div>
-			    <%ArrayList<DangKyLamBean> ChiTiet = (ArrayList<DangKyLamBean>)request.getAttribute("ChiTiet"); %>
+			    <%			    
+				NhanVienBo nvbo = new NhanVienBo();
+			    ArrayList<DangKyLamBean> ChiTiet = (ArrayList<DangKyLamBean>)request.getAttribute("ChiTiet"); %>
 			    <%if(ChiTiet == null){ %>
 				<table class="table" >
 						<thead>
 							<tr>
 								<th>Mã Nhân viên</th>
+								<th>Tên Nhân viên</th>
 								<th>Số ca làm trong tháng</th>
 								<th>Chi tiết ca làm</th>
 							</tr>
 						</thead>
 						<tbody>
-						<% ArrayList<thongkecalambean> ds = (ArrayList<thongkecalambean>)request.getAttribute("BangDangKyLam");
+						<% 
+						ArrayList<thongkecalambean> ds = (ArrayList<thongkecalambean>)request.getAttribute("BangDangKyLam");
 						int n = ds.size();
 						for(int i =0; i<n;i++){
 							thongkecalambean tkb = ds.get(i);%>
 							<tr>
 								<td><%=tkb.getMaNV()%></td>
+								<td><%=nvbo.getnhanvientheoma(tkb.getMaNV()).getTenNV()%></td>
 								<td><%=tkb.getSocalam()%></td>
 								<td><input type="submit" value="Xem chi tiết" name="btn_xemchitiet" onClick="submitForm('<%=tkb.getMaNV()%>')"></td>
 							</tr>	
@@ -160,6 +166,7 @@ input[type="submit"]:hover {
 						<thead>
 							<tr>
 								<th>Mã Nhân viên</th>
+								<th>Tên Nhân viên</th>
 								<th>Mã Loại ca</th>
 								<th>Ngày Đăng ký</th>
 							</tr>
@@ -171,6 +178,7 @@ input[type="submit"]:hover {
 							DangKyLamBean tkb = ChiTiet.get(i);%>
 							<tr>
 								<td><%=tkb.getMaNV()%></td>
+								<td><%=nvbo.getnhanvientheoma(tkb.getMaNV()).getTenNV()%></td>
 								<td><%=tkb.getMaLoaica()%></td>
 								<td><%=tkb.getNgayDK()%></td>
 							</tr>	

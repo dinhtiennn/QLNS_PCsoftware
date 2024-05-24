@@ -1,3 +1,7 @@
+<%@page import="java.util.Locale"%>
+<%@page import="java.time.DayOfWeek"%>
+<%@page import="java.time.format.DateTimeFormatter"%>
+<%@page import="java.time.LocalDate"%>
 <%@page import="bo.NhanVienBo"%>
 <%@page import="bean.NhanVienBean"%>
 <%@page import="bean.DangKyNghiBean"%>
@@ -63,6 +67,15 @@ form > * {
 </style>
 </head>
 <body>
+<%
+LocalDate currentDate = LocalDate.now();
+LocalDate startOfWeek = currentDate.with(DayOfWeek.MONDAY);
+LocalDate endOfWeek = currentDate.with(DayOfWeek.SATURDAY);
+DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+String startOfWeek_String = startOfWeek.format(dateFormatter);
+String endOfWeek_String = endOfWeek.format(dateFormatter);
+%>
+
 	<jsp:include page="header.jsp"></jsp:include>
 		<div class="row">
 			<div class="col-2  mt-5" style="margin-top: 8rem !important;">
@@ -74,9 +87,9 @@ form > * {
 				</div>
 				<form action="quanly?action=danhsachnghilam" method="post" onsubmit="return validateDate()">
 			        <label for="selectedDate">Từ ngày :</label>
-			        <input type="date" id="selectedDate" name="ngayBatDau" required>
+			        <input type="date" id="selectedDate" name="ngayBatDau" required value="<%=(request.getAttribute("ngayBatDau")==null)?startOfWeek: request.getAttribute("ngayBatDau")%>">
 			        <label for="selectedDate">Đến ngày :</label>
-			        <input type="date" id="selectedDate2" name="ngayKetThuc">
+			        <input type="date" id="selectedDate2" name="ngayKetThuc" value="<%=(request.getAttribute("ngayKetThuc")==null)?endOfWeek: request.getAttribute("ngayKetThuc")%>">
 			        <input type="submit" value="Tìm Kiếm" class="btn btn-primary">
 			    </form>
 			    <%

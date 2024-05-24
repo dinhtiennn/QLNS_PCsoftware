@@ -61,11 +61,10 @@
 					           <td><%=dkb.getMaNV() %></td>  
 					           <td><%=dkb.getTenNV() %></td>     
 					           <td><%=dkb.getMaLoaiCa() %></td>      
-					           <td><%=dkb.getNgayDK() %></td>  
-					           
+					           <td><%=dkb.getNgayDK() %></td>
 				           <%if(dkb.getDuyet() == 0) {%>
 					           <td style="color: #c6cd1e;">Chờ duyệt</td>
-					           <td> </td>
+					           <td></td>
 				           <%} if(dkb.getDuyet() == 1) {%>
 					           <td style="color: #35c51c;">Đã duyệt</td>
 					           <td><%=dkb.getNguoiDuyet() %></td> 

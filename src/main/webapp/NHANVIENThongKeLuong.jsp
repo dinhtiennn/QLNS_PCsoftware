@@ -104,12 +104,7 @@
 											  <tbody>
 											  <%int i = 1;
 											  for(ThongKeLuongBean item : tkl){
-												  double luong = 0;
-												  try {
-													  luong = tklbo.TinhLuong(tskt, item.getSoCaLam(), item.getSoCaNghi());
-												  } catch (Exception e) {
-													  e.printStackTrace();
-												  }
+												  item.setLuong(tklbo.TinhLuong(tsktbo.GetThongSo(),item.getSoCaLam(), item.getSoCaNghi()));
 											  %>						
 											    <tr>
 											      <th scope="row"></th>
