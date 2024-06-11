@@ -82,6 +82,8 @@ public class QuanLyController extends HttpServlet {
 					thongkelichlam(request, response);
 				}else if(action.equals("bangluong")) {
 					bangluong(request, response);
+				}else if(action.equals("chinhsuadsdangki")) {
+					chinhsuadsdangki(request, response);
 				}
 			}
 		}else {
@@ -171,6 +173,32 @@ public class QuanLyController extends HttpServlet {
 		String url = "QUANLYdslamcungca.jsp";
 		String date = request.getParameter("date");
 		String loaica = request.getParameter("lc");
+		request.setAttribute("date", date);
+		request.setAttribute("loaica", loaica);
+		RequestDispatcher rd = request.getRequestDispatcher(url);
+		rd.forward(request, response);
+	}
+	public void chinhsuadsdangki(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
+		DangKyLamBo dklambo = new DangKyLamBo();
+		String url = "QUANLYchinhsuadsdklam.jsp";
+		String date = request.getParameter("date");
+		String loaica = request.getParameter("lc");
+		String maNv = request.getParameter("manv");
+		String xoa = request.getParameter("xoa");
+		String them = request.getParameter("them");
+		try {
+			if(maNv!=null &(xoa != null || them != null)) {
+				 if(xoa != null) {
+					 dklambo.deleteDK(maNv, loaica, java.sql.Date.valueOf(date));
+				 }
+				 if(them != null) {
+					 dklambo.insertDK(maNv, loaica, java.sql.Date.valueOf(date));				 
+				 }
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		request.setAttribute("date", date);
 		request.setAttribute("loaica", loaica);
 		RequestDispatcher rd = request.getRequestDispatcher(url);

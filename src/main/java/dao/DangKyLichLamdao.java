@@ -135,6 +135,18 @@ public class DangKyLichLamdao {
 	    cmd.close();
 	    kn.cn.close();
 	}
+	public void XoaDKL(String idnv, String maloaica, java.sql.Date date) throws Exception {
+	    ketnoiDB kn = new ketnoiDB();
+	    kn.ketnoi();
+	    String sql = "DELETE FROM DangKyLichLam WHERE MaNV = ? and MaLoaiCa = ? and NgayDK = ?";
+	    PreparedStatement cmd = kn.cn.prepareStatement(sql);
+	    cmd.setString(1, idnv);
+	    cmd.setString(2, maloaica);
+	    cmd.setDate(3, date);
+	    cmd.executeUpdate();
+	    cmd.close();
+	    kn.cn.close();
+	}
 	public int CountRecordsByNgayDKAndMaLoaiCa(java.sql.Date ngayDK, String maLC) throws Exception {
 	    int count = 0;
 	    ketnoiDB kn = new ketnoiDB();

@@ -84,6 +84,9 @@
 				<a href="quanly?action=xemdsdangkinghi&date=<%=date%>&lc=<%=loaica%>&manv=<%=nhanvien.getMaNV()%>">
 					<button type="button" class="btn btn-warning">Xem danh sách đăng kí nghỉ phép cho ngày này</button>
 				</a>
+				<a href="quanly?action=chinhsuadsdangki&date=<%=date%>&lc=<%=loaicaString%>">
+					<button type="button" class="btn btn-success mt-1">Chỉnh sửa danh sách</button>
+				</a>
 			</div>
 		</div>
 </body>

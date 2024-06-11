@@ -45,6 +45,9 @@ public class DangKyLamBo {
         LocalDate endOfWeek = currentDate.with(DayOfWeek.SATURDAY);
 		dklam.XoaDKL(Date.valueOf(startOfWeek), Date.valueOf(endOfWeek), idnv);
 	}
+	public void deleteDK(String idnv,String maloaica,Date date) throws Exception{
+		dklam.XoaDKL(idnv, maloaica, date);
+	}
 	public int CountRecordsByNgayDKAndMaLoaiCa(java.sql.Date ngayDK, String maLC) throws Exception {
 		return dklam.CountRecordsByNgayDKAndMaLoaiCa(ngayDK, maLC);
 	}
